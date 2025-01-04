@@ -123,7 +123,7 @@ Honors & Awards
 Teaching Assistant
 ======
 
-<div style="display: grid; grid-template-columns: 450px 150px 200px; gap: 10px; font-size: 16px">
+<div style="display: grid; grid-template-columns: 1.5fr 0.5fr 0.5fr; gap: 10px; font-size: 14px">
   <div style="border: 1px solid #ddd; padding: 5px;">Applied Machine Learning & Data Science</div>
   <div style="border: 1px solid #ddd; padding: 5px; display: flex; justify-content: center; align-items: center;">Spring 2024</div>
   <div style="border: 1px solid #ddd; padding: 5px;">Rice University</div>
@@ -154,7 +154,7 @@ Teaching Assistant
 Selected Courses
 ======
 
-<div style="display: grid; grid-template-columns: 100px 450px 100px 160px; gap: 10px; font-size: 16px">
+<div style="display: grid; grid-template-columns: 0.5fr 1.5fr 0.5fr 0.5fr; gap: 10px; font-size: 14px">
   <div style="border: 1px solid #ddd; padding: 5px; display: flex; justify-content: center; align-items: center;">Fall 2024</div>
   <div style="border: 1px solid #ddd; padding: 5px;">Machine Learning for Signal Processing</div>
   <div style="border: 1px solid #ddd; padding: 5px; display: flex; justify-content: center; align-items: center;">Grade: A<sup>+</sup></div>
