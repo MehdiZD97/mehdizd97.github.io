@@ -6,6 +6,13 @@ redirect_from:
   - /md/
   - /markdown.html
 ---
+Adding Teaching section to the CV:
+
+Teaching Assistant
+======
+  <ul>{% for post in site.teaching reversed %}
+    {% include archive-single-cv.html %}
+  {% endfor %}</ul>
 
 ## Locations of key files/directories
 

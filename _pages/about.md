@@ -1,13 +1,23 @@
----
-permalink: /
-title: "Academic Pages is a ready-to-fork GitHub Pages template for academic personal websites"
-author_profile: true
-redirect_from: 
-  - /about/
-  - /about.html
----
+[//]: # (---)
 
-This is the front page of a website that is powered by the [Academic Pages template](https://github.com/academicpages/academicpages.github.io) and hosted on GitHub pages. [GitHub pages](https://pages.github.com) is a free service in which websites are built and hosted from code and data stored in a GitHub repository, automatically updating when a new commit is made to the repository. This template was forked from the [Minimal Mistakes Jekyll Theme](https://mmistakes.github.io/minimal-mistakes/) created by Michael Rose, and then extended to support the kinds of content that academics have: publications, talks, teaching, a portfolio, blog posts, and a dynamically-generated CV. You can fork [this template](https://github.com/academicpages/academicpages.github.io) right now, modify the configuration and markdown files, add your own PDFs and other content, and have your own site for free, with no ads!
+[//]: # (permalink: /)
+
+[//]: # (title: "About Me")
+
+[//]: # (author_profile: true)
+
+[//]: # (redirect_from: )
+
+[//]: # (  - /about/)
+
+[//]: # (  - /about.html)
+
+[//]: # (---)
+
+I am a PhD student at UC Irvine, specializing in Electrical Engineering and Computer Science. My academic journey began with a BS from the University of Tehran and continued with an MS from Rice University.
+My research interests are centered around advanced wireless systems, integrated sensing and communication, and RIS-aided wireless networks. I am particularly passionate about exploring AI/ML/optimization applications within these fields.
+
+[//]: # (Currently, I am focused on innovative solutions for joint beamforming and power allocation in RIS-aided cell-free massive MIMO systems.)
 
 A data-driven personal website
 ======
