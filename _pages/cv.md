@@ -1,23 +1,16 @@
 ---
 layout: archive
 #title: "Curriculum Vitae"
-permalink: / # /cv/
+permalink: /cv/ # /cv/
 author_profile: true
 redirect_from:
   - /resume
-  - /cv/
+#  - /cv/
 ---
 
 [//]: # ({% include base_path %})
 
 [//]: # (<br>)
-
-About Me
-======
-I am a PhD student at UC Irvine, specializing in Electrical Engineering and Computer Science. My academic journey began with a BS from the University of Tehran and continued with an MS from Rice University.
-My research interests are centered around advanced wireless systems, particularly exploring AI/ML/optimization applications within these fields.
-
-&nbsp;
 
 Education
 ======
@@ -37,7 +30,7 @@ Research Interests
 
 &nbsp;
 
-Work experience
+Professional Work Experience
 ======
 * Jul. 2024 - Present: Research Assistant
   * UCI, Department of Electrical Engineering and Computer Science
