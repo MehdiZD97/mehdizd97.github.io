@@ -123,7 +123,7 @@ redirect_from:
     <h2>Recent Publications</h2>
     <ul>
       <li><strong>ADMM for Downlink Beamforming in Cell‑Free Massive MIMO Systems</strong> - Asilomar, 2024.</li>
-      <li><strong>An Analytical and Experimental Study of Distributed Uplink Beamforming in the Presence of Carrier Frequency Offsets</strong> - Submitted to IEEE TVT Journal, 20224.</li>
+      <li><strong>An Analytical and Experimental Study of Distributed Uplink Beamforming in the Presence of Carrier Frequency Offsets</strong> - Submitted to IEEE TVT Journal, 2024.</li>
       <li><strong>Distributed Multi‑User MIMO Datasets</strong> - Published in IEEE Data Port, 2024.</li>
     </ul>
     <p>
