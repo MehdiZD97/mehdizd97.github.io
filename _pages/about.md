@@ -35,6 +35,8 @@ redirect_from:
   line-height: 1.4;
   font-size: 0.95em;
   margin-top: 5px;
+  text-align: justify;
+  margin-right: 1px;
 }
 
 .about-page ul {
@@ -85,8 +87,8 @@ redirect_from:
   <section class="about-me">
     <h2>About Me</h2>
     <p>
-        I am a PhD student at UC Irvine, specializing in Electrical Engineering and Computer Science. My academic journey began with a BS from the University of Tehran and continued with an MS from Rice University.
-        My research interests are centered around advanced wireless systems, particularly exploring AI/ML/optimization applications within these fields.
+        I am a Ph.D. student at UC Irvine, where I work under the supervision of <a href="https://scholar.google.com/citations?user=ibAcKWwAAAAJ&hl=en" target="_blank">Professor Lee Swindlehurst</a>. My research centers on advancing wireless communication systems through signal processing, optimization techniques, and hands-on experimental implementations.
+        I am particularly passionate about harnessing the power of AI and machine learning to drive innovation in this field.
     </p>
   </section>
 
