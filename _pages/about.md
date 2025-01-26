@@ -18,7 +18,7 @@ redirect_from:
 }
 
 .about-page section {
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   margin-top: 0;
 }
 
@@ -46,6 +46,7 @@ redirect_from:
 
 .about-page ul li {
   font-size: 0.9em;
+  line-height: 1.3;
   margin-bottom: 10px;
 }
 
@@ -62,7 +63,7 @@ redirect_from:
 .horizontal-titles {
   display: grid;
   grid-template-columns: 1fr 1fr; /* Two equal columns for titles */
-  gap: 30px;
+  gap: 35px;
   align-items: center; /* Align titles vertically */
 }
 
@@ -77,7 +78,7 @@ redirect_from:
   display: grid;
   grid-template-columns: 1fr 1fr; /* Two equal columns for content */
   gap: 30px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 </style>
 
@@ -87,8 +88,8 @@ redirect_from:
   <section class="about-me">
     <h2>About Me</h2>
     <p>
-        I am a Ph.D. student at UC Irvine, where I work under the supervision of <a href="https://scholar.google.com/citations?user=ibAcKWwAAAAJ&hl=en" target="_blank">Professor Lee Swindlehurst</a>. My research centers on advancing wireless communication systems through signal processing, optimization techniques, and hands-on experimental implementations.
-        I am particularly passionate about harnessing the power of AI and machine learning to drive innovation in this field.
+        I am a Ph.D. student at UC Irvine, where I work under the supervision of <a href="https://scholar.google.com/citations?user=ibAcKWwAAAAJ&hl=en" target="_blank">Professor Lee Swindlehurst</a>.
+        My research centers on advancing wireless communication systems through signal processing, optimization techniques, AI/machine learning, and hands-on experimental implementations.
     </p>
   </section>
 
@@ -129,8 +130,21 @@ redirect_from:
       <li><strong>Distributed Multi‑User MIMO Datasets</strong> - Published in IEEE Data Port, 2024.</li>
     </ul>
     <p>
-      For a list of my publications or curriculum vitae, visit the <a href="/publications/">Publications</a> or <a href="/cv/">CV</a> pages.
+      For a list of my publications or curriculum vitae, visit the <a href="/cv/">CV</a> or <a href="/publications/">Publications</a> pages.
     </p>
   </section>
 
+  <!-- Recent News Section -->
+  <section class="recent-news">
+    <h2>Recent News</h2>
+    <ul>
+      <li><strong>[Nov. 2024]:</strong> Posted two short tutorials on YouTube.</li>
+      <li><strong>[Oct. 2024]:</strong> Presented a lecture of my recent paper at the 58th Asilomar Conference.</li>
+      <li><strong>[Jul. 2024]:</strong> Received the Graduate Dean’s Recruitment Fellowship Award from UC Irvine.</li>
+      <li><strong>[Jul. 2024]:</strong> Started my PhD studies in the EECS department at UC Irvine.</li>
+    </ul>
+    <p>
+      For a full list of News and activities, visit the <a href="/year-archive/">News & Posts</a> page.
+    </p>
+  </section>
 </div>

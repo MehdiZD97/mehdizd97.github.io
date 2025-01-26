@@ -33,10 +33,10 @@ author:
   avatar           : "profile.png"
   name             : "Mehdi Zafari"
   pronouns         : # example: "she/her"  
-  bio              : "PhD Student | Wireless Communication Systems Researcher"
+  bio              : "PhD Student | AI/ML-Driven Wireless Systems Researcher"
   location         : "Irvine, California"
-  employer         : "University of California - Irvine"
-  uri              : # URL
+  employer         : "https://uci.edu/"
+  uri              : # "https://mehdizd97.github.io/"
   email            : "mzafarid@uci.edu"
 
   # Academic websites
@@ -46,7 +46,7 @@ author:
   orcid            : "https://orcid.org/0000-0001-8894-8709"
   semantic         : # URL
   pubmed           : # URL
-  researchgate     : # URL
+  researchgate     : # "https://www.researchgate.net/profile/Mehdi-Zafari?ev=hdr_xprf"
   scopus           : # URL
 
   # Repositories and software development
