@@ -4,6 +4,8 @@
 
 {% include seo.html %}
 
+<meta name="description" content="Mehdi Zafari – Ph.D. student at UC Irvine researching AI/ML-driven wireless communication systems. Explore my publications, research, and contact details.">
+
 <link href="{% if site.atom_feed.path %}{{ site.atom_feed.path }}{% else %}{{ base_path }}/feed.xml{% endif %}" type="application/atom+xml" rel="alternate" title="{{ site.title }} Feed">
 
 <!-- http://t.co/dKP3o1e -->
@@ -13,6 +15,25 @@
 
 <script>
   document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Mehdi Zafari",
+  "url": "https://mehdizd97.github.io",
+  "affiliation": {
+    "@type": "EducationalOrganization",
+    "name": "University of California, Irvine"
+  },
+  "jobTitle": "Ph.D. Student",
+  "sameAs": [
+    "https://scholar.google.com/citations?user=lKiB9vIAAAAJ",
+    "https://www.linkedin.com/in/Mehdi-Zafari/",
+    "https://github.com/mehdizd97"
+  ]
+}
 </script>
 
 <!-- For all browsers -->

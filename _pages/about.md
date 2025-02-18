@@ -24,8 +24,8 @@ redirect_from:
 
 .about-page h2 {
   font-size: 1.4em;
-  color: #007acc;
-  border-bottom: 2px solid #007acc;
+  color: #04588C;
+  border-bottom: 2px solid #04588C;
   padding-bottom: 5px;
   margin-top: 0;
   margin-bottom: 10px;
@@ -51,7 +51,7 @@ redirect_from:
 }
 
 .about-page a {
-  color: #007acc;
+  color: #0669BF;
   text-decoration: none;
 }
 
@@ -69,7 +69,7 @@ redirect_from:
 
 .horizontal-titles h2 {
   text-align: left; /* Center-align the titles horizontally */
-  border-bottom: 2px solid #007acc; /* Remove the underline from these titles */
+  border-bottom: 2px solid #04588C; /* Remove the underline from these titles */
   margin-bottom: 1px; /* Reduce the gap below these titles */
 }
 
@@ -125,9 +125,9 @@ redirect_from:
   <section class="recent-publications">
     <h2>Recent Publications</h2>
     <ul>
-      <li><strong>ADMM for Downlink Beamforming in Cell‑Free Massive MIMO Systems</strong> - Asilomar, 2024.</li>
-      <li><strong>An Analytical and Experimental Study of Distributed Uplink Beamforming in the Presence of Carrier Frequency Offsets</strong> - Submitted to IEEE TVT Journal, 2024.</li>
-      <li><strong>Distributed Multi‑User MIMO Datasets</strong> - Published in IEEE Data Port, 2024.</li>
+      <li><strong><a href="/publication/2024-05-admm_for_dl_beamforming">ADMM for Downlink Beamforming in Cell‑Free Massive MIMO Systems</a></strong> - Asilomar, 2024.</li>
+      <li><strong><a href="/publication/2024-09-distributed_multi_user_beamforming">An Analytical and Experimental Study of Distributed Uplink Beamforming in the Presence of Carrier Frequency Offsets</a></strong> - Submitted to IEEE TVT Journal, 2024.</li>
+      <li><strong><a href="/publication/2024-09-distributed_multi_user_datasets">Distributed Multi‑User MIMO Datasets</a></strong> - Published in IEEE Data Port, 2024.</li>
     </ul>
     <p>
       For a list of my publications or curriculum vitae, visit the <a href="/cv/">CV</a> or <a href="/publications/">Publications</a> pages.
