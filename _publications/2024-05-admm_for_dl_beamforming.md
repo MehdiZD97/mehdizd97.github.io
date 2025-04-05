@@ -6,8 +6,8 @@ permalink: /publication/2024-05-admm_for_dl_beamforming
 excerpt: ''
 date: 2024-05-01
 venue: 'IEEE Asilomar Conference on Signals, Systems, and Computers'
-paperurl: 'https://arxiv.org/abs/2409.06106'
-citation: 'M. Zafari, D. Pandey, R. Doost-Mohammady, and C. A. Uribe, “ADMM for Downlink Beamforming in Cell-Free Massive MIMO Systems,” arXiv preprint arXiv:2409.06106, 2024. [Online]. Available: https://arxiv.org/abs/2409.06106'
+paperurl: 'https://ieeexplore.ieee.org/document/10943106'
+citation: 'M. Zafari, D. Pandey, R. Doost-Mohammady and C. A. Uribe, "ADMM for Downlink Beamforming in Cell-Free Massive MIMO Systems," 2024 58th Asilomar Conference on Signals, Systems, and Computers, Pacific Grove, CA, USA, 2024, pp. 623-628, doi: 10.1109/IEEECONF60004.2024.10943106.'
 ---
 
 In cell-free massive MIMO systems with multiple distributed access points (APs) serving multiple users over the same time-frequency resources, downlink beamforming is done through spatial precoding.
