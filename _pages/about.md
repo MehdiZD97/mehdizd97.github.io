@@ -125,9 +125,10 @@ redirect_from:
   <section class="recent-publications">
     <h2>Recent Publications</h2>
     <ul>
-      <li><strong><a href="/publication/2024-05-admm_for_dl_beamforming">ADMM for Downlink Beamforming in Cell‑Free Massive MIMO Systems</a></strong> - Asilomar, 2024.</li>
-      <li><strong><a href="/publication/2024-09-distributed_multi_user_beamforming">An Analytical and Experimental Study of Distributed Uplink Beamforming in the Presence of Carrier Frequency Offsets</a></strong> - Submitted to IEEE TVT Journal, 2024.</li>
-      <li><strong><a href="/publication/2024-09-distributed_multi_user_datasets">Distributed Multi‑User MIMO Datasets</a></strong> - Published in IEEE Data Port, 2024.</li>
+        <li><strong><a href="/publications/2025-04-repo-distributed_cellfree_isac">Distributed Cell-Free ISAC Simulation Framework</a></strong> - GitHub Repository, 2025.</li>
+        <li><strong><a href="/publication/2024-05-admm_for_dl_beamforming">ADMM for Downlink Beamforming in Cell‑Free Massive MIMO Systems</a></strong> - Asilomar, 2024.</li>
+        <li><strong><a href="/publication/2024-09-distributed_multi_user_beamforming">An Analytical and Experimental Study of Distributed Uplink Beamforming in the Presence of Carrier Frequency Offsets</a></strong> - Submitted to IEEE TVT Journal, 2024.</li>
+        <li><strong><a href="/publication/2024-09-distributed_multi_user_datasets">Distributed Multi‑User MIMO Datasets</a></strong> - Published in IEEE Data Port, 2024.</li>
     </ul>
     <p>
       For a list of my publications or curriculum vitae, visit the <a href="/cv/">CV</a> or <a href="/publications/">Publications</a> pages.
@@ -138,10 +139,11 @@ redirect_from:
   <section class="recent-news">
     <h2>Recent News</h2>
     <ul>
-      <li><strong>[Nov. 2024]:</strong> Posted two short tutorials on YouTube.</li>
-      <li><strong>[Oct. 2024]:</strong> Presented a lecture of my recent paper at the 58th Asilomar Conference.</li>
-      <li><strong>[Jul. 2024]:</strong> Received the Graduate Dean’s Recruitment Fellowship Award from UC Irvine.</li>
-      <li><strong>[Jul. 2024]:</strong> Started my PhD studies in the EECS department at UC Irvine.</li>
+        <li><strong>[Apr. 2025]:</strong> Released a simulation framework for distributed cell-free ISAC systems on GitHub.</li>
+        <li><strong>[Nov. 2024]:</strong> Posted two short tutorial videos on YouTube.</li>
+        <li><strong>[Oct. 2024]:</strong> Presented a lecture of my recent paper at the 58th Asilomar Conference.</li>
+        <li><strong>[Jul. 2024]:</strong> Received the Graduate Dean’s Recruitment Fellowship Award from UC Irvine.</li>
+        <li><strong>[Jul. 2024]:</strong> Started my PhD studies in the EECS department at UC Irvine.</li>
     </ul>
     <p>
       For a full list of News and activities, visit the <a href="/year-archive/">News & Posts</a> page.
