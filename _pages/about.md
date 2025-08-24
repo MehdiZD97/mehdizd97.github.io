@@ -125,13 +125,14 @@ redirect_from:
   <section class="recent-publications">
     <h2>Recent Publications</h2>
     <ul>
-        <li><strong><a href="/publications/2025-04-repo-distributed_cellfree_isac">Distributed Cell-Free ISAC Simulation Framework</a></strong> - GitHub Repository, 2025.</li>
-        <li><strong><a href="/publication/2024-05-admm_for_dl_beamforming">ADMM for Downlink Beamforming in Cell‑Free Massive MIMO Systems</a></strong> - Asilomar, 2024.</li>
-        <li><strong><a href="/publication/2024-09-distributed_multi_user_beamforming">An Analytical and Experimental Study of Distributed Uplink Beamforming in the Presence of Carrier Frequency Offsets</a></strong> - Submitted to IEEE TVT Journal, 2024.</li>
-        <li><strong><a href="/publication/2024-09-distributed_multi_user_datasets">Distributed Multi‑User MIMO Datasets</a></strong> - Published in IEEE Data Port, 2024.</li>
+        <li><strong> Coordinated Decentralized Resource Optimization for Cell-Free ISAC Systems</strong> - <em>Asilomar, 2025.</em></li>
+        <li><strong> Distributed Cell-Free ISAC Simulation Framework</strong> - <em>GitHub Repository, 2025.</em></li>
+        <li><strong> ADMM for Downlink Beamforming in Cell‑Free Massive MIMO Systems</strong> - <em>Asilomar, 2024.</em></li>
+        <li><strong> An Analytical and Experimental Study of Distributed Uplink Beamforming in the Presence of Carrier Frequency Offsets</strong> - <em>Submitted to IEEE TVT Journal, 2024.</em></li>
+        <li><strong> Distributed Multi‑User MIMO Datasets</strong> - <em>Published in IEEE Data Port, 2024.</em></li>
     </ul>
     <p>
-      For a list of my publications or curriculum vitae, visit the <a href="/cv/">CV</a> or <a href="/publications/">Publications</a> pages.
+      For a full list of my publications, visit the <a href="/publications/">Publications</a> pages.
     </p>
   </section>
 
@@ -139,6 +140,7 @@ redirect_from:
   <section class="recent-news">
     <h2>Recent News</h2>
     <ul>
+        <li><strong>[Aug. 2025]:</strong> My submission to Asilomar 2025 has been shortlisted for the Best Paper Award contest.</li>
         <li><strong>[Apr. 2025]:</strong> Released a simulation framework for distributed cell-free ISAC systems on GitHub.</li>
         <li><strong>[Nov. 2024]:</strong> Posted two short tutorial videos on YouTube.</li>
         <li><strong>[Oct. 2024]:</strong> Presented a lecture of my recent paper at the 58th Asilomar Conference.</li>
@@ -146,7 +148,7 @@ redirect_from:
         <li><strong>[Jul. 2024]:</strong> Started my PhD studies in the EECS department at UC Irvine.</li>
     </ul>
     <p>
-      For a full list of News and activities, visit the <a href="/year-archive/">News & Posts</a> page.
+      For a full list of news and activities, visit the <a href="/year-archive/">News & Posts</a> page.
     </p>
   </section>
 </div>

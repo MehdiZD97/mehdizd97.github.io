@@ -1,0 +1,58 @@
+---
+layout: single   # for Minimal Mistakes; use "post" if your theme uses that
+author_profile: true
+---
+
+{%- comment -%} Optional hero header for posts {%- endcomment -%}
+{% if page.header.overlay_image %}
+  <div class="post-hero" style="margin-bottom:1rem;">
+    <img src="{{ page.header.overlay_image | relative_url }}" alt="{{ page.title | escape }}" style="width:100%; height:auto; border-radius:10px;">
+    {% if page.header.subtitle %}
+      <p style="margin:.5rem 0 0; color:#555;">{{ page.header.subtitle }}</p>
+    {% endif %}
+  </div>
+{% endif %}
+
+{%- comment -%} Post title block {%- endcomment -%}
+<header class="post-header">
+  <h1 class="page__title">{{ page.title }}</h1>
+  <p class="page__meta" style="color:#6b7280;">
+    <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%b %-d, %Y" }}</time>
+    {% if page.read_time %} • {{ page.read_time }} min read{% endif %}
+  </p>
+</header>
+
+{%- comment -%} Main content {%- endcomment -%}
+<article class="post-content">
+  {{ content }}
+</article>
+
+{%- comment -%} Footer: tags + share + prev/next {%- endcomment -%}
+<footer class="post-footer" style="margin-top:1.25rem;">
+  {% if page.tags and page.tags.size > 0 %}
+    <div class="post-tags" style="margin-bottom:.5rem;">
+      {% for tag in page.tags %}
+        <a href="{{ '/tags/' | append: tag | slugify | append: '/' | relative_url }}"
+           class="post-tag"
+           style="display:inline-block;font-size:.85rem;padding:2px 8px;border:1px solid #d0d7de;border-radius:999px;margin-right:6px;text-decoration:none;color:#0b5295;background:#f8fafc;">
+          #{{ tag }}
+        </a>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {%- if site.share -%}{% include share.html %}{%- endif -%}
+
+  <nav class="post-nav" style="display:flex;justify-content:space-between;margin-top:.75rem;">
+    <div class="prev">
+      {% if page.previous.url %}
+        ← <a href="{{ page.previous.url | relative_url }}">{{ page.previous.title }}</a>
+      {% endif %}
+    </div>
+    <div class="next">
+      {% if page.next.url %}
+        <a href="{{ page.next.url | relative_url }}">{{ page.next.title }}</a> →
+      {% endif %}
+    </div>
+  </nav>
+</footer>

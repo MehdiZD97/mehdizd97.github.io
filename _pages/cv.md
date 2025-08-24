@@ -79,21 +79,6 @@ Skills
 
 &nbsp;
 
-Publications
-======
-  <ul>{% for post in site.publications reversed %}
-    {% include archive-single-cv.html %}
-  {% endfor %}</ul>
-
-&nbsp;
-
-Talks, Conferences, and Workshops
-======
-  <ul>{% for post in site.talks reversed %}
-    {% include archive-single-talk-cv.html  %}
-  {% endfor %}</ul>
-
-&nbsp;
 
 Honors & Awards
 ======
@@ -113,10 +98,15 @@ Honors & Awards
 
 &nbsp;
 
-Teaching Assistant
+Teaching Assistant Experiences
 ======
 
 <div style="display: grid; grid-template-columns: 1.5fr 0.5fr 0.5fr; gap: 10px; font-size: 14px">
+  <div style="border: 1px solid #ddd; padding: 5px;">Introduction to Digital Logic Laboratory</div>
+  <div style="border: 1px solid #ddd; padding: 5px; display: flex; justify-content: center; align-items: center;">Spring 2025</div>
+  <div style="border: 1px solid #ddd; padding: 5px;">UC Irvine</div>
+
+
   <div style="border: 1px solid #ddd; padding: 5px;">Applied Machine Learning & Data Science</div>
   <div style="border: 1px solid #ddd; padding: 5px; display: flex; justify-content: center; align-items: center;">Spring 2024</div>
   <div style="border: 1px solid #ddd; padding: 5px;">Rice University</div>

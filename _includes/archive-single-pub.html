@@ -1,0 +1,327 @@
+<!--{%- comment -%}-->
+<!--  pub-single.html — Renders one publication entry in IEEE-like style.-->
+
+<!--  Expected front matter fields on each _publications/*.md:-->
+<!--    citation: "M. Zafari, R. Liu, and A. L. Swindlehurst, “Paper Title…,” Proc. XYZ, 2025."-->
+<!--    title: "Paper Title…"-->
+<!--    paperurl: "https://..."-->
+<!--    bibtex_id: "C-1"               (optional)-->
+<!--    pdf, arxiv, doi, code, slides, poster (optional)-->
+<!--    award: "Best Student Paper..." (optional)-->
+
+<!--  This include:-->
+<!--    • Prints post.citation and bolds your name.-->
+<!--    • Hyperlinks the title inside the citation using post.paperurl.-->
+<!--    • Shows badges for PDF/arXiv/DOI/Code/Slides/Poster if present.-->
+<!--    • If citation missing, falls back to a constructed line with linked title.-->
+
+<!--  Styling: add CSS for .pub-item, .pub-citation, .pub-links, .pub-badge, .pub-award-->
+<!--  on the page or in a site CSS file.-->
+<!--{%- endcomment -%}-->
+
+<!--{%- assign me_full = "Mehdi Zafari" -%}-->
+<!--{%- assign me_init = "M. Zafari" -%}-->
+
+<!--{%- assign year_val  = post.year | default: post.date | date: "%Y" -%}-->
+<!--{%- assign venue_val = post.venue | default: post.collection | default: "" -%}-->
+
+<!--{%- assign citation_raw = post.citation | default: "" -%}-->
+
+<!--{%- if citation_raw != "" -%}-->
+<!--  {%- comment -%}Bold my name variants inside the citation text{%- endcomment -%}-->
+<!--  {%- assign citation_fmt = citation_raw-->
+<!--      | replace: me_full, "<strong>Mehdi Zafari</strong>"-->
+<!--      | replace: me_init, "<strong>M. Zafari</strong>" -%}-->
+
+<!--  {%- comment -%}-->
+<!--    If a paper URL is provided, link the title inside the citation.-->
+<!--    Try several common forms:-->
+<!--      “Title”, "Title", <i>Title</i>, <em>Title</em>, with smart/straight quotes.-->
+<!--    Replacements are no-ops if pattern not found.-->
+<!--  {%- endcomment -%}-->
+<!--  {%- assign citation_linked = citation_fmt -%}-->
+<!--  {%- if post.paperurl and post.title %}-->
+<!--    {%- assign t = post.title -%}-->
+<!--    {%- assign a_open = '<a href="' | append: post.paperurl | append: '" target="_blank" rel="noopener">' -%}-->
+<!--    {%- assign a_title = a_open | append: t | append: '</a>' -%}-->
+<!--    {%- assign a_title_i   = a_open | append: '<i>'  | append: t | append: '</i></a>' -%}-->
+<!--    {%- assign a_title_em  = a_open | append: '<em>' | append: t | append: '</em></a>' -%}-->
+
+<!--    {%- assign patt_smart      = '“'  | append: t | append: '”'   -%}-->
+<!--    {%- assign repl_smart      = '“'  | append: a_title | append: '”' -%}-->
+<!--    {%- assign patt_straight   = '"'  | append: t | append: '"'   -%}-->
+<!--    {%- assign repl_straight   = '"'  | append: a_title | append: '"' -%}-->
+<!--    {%- assign patt_plain      = t -%}-->
+<!--    {%- assign repl_plain      = a_title -%}-->
+
+<!--    {%- assign patt_smart_i    = '“<i>'  | append: t | append: '</i>”'  -%}-->
+<!--    {%- assign repl_smart_i    = '“'     | append: a_title_i | append: '”' -%}-->
+<!--    {%- assign patt_straight_i = '"<i>'  | append: t | append: '</i>"'  -%}-->
+<!--    {%- assign repl_straight_i = '"'     | append: a_title_i | append: '"' -%}-->
+
+<!--    {%- assign patt_smart_em    = '“<em>' | append: t | append: '</em>”' -%}-->
+<!--    {%- assign repl_smart_em    = '“'     | append: a_title_em | append: '”' -%}-->
+<!--    {%- assign patt_straight_em = '"<em>' | append: t | append: '</em>"' -%}-->
+<!--    {%- assign repl_straight_em = '"'     | append: a_title_em | append: '"' -%}-->
+
+<!--    {%- assign citation_linked = citation_linked-->
+<!--        | replace: patt_smart_i,    repl_smart_i-->
+<!--        | replace: patt_straight_i, repl_straight_i-->
+<!--        | replace: patt_smart_em,   repl_smart_em-->
+<!--        | replace: patt_straight_em,repl_straight_em-->
+<!--        | replace: patt_smart,      repl_smart-->
+<!--        | replace: patt_straight,   repl_straight-->
+<!--        | replace: patt_plain,      repl_plain-->
+<!--      -%}-->
+<!--  {%- endif -%}-->
+
+<!--  <div class="pub-item">-->
+<!--    <p class="pub-citation">-->
+<!--      {%- if post.bibtex_id %}[{{ post.bibtex_id }}] {% endif -%}-->
+<!--      {{ citation_linked }}-->
+<!--      {%- if post.award %} <span class="pub-award">🏆 {{ post.award }}</span>{% endif -%}-->
+<!--    </p>-->
+
+<!--    {%- assign links = "" -%}-->
+<!--    {%- if post.pdf    %}{% assign links = links | append: '<a class="pub-badge" href="' | append: post.pdf    | append: '" target="_blank" rel="noopener">PDF</a>'    %}{% endif -%}-->
+<!--    {%- if post.arxiv  %}{% assign links = links | append: '<a class="pub-badge" href="' | append: post.arxiv  | append: '" target="_blank" rel="noopener">arXiv</a>'  %}{% endif -%}-->
+<!--    {%- if post.doi    %}{% assign links = links | append: '<a class="pub-badge" href="https://doi.org/' | append: post.doi | append: '" target="_blank" rel="noopener">DOI</a>' %}{% endif -%}-->
+<!--    {%- if post.code   %}{% assign links = links | append: '<a class="pub-badge" href="' | append: post.code   | append: '" target="_blank" rel="noopener">Code</a>'   %}{% endif -%}-->
+<!--    {%- if post.slides %}{% assign links = links | append: '<a class="pub-badge" href="' | append: post.slides | append: '" target="_blank" rel="noopener">Slides</a>' %}{% endif -%}-->
+<!--    {%- if post.poster %}{% assign links = links | append: '<a class="pub-badge" href="' | append: post.poster | append: '" target="_blank" rel="noopener">Poster</a>' %}{% endif -%}-->
+
+<!--    {%- if links != "" -%}-->
+<!--      <div class="pub-links">{{ links | strip_newlines }}</div>-->
+<!--    {%- endif -%}-->
+<!--  </div>-->
+
+<!--{%- else -%}-->
+<!--  {%- comment -%}Fallback if `citation` missing: construct a citation-like line with linked title{%- endcomment -%}-->
+<!--  <div class="pub-item">-->
+<!--    <p class="pub-citation">-->
+<!--      {%- if post.bibtex_id %}[{{ post.bibtex_id }}] {% endif -%}-->
+<!--      {%- if post.authors -%}-->
+<!--        {{ post.authors | replace: me_full, "<strong>Mehdi Zafari</strong>" | replace: me_init, "<strong>M. Zafari</strong>" }},-->
+<!--      {%- endif -%}-->
+<!--      “<em>-->
+<!--        {%- if post.paperurl -%}-->
+<!--          <a href="{{ post.paperurl }}" target="_blank" rel="noopener">{{ post.title }}</a>-->
+<!--        {%- else -%}-->
+<!--          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>-->
+<!--        {%- endif -%}-->
+<!--      </em>,”-->
+<!--      {%- if venue_val != "" -%} {{ venue_val }},{% endif -%}-->
+<!--      {%- if year_val  != "" -%} {{ year_val }}.{% endif -%}-->
+<!--      {%- if post.award %} <span class="pub-award">🏆 {{ post.award }}</span>{% endif -%}-->
+<!--    </p>-->
+
+<!--    {%- assign links = "" -%}-->
+<!--    {%- if post.pdf    %}{% assign links = links | append: '<a class="pub-badge" href="' | append: post.pdf    | append: '" target="_blank" rel="noopener">PDF</a>'    %}{% endif -%}-->
+<!--    {%- if post.arxiv  %}{% assign links = links | append: '<a class="pub-badge" href="' | append: post.arxiv  | append: '" target="_blank" rel="noopener">arXiv</a>'  %}{% endif -%}-->
+<!--    {%- if post.doi    %}{% assign links = links | append: '<a class="pub-badge" href="https://doi.org/' | append: post.doi | append: '" target="_blank" rel="noopener">DOI</a>' %}{% endif -%}-->
+<!--    {%- if post.code   %}{% assign links = links | append: '<a class="pub-badge" href="' | append: post.code   | append: '" target="_blank" rel="noopener">Code</a>'   %}{% endif -%}-->
+<!--    {%- if post.slides %}{% assign links = links | append: '<a class="pub-badge" href="' | append: post.slides | append: '" target="_blank" rel="noopener">Slides</a>' %}{% endif -%}-->
+<!--    {%- if post.poster %}{% assign links = links | append: '<a class="pub-badge" href="' | append: post.poster | append: '" target="_blank" rel="noopener">Poster</a>' %}{% endif -%}-->
+
+<!--    {%- if links != "" -%}-->
+<!--      <div class="pub-links">{{ links | strip_newlines }}</div>-->
+<!--    {%- endif -%}-->
+<!--  </div>-->
+<!--{%- endif -%}-->
+
+<!--First desig-->
+
+<!--<style>-->
+<!--.pub-links {-->
+<!--  display: flex;-->
+<!--  gap: 10px; /* space between boxes */-->
+<!--  margin-top: 6px;-->
+<!--}-->
+
+<!--.pub-logo-box {-->
+<!--  display: inline-flex;-->
+<!--  align-items: center;-->
+<!--  justify-content: center;-->
+<!--  padding: 6px;-->
+<!--  border: 1px solid #ccc;  /* box border */-->
+<!--  border-radius: 6px;      /* rounded corners */-->
+<!--  background-color: #f9f9f9;-->
+<!--  transition: background-color 0.2s ease, transform 0.2s ease;-->
+<!--}-->
+
+<!--.pub-logo-box img {-->
+<!--  height: 20px; /* control logo size */-->
+<!--  width: auto;-->
+<!--}-->
+
+<!--.pub-logo-box:hover {-->
+<!--  background-color: #e6f0ff; /* light blue hover */-->
+<!--  transform: scale(1.05);    /* subtle grow on hover */-->
+<!--}-->
+<!--</style>-->
+
+<!--<div class="pub-item">-->
+<!--  <p class="pub-citation">-->
+<!--      {%- assign prefix = post.prefix | default: "X" -%}-->
+<!--    [{{ prefix }}]:-->
+<!--    {%- assign authors_fmt = post.authors-->
+<!--        | replace: "Mehdi Zafari", "<strong>Mehdi Zafari</strong>"-->
+<!--        | replace: "M. Zafari", "<strong>M. Zafari</strong>" -%}-->
+<!--     &nbsp;{{ authors_fmt }},-->
+<!--    “{%- if post.paperurl -%}-->
+<!--        <a href="{{ post.paperurl }}" target="_blank" rel="noopener">{{ post.title }}</a>-->
+<!--      {%- else -%}-->
+<!--        {{ post.title }}-->
+<!--      {%- endif -%},”-->
+<!--    <em>{%- if post.venue %} {{ post.venue }},{% endif %}</em>-->
+<!--    {%- if post.date %} {{ post.date | date: "%Y" }}.{% endif %}-->
+<!--  </p>-->
+
+<!--  <div class="pub-links">-->
+<!--    {% if post.pdf %}-->
+<!--      <a class="pub-badge" href="{{ post.pdf }}" target="_blank" rel="noopener">PDF</a>-->
+<!--    {% endif %}-->
+<!--    {% if post.slidesurl %}-->
+<!--      <a class="pub-badge" href="{{ post.slidesurl }}" target="_blank" rel="noopener">Slides</a>-->
+<!--    {% endif %}-->
+<!--    {% if post.arxiv %}-->
+<!--&lt;!&ndash;      <a href="{{ post.arxiv }}" target="_blank" rel="noopener">&ndash;&gt;-->
+<!--&lt;!&ndash;      <img src="{{ '/images/arxiv-logo.png' | relative_url }}" alt="arXiv" style="height:24px; margin-right:8px;">&ndash;&gt;-->
+<!--&lt;!&ndash;    </a>&ndash;&gt;-->
+<!--      <a href="{{ post.arxiv }}" target="_blank" rel="noopener" class="pub-logo-box" title="View on arXiv">-->
+<!--      <img src="{{ '/images/arxiv-logo.png' | relative_url }}" alt="arXiv" />-->
+<!--    </a>-->
+<!--    {% endif %}-->
+<!--    {% if post.doi %}-->
+<!--&lt;!&ndash;      <a class="pub-badge" href="https://doi.org/{{ post.doi }}" target="_blank" rel="noopener">IEEE</a>&ndash;&gt;-->
+<!--&lt;!&ndash;      <a href="https://doi.org/{{ post.doi }}" target="_blank" rel="noopener">&ndash;&gt;-->
+<!--&lt;!&ndash;      <img src="{{ '/images/ieee-logo.png' | relative_url }}" alt="IEEE DOI" style="height:24px; margin-right:8px;">&ndash;&gt;-->
+<!--&lt;!&ndash;    </a>&ndash;&gt;-->
+<!--      <a href="https://doi.org/{{ post.doi }}" target="_blank" rel="noopener" class="pub-logo-box" title="View on IEEE Xplore">-->
+<!--      <img src="{{ '/images/ieee-logo.png' | relative_url }}" alt="IEEE DOI" />-->
+<!--    </a>-->
+<!--    {% endif %}-->
+<!--    {% if post.code %}-->
+<!--      <a class="pub-badge" href="{{ post.code }}" target="_blank" rel="noopener">Code</a>-->
+<!--    {% endif %}-->
+<!--  </div>-->
+<!--</div>-->
+
+<style>
+/* Citation line */
+/*.pub-item { margin: 0 0 18px 0; }*/
+.pub-item {
+  margin: 0 0 20px 0;
+  padding: 15px 18px;
+  border: 1px solid #d0d7de;
+  border-radius: 8px;
+  background-color: #fcfcfc;   /* light gray background */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.06); /* subtle shadow */
+}
+.pub-citation { margin: 0; line-height: 1.6; text-align: justify; }
+.pub-title { color: #0b5295; font-weight: 500; }
+
+/* Logo boxes under each item */
+.pub-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 6px;
+}
+/*.pub-logo-box {*/
+/*  display: inline-flex;*/
+/*  align-items: center;*/
+/*  justify-content: center;*/
+/*  padding: 6px;*/
+/*  border: 1px solid #ccc;*/
+/*  border-radius: 6px;*/
+/*  background-color: #f9f9f9;*/
+/*  transition: background-color 0.2s ease, transform 0.2s ease;*/
+/*}*/
+/*.pub-logo-box img {*/
+/*  height: 20px; !* adjust logo size here *!*/
+/*  width: auto;*/
+/*}*/
+/*.pub-logo-box:hover {*/
+/*  background-color: #e6f0ff;*/
+/*  transform: scale(1.05);*/
+/*}*/
+.pub-logo-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #ffffff; /* default white */
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+/* Specific styles per source */
+.pub-logo-box--arxiv {
+  background-color: #fff5f5;   /* soft red */
+  border-color: #e57373;
+}
+
+.pub-logo-box--ieee {
+  background-color: #f2faff;   /* light blue */
+  border-color: #64b5f6;
+}
+
+.pub-logo-box--github {
+  background-color: #f2f2f2;   /* light gray */
+  border-color: #7a7a7a;
+}
+
+.pub-logo-box img {
+  height: 20px; /* adjust logo size here */
+  width: auto;
+}
+
+.pub-logo-box:hover {
+  transform: scale(1.05);
+  filter: brightness(1.05);
+}
+</style>
+
+<div class="pub-item">
+  <p class="pub-citation">
+    {%- comment -%} Bold your name variants in the authors list {%- endcomment -%}
+    {%- assign authors_fmt = post.authors
+        | replace: "Mehdi Zafari", "<strong>Mehdi Zafari</strong>"
+        | replace: "M. Zafari", "<strong>M. Zafari</strong>" -%}
+
+    {%- if authors_fmt and authors_fmt != "" -%}
+      {{ authors_fmt }},&nbsp;
+    {%- endif -%}
+
+    “<span class="pub-title">{{ post.title }}</span>,”
+    {%- if post.venue %} <em>{{ post.venue }}</em>,{% endif -%}
+    {%- if post.date %} {{ post.date | date: "%B %Y" }}.{% endif -%}
+  </p>
+
+  <div class="pub-links">
+    {%- comment -%} IEEE / DOI (fallback to paperurl if DOI missing) {%- endcomment -%}
+
+    {%- if post.arxiv -%}
+      <a class="pub-logo-box pub-logo-box--arxiv" href="{{ post.arxiv }}" target="_blank" rel="noopener" title="View on arXiv">
+        <img src="{{ '/images/arxiv-logo.png' | relative_url }}" alt="arXiv">
+      </a>
+    {%- endif -%}
+
+    {%- if post.doi or post.paperurl -%}
+      <a
+        class="pub-logo-box pub-logo-box--ieee"
+        href="{% if post.doi %}https://doi.org/{{ post.doi }}{% else %}{{ post.paperurl }}{% endif %}"
+        target="_blank" rel="noopener" title="View on IEEE Xplore">
+        <img src="{{ '/images/ieee-logo.png' | relative_url }}" alt="IEEE Xplore">
+      </a>
+    {%- endif -%}
+
+    {%- if post.code -%}
+      <a class="pub-logo-box pub-logo-box--github" href="{{ post.code }}" target="_blank" rel="noopener" title="View on GitHub">
+        <img src="{{ '/images/github-logo.png' | relative_url }}" alt="GitHub">
+      </a>
+    {%- endif -%}
+  </div>
+</div>

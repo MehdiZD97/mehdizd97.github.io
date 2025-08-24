@@ -1,0 +1,108 @@
+<style>
+.talk-card {
+  display: block;
+  max-width: 800px;
+  padding: 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #fff;
+  margin: 12px 0;
+}
+.talk-card__title { font-size: 1.15rem; margin: 0 0 4px 0; color: #0b5295; }
+.talk-card__title a { text-decoration: none; color: #0b5295; }
+.talk-card__title a:hover { text-decoration: underline; }
+.talk-card__meta { font-size: 0.92rem; color: #6b7280; margin-bottom: 8px; }
+.talk-card__desc { margin: 0; line-height: 1.6; color: #374151; }
+.talk-card__links { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 8px; }
+.talk-badge {
+  display: inline-block; font-size: 0.9rem; padding: 3px 10px;
+  border: 1px solid #d0d7de; border-radius: 999px;
+  text-decoration: none; color: #0b5295; background: #f8fafc;
+}
+.talk-badge:hover { background: #eef6ff; }
+
+.talk-links { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+.link-chip {
+  display:inline-flex; align-items:center; gap:6px;
+  padding:6px 10px; border:1px solid #d0d7de; border-radius:999px;
+  background:#f8fafc; color:#0b5295; text-decoration:none; font-size:0.92rem;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+.link-chip:hover { background:#eef6ff; transform: translateY(-1px); }
+.link-chip i { font-size:0.95em; }
+.link-chip .ext { opacity:.8; margin-left:2px; }
+.link-chip--event   { background:#f8fbff; }
+.link-chip--paper   { background:#f9fff8; }
+.link-chip--slides  { background:#fff9fb; }
+.link-chip--video   { background:#f9fbff; }
+</style>
+
+<article class="talk-card">
+  {%- assign title_href = include.talk.link | default: include.talk.url | relative_url -%}
+
+  <h3 class="talk-card__title">
+<!--    <a href="{{ title_href }}">-->
+<!--      {{ include.talk.title }}-->
+<!--    </a>-->
+      {{ include.talk.title }}
+  </h3>
+
+  <div class="talk-card__meta">
+    {%- if include.talk.date -%}
+      <time datetime="{{ include.talk.date | date_to_xmlschema }}">
+        {{ include.talk.date | date: "%b %-d, %Y" }}
+      </time>
+    {%- endif -%}
+    {%- if include.talk.location -%}
+      &nbsp;•&nbsp;{{ include.talk.location }}
+    {%- endif -%}
+    {%- if include.talk.venue -%}
+      &nbsp;•&nbsp;{{ include.talk.venue }}
+    {%- endif -%}
+  </div>
+
+  <p class="talk-card__desc">
+    {%- if include.talk.summary and include.talk.summary != "" -%}
+      {{ include.talk.summary | strip_html | strip_newlines }}
+    {%- elsif include.talk.excerpt and include.talk.excerpt != "" -%}
+      {{ include.talk.excerpt | strip_html | strip_newlines }}
+    {%- else -%}
+      {{ include.talk.content | strip_html | truncatewords: 40 }}
+    {%- endif -%}
+  </p>
+
+  <div class="talk-card__links">
+<!--    {%- if include.talk.event_url -%}-->
+<!--      <a class="talk-badge" href="{{ include.talk.event_url }}" target="_blank" rel="noopener">🔗 Event</a>-->
+<!--    {%- endif -%}-->
+<!--    {%- if include.talk.paper_url -%}-->
+<!--      <a class="talk-badge" href="{{ include.talk.paper_url }}" target="_blank" rel="noopener">Paper</a>-->
+<!--    {%- endif -%}-->
+<!--    {%- if include.talk.slides_url -%}-->
+<!--      <a class="talk-badge" href="{{ include.talk.slides_url }}" target="_blank" rel="noopener">Slides</a>-->
+<!--    {%- endif -%}-->
+<!--    {%- if include.talk.video_url -%}-->
+<!--      <a class="talk-badge" href="{{ include.talk.video_url }}" target="_blank" rel="noopener">Video</a>-->
+<!--    {%- endif -%}-->
+        {% if include.talk.event_url %}
+    <a class="link-chip link-chip--event" href="{{ include.talk.event_url }}" target="_blank" rel="noopener">
+      <i class="fas fa-calendar-alt" aria-hidden="true"></i> Event <span class="ext">↗</span>
+    </a>
+  {% endif %}
+  {% if include.talk.paper_url %}
+    <a class="link-chip link-chip--paper" href="{{ include.talk.paper_url }}" target="_blank" rel="noopener">
+      <i class="fas fa-file-alt" aria-hidden="true"></i> Paper <span class="ext">↗</span>
+    </a>
+  {% endif %}
+  {% if include.talk.slides_url %}
+    <a class="link-chip link-chip--slides" href="{{ include.talk.slides_url }}" target="_blank" rel="noopener">
+      <i class="fas fa-chalkboard-teacher" aria-hidden="true"></i> Slides <span class="ext">↗</span>
+    </a>
+  {% endif %}
+  {% if include.talk.video_url %}
+    <a class="link-chip link-chip--video" href="{{ include.talk.video_url }}" target="_blank" rel="noopener">
+      <i class="fab fa-youtube" aria-hidden="true"></i> Video <span class="ext">↗</span>
+    </a>
+  {% endif %}
+  </div>
+</article>

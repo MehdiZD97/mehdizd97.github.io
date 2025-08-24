@@ -6,11 +6,28 @@ author_profile: true
 ---
 
 {% if site.talkmap_link == true %}
-
 <p style="text-decoration:underline;"><a href="/talkmap.html">See a map of all the places I've given a talk!</a></p>
-
 {% endif %}
 
-{% for post in site.talks reversed %}
-  {% include archive-single-talk.html %}
-{% endfor %}
+{%- assign talks_sorted = site.talks | sort: "date" | reverse -%}
+{%- assign current_year = "" -%}
+
+{%- for talk in talks_sorted -%}
+  {%- assign y = talk.date | date: "%Y" -%}
+
+  {%- unless y == current_year -%}
+    {%- unless forloop.first -%}</div>{%- endunless -%}
+    <h2 id="{{ y | slugify }}" class="archive__subtitle">{{ y }}</h2>
+    <div class="talk-year-group">
+    {%- assign current_year = y -%}
+  {%- endunless -%}
+
+  {% include talk-preview.html talk=talk %}
+
+  {%- if forloop.last -%}</div>{%- endif -%}
+{%- endfor -%}
+
+<style>
+  .talk-year-group { margin-bottom: 1rem; }
+  .archive__subtitle { margin-top: 2rem; }
+</style>

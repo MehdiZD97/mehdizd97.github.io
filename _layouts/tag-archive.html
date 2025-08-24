@@ -1,0 +1,14 @@
+---
+layout: archive
+author_profile: true
+---
+
+<h2 class="archive__subtitle">Posts tagged “{{ page.title }}”</h2>
+
+{% if page.posts and page.posts != empty %}
+  {% for post in page.posts %}
+    {% include post-preview.html post=post %}
+  {% endfor %}
+{% else %}
+  <p>No posts found for this tag.</p>
+{% endif %}

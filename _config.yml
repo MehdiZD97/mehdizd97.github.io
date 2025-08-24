@@ -248,6 +248,7 @@ defaults:
       type: posts
     values:
       layout: single
+#      layout: post-article
       author_profile: true
       read_time: true
       comments: true
@@ -295,6 +296,12 @@ defaults:
       layout: talk
       author_profile: true
       share: true
+  # _tags
+  - scope:
+      type: tags
+    values:
+      layout: archive-taxonomy
+      author_profile: true
 
 
 # Sass/SCSS
@@ -319,6 +326,7 @@ plugins:
   - jekyll-redirect-from
   - jemoji
   - jekyll-include-cache
+  - jekyll-archives
 
 # Mimic GitHub Pages with --safe
 whitelist:
@@ -343,9 +351,23 @@ whitelist:
 category_archive:
   type: liquid
   path: /categories/
+#tag_archive:
+#  type: liquid
+#  path: /tags/
+
+
 tag_archive:
-  type: liquid
+  type: jekyll-archives
   path: /tags/
+
+jekyll-archives:
+  enabled:
+    - tags
+  layouts:
+    tag: tag-archive   # or 'archive' depending on your theme
+  permalinks:
+    tag: /tags/:name/
+
 # https://github.com/jekyll/jekyll-archives
 # jekyll-archives:
 #   enabled:
