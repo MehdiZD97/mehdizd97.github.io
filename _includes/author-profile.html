@@ -12,12 +12,12 @@
     {% if author.avatar contains "://" %}
     	<img src="{{ author.avatar }}" alt="{{ author.name }}">
     {% else %}
-    	<img src="{{ author.avatar | prepend: "/images/" | prepend: base_path }}" class="author__avatar" alt="{{ author.name }}" style="border-radius: 50%; border: 2px solid #ddd;>
+    	<img src="{{ author.avatar | prepend: "/images/" | prepend: base_path }}" class="author__avatar" alt="{{ author.name }}" style="border-radius: 50%; border: 3px solid #04588C;>
     {% endif %}
   </div>
 
   <div class="author__content">
-    <h3 class="author__name" style="font-size: 20px;">{{ author.name }}</h3>
+    <h3 class="author__name" style="font-size: 22px;">{{ author.name }}</h3>
     {% if author.pronouns %}<p class="author__pronouns">{{ author.pronouns }}</p>{% endif %}
     {% if author.bio %}<p class="author__bio" style="font-size: 16px;">{{ author.bio }}</p>{% endif %}
   </div>
