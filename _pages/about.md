@@ -140,6 +140,7 @@ redirect_from:
   <section class="recent-news">
     <h2>Recent News</h2>
     <ul>
+        <li><strong>[Oct. 2025]:</strong> Attended the IEEE MILCOM 2025 conference in LA, CA.</li>
         <li><strong>[Aug. 2025]:</strong> My submission to Asilomar 2025 has been shortlisted for the Best Paper Award contest.</li>
         <li><strong>[Apr. 2025]:</strong> Released a simulation framework for distributed cell-free ISAC systems on GitHub.</li>
         <li><strong>[Nov. 2024]:</strong> Posted two short tutorial videos on YouTube.</li>
