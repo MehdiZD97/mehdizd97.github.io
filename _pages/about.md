@@ -62,7 +62,7 @@ redirect_from:
 /* Two-column layout for titles */
 .horizontal-titles {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Two equal columns for titles */
+  grid-template-columns: 0.93fr 1.07fr; /* Two equal columns for titles */
   gap: 35px;
   align-items: center; /* Align titles vertically */
 }
@@ -76,9 +76,70 @@ redirect_from:
 /* Two-column grid for content */
 .two-column-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Two equal columns for content */
+  grid-template-columns: 0.92fr 1.08fr; /* Two equal columns for content */
   gap: 30px;
   margin-bottom: 10px;
+}
+
+.link-more {
+  margin-top: 1.2rem;
+  font-size: 0.9rem;
+}
+
+/* Smaller, high-contrast pill */
+.link-button {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;      /* smaller padding */
+  margin-left: 0.1rem;
+  border-radius: 10px;
+  border: 1px solid #4a6cff;
+  background-color: #f5f7ff;     /* light background */
+  color: #2643a0;                /* dark blue text */
+  text-decoration: none;
+  font-size: 0.85rem;            /* slightly smaller text */
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.link-button:hover {
+  background-color: #4a6cff;     /* solid blue on hover */
+  color: #ffffff;                /* white text */
+}
+
+
+
+
+.edu-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 0.5rem;
+  margin-left: 0.0rem;
+}
+
+.edu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+  margin-left: 0.0rem;
+}
+
+/* Fixed-size square box for all logos */
+.edu-logo-wrap {
+  width: 50px;              /* you can try 24–32px */
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Logo scales inside the box */
+.edu-logo {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
 }
 </style>
 
@@ -105,34 +166,57 @@ redirect_from:
     <div>
       <ul>
         <li>Wireless Communication Systems</li>
-        <li>Integrated Sensing and Communication (ISAC)</li>
+        <li>Integrated Sensing and Communication</li>
         <li>Cell‑Free / Distributed Massive MIMO</li>
-        <li>AI/ML and Optimization for Wireless Networks</li>
+        <li>AI / Machine Learning for Wireless Networks</li>
+        <li>Distributed / Decentralized Optimization</li>
       </ul>
     </div>
-
     <!-- Education -->
     <div>
-      <ul>
-        <li><strong>Ph.D.</strong>, Electrical Engineering and Computer Science, UC Irvine, 2028 (expected)</li>
-        <li><strong>M.S.</strong>, Electrical and Computer Engineering, Rice University, 2024</li>
-        <li><strong>B.S.</strong>, Electrical and Computer Engineering, University of Tehran, 2019</li>
+      <ul class="edu-list">
+        <li class="edu-item">
+          <div class="edu-logo-wrap">
+            <img src="/images/my_images/UCI_Seal_Logo.png" alt="UC Irvine logo" class="edu-logo">
+          </div>
+          <span>
+            <strong>Ph.D.</strong>, Electrical Engineering and Computer Science, UC Irvine, 2028 (expected)
+          </span>
+        </li>
+        <li class="edu-item">
+          <div class="edu-logo-wrap">
+            <img src="/images/my_images/Rice_Shield_Logo.png" alt="Rice University logo" class="edu-logo">
+          </div>
+          <span>
+            <strong>M.S.</strong>, Electrical and Computer Engineering, Rice University, 2024
+          </span>
+        </li>
+        <li class="edu-item">
+          <div class="edu-logo-wrap">
+            <img src="/images/my_images/UT_Logo.png" alt="University of Tehran logo" class="edu-logo">
+          </div>
+          <span>
+            <strong>B.S.</strong>, Electrical and Computer Engineering, University of Tehran, 2019
+          </span>
+        </li>
       </ul>
     </div>
   </div>
-
   <!-- Recent Publications Section -->
   <section class="recent-publications">
     <h2>Recent Publications</h2>
     <ul>
+        <li><strong> ASSENT: Learning-Based Association Optimization for Distributed Cell-Free ISAC</strong> - <em>Nov 2025.</em></li>
+        <li><strong> ASSENT-CellFree-ISAC: Simulation Framework</strong> - <em>GitHub Repository, Nov 2025.</em></li>
         <li><strong> Coordinated Decentralized Resource Optimization for Cell-Free ISAC Systems</strong> - <em>Asilomar, 2025.</em></li>
         <li><strong> Distributed Cell-Free ISAC Simulation Framework</strong> - <em>GitHub Repository, 2025.</em></li>
         <li><strong> ADMM for Downlink Beamforming in Cell‑Free Massive MIMO Systems</strong> - <em>Asilomar, 2024.</em></li>
         <li><strong> An Analytical and Experimental Study of Distributed Uplink Beamforming in the Presence of Carrier Frequency Offsets</strong> - <em>Submitted to IEEE TVT Journal, 2024.</em></li>
-        <li><strong> Distributed Multi‑User MIMO Datasets</strong> - <em>Published in IEEE Data Port, 2024.</em></li>
     </ul>
-    <p>
-      For a full list of my publications, visit the <a href="/publications/">Publications</a> pages.
+    <p class="link-more">
+      For a full list of my publications, visit the
+      <a href="/publications/" class="link-button">Publications</a>
+      page.
     </p>
   </section>
 
@@ -140,16 +224,20 @@ redirect_from:
   <section class="recent-news">
     <h2>Recent News</h2>
     <ul>
+        <li><strong>[Nov. 2025]:</strong> Published a preprint of the ASSENT paper and its GitHub repository.</li>
+        <li><strong>[Oct. 2025]:</strong> Lecture presentation at the 59th Asilomar Conference.</li>
+        <li><strong>[Oct. 2025]:</strong> Poster presentation at the Student Paper Contest (SPC) of Asilomar Conference.</li>
         <li><strong>[Oct. 2025]:</strong> Attended the IEEE MILCOM 2025 conference in LA, CA.</li>
         <li><strong>[Aug. 2025]:</strong> My submission to Asilomar 2025 has been shortlisted for the Best Paper Award contest.</li>
         <li><strong>[Apr. 2025]:</strong> Released a simulation framework for distributed cell-free ISAC systems on GitHub.</li>
         <li><strong>[Nov. 2024]:</strong> Posted two short tutorial videos on YouTube.</li>
         <li><strong>[Oct. 2024]:</strong> Presented a lecture of my recent paper at the 58th Asilomar Conference.</li>
         <li><strong>[Jul. 2024]:</strong> Received the Graduate Dean’s Recruitment Fellowship Award from UC Irvine.</li>
-        <li><strong>[Jul. 2024]:</strong> Started my PhD studies in the EECS department at UC Irvine.</li>
     </ul>
-    <p>
-      For a full list of news and activities, visit the <a href="/year-archive/">News & Posts</a> page.
+    <p class="link-more">
+      For a full list of news and activities, visit the
+      <a href="/year-archive/" class="link-button">News & Posts</a>
+      page.
     </p>
   </section>
 </div>
