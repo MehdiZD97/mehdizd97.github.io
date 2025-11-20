@@ -30,7 +30,7 @@ repository               : "mehdizd97/mehdizd97.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "profile.jpeg"
+  avatar           : "profile1.png"
   name             : "Mehdi Zafari"
   pronouns         : # example: "she/her"  
   bio              : "PhD Student | AI/ML-Driven Wireless Systems Researcher"
