@@ -14,19 +14,61 @@ redirect_from:
 
 Education
 ======
-* **Ph.D. in Electrical Engineering and Computer Science, UCI, 2028 (expected)**
-  * Recipient of the UCI Graduate Dean’s Recruitment Fellowship Award
-* **M.S. in Electrical and Computer Engineering, Rice University, 2024**
-  * **Thesis:** Distributed Multi‑User Beamforming in the Presence of CFO: An Analytical and Experimental Study
-* **B.S. in Electrical and Computer Engineering, University of Tehran, 2019**
-  * **Thesis:** Design and Hardware Implementation of a MIMO‑OFDM System Using High‑Level Synthesis Techniques
+
+<style>
+.edu-list { list-style: none; padding-left: 0; margin: 0; }
+.edu-item { display: grid; grid-template-columns: 90px 1fr; gap: 12px; margin: 12px 0; }
+.edu-logo {
+  width: 90px; height: 90px; object-fit: contain;
+  border: 1px solid #a9c7e6; border-radius: 10px;
+  background: #f8fbff; padding: 5px;
+}
+.edu-title { margin: 0; font-weight: 900; color: #0b5295; }
+.edu-sub { margin: 3px 0 0; color: #374151; }
+.edu-bul { margin: 6px 0 0; padding-left: 18px; color: #374151; }
+.edu-bul li { margin: 2px 0; }
+</style>
+
+<ul class="edu-list">
+
+  <li class="edu-item">
+    <img class="edu-logo" src="/images/my_images/UCI_Seal_Logo.png" alt="UC Irvine logo">
+    <div>
+      <p class="edu-title">Ph.D. in Electrical Engineering and Computer Science — UC Irvine (Expected 2028)</p>
+      <ul class="edu-bul">
+        <li>Recipient of the UCI Graduate Dean’s Recruitment Fellowship Award</li>
+      </ul>
+    </div>
+  </li>
+
+  <li class="edu-item">
+    <img class="edu-logo" src="/images/my_images/Rice_Shield_Logo.png" alt="Rice University logo">
+    <div>
+      <p class="edu-title">M.S. in Electrical and Computer Engineering — Rice University (2024)</p>
+      <ul class="edu-bul">
+        <li><strong>Thesis:</strong> Distributed Multi-User Beamforming in the Presence of CFO: An Analytical and Experimental Study</li>
+      </ul>
+    </div>
+  </li>
+
+  <li class="edu-item">
+    <img class="edu-logo" src="/images/my_images/UT_Logo.png" alt="University of Tehran logo">
+    <div>
+      <p class="edu-title">B.S. in Electrical and Computer Engineering — University of Tehran (2019)</p>
+      <ul class="edu-bul">
+        <li><strong>Thesis:</strong> Design and Hardware Implementation of a MIMO-OFDM System Using High-Level Synthesis Techniques</li>
+      </ul>
+    </div>
+  </li>
+
+</ul>
 
 &nbsp;
 
 Research Interests
 ======
 * **Wireless Communication:** Integrated Sensing and Communication (ISAC), Cell‑Free / Distributed MIMO, Resource Allocation, Beamforming
-* **ML & Optimization:** Distributed Optimizations, Reinforcement Learning, AI/ML for Wireless
+* **ML & Optimization:** Distributed Optimizations, Reinforcement Learning, AI/ML for Next-Gen Wireless Systems
 
 
 

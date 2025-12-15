@@ -224,6 +224,7 @@ redirect_from:
   <section class="recent-news">
     <h2>Recent News</h2>
     <ul>
+        <li><strong>[Dec. 2025]:</strong> Released a GitHub repository for our GenAI-based wildfire prediction project.</li>
         <li><strong>[Nov. 2025]:</strong> Published a preprint of the ASSENT paper and its GitHub repository.</li>
         <li><strong>[Oct. 2025]:</strong> Lecture presentation at the 59th Asilomar Conference.</li>
         <li><strong>[Oct. 2025]:</strong> Poster presentation at the Student Paper Contest (SPC) of Asilomar Conference.</li>
