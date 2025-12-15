@@ -25,47 +25,125 @@ Education
 
 Research Interests
 ======
-* **Wireless Communication:** Cell‑Free Massive MIMO, Integrated Sensing and Communication, Distributed MU‑MIMO, Beamforming
-* **ML & Optimization:** Distributed Optimizations, Statistical Data Analysis, AI/ML for Wireless
+* **Wireless Communication:** Integrated Sensing and Communication (ISAC), Cell‑Free / Distributed MIMO, Resource Allocation, Beamforming
+* **ML & Optimization:** Distributed Optimizations, Reinforcement Learning, AI/ML for Wireless
+
+
 
 &nbsp;
 
+
 Professional Work Experience
 ======
-* Jul. 2024 - Present: Research Assistant
-  * UCI, Department of Electrical Engineering and Computer Science
-  * Conducting research on optimization techniques for advancing cell‑free ISAC systems.
-  * Supervisor: Professor A. Lee Swindlehurst
 
-* Aug. 2021 ‑ Apr. 2024: Research Assistant
-  * Rice University, Department of Electrical and Computer Engineering
-  * Conducted research on distributed multi‑user MIMO beamforming for next‑generation wireless networks.
-  * Evaluated performance and robustness of distributed multi‑user beamforming techniques using RENEW.
-  * Measurements: Collected over 200 datasets using the RENEW platform, featuring a 64‑antenna BS and up to 8 users. Click [here](https://ieee-dataport.org/documents/distributed-multi-user-mimo-datasets) to access datasets.
-  * Supervisor: Dr. Rahman Doost-Mohammady
+<div class="cv-row">
+  <div class="cv-left">
+    <strong>Research Assistant</strong><br>
+    UC Irvine, EECS Department
+  </div>
+  <div class="cv-right">
+    Jul. 2024 - Present
+  </div>
+</div>
+<ul class="cv-details">
+  <li>Conducting research on Reinforcement Learning and Graph Neural Network (GNN) architectures for cooperative Integrated Sensing and Communications (ISAC) networks.</li>
+  <li>Designing decentralized ADMM-based algorithms for resource allocation in Cell-Free ISAC systems.</li>
+  <li>Developing large-scale network simulations and optimization pipelines using Python (PyTorch), CVXPY, and Gurobi.</li>
+  <li>Supervisor: <strong>Prof. A. Lee Swindlehurst</strong></li>
+</ul>
 
-* Jan. 2024 ‑ May 2024: Research Fellow
-  * Rice University, Data to Knowledge (D2K) Lab
-  * Mentored a project sponsored by Rice EMS to conduct an analysis of their datasets across various domains.
-  * Developed Time Series prediction models to anticipate future requirements within each area and provide insights into the overall organizational needs.
+<div class="cv-row">
+  <div class="cv-left">
+    <strong>Research Assistant</strong><br>
+    Rice University, Department of Electrical and Computer Engineering
+  </div>
+  <div class="cv-right">
+    Aug. 2021 - Apr. 2024
+  </div>
+</div>
+<ul class="cv-details">
+  <li>Conducted research on distributed multi‑user MIMO beamforming for next‑generation wireless networks.</li>
+  <li>Evaluated performance and robustness of distributed multi‑user beamforming techniques using RENEW platform.</li>
+  <li>Measurements: Collected over 200 datasets using the RENEW platform, featuring a 64‑antenna BS and up to 8 users. Click <a href="https://ieee-dataport.org/documents/distributed-multi-user-mimo-datasets"
+           target="_blank" rel="noopener">here</a> to access datasets.</li>
+  <li>Supervisor: Dr. Rahman Doost-Mohammady</li>
+</ul>
 
-* Dec. 2018 ‑ Dec. 2020: Undergraduate Research Assistant
-  * University of Tehran, Array Processing Laboratory
-  * Conducted research on the hardware implementation of a MIMO OFDM system using the Xilinx ZedBoards.
-  * Designed and simulated an FDMA, OFDM, and SC‑FDE wireless systems in system‑level using MATLAB and in hardware‑level using Vivado‑HLS.
-  * Supervisor: Dr. Aliazam Abbasfar
 
-* May 2020 ‑ Nov. 2020: Part-Time R&D Engineer
-  * Transportation Innovation Center, Tehran, Iran
-  * Conducted research on the desing and implementation of analog FM‑based and digital OFDM‑based radio links for radio‑controlled quadcopters.
+<div class="cv-row">
+  <div class="cv-left">
+    <strong>Research Fellow</strong><br>
+    Rice University, Data to Knowledge (D2K) Lab
+  </div>
+  <div class="cv-right">
+    Jan. 2024 - May 2024
+  </div>
+</div>
+<ul class="cv-details">
+  <li>Mentored five undergraduate students on a project sponsored by Rice EMS to conduct an analysis of their datasets across various domains.</li>
+  <li>Developed Time Series prediction models to anticipate future requirements within each area and provide insights into the overall organizational needs.</li>
+</ul>
 
-* May 2020 ‑ Nov. 2020: Part-Time R&D Engineer
-  * Sadr Electronic Dena, Tehran, Iran
-  * Developed embedded C/C++ programs and serial data transmission for Atmel‑AVR and ARM‑STM32 microcontrollers on the central control board of elevators.
 
-* Jul. 2018 - Oct. 2018: Full-Time Intern
-  * Pionaria, Tehran, Iran
-  * Simulated parabolic antennas with gains ranging from 17dB to 34dB using HFSS and CST tools for characteristic design optimization.
+<div class="cv-row">
+  <div class="cv-left">
+    <strong>Undergraduate Research Assistant</strong><br>
+    University of Tehran, Array Processing Laboratory
+  </div>
+  <div class="cv-right">
+    Dec. 2018 - Dec. 2020
+  </div>
+</div>
+<ul class="cv-details">
+  <li>Developed OFDM and SC-FDE systems on Xilinx FPGAs using High-Level Synthesis (HLS) as part of a broader study on MIMO communications.</li>
+  <li>Conducted full-stack system design, from theoretical modeling in MATLAB/Python to experimental evaluation and C/C++ implementation on hardware.</li>
+  <li>Supervisor: Dr. Aliazam Abbasfar</li>
+</ul>
+
+
+<div class="cv-row">
+  <div class="cv-left">
+    <strong>Part-Time R&D Engineer</strong><br>
+    Transportation Innovation Center, Tehran, Iran
+  </div>
+  <div class="cv-right">
+    May 2020 - Nov. 2020
+  </div>
+</div>
+<ul class="cv-details">
+  <li>Designed and implemented hybrid radio links (FM analog and OFDM digital) for drones, enabling real-time transmission of video, GPS, and control commands.</li>
+  <li>Conducted research on telemetry system implementation strategies for vehicular communication in drone networks.</li>
+</ul>
+
+
+<div class="cv-row">
+  <div class="cv-left">
+    <strong>Part-Time R&D Engineer</strong><br>
+    Sadr Electronic Dena, Tehran, Iran
+  </div>
+  <div class="cv-right">
+    May 2020 - Nov. 2020
+  </div>
+</div>
+<ul class="cv-details">
+  <li>Developed a 2.4GHz ISM band IoT system to enable remote control functionality for elevator central control boards.</li>
+  <li>Engineered embedded C/C++ firmware for AVR and ARM microcontrollers, implementing efficient serial data transmission protocols.</li>
+</ul>
+
+
+<div class="cv-row">
+  <div class="cv-left">
+    <strong>Full-Time Intern</strong><br>
+    Pionaria, Tehran, Iran
+  </div>
+  <div class="cv-right">
+    Jul. 2018 - Oct. 2018
+  </div>
+</div>
+<ul class="cv-details">
+  <li>Simulated parabolic and patch antennas using HFSS and CST, specifically improving VSWR and Gain performance.</li>
+  <li>Implemented Point-to-Point and Point-to-Multi-Point wireless links, utilizing wireless network standards and Software-Defined Radio (SDR) concepts.</li>
+</ul>
 
 &nbsp;
 
