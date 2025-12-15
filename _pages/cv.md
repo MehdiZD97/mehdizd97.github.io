@@ -161,17 +161,144 @@ Skills
 Honors & Awards
 ======
 
-| Year  | Title                                                         | Description                                                         |
-|:-----:|---------------------------------------------------------------|---------------------------------------------------------------------|
-| 2024  | **Recipient of Graduate Dean’s Recruitment Fellowship Award** | UCI Samueli School of Engineering                                   |
-| 2023  | **Recipient of SIAWE Scholarship**                            | Considered for Distinguished International Students                 |
-| 2022  | **Recipient of SIAWE Scholarship**                            | Considered for Distinguished International Students                 |
-| 2021  | **Recipient of Rice University Graduate Fellowship**          | Rice University                                                     |
-| 2019  | **Exceptional Talent Award**                                  | Top 5% GPA in the undergraduate program at the University of Tehran |
-| 2016  | **Recipient of the National Elites Foundation Fellowship**    | Iranian National Elites Foundation                                  |
-| 2015  | **Ranked 47th**                                               | Iranian National University Entrance Exam (Konkoor)                 |
-| 2013  | **Ranked 3rd**                                                | Iranian National Mathematics Olympiad                               |
+<style>
+.awards-container {
+  max-width: 1000px;
+  margin: 10px 0;
+}
 
+.award-card {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  gap: 12px;
+  border: 1px solid #a9c7e6;
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  background: #f8fbff;
+}
+
+.award-year {
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: #0b5295;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.award-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.award-title {
+  font-weight: 500;
+  color: #0b5295;
+  margin-bottom: 2px;
+}
+
+.award-desc {
+  font-size: 0.85rem;
+  color: #374151;
+}
+</style>
+
+<div class="awards-container">
+
+<div class="award-card">
+  <div class="award-year">2024</div>
+  <div class="award-content">
+    <div class="award-title">Recipient of Graduate Dean’s Recruitment Fellowship Award</div>
+    <div class="award-desc">UCI Samueli School of Engineering</div>
+  </div>
+</div>
+
+<div class="award-card">
+  <div class="award-year">2023</div>
+  <div class="award-content">
+    <div class="award-title">Recipient of SIAWE Scholarship</div>
+    <div class="award-desc">Recognized among distinguished international students</div>
+  </div>
+</div>
+
+<div class="award-card">
+  <div class="award-year">2022</div>
+  <div class="award-content">
+    <div class="award-title">Recipient of SIAWE Scholarship</div>
+    <div class="award-desc">Recognized among distinguished international students</div>
+  </div>
+</div>
+
+<div class="award-card">
+  <div class="award-year">2021</div>
+  <div class="award-content">
+    <div class="award-title">Recipient of Graduate Fellowship</div>
+    <div class="award-desc">Rice University, School of Engineering and Computing</div>
+  </div>
+</div>
+
+<div class="award-card">
+  <div class="award-year">2019</div>
+  <div class="award-content">
+    <div class="award-title">Recipient of Exceptional Talent Award</div>
+    <div class="award-desc">Top 5% GPA, University of Tehran</div>
+  </div>
+</div>
+
+<div class="award-card">
+  <div class="award-year">2016</div>
+  <div class="award-content">
+    <div class="award-title">National Elites Foundation Fellowship</div>
+    <div class="award-desc">Iranian National Elites Foundation</div>
+  </div>
+</div>
+
+<div class="award-card">
+  <div class="award-year">2015</div>
+  <div class="award-content">
+    <div class="award-title">Ranked 47th</div>
+    <div class="award-desc">Iranian National University Entrance Exam (Konkoor)</div>
+  </div>
+</div>
+
+<div class="award-card">
+  <div class="award-year">2013</div>
+  <div class="award-content">
+    <div class="award-title">Ranked 3rd</div>
+    <div class="award-desc">Iranian National Mathematics Olympiad</div>
+  </div>
+</div>
+
+</div>
+
+
+<style>
+.awards-container{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);  /* 2 columns */
+  gap: 10px;
+  margin: 10px 0;
+}
+
+/* your existing card style (keep or adjust) */
+.award-card{
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  gap: 12px;
+  border: 1px solid #a9c7e6;
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: #f8fbff;
+}
+
+/* responsive: switch to 1 column on small screens */
+@media (max-width: 1000px){
+  .awards-container{
+    grid-template-columns: 1fr;
+  }
+}
+</style>
 
 
 &nbsp;
@@ -179,35 +306,35 @@ Honors & Awards
 Teaching Assistant Experiences
 ======
 
-<div style="display: grid; grid-template-columns: 1.5fr 0.5fr 0.5fr; gap: 10px; font-size: 14px">
-  <div style="border: 1px solid #ddd; padding: 5px;">Introduction to Digital Logic Laboratory</div>
-  <div style="border: 1px solid #ddd; padding: 5px; display: flex; justify-content: center; align-items: center;">Spring 2025</div>
-  <div style="border: 1px solid #ddd; padding: 5px;">UC Irvine</div>
+<div style="display: grid; grid-template-columns: 1.5fr 0.5fr 0.5fr; gap: 10px; font-size: 16px">
+  <div style="border: 2px solid #a9c7e6; padding: 5px;">Introduction to Digital Logic Laboratory</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px; display: flex; justify-content: center; align-items: center;">Spring 2025</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px;">UC Irvine</div>
 
 
-  <div style="border: 1px solid #ddd; padding: 5px;">Applied Machine Learning & Data Science</div>
-  <div style="border: 1px solid #ddd; padding: 5px; display: flex; justify-content: center; align-items: center;">Spring 2024</div>
-  <div style="border: 1px solid #ddd; padding: 5px;">Rice University</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px;">Applied Machine Learning & Data Science</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px; display: flex; justify-content: center; align-items: center;">Spring 2024</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px;">Rice University</div>
 
-  <div style="border: 1px solid #ddd; padding: 5px;">Modern Communication: Theory and Practice</div>
-  <div style="border: 1px solid #ddd; padding: 5px; display: flex; justify-content: center; align-items: center;">Fall 2023</div>
-  <div style="border: 1px solid #ddd; padding: 5px;">Rice University</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px;">Modern Communication: Theory and Practice</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px; display: flex; justify-content: center; align-items: center;">Fall 2023</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px;">Rice University</div>
 
-  <div style="border: 1px solid #ddd; padding: 5px;">Modern Communication: Theory and Practice</div>
-  <div style="border: 1px solid #ddd; padding: 5px; display: flex; justify-content: center; align-items: center;">Fall 2022</div>
-  <div style="border: 1px solid #ddd; padding: 5px;">Rice University</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px;">Modern Communication: Theory and Practice</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px; display: flex; justify-content: center; align-items: center;">Fall 2022</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px;">Rice University</div>
 
-  <div style="border: 1px solid #ddd; padding: 5px;">Wireless Multimedia Communications</div>
-  <div style="border: 1px solid #ddd; padding: 5px; display: flex; justify-content: center; align-items: center;">Spring 2020</div>
-  <div style="border: 1px solid #ddd; padding: 5px;">University of Tehran</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px;">Wireless Multimedia Communications</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px; display: flex; justify-content: center; align-items: center;">Spring 2020</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px;">University of Tehran</div>
 
-  <div style="border: 1px solid #ddd; padding: 5px;">Signals and Systems Analysis</div>
-  <div style="border: 1px solid #ddd; padding: 5px; display: flex; justify-content: center; align-items: center;">Fall 2019</div>
-  <div style="border: 1px solid #ddd; padding: 5px;">University of Tehran</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px;">Signals and Systems Analysis</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px; display: flex; justify-content: center; align-items: center;">Fall 2019</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px;">University of Tehran</div>
 
-  <div style="border: 1px solid #ddd; padding: 5px;">Digital Communications</div>
-  <div style="border: 1px solid #ddd; padding: 5px; display: flex; justify-content: center; align-items: center;">Spring 2019</div>
-  <div style="border: 1px solid #ddd; padding: 5px;">University of Tehran</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px;">Digital Communications</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px; display: flex; justify-content: center; align-items: center;">Spring 2019</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px;">University of Tehran</div>
 </div>
 
 &nbsp;
@@ -215,40 +342,45 @@ Teaching Assistant Experiences
 Selected Courses
 ======
 
-<div style="display: grid; grid-template-columns: 0.5fr 1.5fr 0.5fr 0.5fr; gap: 10px; font-size: 14px">
-  <div style="border: 1px solid #ddd; padding: 5px; display: flex; justify-content: center; align-items: center;">Fall 2024</div>
-  <div style="border: 1px solid #ddd; padding: 5px;">Machine Learning for Signal Processing</div>
-  <div style="border: 1px solid #ddd; padding: 5px; display: flex; justify-content: center; align-items: center;">Grade: A<sup>+</sup></div>
-  <div style="border: 1px solid #ddd; padding: 5px;">UC Irvine</div>
+<div style="display: grid; grid-template-columns: 0.5fr 1.5fr 0.5fr 0.5fr; gap: 10px; font-size: 16px">
+  <div style="border: 2px solid #a9c7e6; padding: 5px; display: flex; justify-content: center; align-items: center;">Fall 2025</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px;">Deep Generative Models</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px; display: flex; justify-content: center; align-items: center;">Grade: A</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px;">UC Irvine</div>
 
-  <div style="border: 1px solid #ddd; padding: 5px; display: flex; justify-content: center; align-items: center;">Spring 2024</div>
-  <div style="border: 1px solid #ddd; padding: 5px;">Optimization: Algorithms, Complexity, & Approximations</div>
-  <div style="border: 1px solid #ddd; padding: 5px; display: flex; justify-content: center; align-items: center;">Grade: A</div>
-  <div style="border: 1px solid #ddd; padding: 5px;">Rice University</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px; display: flex; justify-content: center; align-items: center;">Fall 2024</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px;">Machine Learning for Signal Processing</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px; display: flex; justify-content: center; align-items: center;">Grade: A<sup>+</sup></div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px;">UC Irvine</div>
 
-  <div style="border: 1px solid #ddd; padding: 5px; display: flex; justify-content: center; align-items: center;">Spring 2023</div>
-  <div style="border: 1px solid #ddd; padding: 5px;">Distributed Methods for Optimization and Machine Learning</div>
-  <div style="border: 1px solid #ddd; padding: 5px; display: flex; justify-content: center; align-items: center;">Grade: A<sup>+</sup></div>
-  <div style="border: 1px solid #ddd; padding: 5px;">Rice University</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px; display: flex; justify-content: center; align-items: center;">Spring 2024</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px;">Optimization: Algorithms, Complexity, & Approximations</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px; display: flex; justify-content: center; align-items: center;">Grade: A</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px;">Rice University</div>
 
-  <div style="border: 1px solid #ddd; padding: 5px; display: flex; justify-content: center; align-items: center;">Fall 2022</div>
-  <div style="border: 1px solid #ddd; padding: 5px;">Machine Learning (Introduction to Deep Learning)</div>
-  <div style="border: 1px solid #ddd; padding: 5px; display: flex; justify-content: center; align-items: center;">Grade: A</div>
-  <div style="border: 1px solid #ddd; padding: 5px;">Rice University</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px; display: flex; justify-content: center; align-items: center;">Spring 2023</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px;">Distributed Methods for Optimization and Machine Learning</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px; display: flex; justify-content: center; align-items: center;">Grade: A<sup>+</sup></div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px;">Rice University</div>
 
-  <div style="border: 1px solid #ddd; padding: 5px; display: flex; justify-content: center; align-items: center;">Spring 2022</div>
-  <div style="border: 1px solid #ddd; padding: 5px;">Advanced Wireless Networks</div>
-  <div style="border: 1px solid #ddd; padding: 5px; display: flex; justify-content: center; align-items: center;">Grade: A</div>
-  <div style="border: 1px solid #ddd; padding: 5px;">Rice University</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px; display: flex; justify-content: center; align-items: center;">Fall 2022</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px;">Machine Learning (Introduction to Deep Learning)</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px; display: flex; justify-content: center; align-items: center;">Grade: A</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px;">Rice University</div>
 
-  <div style="border: 1px solid #ddd; padding: 5px; display: flex; justify-content: center; align-items: center;">Fall 2021</div>
-  <div style="border: 1px solid #ddd; padding: 5px;">Modern Communication: Theory and Practice</div>
-  <div style="border: 1px solid #ddd; padding: 5px; display: flex; justify-content: center; align-items: center;">Grade: A</div>
-  <div style="border: 1px solid #ddd; padding: 5px;">Rice University</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px; display: flex; justify-content: center; align-items: center;">Spring 2022</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px;">Advanced Wireless Networks</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px; display: flex; justify-content: center; align-items: center;">Grade: A</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px;">Rice University</div>
 
-  <div style="border: 1px solid #ddd; padding: 5px; display: flex; justify-content: center; align-items: center;">Fall 2017</div>
-  <div style="border: 1px solid #ddd; padding: 5px;">Advanced Object-Oriented Programming</div>
-  <div style="border: 1px solid #ddd; padding: 5px; display: flex; justify-content: center; align-items: center;">Grade: A</div>
-  <div style="border: 1px solid #ddd; padding: 5px;">University of Tehran</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px; display: flex; justify-content: center; align-items: center;">Fall 2021</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px;">Modern Communication: Theory and Practice</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px; display: flex; justify-content: center; align-items: center;">Grade: A</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px;">Rice University</div>
+
+  <div style="border: 2px solid #a9c7e6; padding: 5px; display: flex; justify-content: center; align-items: center;">Fall 2017</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px;">Advanced Object-Oriented Programming</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px; display: flex; justify-content: center; align-items: center;">Grade: A</div>
+  <div style="border: 2px solid #a9c7e6; padding: 5px;">University of Tehran</div>
 </div>
 
