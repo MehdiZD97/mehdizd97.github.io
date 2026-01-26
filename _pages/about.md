@@ -206,12 +206,12 @@ redirect_from:
   <section class="recent-publications">
     <h2>Recent Publications</h2>
     <ul>
-        <li><strong> ASSENT: Learning-Based Association Optimization for Distributed Cell-Free ISAC</strong> - <em>Nov 2025.</em></li>
+        <li><strong> An Analytical and Experimental Study of Distributed Uplink Beamforming in the Presence of Carrier Frequency Offsets</strong> - <em>Published at IEEE TVT Journal, Jan 2026.</em></li>
+        <li><strong> ASSENT: Learning-Based Association Optimization for Distributed Cell-Free ISAC</strong> - <em>Accepted to the IEEE ICC, Jan 2026.</em></li>
         <li><strong> ASSENT-CellFree-ISAC: Simulation Framework</strong> - <em>GitHub Repository, Nov 2025.</em></li>
         <li><strong> Coordinated Decentralized Resource Optimization for Cell-Free ISAC Systems</strong> - <em>Asilomar, 2025.</em></li>
         <li><strong> Distributed Cell-Free ISAC Simulation Framework</strong> - <em>GitHub Repository, 2025.</em></li>
         <li><strong> ADMM for Downlink Beamforming in Cell‑Free Massive MIMO Systems</strong> - <em>Asilomar, 2024.</em></li>
-        <li><strong> An Analytical and Experimental Study of Distributed Uplink Beamforming in the Presence of Carrier Frequency Offsets</strong> - <em>Submitted to IEEE TVT Journal, 2024.</em></li>
     </ul>
     <p class="link-more">
       For a full list of my publications, visit the
@@ -224,6 +224,9 @@ redirect_from:
   <section class="recent-news">
     <h2>Recent News</h2>
     <ul>
+        <li><strong>[Jan. 2026]:</strong> I will be presenting at the UCI Grad Slam Semi Finals!</li>
+        <li><strong>[Jan. 2026]:</strong> My experimental paper is published at the IEEE TVT journal (see publications).</li>
+        <li><strong>[Jan. 2026]:</strong> My ASSENT paper is accepted at the IEEE ICC 2026.</li>
         <li><strong>[Dec. 2025]:</strong> Released a GitHub repository for our GenAI-based wildfire prediction project.</li>
         <li><strong>[Nov. 2025]:</strong> Published a preprint of the ASSENT paper and its GitHub repository.</li>
         <li><strong>[Oct. 2025]:</strong> Lecture presentation at the 59th Asilomar Conference.</li>

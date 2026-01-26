@@ -9,14 +9,15 @@ main:
   - title: "Publications"
     url: /publications/
 
+  - title: "My CV"
+    url: /cv/
+
   - title: "Talks & Conferences"
     url: /talks/
 
 #  - title: "Awards"
 #    url: /awards/
 
-  - title: "CV"
-    url: /cv/
 
 #  - title: "TA Experience"
 #    url: /teaching/
