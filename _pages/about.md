@@ -224,8 +224,9 @@ redirect_from:
   <section class="recent-news">
     <h2>Recent News</h2>
     <ul>
+        <li><strong>[Feb. 2026]:</strong> Selected as a finalist in the UCI Grad Slam Finals competition! (<a href="https://grad.uci.edu/professional-development/grad-slam/grad-slam-finalists/" target="_blank">Read more</a>)</li>
         <li><strong>[Jan. 2026]:</strong> I will be presenting at the UCI Grad Slam Semi Finals!</li>
-        <li><strong>[Jan. 2026]:</strong> My experimental paper is published at the IEEE TVT journal (see publications).</li>
+        <li><strong>[Jan. 2026]:</strong> My experimental paper is published at the IEEE TVT journal (see <a href="/publications/">Publications</a>).</li>
         <li><strong>[Jan. 2026]:</strong> My ASSENT paper is accepted at the IEEE ICC 2026.</li>
         <li><strong>[Dec. 2025]:</strong> Released a GitHub repository for our GenAI-based wildfire prediction project.</li>
         <li><strong>[Nov. 2025]:</strong> Published a preprint of the ASSENT paper and its GitHub repository.</li>
@@ -233,10 +234,15 @@ redirect_from:
         <li><strong>[Oct. 2025]:</strong> Poster presentation at the Student Paper Contest (SPC) of Asilomar Conference.</li>
         <li><strong>[Oct. 2025]:</strong> Attended the IEEE MILCOM 2025 conference in LA, CA.</li>
         <li><strong>[Aug. 2025]:</strong> My submission to Asilomar 2025 has been shortlisted for the Best Paper Award contest.</li>
-        <li><strong>[Apr. 2025]:</strong> Released a simulation framework for distributed cell-free ISAC systems on GitHub.</li>
-        <li><strong>[Nov. 2024]:</strong> Posted two short tutorial videos on YouTube.</li>
-        <li><strong>[Oct. 2024]:</strong> Presented a lecture of my recent paper at the 58th Asilomar Conference.</li>
-        <li><strong>[Jul. 2024]:</strong> Received the Graduate Dean’s Recruitment Fellowship Award from UC Irvine.</li>
+        <details>
+          <summary><strong>Older News</strong></summary>
+          <ul>
+            <li><strong>[Apr. 2025]:</strong> Released a simulation framework for distributed cell-free ISAC systems on GitHub.</li>
+            <li><strong>[Nov. 2024]:</strong> Posted two short tutorial videos on YouTube.</li>
+            <li><strong>[Oct. 2024]:</strong> Presented a lecture of my recent paper at the 58th Asilomar Conference.</li>
+            <li><strong>[Jul. 2024]:</strong> Received the Graduate Dean’s Recruitment Fellowship Award from UC Irvine.</li>
+          </ul>
+        </details>
     </ul>
     <p class="link-more">
       For a full list of news and activities, visit the
