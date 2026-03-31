@@ -249,6 +249,22 @@ Honors & Awards
 <div class="awards-container">
 
 <div class="award-card">
+  <div class="award-year">2026</div>
+  <div class="award-content">
+    <div class="award-title">Recipient of Pia Gratton Endowed Graduate Student Award</div>
+    <div class="award-desc">UCI Samueli School of Engineering</div>
+  </div>
+</div>
+
+<div class="award-card">
+  <div class="award-year">2026</div>
+  <div class="award-content">
+    <div class="award-title">Won 3rd Place in the UCI Grad Slam Finals Competition</div>
+    <div class="award-desc">UCI Graduate Division</div>
+  </div>
+</div>
+
+<div class="award-card">
   <div class="award-year">2024</div>
   <div class="award-content">
     <div class="award-title">Recipient of Graduate Dean’s Recruitment Fellowship Award</div>

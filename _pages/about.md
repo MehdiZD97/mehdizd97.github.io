@@ -206,6 +206,7 @@ redirect_from:
   <section class="recent-publications">
     <h2>Recent Publications</h2>
     <ul>
+        <li><strong> Robust Wildfire Forecasting under Partial Observability: From Reconstruction to Prediction</strong> - <em>Submitted to IEEE TGRS Journal, Mar 2026.</em></li>
         <li><strong> An Analytical and Experimental Study of Distributed Uplink Beamforming in the Presence of Carrier Frequency Offsets</strong> - <em>Published at IEEE TVT Journal, Jan 2026.</em></li>
         <li><strong> ASSENT: Learning-Based Association Optimization for Distributed Cell-Free ISAC</strong> - <em>Accepted to the IEEE ICC, Jan 2026.</em></li>
         <li><strong> ASSENT-CellFree-ISAC: Simulation Framework</strong> - <em>GitHub Repository, Nov 2025.</em></li>
@@ -224,6 +225,8 @@ redirect_from:
   <section class="recent-news">
     <h2>Recent News</h2>
     <ul>
+        <li><strong>[Mar. 2026]:</strong> Received Pia Gratton Endowed Graduate Student Award from the UCI Samueli School of Engineering.</li>
+        <li><strong>[Mar. 2026]:</strong> Won 3rd place in the UCI Grad Slam Finals competition! (<a href="https://grad.uci.edu/professional-development/grad-slam/grad-slam-finalists/" target="_blank">Read more</a>)</li>
         <li><strong>[Feb. 2026]:</strong> Selected as a finalist in the UCI Grad Slam Finals competition! (<a href="https://grad.uci.edu/professional-development/grad-slam/grad-slam-finalists/" target="_blank">Read more</a>)</li>
         <li><strong>[Jan. 2026]:</strong> I will be presenting at the UCI Grad Slam Semi Finals!</li>
         <li><strong>[Jan. 2026]:</strong> My experimental paper is published at the IEEE TVT journal (see <a href="/publications/">Publications</a>).</li>
