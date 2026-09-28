@@ -6,6 +6,8 @@ _site/
 _local/
 .claude/
 .kronk/
+.idea/
+.DS_Store
 CLAUDE.md
 
 
@@ -15,3 +17,9 @@ Gemfile.lock
 # Ingore files created by npm
 node_modules
 package-lock.json
+
+# Ignore the Python virtual environment and caches
+.venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
