@@ -3,7 +3,11 @@ _site/
 .sass-cache/
 
 # Ignore the directory for local files during development
-local/
+_local/
+.claude/
+.kronk/
+CLAUDE.md
+
 
 # Ignore the Gemfile that is generated
 Gemfile.lock
