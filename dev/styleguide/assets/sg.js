@@ -1,5 +1,6 @@
-// Temporary (Stage 2 style guide): theme toggle, mobile menu, BibTeX panels,
-// and live contrast ratios for the palette table.
+// Temporary (Stage 2 style guide): theme toggle, mobile menu, the header
+// underline that follows the section in view, BibTeX panels, and live
+// contrast ratios for the palette table.
 
 const root = document.documentElement;
 const systemDark = window.matchMedia("(prefers-color-scheme: dark)");
@@ -38,6 +39,36 @@ if (menuButton && menu) {
       menuButton.focus();
     }
   });
+  menu.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => setOpen(false)));
+}
+
+// The header underline follows the section in view: the last linked section
+// whose top has passed a reading line 35% down the window is current.
+const spyLinks = [...document.querySelectorAll(".site-nav a[href^='#']")];
+const spyTargets = spyLinks.map((link) => document.getElementById(link.hash.slice(1)));
+if (spyLinks.length) {
+  let queued = false;
+  const updateCurrent = () => {
+    queued = false;
+    const line = window.innerHeight * 0.35;
+    let current = 0;
+    spyTargets.forEach((section, i) => {
+      if (section && section.getBoundingClientRect().top <= line) current = i;
+    });
+    spyLinks.forEach((link, i) => {
+      if (i === current) link.setAttribute("aria-current", "true");
+      else link.removeAttribute("aria-current");
+    });
+  };
+  const queue = () => {
+    if (!queued) {
+      queued = true;
+      requestAnimationFrame(updateCurrent);
+    }
+  };
+  window.addEventListener("scroll", queue, { passive: true });
+  window.addEventListener("resize", queue);
+  updateCurrent();
 }
 
 // BibTeX panels with a copy button that reports success or failure.

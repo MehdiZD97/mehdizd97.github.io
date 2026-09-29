@@ -79,6 +79,13 @@ ul { margin: 0; padding: 0; }
 .sg-type { display: grid; gap: 1.5rem; }
 .sg-type__meta { font-size: 0.8125rem; opacity: 0.75; margin-bottom: 0.25rem; }
 
+/* Direction A hero: two stacked views that cross-fade; tabs need JavaScript */
+.hv-stage { display: grid; }
+.hv-panel { grid-area: 1 / 1; min-width: 0; }
+.js .hv-panel { transition: opacity 280ms cubic-bezier(0.2, 0.7, 0.2, 1), visibility 0s linear 0s; }
+.js .hv-panel.is-hidden { opacity: 0; visibility: hidden; transition: opacity 280ms cubic-bezier(0.2, 0.7, 0.2, 1), visibility 0s linear 280ms; }
+html:not(.js) .hv-tabs, html:not(.js) .hv-panel.is-hidden { display: none; }
+
 .bibtex[hidden] { display: none; }
 .bibtex pre { overflow-x: auto; margin: 0; }
 .bibtex__status:empty { display: none; }

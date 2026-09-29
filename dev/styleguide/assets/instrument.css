@@ -83,8 +83,8 @@ code { font-family: var(--font-mono); }
 .theme-toggle { width: 2.5rem; }
 .site-menu { padding: 0.25rem 0 1rem; }
 .site-nav a { position: relative; display: block; padding: 0.625rem 0; font-size: var(--text-ui); font-weight: 500; text-decoration: none; }
-.site-nav a[aria-current="page"] { font-weight: 600; }
-.site-nav a[aria-current="page"]::before {
+.site-nav a[aria-current] { font-weight: 600; }
+.site-nav a[aria-current]::before {
   content: ""; display: inline-block; width: 0.5rem; height: 0.5rem;
   margin-inline-end: 0.5rem; background: var(--signal-bright); vertical-align: 0.1em;
 }
@@ -93,13 +93,13 @@ code { font-family: var(--font-mono); }
   .site-menu { gap: 1.75rem; padding: 0; }
   .site-nav ul { gap: 1.5rem; }
   .site-nav a { padding: 0.5rem 0; }
-  .site-nav a[aria-current="page"]::before { content: none; }
+  .site-nav a[aria-current]::before { content: none; }
   .site-nav a::after {
     content: ""; position: absolute; left: 0; right: 0; bottom: 0.125rem; height: 2px;
     background: var(--signal-bright); transform: scaleX(0); transform-origin: left;
     transition: transform var(--dur-fast) var(--ease-out);
   }
-  .site-nav a[aria-current="page"]::after, .site-nav a:focus-visible::after { transform: scaleX(1); }
+  .site-nav a[aria-current]::after, .site-nav a:focus-visible::after { transform: scaleX(1); }
   .site-header__contact { margin-top: 0; }
 }
 @media (hover: hover) and (pointer: fine) and (min-width: 56.25rem) {
@@ -140,11 +140,11 @@ code { font-family: var(--font-mono); }
   display: grid; gap: var(--space-6);
 }
 @media (min-width: 56.25rem) {
-  .hero__inner { grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); align-items: center; gap: var(--space-7); padding-block: var(--space-8); }
+  .hero__inner { grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); align-items: center; gap: var(--space-7); padding-block: var(--space-7) var(--space-5); }
 }
 .hero__text { display: grid; gap: var(--space-4); align-content: start; }
 .hero__name { font-size: var(--text-hero); font-weight: 600; line-height: 1.02; letter-spacing: -0.025em; }
-.hero__title { font-size: 1.125rem; font-weight: 500; color: var(--slate); margin-top: -0.5rem; }
+.hero__title { font-size: 1.125rem; font-weight: 500; color: var(--slate); }
 .hero__headline { font-size: var(--text-h3); font-weight: 500; line-height: 1.35; max-width: 30ch; }
 .hero__intro { color: var(--slate); max-width: 52ch; }
 .hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); margin-top: var(--space-2); }
@@ -155,30 +155,91 @@ code { font-family: var(--font-mono); }
   .profile-links a:hover { color: var(--signal); }
 }
 
-/* Signature: the instrument display */
-.scope {
-  display: grid; gap: var(--space-3);
-  padding: var(--space-4);
-  background: var(--panel); border: 1px solid var(--grid); border-radius: var(--radius);
+/* Portrait beside the name, with the amber status mark of the monogram */
+.hero__id { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-4); }
+.hero__id-text { display: grid; gap: var(--space-1); }
+.hero__photo { position: relative; display: block; flex: none; width: 6rem; }
+.hero__photo img { display: block; width: 100%; height: auto; border: 1px solid var(--grid); border-radius: var(--radius); background: var(--panel); }
+.hero__photo::after { content: ""; position: absolute; right: -4px; bottom: -4px; width: 0.75rem; height: 0.75rem; background: var(--signal-bright); }
+@media (min-width: 40rem) {
+  .hero__id { flex-direction: row; align-items: center; gap: var(--space-5); }
 }
-.scope__plot { width: 100%; height: auto; touch-action: pan-y; }
-.scope__grid path, .scope__grid line { fill: none; stroke: var(--grid); stroke-width: 1; }
-.scope__labels text { fill: var(--slate); font: 400 11px var(--font-mono); }
+@media (min-width: 56.25rem) {
+  .hero__photo { width: 8.5rem; }
+}
+
+/* Signature: two views on the page itself (no box), switched by tabs */
+.hv { display: grid; gap: var(--space-2); min-width: 0; }
+.hv-tabs { display: flex; justify-content: center; gap: var(--space-2); }
+.hv-tab {
+  position: relative; min-width: 8rem; min-height: 2.5rem; padding: 0 0.75rem;
+  border: 0; background: none; color: var(--slate);
+  font: 500 var(--text-mono)/1 var(--font-mono); letter-spacing: 0.02em;
+}
+.hv-tab[aria-selected="true"] { color: var(--ink); }
+.hv-tab::after {
+  content: ""; position: absolute; left: 0.75rem; right: 0.75rem; bottom: 0.3rem; height: 2px;
+  background: var(--signal-bright); transform: scaleX(0); transform-origin: left;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.hv-tab[aria-selected="true"]::after { transform: scaleX(1); }
+@media (hover: hover) and (pointer: fine) {
+  .hv-tab:hover { color: var(--ink); }
+}
+.hv-panel { display: grid; gap: var(--space-3); align-content: start; }
+.hv-svg { width: 100%; height: auto; touch-action: pan-y; }
+.hv-dot { fill: var(--grid); }
+.hv-label text, text.hv-label { fill: var(--slate); font: 500 11px var(--font-mono); }
 @media (max-width: 40rem) {
-  .scope__labels text { font-size: 16px; }
+  .hv-label text, text.hv-label { font-size: 15px; }
 }
-.scope__beam { fill: var(--signal-bright); fill-opacity: 0.14; stroke: var(--signal-bright); stroke-width: 1.75; stroke-linejoin: round; }
-.scope__ray { stroke: var(--signal); stroke-width: 1; stroke-dasharray: 3 4; }
-.scope__element { fill: var(--ink); }
-.scope__dial { fill: none; stroke: var(--grid); stroke-width: 1; }
-.scope__needle { stroke: var(--signal); stroke-width: 1.5; stroke-linecap: round; }
-.scope__panel { display: grid; gap: var(--space-3); }
-.scope__readout { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 var(--space-5); margin: 0; font: 400 var(--text-mono)/1.4 var(--font-mono); }
-.scope__readout div { display: flex; justify-content: space-between; gap: var(--space-2); padding: 0.375rem 0; border-top: 1px solid var(--grid); }
-.scope__readout dt { color: var(--slate); }
-.scope__readout dd { margin: 0; font-variant-numeric: tabular-nums; }
-.scope__control { display: flex; align-items: center; gap: var(--space-3); font: 500 var(--text-mono)/1 var(--font-mono); color: var(--slate); }
-.scope__control input { flex: 1; min-height: 1.5rem; accent-color: var(--signal); }
+
+/* Cell-free view */
+.hv-fronthaul line { stroke: var(--slate); stroke-opacity: 0.45; stroke-width: 1.25; stroke-dasharray: 3 4; stroke-linecap: round; }
+.hv-stop--near { stop-color: var(--signal-bright); stop-opacity: 0.6; }
+.hv-stop--mid { stop-color: var(--signal-bright); stop-opacity: 0.28; }
+.hv-stop--far { stop-color: var(--signal-bright); stop-opacity: 0; }
+.hv-ap-waves { fill: none; stroke: var(--signal); stroke-width: 1.4; stroke-linecap: round; }
+.hv-ap-mast { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.hv-ap-head { fill: var(--ink); }
+.hv-cpu-body { fill: var(--paper); stroke: var(--ink); stroke-width: 1.6; }
+.hv-cpu-core { fill: var(--ink); }
+.hv-cpu-pins { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; }
+.hv-reticle { fill: none; stroke: var(--ink); stroke-width: 1.6; }
+.hv-reticle-ticks { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; }
+.hv-reticle-dot { fill: var(--signal); }
+.hv-echo {
+  fill: none; stroke: var(--signal-bright); stroke-width: 1.25; opacity: 0;
+  vector-effect: non-scaling-stroke; transform-box: fill-box; transform-origin: center;
+  animation: hv-echo 2.8s cubic-bezier(0.2, 0.6, 0.3, 1) infinite;
+}
+.hv-echo--late { animation-delay: 1.4s; }
+.is-paused .hv-echo, .hv-panel.is-hidden .hv-echo { animation-play-state: paused; }
+@keyframes hv-echo {
+  0% { transform: scale(0.9); opacity: 0.85; }
+  100% { transform: scale(3.4); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hv-echo { display: none; }
+}
+
+/* Array view */
+.hv-grid path, .hv-grid line { fill: none; stroke: var(--grid); stroke-width: 1; }
+.hv-pattern { fill: var(--signal-bright); fill-opacity: 0.14; stroke: var(--signal-bright); stroke-width: 1.75; stroke-linejoin: round; }
+.hv-ray { stroke: var(--signal); stroke-width: 1; stroke-dasharray: 3 4; }
+.hv-element { fill: var(--ink); }
+.hv-dial { fill: none; stroke: var(--grid); stroke-width: 1; }
+.hv-needle { stroke: var(--signal); stroke-width: 1.5; stroke-linecap: round; }
+
+/* Readouts under each view (no rules, no box) */
+.hv-readout { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.25rem 1.5rem; margin: 0; font: 400 var(--text-mono)/1.5 var(--font-mono); }
+.hv-readout div { display: flex; gap: 0.5rem; }
+.hv-readout dt { color: var(--slate); }
+.hv-readout dd { margin: 0; font-variant-numeric: tabular-nums; }
+.hv-readout--az dd { min-width: 4ch; }
+.hv-caption { text-align: center; font: 400 0.75rem/1.4 var(--font-mono); color: var(--slate); }
+.hv-control { display: flex; align-items: center; gap: var(--space-3); justify-self: center; width: 100%; max-width: 26rem; font: 500 var(--text-mono)/1 var(--font-mono); color: var(--slate); }
+.hv-control input { flex: 1; min-height: 1.5rem; accent-color: var(--signal); }
 
 /* Style guide sections use the label column */
 .sg-main { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter) var(--space-8); }
@@ -307,6 +368,33 @@ code { font-family: var(--font-mono); }
 @media (hover: hover) and (pointer: fine) {
   .video:hover .video-thumb img { transform: scale(1.04); }
   .video:hover .video-title a { color: var(--ink); text-decoration: underline; }
+}
+
+/* Teaching */
+.course-list { list-style: none; display: grid; }
+.course { display: grid; grid-template-columns: 7rem minmax(0, 1fr); gap: 0 var(--space-4); padding: var(--space-2) 0; }
+.course-term { grid-row: span 2; font: 500 var(--text-mono)/1.9 var(--font-mono); color: var(--slate); }
+.course-name { font-weight: 500; }
+.course-place { grid-column: 2; font-size: var(--text-small); color: var(--slate); }
+@media (min-width: 40rem) {
+  .course { grid-template-columns: 7rem minmax(0, 1fr) auto; }
+  .course-term { grid-row: auto; }
+  .course-place { grid-column: auto; text-align: end; font-size: var(--text-body); }
+}
+
+/* Education (CV) with university logos */
+.edu-list { list-style: none; display: grid; gap: var(--space-5); }
+.edu { display: grid; grid-template-columns: 3.5rem minmax(0, 1fr); gap: var(--space-1) var(--space-4); align-items: start; }
+.edu-logo { grid-row: span 2; display: grid; place-items: center; width: 3.5rem; height: 3.5rem; border: 1px solid var(--grid); border-radius: var(--radius); background: var(--tile); }
+.edu-logo img { width: auto; height: 2.5rem; }
+.edu-body { display: grid; gap: 0.125rem; min-width: 0; }
+.edu-degree { font-size: 1.125rem; font-weight: 600; line-height: 1.35; }
+.edu-note { font-size: var(--text-small); color: var(--slate); max-width: 62ch; }
+.edu-dates { grid-column: 2; font: 500 var(--text-mono)/1.6 var(--font-mono); color: var(--slate); }
+@media (min-width: 40rem) {
+  .edu { grid-template-columns: 3.5rem minmax(0, 1fr) auto; }
+  .edu-logo { grid-row: auto; }
+  .edu-dates { grid-column: auto; text-align: end; padding-top: 0.2rem; }
 }
 
 /* Footer */

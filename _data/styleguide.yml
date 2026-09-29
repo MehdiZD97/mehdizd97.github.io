@@ -21,6 +21,7 @@ directions:
       - { id: grid, name: Grid, role: Plot grids and quiet dividers (non-text), light: "#D6DDE8", dark: "#22304D" }
     tokens:
       - { id: signal-bright, role: Beam fill and trace, light: "#C77700", dark: "#F5A524" }
+      - { id: tile, role: Light tile behind university logos (keeps navy marks visible in dark mode), light: "#FFFFFF", dark: "#E7ECF5" }
     pairs:
       - [ink, paper, text]
       - [ink, panel, text]
@@ -49,6 +50,7 @@ directions:
       - { id: echo-bright, role: Sensing rings on the field, light: "#5CDCF5", dark: "#5CDCF5" }
       - { id: mist, role: Tinted section background, light: "#F2F4FE", dark: "#0D1336" }
       - { id: link, role: Links on the page, light: "#1B3BC8", dark: "#5CDCF5" }
+      - { id: tile, role: Light tile behind university logos, light: "#FFFFFF", dark: "#E9ECFF" }
     pairs:
       - [ink, paper, text]
       - [ink, mist, text]
@@ -62,23 +64,3 @@ directions:
       - [on-field-muted, field, text]
       - [beam-bright, field, mark]
       - [echo-bright, field, mark]
-
-  - id: proceedings
-    name: Proceedings
-    summary: A beautifully typeset paper. Serif text on white, navy headings, marginalia, and UC Irvine gold for honors.
-    fonts: STIX Two Text and Source Sans 3
-    colors:
-      - { id: paper, name: Paper, role: Page background, light: "#FFFFFF", dark: "#121418" }
-      - { id: ink, name: Ink, role: Body text, light: "#181B22", dark: "#E8EAEE" }
-      - { id: navy, name: Navy, role: Headings and links, light: "#0A3B7A", dark: "#9CC3FF" }
-      - { id: slate, name: Slate, role: Secondary text and captions, light: "#5A6070", dark: "#A3A9B6" }
-      - { id: gold, name: Gold, role: Highlighter behind honors (never text; focus rings use Navy), light: "#FFD200", dark: "#F2C230" }
-      - { id: rule, name: Rule, role: Figure strokes and quiet lines (non-text), light: "#D9DDE4", dark: "#2E333D" }
-    tokens:
-      - { id: on-gold, role: Text on the gold highlighter, light: "#181B22", dark: "#121418" }
-    pairs:
-      - [ink, paper, text]
-      - [navy, paper, text]
-      - [slate, paper, text]
-      - [on-gold, gold, text]
-      - [paper, navy, text]
