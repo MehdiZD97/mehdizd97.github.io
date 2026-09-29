@@ -1,0 +1,258 @@
+{%- comment -%}
+  Style guide sections shared by every direction. The markup is identical;
+  each direction's stylesheet decides the look. Content is real (CV and
+  CONTENT-AUDIT.md); the BibTeX entry is a sample built from verified fields
+  (Stage 4 fetches the official records).
+{%- endcomment -%}
+{%- assign d = site.data.styleguide.directions | where: "id", page.direction | first -%}
+{%- assign newtab = '<span class="visually-hidden"> (opens in a new tab)</span>' -%}
+<main class="sg-main" id="main">
+
+  <section class="sg-section" id="about" aria-labelledby="about-title">
+    <h2 id="about-title">Direction {{ page.letter }}: {{ d.name }}</h2>
+    <div class="sg-body">
+      <p class="sg-lead">{{ d.summary }}</p>
+      <ul class="sg-principles">
+        {%- for p in page.principles %}
+        <li><strong>{{ p.name }}.</strong> {{ p.text }}</li>
+        {%- endfor %}
+      </ul>
+      <p class="sg-note">Type: {{ d.fonts }}. Signature: {{ page.signature }}</p>
+    </div>
+  </section>
+
+  <section class="sg-section" id="palette" aria-labelledby="palette-title">
+    <h2 id="palette-title">Palette</h2>
+    <div class="sg-body">
+      <ul class="sg-swatches">
+        {%- for c in d.colors %}
+        <li class="sg-swatch">
+          <span class="sg-swatch__chips" aria-hidden="true">
+            <span class="sg-chip" style="background: {{ c.light }}"></span>
+            <span class="sg-chip" style="background: {{ c.dark }}"></span>
+          </span>
+          <span class="sg-swatch__name">{{ c.name }}</span>
+          <span class="sg-swatch__role">{{ c.role }}</span>
+          <span class="sg-swatch__hex">Light <code>{{ c.light }}</code> Dark <code>{{ c.dark }}</code></span>
+        </li>
+        {%- endfor %}
+      </ul>
+      {%- assign all = d.colors | concat: d.tokens %}
+      <table class="sg-contrast">
+        <caption>WCAG contrast of every text and mark pairing (computed live)</caption>
+        <thead><tr><th scope="col">Pairing</th><th scope="col">Needs</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+        <tbody>
+          {%- for pair in d.pairs %}
+          {%- assign fg = all | where: "id", pair[0] | first %}
+          {%- assign bg = all | where: "id", pair[1] | first %}
+          {%- if pair[2] == "text" %}{% assign need = "4.5" %}{% else %}{% assign need = "3.0" %}{% endif %}
+          <tr>
+            <th scope="row">{{ pair[0] }} on {{ pair[1] }} <span class="sg-kind">{{ pair[2] }}</span></th>
+            <td>{{ need }}</td>
+            <td data-contrast="{{ fg.light }},{{ bg.light }}" data-need="{{ need }}"></td>
+            <td data-contrast="{{ fg.dark }},{{ bg.dark }}" data-need="{{ need }}"></td>
+          </tr>
+          {%- endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="sg-section" id="type" aria-labelledby="type-title">
+    <h2 id="type-title">Type</h2>
+    <div class="sg-body sg-type">
+      {%- for t in page.type_scale %}
+      <div class="sg-type__row">
+        <p class="sg-type__meta">{{ t.label }}</p>
+        {%- case t.class %}
+        {%- when "type-hero" %}<p class="{{ t.class }}">Mehdi Zafari</p>
+        {%- when "type-h1" %}<p class="{{ t.class }}">Publications</p>
+        {%- when "type-h2" %}<p class="{{ t.class }}">Selected publications</p>
+        {%- when "type-h3" %}<p class="{{ t.class }}">ADMM for Downlink Beamforming in Cell-Free Massive MIMO Systems</p>
+        {%- when "type-body" %}<p class="{{ t.class }}">In cell-free massive MIMO systems with multiple distributed access points (APs) serving multiple users over the same time-frequency resources, downlink beamforming is done through spatial precoding. Precoding vectors can be optimally designed to use the minimum downlink transmit power while satisfying a quality-of-service requirement for each user.</p>
+        {%- when "type-small" %}<p class="{{ t.class }}">Graduate Student Researcher, Department of Electrical Engineering and Computer Science, University of California, Irvine. July 2024 to present.</p>
+        {%- when "type-mono" %}<p class="{{ t.class }}">arXiv 2511.09992 &nbsp; DOI 10.1109/TVT.2026.3656108 &nbsp; ICC 2026</p>
+        {%- when "type-ui" %}<p class="{{ t.class }}">Research &nbsp; Publications &nbsp; Talks &nbsp; Teaching &nbsp; CV</p>
+        {%- endcase %}
+      </div>
+      {%- endfor %}
+    </div>
+  </section>
+
+  <section class="sg-section" id="buttons" aria-labelledby="buttons-title">
+    <h2 id="buttons-title">Buttons</h2>
+    <div class="sg-body">
+      <p class="sg-note">Hover with a mouse, or press Tab to see focus states.</p>
+      <p class="sg-row">
+        <a class="btn btn--primary" href="#publications">View publications</a>
+        <a class="btn btn--secondary" href="#top">Download CV (PDF)</a>
+        <a class="btn btn--text" href="#contact">Contact</a>
+      </p>
+      <p class="sg-note">Link buttons, always in this order and only when a link exists:</p>
+      <ul class="linkbtns">
+        <li><a class="linkbtn" href="#publications">{% include styleguide/icon.html name="pdf" %}<span>PDF</span></a></li>
+        <li><a class="linkbtn" href="#publications">{% include styleguide/icon.html name="arxiv" %}<span>arXiv</span></a></li>
+        <li><a class="linkbtn" href="#publications">{% include styleguide/icon.html name="ieee" %}<span>IEEE Xplore</span></a></li>
+        <li><a class="linkbtn" href="#publications">{% include styleguide/icon.html name="code" %}<span>Code</span></a></li>
+        <li><a class="linkbtn" href="#publications">{% include styleguide/icon.html name="slides" %}<span>Slides</span></a></li>
+        <li><a class="linkbtn" href="#publications">{% include styleguide/icon.html name="video" %}<span>Video</span></a></li>
+        <li><a class="linkbtn" href="#publications">{% include styleguide/icon.html name="bibtex" %}<span>BibTeX</span></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sg-section" id="publications" aria-labelledby="publications-title">
+    <h2 id="publications-title">Selected publications</h2>
+    <div class="sg-body">
+      <article class="pub">
+        <div class="pub-meta">
+          <span class="pub-year">2026</span>
+          <span class="pub-venue-short">IEEE TVT</span>
+          <span class="pub-type">Journal</span>
+        </div>
+        <div class="pub-body">
+          <h3 class="pub-title"><a href="#publications">An Analytical and Experimental Study of Distributed Uplink Beamforming in the Presence of Carrier Frequency Offsets</a></h3>
+          <p class="pub-authors"><strong>M. Zafari</strong>, D. Pandey, and R. Doost-Mohammady</p>
+          <p class="pub-venue">IEEE Transactions on Vehicular Technology</p>
+          <ul class="linkbtns">
+            <li><a class="linkbtn" href="https://arxiv.org/abs/2508.08506" target="_blank" rel="noopener">{% include styleguide/icon.html name="arxiv" %}<span>arXiv</span>{{ newtab }}</a></li>
+            <li><a class="linkbtn" href="https://doi.org/10.1109/TVT.2026.3656108" target="_blank" rel="noopener">{% include styleguide/icon.html name="ieee" %}<span>IEEE Xplore</span>{{ newtab }}</a></li>
+            <li><button class="linkbtn" type="button" aria-expanded="false" aria-controls="bib-tvt" data-bib-toggle>{% include styleguide/icon.html name="bibtex" %}<span>BibTeX</span></button></li>
+          </ul>
+          <div class="bibtex" id="bib-tvt" hidden>
+<pre id="bib-tvt-text">@article{zafari2026distributed,
+  author  = {Zafari, M. and Pandey, D. and Doost-Mohammady, R.},
+  title   = {An Analytical and Experimental Study of Distributed Uplink
+             Beamforming in the Presence of Carrier Frequency Offsets},
+  journal = {IEEE Transactions on Vehicular Technology},
+  year    = {2026},
+  doi     = {10.1109/TVT.2026.3656108}
+}</pre>
+            <p class="bibtex__actions"><button class="btn btn--secondary btn--small" type="button" data-copy="bib-tvt-text">{% include styleguide/icon.html name="copy" %}Copy</button> <span class="bibtex__status" role="status" data-copy-status></span></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="pub">
+        <div class="pub-meta">
+          <span class="pub-year">2025</span>
+          <span class="pub-venue-short">Asilomar 2025</span>
+          <span class="pub-type">Conference</span>
+        </div>
+        <div class="pub-body">
+          <h3 class="pub-title"><a href="#publications">Coordinated Decentralized Resource Optimization for Cell-Free ISAC Systems</a></h3>
+          <p class="pub-authors"><strong>M. Zafari</strong>, R. Liu, and A. L. Swindlehurst</p>
+          <p class="pub-venue">59th Asilomar Conference on Signals, Systems, and Computers</p>
+          <p class="pub-badges"><span class="badge badge--award">{% include styleguide/icon.html name="award" %}Best Paper Award Finalist</span></p>
+          <ul class="linkbtns">
+            <li><a class="linkbtn" href="https://arxiv.org/abs/2508.01044" target="_blank" rel="noopener">{% include styleguide/icon.html name="arxiv" %}<span>arXiv</span>{{ newtab }}</a></li>
+            <li><a class="linkbtn" href="https://github.com/MehdiZD97/distributed-cellfree-isac" target="_blank" rel="noopener">{% include styleguide/icon.html name="code" %}<span>Code</span>{{ newtab }}</a></li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="pub">
+        <div class="pub-meta">
+          <span class="pub-year">Mar 2026</span>
+          <span class="pub-venue-short">IEEE TGRS</span>
+          <span class="pub-type">Journal</span>
+        </div>
+        <div class="pub-body">
+          <h3 class="pub-title"><a href="#publications">Robust Wildfire Forecasting under Partial Observability: From Reconstruction to Prediction</a></h3>
+          <p class="pub-authors">C. Yang, <strong>M. Zafari</strong>, Z. Duan, and A. L. Swindlehurst</p>
+          <p class="pub-venue">Submitted to IEEE Transactions on Geoscience and Remote Sensing</p>
+          <p class="pub-badges"><span class="badge badge--status">Under review</span></p>
+          <ul class="linkbtns">
+            <li><a class="linkbtn" href="https://arxiv.org/abs/2603.09042" target="_blank" rel="noopener">{% include styleguide/icon.html name="arxiv" %}<span>arXiv</span>{{ newtab }}</a></li>
+            <li><a class="linkbtn" href="https://github.com/LS-Wireless/Robust-Wildfire-Forecasting" target="_blank" rel="noopener">{% include styleguide/icon.html name="code" %}<span>Code</span>{{ newtab }}</a></li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="sg-section" id="news" aria-labelledby="news-title">
+    <h2 id="news-title">Latest news</h2>
+    <div class="sg-body">
+      <ul class="news-list">
+        <li class="news">
+          <time class="news-date" datetime="2026-03">Mar 2026</time>
+          <span class="news-icon">{% include styleguide/icon.html name="award" %}<span class="visually-hidden">Award:</span></span>
+          <p class="news-text">Received the Pia Gratton Endowed Graduate Student Award at UC Irvine.</p>
+        </li>
+        <li class="news">
+          <time class="news-date" datetime="2026-01">Jan 2026</time>
+          <span class="news-icon">{% include styleguide/icon.html name="paper" %}<span class="visually-hidden">Paper:</span></span>
+          <p class="news-text">Our study of distributed uplink beamforming with carrier frequency offsets was published in IEEE Transactions on Vehicular Technology. <a href="#publications">Read the paper</a></p>
+        </li>
+        <li class="news">
+          <time class="news-date" datetime="2025-10">Oct 2025</time>
+          <span class="news-icon">{% include styleguide/icon.html name="talk" %}<span class="visually-hidden">Talk:</span></span>
+          <p class="news-text">Gave a lecture and a Student Paper Contest poster at the 59th Asilomar Conference. <a href="{{ '/posts/2025/10/blog-post-5/' | relative_url }}">Read the story</a></p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sg-section" id="talks" aria-labelledby="talks-title">
+    <h2 id="talks-title">Talks</h2>
+    <div class="sg-body">
+      <article class="talk">
+        <div class="talk-meta">
+          <time class="talk-date" datetime="2025-10-26">Oct 2025</time>
+          <span class="talk-kind">Lecture</span>
+        </div>
+        <div class="talk-body">
+          <h3 class="talk-title">Coordinated Decentralized Resource Optimization for Cell-Free ISAC Systems</h3>
+          <p class="talk-event">59th Asilomar Conference on Signals, Systems, and Computers, Pacific Grove, CA</p>
+          <p class="talk-note">Best Paper Award finalist; also presented a poster in the Student Paper Contest.</p>
+          <ul class="linkbtns">
+            <li><a class="linkbtn" href="https://arxiv.org/abs/2508.01044" target="_blank" rel="noopener">{% include styleguide/icon.html name="paper" %}<span>Paper</span>{{ newtab }}</a></li>
+            <li><a class="linkbtn" href="https://www.asilomarsscconf.org/" target="_blank" rel="noopener">{% include styleguide/icon.html name="event" %}<span>Event</span>{{ newtab }}</a></li>
+            <li><a class="linkbtn" href="{{ '/posts/2025/10/blog-post-5/' | relative_url }}">{% include styleguide/icon.html name="story" %}<span>Story</span></a></li>
+          </ul>
+        </div>
+      </article>
+      <article class="talk">
+        <div class="talk-meta">
+          <time class="talk-date" datetime="2024-10-28">Oct 2024</time>
+          <span class="talk-kind">Lecture</span>
+        </div>
+        <div class="talk-body">
+          <h3 class="talk-title">ADMM for Downlink Beamforming in Cell-Free Massive MIMO Systems</h3>
+          <p class="talk-event">58th Asilomar Conference on Signals, Systems, and Computers, Pacific Grove, CA</p>
+          <ul class="linkbtns">
+            <li><a class="linkbtn" href="https://doi.org/10.1109/IEEECONF60004.2024.10943106" target="_blank" rel="noopener">{% include styleguide/icon.html name="paper" %}<span>Paper</span>{{ newtab }}</a></li>
+            <li><a class="linkbtn" href="{{ '/posts/2024/10/blog-post-3/' | relative_url }}">{% include styleguide/icon.html name="story" %}<span>Story</span></a></li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="sg-section" id="videos" aria-labelledby="videos-title">
+    <h2 id="videos-title">Videos</h2>
+    <div class="sg-body">
+      <div class="videos">
+        <article class="video">
+          <div class="video-thumb">
+            <img src="https://i.ytimg.com/vi/8NDZutr3OEE/mqdefault.jpg" width="320" height="180" alt="" loading="lazy">
+            <span class="video-play" aria-hidden="true">{% include styleguide/icon.html name="play" %}</span>
+            <span class="video-duration">41:51</span>
+          </div>
+          <h3 class="video-title"><a href="https://www.youtube.com/watch?v=8NDZutr3OEE" target="_blank" rel="noopener">Beamforming in Wireless Communications: Basics and Applications{{ newtab }}</a></h3>
+          <p class="video-meta">Tutorial, published on <a class="video-host" href="https://www.youtube.com/@Daaneshacademy" target="_blank" rel="noopener">Danesh Academy{{ newtab }}</a></p>
+        </article>
+        <article class="video">
+          <div class="video-thumb">
+            <img src="https://i.ytimg.com/vi/16-DP_fDdp4/mqdefault.jpg" width="320" height="180" alt="" loading="lazy">
+            <span class="video-play" aria-hidden="true">{% include styleguide/icon.html name="play" %}</span>
+          </div>
+          <h3 class="video-title"><a href="https://www.youtube.com/watch?v=16-DP_fDdp4" target="_blank" rel="noopener"><span lang="fa" dir="rtl">آموزش برنامه‌نویسی پایتون | جلسه ۱: تفکر ماشین، مبناهای اعداد و کار با خط فرمان</span>{{ newtab }}</a></h3>
+          <p class="video-meta">Python programming course, session 1 (in Persian)</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+</main>

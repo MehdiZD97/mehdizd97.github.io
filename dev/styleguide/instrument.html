@@ -1,0 +1,33 @@
+---
+layout: styleguide
+title: "Direction A: Instrument"
+permalink: /dev/styleguide/instrument/
+sitemap: false
+direction: instrument
+letter: A
+signature: "a steerable 16-element array; its beam follows the pointer, the dials show the phase shifts that steer it, and a slider steers it by keyboard or touch."
+hero_script: /dev/styleguide/assets/hero-instrument.js
+preload_fonts:
+  - /dev/styleguide/fonts/ibm-plex-sans-latin-wght-normal.woff2
+principles:
+  - name: Every mark carries a value
+    text: Graphics are data, not decoration; the beam plot is computed from the array factor.
+  - name: One signal color
+    text: Amber marks what is active or important; everything else is ink and slate.
+  - name: Data in mono, prose in sans
+    text: Dates, identifiers, venues, and readouts are set like instrument values.
+type_scale:
+  - { class: type-hero, label: "Hero name: IBM Plex Sans 600, 40 to 60 px" }
+  - { class: type-h1, label: "Page title: 600, 32 to 40 px" }
+  - { class: type-h2, label: "Section heading: 600, 24 to 30 px" }
+  - { class: type-h3, label: "Entry title: 600, 20 to 22 px" }
+  - { class: type-body, label: "Body: 400, 17 px, line height 1.6, about 68 characters per line" }
+  - { class: type-small, label: "Small: 14 px" }
+  - { class: type-mono, label: "Data: IBM Plex Mono 400 and 500, 13 px" }
+  - { class: type-ui, label: "Navigation and buttons: 500 to 600, 15 px" }
+---
+{% include styleguide/bar.html %}
+{% include styleguide/header.html %}
+{% include styleguide/hero-instrument.html %}
+{% include styleguide/sections.html %}
+{% include styleguide/footer.html %}

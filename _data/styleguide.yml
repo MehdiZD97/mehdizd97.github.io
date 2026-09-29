@@ -1,0 +1,84 @@
+# Temporary data for the Stage 2 style guide (/dev/styleguide/).
+# Delete together with dev/, _layouts/styleguide.html, and _includes/styleguide/
+# before launch (PLAN task 11.2).
+#
+# Each direction has four to six named colors (light and dark values), a few
+# derived tokens, and the text pairings that must pass WCAG 2.2 AA.
+# `_local/tools/contrast.py` checks every pairing; kind "text" needs 4.5,
+# "large" and "mark" (non-text: focus rings, beams, icons) need 3.0.
+
+directions:
+  - id: instrument
+    name: Instrument
+    summary: Precise, calm, instrument-like. Navy ink, one amber signal, and a monospaced data layer.
+    fonts: IBM Plex Sans and IBM Plex Mono
+    colors:
+      - { id: paper, name: Paper, role: Page background, light: "#F5F7FA", dark: "#0B1120" }
+      - { id: panel, name: Panel, role: Raised surfaces and the instrument display, light: "#FFFFFF", dark: "#111A2E" }
+      - { id: ink, name: Ink, role: Text and primary buttons, light: "#0D1B35", dark: "#E7ECF5" }
+      - { id: slate, name: Slate, role: Secondary text, light: "#4B5A74", dark: "#9BA8C0" }
+      - { id: signal, name: Signal, role: The one accent (active states, beam, focus), light: "#9A5B00", dark: "#F5A524" }
+      - { id: grid, name: Grid, role: Plot grids and quiet dividers (non-text), light: "#D6DDE8", dark: "#22304D" }
+    tokens:
+      - { id: signal-bright, role: Beam fill and trace, light: "#C77700", dark: "#F5A524" }
+    pairs:
+      - [ink, paper, text]
+      - [ink, panel, text]
+      - [slate, paper, text]
+      - [slate, panel, text]
+      - [signal, paper, text]
+      - [signal, panel, text]
+      - [paper, ink, text]
+      - [signal-bright, panel, mark]
+
+  - id: cooperative
+    name: Cooperative
+    summary: Continuity with the YouTube channel. A royal-blue field, warm orange beams, a cyan echo, and calm white pages.
+    fonts: Bricolage Grotesque
+    colors:
+      - { id: field, name: Field, role: Hero and header band, light: "#1B3BC8", dark: "#15237A" }
+      - { id: ink, name: Ink, role: Text on the page, light: "#0C1445", dark: "#E9ECFF" }
+      - { id: paper, name: Paper, role: Page background, light: "#FFFFFF", dark: "#070B24" }
+      - { id: slate, name: Slate, role: Secondary text, light: "#4A527A", dark: "#A9B1DE" }
+      - { id: beam, name: Beam, role: Warm accent (text-safe on paper), light: "#B55400", dark: "#FFA64D" }
+      - { id: echo, name: Echo, role: Cyan secondary (links in dark mode), light: "#0E7490", dark: "#5CDCF5" }
+    tokens:
+      - { id: on-field, role: Text on the field, light: "#FFFFFF", dark: "#E9ECFF" }
+      - { id: on-field-muted, role: Secondary text on the field, light: "#D3DBFF", dark: "#B9C2F0" }
+      - { id: beam-bright, role: Beams drawn on the field, light: "#FF9A2E", dark: "#FF9A2E" }
+      - { id: echo-bright, role: Sensing rings on the field, light: "#5CDCF5", dark: "#5CDCF5" }
+      - { id: mist, role: Tinted section background, light: "#F2F4FE", dark: "#0D1336" }
+      - { id: link, role: Links on the page, light: "#1B3BC8", dark: "#5CDCF5" }
+    pairs:
+      - [ink, paper, text]
+      - [ink, mist, text]
+      - [slate, paper, text]
+      - [slate, mist, text]
+      - [beam, paper, text]
+      - [echo, paper, text]
+      - [link, paper, text]
+      - [link, mist, text]
+      - [on-field, field, text]
+      - [on-field-muted, field, text]
+      - [beam-bright, field, mark]
+      - [echo-bright, field, mark]
+
+  - id: proceedings
+    name: Proceedings
+    summary: A beautifully typeset paper. Serif text on white, navy headings, marginalia, and UC Irvine gold for honors.
+    fonts: STIX Two Text and Source Sans 3
+    colors:
+      - { id: paper, name: Paper, role: Page background, light: "#FFFFFF", dark: "#121418" }
+      - { id: ink, name: Ink, role: Body text, light: "#181B22", dark: "#E8EAEE" }
+      - { id: navy, name: Navy, role: Headings and links, light: "#0A3B7A", dark: "#9CC3FF" }
+      - { id: slate, name: Slate, role: Secondary text and captions, light: "#5A6070", dark: "#A3A9B6" }
+      - { id: gold, name: Gold, role: Highlighter behind honors (never text; focus rings use Navy), light: "#FFD200", dark: "#F2C230" }
+      - { id: rule, name: Rule, role: Figure strokes and quiet lines (non-text), light: "#D9DDE4", dark: "#2E333D" }
+    tokens:
+      - { id: on-gold, role: Text on the gold highlighter, light: "#181B22", dark: "#121418" }
+    pairs:
+      - [ink, paper, text]
+      - [navy, paper, text]
+      - [slate, paper, text]
+      - [on-gold, gold, text]
+      - [paper, navy, text]

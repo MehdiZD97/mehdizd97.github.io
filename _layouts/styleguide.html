@@ -1,0 +1,73 @@
+<!doctype html>
+{%- comment -%}
+  Temporary layout for the Stage 2 style guide (/dev/styleguide/).
+  Independent of the legacy theme. Delete with dev/ before launch.
+{%- endcomment -%}
+{%- assign d = site.data.styleguide.directions | where: "id", page.direction | first -%}
+<html lang="en-US" data-direction="{{ page.direction | default: 'overview' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>{{ page.title }} | Style guide (temporary)</title>
+  <script>
+    // Mark JavaScript as available and apply a stored theme choice before the first paint.
+    (function () {
+      document.documentElement.classList.add("js");
+      try {
+        var theme = localStorage.getItem("sg-theme");
+        if (theme === "light" || theme === "dark") {
+          document.documentElement.setAttribute("data-theme", theme);
+        }
+      } catch (e) {}
+    })();
+  </script>
+  {%- if d %}
+  <style>
+    :root {
+      color-scheme: light;
+      {%- for c in d.colors %}
+      --{{ c.id }}: {{ c.light }};
+      {%- endfor %}
+      {%- for t in d.tokens %}
+      --{{ t.id }}: {{ t.light }};
+      {%- endfor %}
+    }
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      {%- for c in d.colors %}
+      --{{ c.id }}: {{ c.dark }};
+      {%- endfor %}
+      {%- for t in d.tokens %}
+      --{{ t.id }}: {{ t.dark }};
+      {%- endfor %}
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        color-scheme: dark;
+        {%- for c in d.colors %}
+        --{{ c.id }}: {{ c.dark }};
+        {%- endfor %}
+        {%- for t in d.tokens %}
+        --{{ t.id }}: {{ t.dark }};
+        {%- endfor %}
+      }
+    }
+  </style>
+  {%- endif %}
+  {%- for font in page.preload_fonts %}
+  <link rel="preload" href="{{ font | relative_url }}" as="font" type="font/woff2" crossorigin>
+  {%- endfor %}
+  <link rel="stylesheet" href="{{ '/dev/styleguide/assets/sg.css' | relative_url }}">
+  {%- if d %}
+  <link rel="stylesheet" href="{{ '/dev/styleguide/assets/' | append: page.direction | append: '.css' | relative_url }}">
+  {%- endif %}
+</head>
+<body>
+  {{ content }}
+  <script type="module" src="{{ '/dev/styleguide/assets/sg.js' | relative_url }}"></script>
+  {%- if page.hero_script %}
+  <script type="module" src="{{ page.hero_script | relative_url }}"></script>
+  {%- endif %}
+</body>
+</html>

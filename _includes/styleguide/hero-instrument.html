@@ -1,0 +1,21 @@
+{%- comment -%} Direction A hero: text plus the steerable-array instrument display. {%- endcomment -%}
+<section class="hero" aria-labelledby="hero-name">
+  <div class="hero__inner">
+    {% include styleguide/hero-text.html %}
+    <figure class="scope" data-hero="instrument">
+      {% include styleguide/svg-instrument.html %}
+      <figcaption class="scope__panel">
+        <dl class="scope__readout">
+          <div><dt>Steering angle</dt><dd><span data-out="theta">115</span>&deg;</dd></div>
+          <div><dt>Beamwidth</dt><dd><span data-out="beamwidth">7.0</span>&deg;</dd></div>
+          <div><dt>Elements</dt><dd>16</dd></div>
+          <div><dt>Spacing</dt><dd>&lambda;/2</dd></div>
+        </dl>
+        <label class="scope__control">
+          <span>Steer</span>
+          <input type="range" min="10" max="170" step="1" value="115" aria-valuetext="115 degrees" data-steer>
+        </label>
+      </figcaption>
+    </figure>
+  </div>
+</section>

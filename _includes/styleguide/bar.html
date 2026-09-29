@@ -1,0 +1,10 @@
+{%- comment -%} Temporary: style guide chrome (not part of any design direction). {%- endcomment -%}
+<nav class="sg-bar" id="top" aria-label="Style guide">
+  <p class="sg-bar__label">Style guide, temporary</p>
+  <ul class="sg-bar__links">
+    <li><a href="{{ '/dev/styleguide/' | relative_url }}"{% if page.direction == nil %} aria-current="page"{% endif %}>Overview</a></li>
+    {%- for dir in site.data.styleguide.directions %}
+    <li><a href="{{ '/dev/styleguide/' | append: dir.id | append: '/' | relative_url }}"{% if page.direction == dir.id %} aria-current="page"{% endif %}>{% case forloop.index %}{% when 1 %}A{% when 2 %}B{% when 3 %}C{% endcase %}. {{ dir.name }}</a></li>
+    {%- endfor %}
+  </ul>
+</nav>

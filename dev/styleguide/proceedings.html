@@ -1,0 +1,33 @@
+---
+layout: styleguide
+title: "Direction C: Proceedings"
+permalink: /dev/styleguide/proceedings/
+sitemap: false
+direction: proceedings
+letter: C
+signature: "a live bistatic sensing figure; the drone follows the pointer, and the ellipse of constant range sum and the caption update with it."
+hero_script: /dev/styleguide/assets/hero-proceedings.js
+preload_fonts:
+  - /dev/styleguide/fonts/stix-two-text-latin-wght-normal.woff2
+principles:
+  - name: Read it like a paper
+    text: Typography carries the design; a scientific serif sets text, titles, and captions.
+  - name: Metadata lives in the margin
+    text: Dates, venues, and types sit beside the entry they describe, like marginal notes.
+  - name: The only graphic is a working figure
+    text: One captioned figure that explains a real idea; no decoration.
+type_scale:
+  - { class: type-hero, label: "Hero name: STIX Two Text 600, 42 to 58 px" }
+  - { class: type-h1, label: "Page title: 600, 32 to 42 px" }
+  - { class: type-h2, label: "Section heading: 600, 26 to 32 px, navy" }
+  - { class: type-h3, label: "Entry title: 600, 21 to 23 px" }
+  - { class: type-body, label: "Body: 400, 19 px, line height 1.55, about 66 characters per line" }
+  - { class: type-small, label: "Small and margin notes: Source Sans 3, 14 px" }
+  - { class: type-mono, label: "Data: system monospace (BibTeX only)" }
+  - { class: type-ui, label: "Navigation and buttons: Source Sans 3, 600, 15 px" }
+---
+{% include styleguide/bar.html %}
+{% include styleguide/header.html %}
+{% include styleguide/hero-proceedings.html %}
+{% include styleguide/sections.html %}
+{% include styleguide/footer.html %}

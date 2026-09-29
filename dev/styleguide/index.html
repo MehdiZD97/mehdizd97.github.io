@@ -1,0 +1,30 @@
+---
+layout: styleguide
+title: Design directions
+permalink: /dev/styleguide/
+sitemap: false
+---
+{% include styleguide/bar.html %}
+<main class="ov" id="main">
+  <h1>Design directions</h1>
+  <p>Three clearly different directions for the v2 site, built from the same real content so they compare fairly. Each page shows the palette in both themes with live contrast checks, the type scale, buttons, link buttons, publication entries, news, talks, video cards, the header and footer, and the hero with its signature element. Move the pointer over each hero (or drag on a phone).</p>
+  <p>Temporary: this page is hidden from search engines and is deleted before launch.</p>
+  <p><strong>Decisions for Mehdi:</strong></p>
+  <ul class="ov-list">
+    <li>a direction, or a mix (for example, one direction's type and colors with another's signature element);</li>
+    <li>the signature element;</li>
+    <li>the typefaces;</li>
+    <li>the menu label for the Teaching page ("Teaching" by default).</li>
+  </ul>
+  <div class="ov-grid">
+    {%- for dir in site.data.styleguide.directions %}
+    {%- capture letter %}{% case forloop.index %}{% when 1 %}A{% when 2 %}B{% when 3 %}C{% endcase %}{% endcapture %}
+    <section class="ov-card" aria-labelledby="ov-{{ dir.id }}">
+      <h2 id="ov-{{ dir.id }}"><a href="{{ '/dev/styleguide/' | append: dir.id | append: '/' | relative_url }}">{{ letter }}. {{ dir.name }}</a></h2>
+      <p>{{ dir.summary }}</p>
+      <p>Type: {{ dir.fonts }}.</p>
+      <iframe class="ov-frame" src="{{ '/dev/styleguide/' | append: dir.id | append: '/' | relative_url }}" title="Direction {{ letter }}, {{ dir.name }}, at phone width" loading="lazy"></iframe>
+    </section>
+    {%- endfor %}
+  </div>
+</main>

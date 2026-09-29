@@ -1,0 +1,15 @@
+{%- comment -%} Site footer demo: profile links, News, RSS, Contact, copyright, last updated. {%- endcomment -%}
+<footer class="site-footer" id="contact">
+  <div class="site-footer__inner">
+    <p class="site-footer__name">Mehdi Zafari <span>Ph.D. Candidate, UC Irvine</span></p>
+    <ul class="site-footer__links">
+      <li><a href="mailto:mzafarid@uci.edu">{% include styleguide/icon.html name="mail" %}Email</a></li>
+      <li><a href="https://scholar.google.com/citations?user=lKiB9vIAAAAJ">{% include styleguide/icon.html name="google-scholar" %}Google Scholar</a></li>
+      <li><a href="https://github.com/MehdiZD97">{% include styleguide/icon.html name="github" %}GitHub</a></li>
+      <li><a href="https://www.youtube.com/@MehdiZD97">{% include styleguide/icon.html name="youtube" %}YouTube</a></li>
+      <li><a href="#news">{% include styleguide/icon.html name="paper" %}News</a></li>
+      <li><a href="{{ '/feed.xml' | relative_url }}">{% include styleguide/icon.html name="rss" %}RSS</a></li>
+    </ul>
+    <p class="site-footer__meta">&copy; {{ site.time | date: "%Y" }} Mehdi Zafari. Last updated {{ site.time | date: "%B %-d, %Y" }}.</p>
+  </div>
+</footer>
