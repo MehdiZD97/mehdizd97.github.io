@@ -20,7 +20,7 @@ locale                   : "en-US"
 title                    : "Mehdi Zafari"
 title_separator          : "-"
 name                     : &name "Mehdi Zafari"
-description              : &description "personal description"
+description              : "Mehdi Zafari is a Ph.D. candidate at UC Irvine researching signal processing and AI/ML for next-generation (5G/6G) wireless systems, cell-free MIMO, and ISAC."
 url                      : https://mehdizd97.github.io # the base hostname & protocol for your site e.g. "https://[your GitHub username].github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "mehdizd97/mehdizd97.github.io"
@@ -104,33 +104,6 @@ breadcrumbs              : false # true, false (default)
 words_per_minute         : 160
 future                   : true
 read_more                : "disabled" # if enabled, adds "Read more" links to excerpts
-talkmap_link             : false #change to true to add link to talkmap on talks page
-comments:
-  provider               : # false (default), "disqus", "discourse", "facebook", "google-plus", "staticman", "custom"
-  disqus:
-    shortname            :
-  discourse:
-    server               : # https://meta.discourse.org/t/embedding-discourse-comments-via-javascript/31963 , e.g.: meta.discourse.org
-  facebook:
-    appid                :
-    num_posts            : # 5 (default)
-    colorscheme          : # "light" (default), "dark"
-staticman:
-  allowedFields          : ['name', 'email', 'url', 'message']
-  branch                 : "gh-pages" # "master", "gh-pages"
-  commitMessage          : "New comment."
-  filename               : comment-{@timestamp}
-  format                 : "yml"
-  moderation             : true
-  path                   : "_data/comments/{options.slug}"
-  requiredFields         : ['name', 'email', 'message']
-  transforms:
-    email                : "md5"
-  generatedFields:
-    date:
-      type               : "date"
-      options:
-        format           : "iso8601" # "iso8601" (default), "timestamp-seconds", "timestamp-milliseconds"
 atom_feed:
   hide                   : false     # change to true to hide the RSS feed in the footer
   path                   : # blank (default) uses feed.xml
@@ -172,32 +145,27 @@ include:
   - _pages
   - files
 exclude:
-  - "*.sublime-project"
-  - "*.sublime-workspace"
-  - .asset-cache
-  - .bundle
-  - .github
-  - .jekyll-assets-cache
-  - .sass-cache
+  # Repository and tooling files
+  - CLAUDE.md
+  - README.md
+  - UPDATING.md
+  - LICENSE
+  - scripts/
+  - Gemfile
+  - Gemfile.lock
+  - .ruby-version
+  - vendor/
+  - .bundle/
+  - .github/
+  - .sass-cache/
+  - .jekyll-cache/
+  - node_modules/
+  - package.json
+  - package-lock.json
+  # Legacy theme JavaScript sources (bundled into main.min.js; removed in Stage 3)
   - assets/js/_main.js
   - assets/js/plugins
   - assets/js/vendor
-  - CHANGELOG
-  - Capfile
-  - config
-  - Dockerfile
-  - Gemfile
-  - Gruntfile.js
-  - gulpfile.js
-  - LICENSE
-  - local
-  - log
-  - node_modules
-  - package.json*
-  - Rakefile
-  - README
-  - tmp
-  - vendor
 keep_files:
   - .git
   - .svn
@@ -227,13 +195,7 @@ kramdown:
 
 # These settings control the types of collections used by the template
 collections:
-  teaching:
-    output: true
-    permalink: /:collection/:path/
   publications:
-    output: true
-    permalink: /:collection/:path/
-  portfolio:
     output: true
     permalink: /:collection/:path/
   talks:
@@ -252,7 +214,6 @@ defaults:
 #      layout: post-article
       author_profile: true
       read_time: true
-      comments: true
       share: true
       related: true
   # _pages
@@ -262,15 +223,6 @@ defaults:
     values:
       layout: single
       author_profile: true
-  # _teaching
-  - scope:
-      path: ""
-      type: teaching
-    values:
-      layout: single
-      author_profile: true
-      share: true
-      comments: true
   # _publications
   - scope:
       path: ""
@@ -279,16 +231,6 @@ defaults:
       layout: single
       author_profile: true
       share: true
-      comments: true
-  # _portfolio
-  - scope:
-      path: ""
-      type: portfolio
-    values:
-      layout: single
-      author_profile: true
-      share: true
-      comment: true
   # _talks
   - scope:
       path: ""
@@ -297,18 +239,18 @@ defaults:
       layout: talk
       author_profile: true
       share: true
-  # _tags
-  - scope:
-      type: tags
-    values:
-      layout: archive-taxonomy
-      author_profile: true
 
 
 # Sass/SCSS
 sass:
   sass_dir: _sass
   style: compressed # http://sass-lang.com/documentation/file.SASS_REFERENCE.html#output_style
+  # Temporary (removed in Stage 3 with the legacy theme): hide Dart Sass
+  # deprecation noise from the vendored academicpages styles in _sass/ and
+  # from the @import rules in assets/css/main.scss.
+  quiet_deps: true
+  silence_deprecations:
+    - import
 
 
 # Outputting
@@ -321,65 +263,17 @@ timezone: America/Los_Angeles # Etc/UTC # http://en.wikipedia.org/wiki/List_of_t
 # Plugins
 plugins:
   - jekyll-feed
-  - jekyll-gist
-  - jekyll-paginate
   - jekyll-sitemap
   - jekyll-redirect-from
-  - jemoji
-  - jekyll-include-cache
-  - jekyll-archives
-
-# Mimic GitHub Pages with --safe
-whitelist:
-  - jekyll-feed
-  - jekyll-gist
-  - jekyll-paginate
-  - jekyll-sitemap
-  - jekyll-redirect-from
-  - jemoji
 
 
-# Archives
-#  Type
-#  - GitHub Pages compatible archive pages built with Liquid ~> type: liquid (default)
-#  - Jekyll Archives plugin archive pages ~> type: jekyll-archives
-#  Path (examples)
-#  - Archive page should exist at path when using Liquid method or you can
-#    expect broken links (especially with breadcrumbs enabled)
-#  - <base_path>/tags/my-awesome-tag/index.html ~> path: /tags/
-#  - <base_path/categories/my-awesome-category/index.html ~> path: /categories/
-#  - <base_path/my-awesome-category/index.html ~> path: /
-category_archive:
-  type: liquid
-  path: /categories/
-#tag_archive:
-#  type: liquid
-#  path: /tags/
-
-
+# Tag links (legacy theme only; removed in Stage 3)
+# The tag archive pages are gone. The legacy templates still link tags to
+# /tags/<tag>/, and those URLs redirect to /year-archive/ (see
+# _pages/year-archive.html) until Stage 7 points them at /news/.
 tag_archive:
   type: jekyll-archives
   path: /tags/
-
-jekyll-archives:
-  enabled:
-    - tags
-  layouts:
-    tag: tag-archive   # or 'archive' depending on your theme
-  permalinks:
-    tag: /tags/:name/
-
-# https://github.com/jekyll/jekyll-archives
-# jekyll-archives:
-#   enabled:
-#     - categories
-#     - tags
-#   layouts:
-#     category: archive-taxonomy
-#     tag: archive-taxonomy
-#   permalinks:
-#     category: /categories/:name/
-#     tag: /tags/:name/
 
 
 # HTML Compression

@@ -1,34 +1,46 @@
-name: Build and Deploy Jekyll
+name: Build and deploy site
 
 on:
   push:
-    branches: [ master, main ]
+    branches: [master, developer]
+  pull_request:
+    branches: [master]
   workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/master' }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.2'
-          bundler-cache: true
-      - run: bundle install --path vendor/bundle
-      - run: bundle exec jekyll build --trace
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: _site
+          bundler-cache: true       # Ruby version comes from .ruby-version
+      - id: pages
+        uses: actions/configure-pages@v6
+      - name: Build
+        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+        env:
+          JEKYLL_ENV: production
+      # Stage 9 adds an html-proofer step here.
+      - if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v5
 
   deploy:
+    if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
     needs: build
-    permissions:
-      pages: write
-      id-token: write
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
