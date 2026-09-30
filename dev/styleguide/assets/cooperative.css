@@ -205,8 +205,12 @@ code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.875e
   .sg-section { padding-top: var(--space-8); }
 }
 .sg-body { display: grid; gap: var(--space-4); min-width: 0; }
-.sg-sub { display: grid; gap: var(--space-2); }
-.sg-sub + .sg-sub { margin-top: var(--space-6); }
+/* Subsections: the gap under the heading equals the gap between items (24 px; 40 px for publication and talk entries) */
+.sg-sub { display: grid; gap: var(--space-5); }
+.sg-sub--entries { gap: 2.5rem; }
+.sg-sub + .sg-sub { margin-top: var(--space-7); }
+.sg-sub + .sg-more { margin-top: var(--space-5); }
+.videos + .sg-more { margin-top: var(--space-4); }
 .sg-row + .sg-sub { margin-top: var(--space-4); }
 .sg-sub > h3, .type-sub { font-size: var(--text-h3); font-weight: 750; line-height: 1.15; letter-spacing: -0.02em; }
 .sg-sub > h3::after, .type-sub::after { content: ""; display: block; width: 2.5rem; height: 4px; margin-top: 0.5rem; border-radius: 2px; background: var(--beam-bright); }
@@ -246,7 +250,7 @@ code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.875e
 }
 
 /* Publications: open entries with one venue chip */
-.pub { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-2) var(--space-3); padding: var(--space-5) 0; }
+.pub { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-2) var(--space-3); }
 .pub-meta, .pub-body { display: contents; }
 .pub-year, .pub-type { display: none; }
 .pub-title { grid-column: 1 / -1; order: 1; font-size: var(--text-h4); font-weight: 700; line-height: 1.25; letter-spacing: -0.01em; }
@@ -281,7 +285,7 @@ code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.875e
 .news-text { grid-column: 2; grid-row: 2; max-width: 64ch; }
 
 /* Talks */
-.talk { display: grid; gap: var(--space-2); padding: var(--space-5) 0; }
+.talk { display: grid; gap: var(--space-2); }
 .talk-meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
 .talk-date { font-size: 0.8125rem; font-weight: 700; color: var(--slate); }
 .talk-kind { padding: 0.2rem 0.6rem; border-radius: var(--pill); background: var(--mist); color: var(--ink); font-size: 0.75rem; font-weight: 700; }
@@ -310,15 +314,17 @@ code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.875e
 }
 
 /* Row lists: experience, honors and awards, teaching */
-.row-list { list-style: none; display: grid; }
-.row-item { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0.125rem; padding: var(--space-3) 0; }
+.row-list { list-style: none; display: grid; gap: var(--space-5); }
+.row-item { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0.125rem; }
 .row-when { font-size: 0.8125rem; font-weight: 700; color: var(--slate); }
 .row-what { font-size: 1.125rem; font-weight: 650; letter-spacing: -0.01em; }
 .row-code { display: inline-block; margin-inline-start: 0.125rem; padding: 0.1rem 0.5rem; border-radius: var(--pill); background: var(--mist); font-size: 0.8125rem; font-weight: 700; white-space: nowrap; }
 .row-where { color: var(--slate); }
+.row-note { max-width: 68ch; margin-top: 0.125rem; color: var(--slate); font-size: var(--text-ui); }
 @media (min-width: 40rem) {
   .row-item { grid-template-columns: 9.5rem minmax(0, 1fr) auto; align-items: baseline; column-gap: var(--space-4); }
   .row-where { text-align: end; }
+  .row-note { grid-column: 2 / -1; }
 }
 
 /* Education (CV) with university logos */

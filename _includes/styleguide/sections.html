@@ -48,7 +48,7 @@
   <section class="sg-section" id="publications" aria-labelledby="publications-title">
     <h2 id="publications-title">Publications</h2>
     <div class="sg-body">
-      <section class="sg-sub" aria-labelledby="pubs-journal-title">
+      <section class="sg-sub sg-sub--entries" aria-labelledby="pubs-journal-title">
         <h3 id="pubs-journal-title">Journal and magazine papers</h3>
         <article class="pub">
           <div class="pub-meta">
@@ -126,7 +126,7 @@
         </article>
       </section>
 
-      <section class="sg-sub" aria-labelledby="pubs-conference-title">
+      <section class="sg-sub sg-sub--entries" aria-labelledby="pubs-conference-title">
         <h3 id="pubs-conference-title">Conference papers</h3>
         <article class="pub">
           <div class="pub-meta">
@@ -180,7 +180,7 @@
   </section>
 
   <section class="sg-section" id="cv" aria-labelledby="cv-title">
-    <h2 id="cv-title">CV</h2>
+    <h2 id="cv-title">Curriculum vitae</h2>
     <div class="sg-body">
       <p class="sg-row">
         <a class="btn btn--primary" href="#cv">{% include styleguide/icon.html name="pdf" %}Download CV (PDF)</a>
@@ -231,14 +231,14 @@
 
       <section class="sg-sub" id="experience" aria-labelledby="experience-title">
         <h3 id="experience-title">Experience</h3>
-        <ul class="row-list">
-          <li class="row-item"><span class="row-when">Jul 2024 – present</span><span class="row-what">Graduate Student Researcher</span><span class="row-where">EECS, UC Irvine</span></li>
-          <li class="row-item"><span class="row-when">Jun – Sep 2026</span><span class="row-what">Wireless AI Engineering Intern</span><span class="row-where">Tiami Networks, Sacramento, CA</span></li>
-          <li class="row-item"><span class="row-when">Aug 2021 – Apr 2024</span><span class="row-what">Graduate Research Assistant</span><span class="row-where">ECE, Rice University</span></li>
-          <li class="row-item"><span class="row-when">Jan – Apr 2024</span><span class="row-what">Research Fellow</span><span class="row-where">Rice D2K Lab</span></li>
-          <li class="row-item"><span class="row-when">Dec 2018 – Dec 2020</span><span class="row-what">Undergraduate Research Assistant</span><span class="row-where">Array Processing Lab, University of Tehran</span></li>
-          <li class="row-item"><span class="row-when">May – Nov 2020</span><span class="row-what">Part-Time R&amp;D Engineer</span><span class="row-where">Transportation Innovation Center, Tehran</span></li>
-          <li class="row-item"><span class="row-when">May – Nov 2020</span><span class="row-what">Part-Time R&amp;D Engineer</span><span class="row-where">Sadr Electronic Dena, Tehran</span></li>
+        <ul class="row-list row-list--notes">
+          <li class="row-item"><span class="row-when">Jul 2024 – present</span><span class="row-what">Graduate Student Researcher</span><span class="row-where">EECS, UC Irvine</span><span class="row-note">Reinforcement learning and GNN models for cooperative ISAC networks; distributed ADMM and consensus algorithms for beamforming and resource allocation in cell-free ISAC.</span></li>
+          <li class="row-item"><span class="row-when">Jun – Sep 2026</span><span class="row-what">Wireless AI Engineering Intern</span><span class="row-where">Tiami Networks, Sacramento, CA</span><span class="row-note">ISAC channel models and high-fidelity RF digital twins with NVIDIA Sionna and ray tracing.</span></li>
+          <li class="row-item"><span class="row-when">Aug 2021 – Apr 2024</span><span class="row-what">Graduate Research Assistant</span><span class="row-where">ECE, Rice University</span><span class="row-note">Distributed multi-user MIMO beamforming with over-the-air experiments on the RENEW massive MIMO testbed; four papers and over 200 released datasets.</span></li>
+          <li class="row-item"><span class="row-when">Jan – Apr 2024</span><span class="row-what">Research Fellow</span><span class="row-where">Rice D2K Lab</span><span class="row-note">Mentoring five undergraduate students on a Rice EMS-sponsored project analyzing operational data across multiple domains.</span></li>
+          <li class="row-item"><span class="row-when">Dec 2018 – Dec 2020</span><span class="row-what">Undergraduate Research Assistant</span><span class="row-where">Array Processing Lab, University of Tehran</span><span class="row-note">Hardware implementation of MIMO-OFDM systems on the Xilinx ZedBoard, from MATLAB and Python models to Vivado HLS.</span></li>
+          <li class="row-item"><span class="row-when">May – Nov 2020</span><span class="row-what">Part-Time R&amp;D Engineer</span><span class="row-where">Transportation Innovation Center, Tehran</span><span class="row-note">Hybrid radio links (FM analog and OFDM digital) for radio-controlled camera drones.</span></li>
+          <li class="row-item"><span class="row-when">May – Nov 2020</span><span class="row-what">Part-Time R&amp;D Engineer</span><span class="row-where">Sadr Electronic Dena, Tehran</span><span class="row-note">A 2.4 GHz ISM-band IoT system for remote control of elevator central control boards.</span></li>
         </ul>
       </section>
 
@@ -267,21 +267,20 @@
           <li class="row-item"><span class="row-when">Fall 2019</span><span class="row-what">Signals and Systems Analysis</span><span class="row-where">University of Tehran</span></li>
           <li class="row-item"><span class="row-when">Spring 2019</span><span class="row-what">Digital Communications</span><span class="row-where">University of Tehran</span></li>
         </ul>
-        <p class="sg-note">Teaching assistant for every course listed. Mentoring: five undergraduate students on a Rice EMS-sponsored project analyzing operational data (Rice D2K Lab, 2024).</p>
+        <p class="sg-note">Teaching assistant for every course listed.</p>
       </section>
 
-      <section class="sg-sub" id="talks" aria-labelledby="talks-title">
+      <section class="sg-sub sg-sub--entries" id="talks" aria-labelledby="talks-title">
         <h3 id="talks-title">Talks</h3>
-        {%- comment -%} TODO(mehdi): the title of the Grad Slam pitch (shown descriptively below until confirmed). {%- endcomment %}
         <article class="talk">
           <div class="talk-meta">
             <time class="talk-date" datetime="2026-03">Mar 2026</time>
             <span class="talk-kind">Competition talk</span>
           </div>
           <div class="talk-body">
-            <h4 class="talk-title">Research pitch at the UCI Grad Slam Finals</h4>
-            <p class="talk-event">UCI Grad Slam, Irvine, CA</p>
-            <p class="talk-note">3rd place in the finals. The pitch starts at 1:02:07 in the event video.</p>
+            <h4 class="talk-title">When Wireless Signals Become Our Eyes</h4>
+            <p class="talk-event">UCI Grad Slam finals, Irvine, CA</p>
+            <p class="talk-note">3rd place. The pitch starts at 1:02:07 in the event video.</p>
             <ul class="linkbtns">
               <li><a class="linkbtn" href="https://www.youtube.com/watch?v=ZPEh1HdD858&amp;t=3727s" target="_blank" rel="noopener">{% include styleguide/icon.html name="video" %}<span>Video</span>{{ newtab }}</a></li>
               <li><a class="linkbtn" href="https://grad.uci.edu/professional-development/grad-slam/grad-slam-finalists/" target="_blank" rel="noopener">{% include styleguide/icon.html name="event" %}<span>Event</span>{{ newtab }}</a></li>
@@ -330,22 +329,32 @@
         <a class="btn btn--secondary btn--small" href="https://www.youtube.com/@MehdiZD97?sub_confirmation=1" target="_blank" rel="noopener">{% include styleguide/icon.html name="youtube" %}Subscribe{{ newtab }}</a>
       </p>
       <div class="videos">
+        {%- comment -%} Newest first by upload date (YouTube, checked 2026-09-29): 2026-09-17, 2026-03-27, 2024-11-14, 2024-11-05, 2024-06-12. {%- endcomment %}
+        <article class="video">
+          <div class="video-thumb">
+            <img src="https://i.ytimg.com/vi/16-DP_fDdp4/mqdefault.jpg" width="320" height="180" alt="" loading="lazy">
+            <span class="video-play" aria-hidden="true">{% include styleguide/icon.html name="play" %}</span>
+            <span class="video-duration">1:02:41</span>
+          </div>
+          <h3 class="video-title" lang="fa" dir="rtl"><a href="https://www.youtube.com/watch?v=16-DP_fDdp4" target="_blank" rel="noopener">آموزش برنامه‌نویسی پایتون | جلسه ۱: تفکر ماشین، مبناهای اعداد و کار با خط فرمان<span class="visually-hidden" lang="en" dir="ltr"> (opens in a new tab)</span></a></h3>
+          <p class="video-meta">Python programming course, session 1 (in Persian)</p>
+        </article>
         <article class="video">
           <div class="video-thumb">
             <img src="https://i.ytimg.com/vi/ZPEh1HdD858/mqdefault.jpg" width="320" height="180" alt="" loading="lazy">
             <span class="video-play" aria-hidden="true">{% include styleguide/icon.html name="play" %}</span>
             <span class="video-duration">from 1:02:07</span>
           </div>
-          <h3 class="video-title"><a href="https://www.youtube.com/watch?v=ZPEh1HdD858&amp;t=3727s" target="_blank" rel="noopener">My pitch at the 2026 UCI Grad Slam Finals{{ newtab }}</a></h3>
-          <p class="video-meta">3rd place. Starts at 1:02:07 in “2026 UCI Grad Slam,” published on <a class="video-host" href="https://www.youtube.com/@UCIrvineGD" target="_blank" rel="noopener">UCIrvineGD{{ newtab }}</a></p>
+          <h3 class="video-title"><a href="https://www.youtube.com/watch?v=ZPEh1HdD858&amp;t=3727s" target="_blank" rel="noopener">When Wireless Signals Become Our Eyes{{ newtab }}</a></h3>
+          <p class="video-meta">UCI Grad Slam finals pitch, 3rd place. Starts at 1:02:07 in “2026 UCI Grad Slam,” published on <a class="video-host" href="https://www.youtube.com/@UCIrvineGD" target="_blank" rel="noopener">UCIrvineGD{{ newtab }}</a></p>
         </article>
         <article class="video">
           <div class="video-thumb">
-            <img src="https://i.ytimg.com/vi/8NDZutr3OEE/mqdefault.jpg" width="320" height="180" alt="" loading="lazy">
+            <img src="https://i.ytimg.com/vi/H-IcUX1w1Z0/mqdefault.jpg" width="320" height="180" alt="" loading="lazy">
             <span class="video-play" aria-hidden="true">{% include styleguide/icon.html name="play" %}</span>
-            <span class="video-duration">41:51</span>
+            <span class="video-duration">4:37</span>
           </div>
-          <h3 class="video-title"><a href="https://www.youtube.com/watch?v=8NDZutr3OEE" target="_blank" rel="noopener">Beamforming in Wireless Communications: Basics and Applications{{ newtab }}</a></h3>
+          <h3 class="video-title"><a href="https://www.youtube.com/watch?v=H-IcUX1w1Z0" target="_blank" rel="noopener">Linear Array Antennas: Models, Approximations, and Responses Explained{{ newtab }}</a></h3>
           <p class="video-meta">Tutorial, published on <a class="video-host" href="https://www.youtube.com/@Daaneshacademy" target="_blank" rel="noopener">Danesh Academy{{ newtab }}</a></p>
         </article>
         <article class="video">
@@ -359,22 +368,16 @@
         </article>
         <article class="video">
           <div class="video-thumb">
-            <img src="https://i.ytimg.com/vi/H-IcUX1w1Z0/mqdefault.jpg" width="320" height="180" alt="" loading="lazy">
+            <img src="https://i.ytimg.com/vi/8NDZutr3OEE/mqdefault.jpg" width="320" height="180" alt="" loading="lazy">
             <span class="video-play" aria-hidden="true">{% include styleguide/icon.html name="play" %}</span>
-            <span class="video-duration">4:37</span>
+            <span class="video-duration">41:51</span>
           </div>
-          <h3 class="video-title"><a href="https://www.youtube.com/watch?v=H-IcUX1w1Z0" target="_blank" rel="noopener">Linear Array Antennas: Models, Approximations, and Responses Explained{{ newtab }}</a></h3>
+          <h3 class="video-title"><a href="https://www.youtube.com/watch?v=8NDZutr3OEE" target="_blank" rel="noopener">Beamforming in Wireless Communications: Basics and Applications{{ newtab }}</a></h3>
           <p class="video-meta">Tutorial, published on <a class="video-host" href="https://www.youtube.com/@Daaneshacademy" target="_blank" rel="noopener">Danesh Academy{{ newtab }}</a></p>
         </article>
-        <article class="video">
-          <div class="video-thumb">
-            <img src="https://i.ytimg.com/vi/16-DP_fDdp4/mqdefault.jpg" width="320" height="180" alt="" loading="lazy">
-            <span class="video-play" aria-hidden="true">{% include styleguide/icon.html name="play" %}</span>
-          </div>
-          <h3 class="video-title" lang="fa" dir="rtl"><a href="https://www.youtube.com/watch?v=16-DP_fDdp4" target="_blank" rel="noopener">آموزش برنامه‌نویسی پایتون | جلسه ۱: تفکر ماشین، مبناهای اعداد و کار با خط فرمان<span class="visually-hidden" lang="en" dir="ltr"> (opens in a new tab)</span></a></h3>
-          <p class="video-meta">Python programming course, session 1 (in Persian)</p>
-        </article>
       </div>
+      {%- comment -%} On the site this links to /videos/ (Stage 8); the style guide has no such page. {%- endcomment %}
+      <p class="sg-more"><a href="#videos">All videos</a></p>
     </div>
   </section>
 
