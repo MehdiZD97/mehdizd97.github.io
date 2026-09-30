@@ -5,8 +5,10 @@
 const root = document.documentElement;
 const systemDark = window.matchMedia("(prefers-color-scheme: dark)");
 
-// Theme: follows the system until the visitor picks one; the choice is remembered.
-const effectiveTheme = () => root.getAttribute("data-theme") || (systemDark.matches ? "dark" : "light");
+// Theme: the direction's default (light, or the system setting) until the
+// visitor picks one with the toggle; the choice is remembered.
+const themeDefault = () => (root.dataset.themeDefault === "system" ? (systemDark.matches ? "dark" : "light") : "light");
+const effectiveTheme = () => root.getAttribute("data-theme") || themeDefault();
 const syncThemeToggles = () => {
   const dark = effectiveTheme() === "dark";
   document.querySelectorAll("[data-theme-toggle]").forEach((button) => {

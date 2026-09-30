@@ -1,12 +1,12 @@
 ---
 layout: styleguide
-title: "Direction B: Cooperative (reference)"
+title: "Direction B: Cooperative (main)"
 permalink: /dev/styleguide/cooperative/
 sitemap: false
 direction: cooperative
 letter: B
-signature: "cell-free beams; five distributed access points jointly steer their beams onto the pointer, which sends out sensing echoes."
-hero_script: /dev/styleguide/assets/hero-cooperative.js
+signature: "the shared hero with two switchable views, cell-free beams (first) and the steerable array, drawn in white, orange, and cyan on the blue field."
+hero_script: /dev/styleguide/assets/hero.js
 preload_fonts:
   - /dev/styleguide/fonts/bricolage-grotesque-latin-standard-normal.woff2
 principles:
@@ -20,7 +20,8 @@ type_scale:
   - { class: type-hero, label: "Hero name: Bricolage Grotesque 780, 48 to 88 px (optical size follows the size)" }
   - { class: type-h1, label: "Page title: 760, 36 to 52 px" }
   - { class: type-h2, label: "Section heading: 760, 28 to 40 px" }
-  - { class: type-h3, label: "Entry title: 700, 22 to 26 px" }
+  - { class: type-sub, label: "Subsection heading: 750, 22 to 26 px, with an orange bar" }
+  - { class: type-h3, label: "Entry title: 700, 19 to 21 px" }
   - { class: type-body, label: "Body: 400, 17 px, line height 1.55, about 64 characters per line" }
   - { class: type-small, label: "Small: 14 px" }
   - { class: type-mono, label: "Data: system monospace (no second family)" }
@@ -28,6 +29,6 @@ type_scale:
 ---
 {% include styleguide/bar.html %}
 {% include styleguide/header.html %}
-{% include styleguide/hero-cooperative.html %}
+{% include styleguide/hero.html %}
 {% include styleguide/sections.html %}
 {% include styleguide/footer.html %}

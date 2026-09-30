@@ -1,15 +1,18 @@
 <!doctype html>
 {%- comment -%}
-  Temporary layout for the Stage 2 style guide (/dev/styleguide/).
-  Independent of the legacy theme. Delete with dev/ before launch.
+  Layout for the style guide (/dev/styleguide/), a development reference for
+  both design directions; independent of the legacy theme; never on the live site.
+  theme_default (from _data/styleguide.yml): light (dark only when the visitor
+  picks it with the toggle) or system (follow the operating system).
 {%- endcomment -%}
 {%- assign d = site.data.styleguide.directions | where: "id", page.direction | first -%}
-<html lang="en-US" data-direction="{{ page.direction | default: 'overview' }}">
+{%- assign theme_default = d.theme_default | default: 'system' -%}
+<html lang="en-US" data-direction="{{ page.direction | default: 'overview' }}" data-theme-default="{{ theme_default }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
-  <title>{{ page.title }} | Style guide (temporary)</title>
+  <title>{{ page.title }} | Style guide</title>
   <script>
     // Mark JavaScript as available and apply a stored theme choice before the first paint.
     (function () {
@@ -42,6 +45,7 @@
       --{{ t.id }}: {{ t.dark }};
       {%- endfor %}
     }
+    {%- if theme_default == "system" %}
     @media (prefers-color-scheme: dark) {
       :root:not([data-theme="light"]) {
         color-scheme: dark;
@@ -53,6 +57,7 @@
         {%- endfor %}
       }
     }
+    {%- endif %}
   </style>
   {%- endif %}
   {%- for font in page.preload_fonts %}

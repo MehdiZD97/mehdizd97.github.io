@@ -1,4 +1,4 @@
-// Temporary (Stage 2 style guide): Direction A hero with two views and tabs.
+// Style guide hero, shared by both directions: two views and tabs.
 // View 1 (default): cell-free beams; five access points steer onto the pointer.
 // View 2: a 16-element uniform linear array (half-wavelength spacing) whose
 // beam pattern, from 0 to -30 dB, steers toward the pointer.
@@ -6,7 +6,7 @@
 
 import { cone, mountHero } from "./hero-core.js";
 
-const hero = document.querySelector("[data-hero='instrument']");
+const hero = document.querySelector("[data-hero]");
 
 if (hero) {
   const f = (v) => v.toFixed(1);

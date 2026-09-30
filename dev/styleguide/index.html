@@ -7,13 +7,17 @@ sitemap: false
 {% include styleguide/bar.html %}
 <main class="ov" id="main">
   <h1>Design directions</h1>
-  <p><strong>Direction A (Instrument) is chosen</strong> (2026-09-29). Its hero has two switchable views, cell-free beams (default) and the steerable array. Direction B (Cooperative) stays as a reference, so the site can switch to it later. Both pages use the same real content in menu order, so the header's underline follows the section in view as you scroll.</p>
+  <p><strong>Direction B (Cooperative) is the main style</strong> (light by default); Direction A (Instrument) is developed in parallel so the site can switch styles easily. Both pages share the same markup, hero, and scripts; only colors, type, and shapes differ.</p>
+  <p>The pages follow the proposed home page: the hero (two switchable views, cell-free first), then News, Publications (journal and conference groups), CV (education, experience, honors and awards, teaching, talks), and Videos. The header stays at the top and its underline follows the section in view.</p>
   <p>These pages are for development only: hidden from search engines, and kept out of the live site's build from Stage 3 on.</p>
   <div class="ov-grid">
-    {%- for dir in site.data.styleguide.directions %}
-    {%- capture letter %}{% case forloop.index %}{% when 1 %}A{% when 2 %}B{% endcase %}{% endcapture %}
+    {%- assign main = site.data.styleguide.directions | where: "role", "main" %}
+    {%- assign alternates = site.data.styleguide.directions | where_exp: "d", "d.role != 'main'" %}
+    {%- assign ordered = main | concat: alternates %}
+    {%- for dir in ordered %}
+    {%- assign letter = dir.letter %}
     <section class="ov-card" aria-labelledby="ov-{{ dir.id }}">
-      <h2 id="ov-{{ dir.id }}"><a href="{{ '/dev/styleguide/' | append: dir.id | append: '/' | relative_url }}">{{ letter }}. {{ dir.name }}</a>{% if forloop.first %} (chosen){% else %} (reference){% endif %}</h2>
+      <h2 id="ov-{{ dir.id }}"><a href="{{ '/dev/styleguide/' | append: dir.id | append: '/' | relative_url }}">{{ letter }}. {{ dir.name }}</a>{% if dir.role == "main" %} (main){% else %} (alternate){% endif %}</h2>
       <p>{{ dir.summary }}</p>
       <p>Type: {{ dir.fonts }}.</p>
       <iframe class="ov-frame" src="{{ '/dev/styleguide/' | append: dir.id | append: '/' | relative_url }}" title="Direction {{ letter }}, {{ dir.name }}, at phone width" loading="lazy"></iframe>

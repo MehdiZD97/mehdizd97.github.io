@@ -1,15 +1,20 @@
-# Temporary data for the Stage 2 style guide (/dev/styleguide/).
-# Delete together with dev/, _layouts/styleguide.html, and _includes/styleguide/
-# before launch (PLAN task 11.2).
+# Data for the style guide (/dev/styleguide/), kept as a development reference
+# for both design directions (never on the live site).
 #
 # Each direction has four to six named colors (light and dark values), a few
 # derived tokens, and the text pairings that must pass WCAG 2.2 AA.
+# `letter`: the direction's fixed label (A, B), independent of list order.
+# `role`: main (the style the site uses) or alternate (kept in parallel).
+# `theme_default`: light (dark only when the visitor picks it) or system.
 # `_local/tools/contrast.py` checks every pairing; kind "text" needs 4.5,
 # "large" and "mark" (non-text: focus rings, beams, icons) need 3.0.
 
 directions:
   - id: instrument
     name: Instrument
+    letter: A
+    role: alternate
+    theme_default: light   # light unless the visitor picks dark with the toggle
     summary: Precise, calm, instrument-like. Navy ink, one amber signal, and a monospaced data layer.
     fonts: IBM Plex Sans and IBM Plex Mono
     colors:
@@ -21,7 +26,6 @@ directions:
       - { id: grid, name: Grid, role: Plot grids and quiet dividers (non-text), light: "#D6DDE8", dark: "#22304D" }
     tokens:
       - { id: signal-bright, role: Beam fill and trace, light: "#C77700", dark: "#F5A524" }
-      - { id: tile, role: Light tile behind university logos (keeps navy marks visible in dark mode), light: "#FFFFFF", dark: "#E7ECF5" }
     pairs:
       - [ink, paper, text]
       - [ink, panel, text]
@@ -34,6 +38,9 @@ directions:
 
   - id: cooperative
     name: Cooperative
+    letter: B
+    role: main
+    theme_default: light   # light unless the visitor picks dark with the toggle
     summary: Continuity with the YouTube channel. A royal-blue field, warm orange beams, a cyan echo, and calm white pages.
     fonts: Bricolage Grotesque
     colors:
@@ -50,7 +57,6 @@ directions:
       - { id: echo-bright, role: Sensing rings on the field, light: "#5CDCF5", dark: "#5CDCF5" }
       - { id: mist, role: Tinted section background, light: "#F2F4FE", dark: "#0D1336" }
       - { id: link, role: Links on the page, light: "#1B3BC8", dark: "#5CDCF5" }
-      - { id: tile, role: Light tile behind university logos, light: "#FFFFFF", dark: "#E9ECFF" }
     pairs:
       - [ink, paper, text]
       - [ink, mist, text]

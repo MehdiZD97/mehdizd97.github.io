@@ -1,35 +1,101 @@
 {%- comment -%}
-  Style guide sections shared by the directions. The markup is identical;
-  each direction's stylesheet decides the look. Content sections come first,
-  in menu order, so the header's scroll-following underline can be tried; the
-  style reference (palette, type, buttons) follows. Content is real (CV and
-  CONTENT-AUDIT.md); the BibTeX entry is a sample built from verified fields
-  (Stage 4 fetches the official records).
+  Style guide sections shared by both directions; each direction's stylesheet
+  decides the look. The content sections follow the proposed home page order
+  (News, Publications, CV, Videos), so the header's scroll-following underline
+  can be tried; the style reference (palette, type, buttons) follows.
+  Content is real (CV and CONTENT-AUDIT.md); the BibTeX entry is a sample
+  built from verified fields (Stage 4 fetches the official records).
 {%- endcomment -%}
 {%- assign d = site.data.styleguide.directions | where: "id", page.direction | first -%}
 {%- assign newtab = '<span class="visually-hidden"> (opens in a new tab)</span>' -%}
 {%- assign img = '/dev/styleguide/img/' | relative_url -%}
 <main class="sg-main" id="main">
 
-  <section class="sg-section" id="publications" aria-labelledby="publications-title">
-    <h2 id="publications-title">Selected publications</h2>
+  <section class="sg-section" id="news" aria-labelledby="news-title">
+    <h2 id="news-title">Latest news</h2>
     <div class="sg-body">
-      <article class="pub">
-        <div class="pub-meta">
-          <span class="pub-year">2026</span>
-          <span class="pub-venue-short">IEEE TVT</span>
-          <span class="pub-type">Journal</span>
-        </div>
-        <div class="pub-body">
-          <h3 class="pub-title"><a href="#publications">An Analytical and Experimental Study of Distributed Uplink Beamforming in the Presence of Carrier Frequency Offsets</a></h3>
-          <p class="pub-authors"><strong>M. Zafari</strong>, D. Pandey, and R. Doost-Mohammady</p>
-          <p class="pub-venue">IEEE Transactions on Vehicular Technology</p>
-          <ul class="linkbtns">
-            <li><a class="linkbtn" href="https://arxiv.org/abs/2508.08506" target="_blank" rel="noopener">{% include styleguide/icon.html name="arxiv" %}<span>arXiv</span>{{ newtab }}</a></li>
-            <li><a class="linkbtn" href="https://doi.org/10.1109/TVT.2026.3656108" target="_blank" rel="noopener">{% include styleguide/icon.html name="ieee" %}<span>IEEE Xplore</span>{{ newtab }}</a></li>
-            <li><button class="linkbtn" type="button" aria-expanded="false" aria-controls="bib-tvt" data-bib-toggle>{% include styleguide/icon.html name="bibtex" %}<span>BibTeX</span></button></li>
-          </ul>
-          <div class="bibtex" id="bib-tvt" hidden>
+      <ul class="news-list">
+        <li class="news">
+          <time class="news-date" datetime="2026-07">Jul 2026</time>
+          <span class="news-icon">{% include styleguide/icon.html name="paper" %}<span class="visually-hidden">Paper:</span></span>
+          <p class="news-text">Our paper TiamiTwin, a digital twin for bistatic ISAC drone sensing, was accepted to the IEEE MILCOM Workshop.</p>
+        </li>
+        <li class="news">
+          <time class="news-date" datetime="2026-06">Jun 2026</time>
+          <span class="news-icon">{% include styleguide/icon.html name="career" %}<span class="visually-hidden">Career:</span></span>
+          <p class="news-text">Joined Tiami Networks in Sacramento as a Wireless AI Engineering Intern.</p>
+        </li>
+        <li class="news">
+          <time class="news-date" datetime="2026-03">Mar 2026</time>
+          <span class="news-icon">{% include styleguide/icon.html name="award" %}<span class="visually-hidden">Award:</span></span>
+          <p class="news-text">Won 3rd place in the UCI Grad Slam finals. <a href="https://www.youtube.com/watch?v=ZPEh1HdD858&amp;t=3727s" target="_blank" rel="noopener">Watch the pitch{{ newtab }}</a></p>
+        </li>
+        <li class="news">
+          <time class="news-date" datetime="2026-03">Mar 2026</time>
+          <span class="news-icon">{% include styleguide/icon.html name="award" %}<span class="visually-hidden">Award:</span></span>
+          <p class="news-text">Received the Pia Gratton Endowed Graduate Student Award at UC Irvine.</p>
+        </li>
+        <li class="news">
+          <time class="news-date" datetime="2026-01">Jan 2026</time>
+          <span class="news-icon">{% include styleguide/icon.html name="paper" %}<span class="visually-hidden">Paper:</span></span>
+          <p class="news-text">Our study of distributed uplink beamforming with carrier frequency offsets was published in IEEE Transactions on Vehicular Technology. <a href="#pub-tvt">Read the paper</a></p>
+        </li>
+      </ul>
+      <p class="sg-more"><a href="{{ '/year-archive/' | relative_url }}">All news</a></p>
+    </div>
+  </section>
+
+  <section class="sg-section" id="publications" aria-labelledby="publications-title">
+    <h2 id="publications-title">Publications</h2>
+    <div class="sg-body">
+      <section class="sg-sub" aria-labelledby="pubs-journal-title">
+        <h3 id="pubs-journal-title">Journal and magazine papers</h3>
+        <article class="pub">
+          <div class="pub-meta">
+            <span class="pub-year">Jul 2026</span>
+            <span class="pub-venue-short">IEEE TWC</span>
+            <span class="pub-type">Journal</span>
+          </div>
+          <div class="pub-body">
+            <h4 class="pub-title"><a href="#publications">CORDIS: A Scalable Coordinated Resource Allocation Framework for Distributed Cell-Free ISAC</a></h4>
+            <p class="pub-authors"><strong>M. Zafari</strong>, B. Ottersten, and A. L. Swindlehurst</p>
+            <p class="pub-venue">Submitted to IEEE Transactions on Wireless Communications</p>
+            <p class="pub-badges"><span class="badge badge--status">Under review</span></p>
+          </div>
+        </article>
+        <article class="pub">
+          <div class="pub-meta">
+            <span class="pub-year">Mar 2026</span>
+            <span class="pub-venue-short">IEEE TGRS</span>
+            <span class="pub-type">Journal</span>
+          </div>
+          <div class="pub-body">
+            <h4 class="pub-title"><a href="#publications">Robust Wildfire Forecasting under Partial Observability: From Reconstruction to Prediction</a></h4>
+            <p class="pub-authors">C. Yang, <strong>M. Zafari</strong>, Z. Duan, and A. L. Swindlehurst</p>
+            <p class="pub-venue">Submitted to IEEE Transactions on Geoscience and Remote Sensing</p>
+            <p class="pub-badges"><span class="badge badge--status">Under review</span></p>
+            <ul class="linkbtns">
+              <li><a class="linkbtn" href="https://arxiv.org/abs/2603.09042" target="_blank" rel="noopener">{% include styleguide/icon.html name="arxiv" %}<span>arXiv</span>{{ newtab }}</a></li>
+              <li><a class="linkbtn" href="https://github.com/LS-Wireless/Robust-Wildfire-Forecasting" target="_blank" rel="noopener">{% include styleguide/icon.html name="code" %}<span>Code</span>{{ newtab }}</a></li>
+            </ul>
+          </div>
+        </article>
+        <article class="pub" id="pub-tvt">
+          <div class="pub-meta">
+            <span class="pub-year">2026</span>
+            <span class="pub-venue-short">IEEE TVT</span>
+            <span class="pub-type">Journal</span>
+          </div>
+          <div class="pub-body">
+            <h4 class="pub-title"><a href="#publications">An Analytical and Experimental Study of Distributed Uplink Beamforming in the Presence of Carrier Frequency Offsets</a></h4>
+            <p class="pub-authors"><strong>M. Zafari</strong>, D. Pandey, and R. Doost-Mohammady</p>
+            <p class="pub-venue">IEEE Transactions on Vehicular Technology</p>
+            <ul class="linkbtns">
+              <li><a class="linkbtn" href="https://arxiv.org/abs/2508.08506" target="_blank" rel="noopener">{% include styleguide/icon.html name="arxiv" %}<span>arXiv</span>{{ newtab }}</a></li>
+              <li><a class="linkbtn" href="https://doi.org/10.1109/TVT.2026.3656108" target="_blank" rel="noopener">{% include styleguide/icon.html name="ieee" %}<span>IEEE Xplore</span>{{ newtab }}</a></li>
+              <li><button class="linkbtn" type="button" aria-expanded="false" aria-controls="bib-tvt" data-bib-toggle>{% include styleguide/icon.html name="bibtex" %}<span>BibTeX</span></button></li>
+            </ul>
+            <div class="bibtex" id="bib-tvt" hidden>
 <pre id="bib-tvt-text">@article{zafari2026distributed,
   author  = {Zafari, M. and Pandey, D. and Doost-Mohammady, R.},
   title   = {An Analytical and Experimental Study of Distributed Uplink
@@ -38,106 +104,241 @@
   year    = {2026},
   doi     = {10.1109/TVT.2026.3656108}
 }</pre>
-            <p class="bibtex__actions"><button class="btn btn--secondary btn--small" type="button" data-copy="bib-tvt-text">{% include styleguide/icon.html name="copy" %}Copy</button> <span class="bibtex__status" role="status" data-copy-status></span></p>
+              <p class="bibtex__actions"><button class="btn btn--secondary btn--small" type="button" data-copy="bib-tvt-text">{% include styleguide/icon.html name="copy" %}Copy</button> <span class="bibtex__status" role="status" data-copy-status></span></p>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
+        <article class="pub">
+          <div class="pub-meta">
+            <span class="pub-year">2025</span>
+            <span class="pub-venue-short">IEEE WCM</span>
+            <span class="pub-type">Magazine</span>
+          </div>
+          <div class="pub-body">
+            <h4 class="pub-title"><a href="#publications">Multi-Domain Optimization Framework for ISAC: From Electromagnetic Shaping to Network Cooperation</a></h4>
+            <p class="pub-authors">R. Liu, M. Li, <strong>M. Zafari</strong>, B. Ottersten, and A. L. Swindlehurst</p>
+            <p class="pub-venue">IEEE Wireless Communications (magazine)</p>
+            <ul class="linkbtns">
+              <li><a class="linkbtn" href="https://arxiv.org/abs/2506.16011" target="_blank" rel="noopener">{% include styleguide/icon.html name="arxiv" %}<span>arXiv</span>{{ newtab }}</a></li>
+              <li><a class="linkbtn" href="https://doi.org/10.1109/MWC.2025.3646980" target="_blank" rel="noopener">{% include styleguide/icon.html name="ieee" %}<span>IEEE Xplore</span>{{ newtab }}</a></li>
+            </ul>
+          </div>
+        </article>
+      </section>
 
-      <article class="pub">
-        <div class="pub-meta">
-          <span class="pub-year">2025</span>
-          <span class="pub-venue-short">Asilomar 2025</span>
-          <span class="pub-type">Conference</span>
-        </div>
-        <div class="pub-body">
-          <h3 class="pub-title"><a href="#publications">Coordinated Decentralized Resource Optimization for Cell-Free ISAC Systems</a></h3>
-          <p class="pub-authors"><strong>M. Zafari</strong>, R. Liu, and A. L. Swindlehurst</p>
-          <p class="pub-venue">59th Asilomar Conference on Signals, Systems, and Computers</p>
-          <p class="pub-badges"><span class="badge badge--award">{% include styleguide/icon.html name="award" %}Best Paper Award Finalist</span></p>
-          <ul class="linkbtns">
-            <li><a class="linkbtn" href="https://arxiv.org/abs/2508.01044" target="_blank" rel="noopener">{% include styleguide/icon.html name="arxiv" %}<span>arXiv</span>{{ newtab }}</a></li>
-            <li><a class="linkbtn" href="https://github.com/MehdiZD97/distributed-cellfree-isac" target="_blank" rel="noopener">{% include styleguide/icon.html name="code" %}<span>Code</span>{{ newtab }}</a></li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="pub">
-        <div class="pub-meta">
-          <span class="pub-year">Mar 2026</span>
-          <span class="pub-venue-short">IEEE TGRS</span>
-          <span class="pub-type">Journal</span>
-        </div>
-        <div class="pub-body">
-          <h3 class="pub-title"><a href="#publications">Robust Wildfire Forecasting under Partial Observability: From Reconstruction to Prediction</a></h3>
-          <p class="pub-authors">C. Yang, <strong>M. Zafari</strong>, Z. Duan, and A. L. Swindlehurst</p>
-          <p class="pub-venue">Submitted to IEEE Transactions on Geoscience and Remote Sensing</p>
-          <p class="pub-badges"><span class="badge badge--status">Under review</span></p>
-          <ul class="linkbtns">
-            <li><a class="linkbtn" href="https://arxiv.org/abs/2603.09042" target="_blank" rel="noopener">{% include styleguide/icon.html name="arxiv" %}<span>arXiv</span>{{ newtab }}</a></li>
-            <li><a class="linkbtn" href="https://github.com/LS-Wireless/Robust-Wildfire-Forecasting" target="_blank" rel="noopener">{% include styleguide/icon.html name="code" %}<span>Code</span>{{ newtab }}</a></li>
-          </ul>
-        </div>
-      </article>
+      <section class="sg-sub" aria-labelledby="pubs-conference-title">
+        <h3 id="pubs-conference-title">Conference papers</h3>
+        <article class="pub">
+          <div class="pub-meta">
+            <span class="pub-year">Jul 2026</span>
+            <span class="pub-venue-short">MILCOM Workshop</span>
+            <span class="pub-type">Conference</span>
+          </div>
+          <div class="pub-body">
+            <h4 class="pub-title"><a href="#publications">TiamiTwin: A Digital Twin for Bistatic ISAC Drone Sensing, Validated Against Measurements</a></h4>
+            <p class="pub-authors"><strong>M. Zafari</strong>, S. Enayati, A. L. Swindlehurst, and A. Mukherjee</p>
+            <p class="pub-venue">IEEE MILCOM Workshop</p>
+            <p class="pub-badges"><span class="badge badge--status">Accepted</span></p>
+          </div>
+        </article>
+        <article class="pub">
+          <div class="pub-meta">
+            <span class="pub-year">2026</span>
+            <span class="pub-venue-short">ICC 2026</span>
+            <span class="pub-type">Conference</span>
+          </div>
+          <div class="pub-body">
+            <h4 class="pub-title"><a href="#publications">ASSENT: Learning-Based Association Optimization for Distributed Cell-Free ISAC</a></h4>
+            <p class="pub-authors"><strong>M. Zafari</strong> and A. L. Swindlehurst</p>
+            <p class="pub-venue">IEEE International Conference on Communications (ICC)</p>
+            <ul class="linkbtns">
+              <li><a class="linkbtn" href="https://arxiv.org/abs/2511.09992" target="_blank" rel="noopener">{% include styleguide/icon.html name="arxiv" %}<span>arXiv</span>{{ newtab }}</a></li>
+              <li><a class="linkbtn" href="https://github.com/LS-Wireless/ASSENT-CellFree-ISAC" target="_blank" rel="noopener">{% include styleguide/icon.html name="code" %}<span>Code</span>{{ newtab }}</a></li>
+            </ul>
+          </div>
+        </article>
+        <article class="pub">
+          <div class="pub-meta">
+            <span class="pub-year">2025</span>
+            <span class="pub-venue-short">Asilomar 2025</span>
+            <span class="pub-type">Conference</span>
+          </div>
+          <div class="pub-body">
+            <h4 class="pub-title"><a href="#publications">Coordinated Decentralized Resource Optimization for Cell-Free ISAC Systems</a></h4>
+            <p class="pub-authors"><strong>M. Zafari</strong>, R. Liu, and A. L. Swindlehurst</p>
+            <p class="pub-venue">59th Asilomar Conference on Signals, Systems, and Computers</p>
+            <p class="pub-badges"><span class="badge badge--award">{% include styleguide/icon.html name="award" %}Best Paper Award Finalist</span></p>
+            <ul class="linkbtns">
+              <li><a class="linkbtn" href="https://arxiv.org/abs/2508.01044" target="_blank" rel="noopener">{% include styleguide/icon.html name="arxiv" %}<span>arXiv</span>{{ newtab }}</a></li>
+              <li><a class="linkbtn" href="https://github.com/MehdiZD97/distributed-cellfree-isac" target="_blank" rel="noopener">{% include styleguide/icon.html name="code" %}<span>Code</span>{{ newtab }}</a></li>
+            </ul>
+          </div>
+        </article>
+      </section>
+      <p class="sg-more"><a href="{{ '/publications/' | relative_url }}">All publications, datasets, and software</a></p>
     </div>
   </section>
 
-  <section class="sg-section" id="talks" aria-labelledby="talks-title">
-    <h2 id="talks-title">Talks</h2>
+  <section class="sg-section" id="cv" aria-labelledby="cv-title">
+    <h2 id="cv-title">CV</h2>
     <div class="sg-body">
-      <article class="talk">
-        <div class="talk-meta">
-          <time class="talk-date" datetime="2025-10-26">Oct 2025</time>
-          <span class="talk-kind">Lecture</span>
-        </div>
-        <div class="talk-body">
-          <h3 class="talk-title">Coordinated Decentralized Resource Optimization for Cell-Free ISAC Systems</h3>
-          <p class="talk-event">59th Asilomar Conference on Signals, Systems, and Computers, Pacific Grove, CA</p>
-          <p class="talk-note">Best Paper Award finalist; also presented a poster in the Student Paper Contest.</p>
-          <ul class="linkbtns">
-            <li><a class="linkbtn" href="https://arxiv.org/abs/2508.01044" target="_blank" rel="noopener">{% include styleguide/icon.html name="paper" %}<span>Paper</span>{{ newtab }}</a></li>
-            <li><a class="linkbtn" href="https://www.asilomarsscconf.org/" target="_blank" rel="noopener">{% include styleguide/icon.html name="event" %}<span>Event</span>{{ newtab }}</a></li>
-            <li><a class="linkbtn" href="{{ '/posts/2025/10/blog-post-5/' | relative_url }}">{% include styleguide/icon.html name="story" %}<span>Story</span></a></li>
-          </ul>
-        </div>
-      </article>
-      <article class="talk">
-        <div class="talk-meta">
-          <time class="talk-date" datetime="2024-10-28">Oct 2024</time>
-          <span class="talk-kind">Lecture</span>
-        </div>
-        <div class="talk-body">
-          <h3 class="talk-title">ADMM for Downlink Beamforming in Cell-Free Massive MIMO Systems</h3>
-          <p class="talk-event">58th Asilomar Conference on Signals, Systems, and Computers, Pacific Grove, CA</p>
-          <ul class="linkbtns">
-            <li><a class="linkbtn" href="https://doi.org/10.1109/IEEECONF60004.2024.10943106" target="_blank" rel="noopener">{% include styleguide/icon.html name="paper" %}<span>Paper</span>{{ newtab }}</a></li>
-            <li><a class="linkbtn" href="{{ '/posts/2024/10/blog-post-3/' | relative_url }}">{% include styleguide/icon.html name="story" %}<span>Story</span></a></li>
-          </ul>
-        </div>
-      </article>
-    </div>
-  </section>
+      <p class="sg-row">
+        <a class="btn btn--primary" href="#cv">{% include styleguide/icon.html name="pdf" %}Download CV (PDF)</a>
+        <a class="btn btn--secondary" href="{{ '/cv/' | relative_url }}">Full CV</a>
+      </p>
 
-  <section class="sg-section" id="teaching" aria-labelledby="teaching-title">
-    <h2 id="teaching-title">Teaching</h2>
-    <div class="sg-body">
-      {%- comment -%} TODO(mehdi): Fall 2026 lab at UC Irvine (course title and role) goes first once confirmed. {%- endcomment %}
-      <ul class="course-list">
-        <li class="course"><span class="course-term">Spring 2025</span><span class="course-name">Introduction to Digital Logic Laboratory</span><span class="course-place">UC Irvine</span></li>
-        <li class="course"><span class="course-term">Spring 2024</span><span class="course-name">Applied Machine Learning &amp; Data Science</span><span class="course-place">Rice University</span></li>
-        <li class="course"><span class="course-term">Fall 2023</span><span class="course-name">Modern Communication: Theory and Practice</span><span class="course-place">Rice University</span></li>
-        <li class="course"><span class="course-term">Fall 2022</span><span class="course-name">Modern Communication: Theory and Practice</span><span class="course-place">Rice University</span></li>
-        <li class="course"><span class="course-term">Spring 2020</span><span class="course-name">Wireless Multimedia Communications</span><span class="course-place">University of Tehran</span></li>
-        <li class="course"><span class="course-term">Fall 2019</span><span class="course-name">Signals and Systems Analysis</span><span class="course-place">University of Tehran</span></li>
-        <li class="course"><span class="course-term">Spring 2019</span><span class="course-name">Digital Communications</span><span class="course-place">University of Tehran</span></li>
-      </ul>
-      <p class="sg-note">Teaching assistant for every course listed. Mentoring: five undergraduate students on a Rice EMS-sponsored project analyzing operational data (Rice D2K Lab, 2024).</p>
+      <section class="sg-sub" id="education" aria-labelledby="education-title">
+        <h3 id="education-title">Education</h3>
+        <ul class="edu-list">
+          <li class="edu">
+            <picture class="edu-logo">
+              <source type="image/webp" srcset="{{ img }}logo-uci-72.webp 1x, {{ img }}logo-uci-144.webp 2x, {{ img }}logo-uci-216.webp 3x">
+              <img src="{{ img }}logo-uci-72.png" srcset="{{ img }}logo-uci-144.png 2x, {{ img }}logo-uci-216.png 3x" width="72" height="72" alt="" loading="lazy">
+            </picture>
+            <div class="edu-body">
+              <h4 class="edu-degree">Ph.D. in Electrical Engineering and Computer Science</h4>
+              <p class="edu-school">University of California, Irvine, CA</p>
+              <p class="edu-note">Advisor: Prof. A. Lee Swindlehurst</p>
+            </div>
+            <p class="edu-dates">June 2024 – December 2028, expected</p>
+          </li>
+          <li class="edu">
+            <picture class="edu-logo">
+              <source type="image/webp" srcset="{{ img }}logo-rice-72.webp 1x, {{ img }}logo-rice-144.webp 2x, {{ img }}logo-rice-216.webp 3x">
+              <img src="{{ img }}logo-rice-72.png" srcset="{{ img }}logo-rice-144.png 2x, {{ img }}logo-rice-216.png 3x" width="60" height="72" alt="" loading="lazy">
+            </picture>
+            <div class="edu-body">
+              <h4 class="edu-degree">M.S. in Electrical and Computer Engineering</h4>
+              <p class="edu-school">Rice University, Houston, TX</p>
+              <p class="edu-note">Thesis: Distributed Multi-User Beamforming in the Presence of CFO: An Analytical and Experimental Study</p>
+            </div>
+            <p class="edu-dates">August 2021 – May 2024</p>
+          </li>
+          <li class="edu">
+            <picture class="edu-logo">
+              <source type="image/webp" srcset="{{ img }}logo-tehran-72.webp 1x, {{ img }}logo-tehran-144.webp 2x, {{ img }}logo-tehran-216.webp 3x">
+              <img src="{{ img }}logo-tehran-72.png" srcset="{{ img }}logo-tehran-144.png 2x, {{ img }}logo-tehran-216.png 3x" width="72" height="72" alt="" loading="lazy">
+            </picture>
+            <div class="edu-body">
+              <h4 class="edu-degree">B.S. in Electrical and Computer Engineering</h4>
+              <p class="edu-school">University of Tehran, Tehran, Iran</p>
+              <p class="edu-note">Thesis: Design and Hardware Implementation of a MIMO-OFDM System Using High-Level Synthesis Techniques</p>
+            </div>
+            <p class="edu-dates">September 2015 – September 2019</p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="sg-sub" id="experience" aria-labelledby="experience-title">
+        <h3 id="experience-title">Experience</h3>
+        <ul class="row-list">
+          <li class="row-item"><span class="row-when">Jul 2024 – present</span><span class="row-what">Graduate Student Researcher</span><span class="row-where">EECS, UC Irvine</span></li>
+          <li class="row-item"><span class="row-when">Jun – Sep 2026</span><span class="row-what">Wireless AI Engineering Intern</span><span class="row-where">Tiami Networks, Sacramento, CA</span></li>
+          <li class="row-item"><span class="row-when">Aug 2021 – Apr 2024</span><span class="row-what">Graduate Research Assistant</span><span class="row-where">ECE, Rice University</span></li>
+          <li class="row-item"><span class="row-when">Jan – Apr 2024</span><span class="row-what">Research Fellow</span><span class="row-where">Rice D2K Lab</span></li>
+          <li class="row-item"><span class="row-when">Dec 2018 – Dec 2020</span><span class="row-what">Undergraduate Research Assistant</span><span class="row-where">Array Processing Lab, University of Tehran</span></li>
+          <li class="row-item"><span class="row-when">May – Nov 2020</span><span class="row-what">Part-Time R&amp;D Engineer</span><span class="row-where">Transportation Innovation Center, Tehran</span></li>
+          <li class="row-item"><span class="row-when">May – Nov 2020</span><span class="row-what">Part-Time R&amp;D Engineer</span><span class="row-where">Sadr Electronic Dena, Tehran</span></li>
+        </ul>
+      </section>
+
+      <section class="sg-sub" id="honors" aria-labelledby="honors-title">
+        <h3 id="honors-title">Honors and awards</h3>
+        <ul class="row-list">
+          <li class="row-item"><span class="row-when">2026</span><span class="row-what">Wireless History Foundation Scholarship Award</span><span class="row-where">Wireless History Foundation</span></li>
+          <li class="row-item"><span class="row-when">2026</span><span class="row-what">Pia Gratton Endowed Graduate Student Award</span><span class="row-where">UC Irvine</span></li>
+          <li class="row-item"><span class="row-when">2026</span><span class="row-what">1st Place, UCI EECS Annual Technology Showcase</span><span class="row-where">UC Irvine</span></li>
+          <li class="row-item"><span class="row-when">2026</span><span class="row-what">3rd Place, UCI Grad Slam Competition</span><span class="row-where">UC Irvine</span></li>
+          <li class="row-item"><span class="row-when">2025</span><span class="row-what">Best Paper Award Finalist, 59th Asilomar Conference</span><span class="row-where">IEEE Asilomar Conference</span></li>
+          <li class="row-item"><span class="row-when">2024</span><span class="row-what">Graduate Dean’s Recruitment Fellowship Award</span><span class="row-where">UC Irvine</span></li>
+          <li class="row-item"><span class="row-when">2022, 2023</span><span class="row-what">SIAWE Scholarship Award for Distinguished International Students</span><span class="row-where">Rice University</span></li>
+        </ul>
+      </section>
+
+      <section class="sg-sub" id="teaching" aria-labelledby="teaching-title">
+        <h3 id="teaching-title">Teaching</h3>
+        <ul class="row-list">
+          <li class="row-item"><span class="row-when">Fall 2026</span><span class="row-what">Introduction to Control Systems + Lab <span class="row-code">EECS 160A/LA</span></span><span class="row-where">UC Irvine</span></li>
+          <li class="row-item"><span class="row-when">Spring 2025</span><span class="row-what">Introduction to Digital Logic Laboratory</span><span class="row-where">UC Irvine</span></li>
+          <li class="row-item"><span class="row-when">Spring 2024</span><span class="row-what">Applied Machine Learning &amp; Data Science</span><span class="row-where">Rice University</span></li>
+          <li class="row-item"><span class="row-when">Fall 2023</span><span class="row-what">Modern Communication: Theory and Practice</span><span class="row-where">Rice University</span></li>
+          <li class="row-item"><span class="row-when">Fall 2022</span><span class="row-what">Modern Communication: Theory and Practice</span><span class="row-where">Rice University</span></li>
+          <li class="row-item"><span class="row-when">Spring 2020</span><span class="row-what">Wireless Multimedia Communications</span><span class="row-where">University of Tehran</span></li>
+          <li class="row-item"><span class="row-when">Fall 2019</span><span class="row-what">Signals and Systems Analysis</span><span class="row-where">University of Tehran</span></li>
+          <li class="row-item"><span class="row-when">Spring 2019</span><span class="row-what">Digital Communications</span><span class="row-where">University of Tehran</span></li>
+        </ul>
+        <p class="sg-note">Teaching assistant for every course listed. Mentoring: five undergraduate students on a Rice EMS-sponsored project analyzing operational data (Rice D2K Lab, 2024).</p>
+      </section>
+
+      <section class="sg-sub" id="talks" aria-labelledby="talks-title">
+        <h3 id="talks-title">Talks</h3>
+        {%- comment -%} TODO(mehdi): the title of the Grad Slam pitch (shown descriptively below until confirmed). {%- endcomment %}
+        <article class="talk">
+          <div class="talk-meta">
+            <time class="talk-date" datetime="2026-03">Mar 2026</time>
+            <span class="talk-kind">Competition talk</span>
+          </div>
+          <div class="talk-body">
+            <h4 class="talk-title">Research pitch at the UCI Grad Slam Finals</h4>
+            <p class="talk-event">UCI Grad Slam, Irvine, CA</p>
+            <p class="talk-note">3rd place in the finals. The pitch starts at 1:02:07 in the event video.</p>
+            <ul class="linkbtns">
+              <li><a class="linkbtn" href="https://www.youtube.com/watch?v=ZPEh1HdD858&amp;t=3727s" target="_blank" rel="noopener">{% include styleguide/icon.html name="video" %}<span>Video</span>{{ newtab }}</a></li>
+              <li><a class="linkbtn" href="https://grad.uci.edu/professional-development/grad-slam/grad-slam-finalists/" target="_blank" rel="noopener">{% include styleguide/icon.html name="event" %}<span>Event</span>{{ newtab }}</a></li>
+            </ul>
+          </div>
+        </article>
+        <article class="talk">
+          <div class="talk-meta">
+            <time class="talk-date" datetime="2025-10-26">Oct 2025</time>
+            <span class="talk-kind">Lecture</span>
+          </div>
+          <div class="talk-body">
+            <h4 class="talk-title">Coordinated Decentralized Resource Optimization for Cell-Free ISAC Systems</h4>
+            <p class="talk-event">59th Asilomar Conference on Signals, Systems, and Computers, Pacific Grove, CA</p>
+            <p class="talk-note">Best Paper Award finalist; also presented a poster in the Student Paper Contest.</p>
+            <ul class="linkbtns">
+              <li><a class="linkbtn" href="https://arxiv.org/abs/2508.01044" target="_blank" rel="noopener">{% include styleguide/icon.html name="paper" %}<span>Paper</span>{{ newtab }}</a></li>
+              <li><a class="linkbtn" href="https://www.asilomarsscconf.org/" target="_blank" rel="noopener">{% include styleguide/icon.html name="event" %}<span>Event</span>{{ newtab }}</a></li>
+              <li><a class="linkbtn" href="{{ '/posts/2025/10/blog-post-5/' | relative_url }}">{% include styleguide/icon.html name="story" %}<span>Story</span></a></li>
+            </ul>
+          </div>
+        </article>
+        <article class="talk">
+          <div class="talk-meta">
+            <time class="talk-date" datetime="2024-10-28">Oct 2024</time>
+            <span class="talk-kind">Lecture</span>
+          </div>
+          <div class="talk-body">
+            <h4 class="talk-title">ADMM for Downlink Beamforming in Cell-Free Massive MIMO Systems</h4>
+            <p class="talk-event">58th Asilomar Conference on Signals, Systems, and Computers, Pacific Grove, CA</p>
+            <ul class="linkbtns">
+              <li><a class="linkbtn" href="https://doi.org/10.1109/IEEECONF60004.2024.10943106" target="_blank" rel="noopener">{% include styleguide/icon.html name="paper" %}<span>Paper</span>{{ newtab }}</a></li>
+              <li><a class="linkbtn" href="{{ '/posts/2024/10/blog-post-3/' | relative_url }}">{% include styleguide/icon.html name="story" %}<span>Story</span></a></li>
+            </ul>
+          </div>
+        </article>
+      </section>
     </div>
   </section>
 
   <section class="sg-section" id="videos" aria-labelledby="videos-title">
     <h2 id="videos-title">Videos</h2>
     <div class="sg-body">
+      <p class="sg-row sg-channel">
+        <span>Tutorials and talks. New videos come to my YouTube channel, <a href="https://www.youtube.com/@MehdiZD97" target="_blank" rel="noopener">@MehdiZD97{{ newtab }}</a>.</span>
+        <a class="btn btn--secondary btn--small" href="https://www.youtube.com/@MehdiZD97?sub_confirmation=1" target="_blank" rel="noopener">{% include styleguide/icon.html name="youtube" %}Subscribe{{ newtab }}</a>
+      </p>
       <div class="videos">
+        <article class="video">
+          <div class="video-thumb">
+            <img src="https://i.ytimg.com/vi/ZPEh1HdD858/mqdefault.jpg" width="320" height="180" alt="" loading="lazy">
+            <span class="video-play" aria-hidden="true">{% include styleguide/icon.html name="play" %}</span>
+            <span class="video-duration">from 1:02:07</span>
+          </div>
+          <h3 class="video-title"><a href="https://www.youtube.com/watch?v=ZPEh1HdD858&amp;t=3727s" target="_blank" rel="noopener">My pitch at the 2026 UCI Grad Slam Finals{{ newtab }}</a></h3>
+          <p class="video-meta">3rd place. Starts at 1:02:07 in “2026 UCI Grad Slam,” published on <a class="video-host" href="https://www.youtube.com/@UCIrvineGD" target="_blank" rel="noopener">UCIrvineGD{{ newtab }}</a></p>
+        </article>
         <article class="video">
           <div class="video-thumb">
             <img src="https://i.ytimg.com/vi/8NDZutr3OEE/mqdefault.jpg" width="320" height="180" alt="" loading="lazy">
@@ -149,6 +350,24 @@
         </article>
         <article class="video">
           <div class="video-thumb">
+            <img src="https://i.ytimg.com/vi/NO37pcl0t7A/mqdefault.jpg" width="320" height="180" alt="" loading="lazy">
+            <span class="video-play" aria-hidden="true">{% include styleguide/icon.html name="play" %}</span>
+            <span class="video-duration">8:45</span>
+          </div>
+          <h3 class="video-title"><a href="https://www.youtube.com/watch?v=NO37pcl0t7A" target="_blank" rel="noopener">Understanding Antenna Parameters: Gain, Radiation Patterns, and More!{{ newtab }}</a></h3>
+          <p class="video-meta">Tutorial, published on <a class="video-host" href="https://www.youtube.com/@Daaneshacademy" target="_blank" rel="noopener">Danesh Academy{{ newtab }}</a></p>
+        </article>
+        <article class="video">
+          <div class="video-thumb">
+            <img src="https://i.ytimg.com/vi/H-IcUX1w1Z0/mqdefault.jpg" width="320" height="180" alt="" loading="lazy">
+            <span class="video-play" aria-hidden="true">{% include styleguide/icon.html name="play" %}</span>
+            <span class="video-duration">4:37</span>
+          </div>
+          <h3 class="video-title"><a href="https://www.youtube.com/watch?v=H-IcUX1w1Z0" target="_blank" rel="noopener">Linear Array Antennas: Models, Approximations, and Responses Explained{{ newtab }}</a></h3>
+          <p class="video-meta">Tutorial, published on <a class="video-host" href="https://www.youtube.com/@Daaneshacademy" target="_blank" rel="noopener">Danesh Academy{{ newtab }}</a></p>
+        </article>
+        <article class="video">
+          <div class="video-thumb">
             <img src="https://i.ytimg.com/vi/16-DP_fDdp4/mqdefault.jpg" width="320" height="180" alt="" loading="lazy">
             <span class="video-play" aria-hidden="true">{% include styleguide/icon.html name="play" %}</span>
           </div>
@@ -156,73 +375,6 @@
           <p class="video-meta">Python programming course, session 1 (in Persian)</p>
         </article>
       </div>
-    </div>
-  </section>
-
-  <section class="sg-section" id="education" aria-labelledby="education-title">
-    <h2 id="education-title">Education</h2>
-    <div class="sg-body">
-      <ul class="edu-list">
-        <li class="edu">
-          <picture class="edu-logo">
-            <source type="image/webp" srcset="{{ img }}logo-uci-48.webp 1x, {{ img }}logo-uci-96.webp 2x, {{ img }}logo-uci-144.webp 3x">
-            <img src="{{ img }}logo-uci-48.png" srcset="{{ img }}logo-uci-96.png 2x, {{ img }}logo-uci-144.png 3x" width="48" height="48" alt="" loading="lazy">
-          </picture>
-          <div class="edu-body">
-            <h3 class="edu-degree">Ph.D. in Electrical Engineering and Computer Science</h3>
-            <p class="edu-school">University of California, Irvine, CA</p>
-            <p class="edu-note">Advisor: Prof. A. Lee Swindlehurst</p>
-          </div>
-          <p class="edu-dates">June 2024 – December 2028, expected</p>
-        </li>
-        <li class="edu">
-          <picture class="edu-logo">
-            <source type="image/webp" srcset="{{ img }}logo-rice-48.webp 1x, {{ img }}logo-rice-96.webp 2x, {{ img }}logo-rice-144.webp 3x">
-            <img src="{{ img }}logo-rice-48.png" srcset="{{ img }}logo-rice-96.png 2x, {{ img }}logo-rice-144.png 3x" width="40" height="48" alt="" loading="lazy">
-          </picture>
-          <div class="edu-body">
-            <h3 class="edu-degree">M.S. in Electrical and Computer Engineering</h3>
-            <p class="edu-school">Rice University, Houston, TX</p>
-            <p class="edu-note">Thesis: Distributed Multi-User Beamforming in the Presence of CFO: An Analytical and Experimental Study</p>
-          </div>
-          <p class="edu-dates">August 2021 – May 2024</p>
-        </li>
-        <li class="edu">
-          <picture class="edu-logo">
-            <source type="image/webp" srcset="{{ img }}logo-tehran-48.webp 1x, {{ img }}logo-tehran-96.webp 2x, {{ img }}logo-tehran-144.webp 3x">
-            <img src="{{ img }}logo-tehran-48.png" srcset="{{ img }}logo-tehran-96.png 2x, {{ img }}logo-tehran-144.png 3x" width="48" height="48" alt="" loading="lazy">
-          </picture>
-          <div class="edu-body">
-            <h3 class="edu-degree">B.S. in Electrical and Computer Engineering</h3>
-            <p class="edu-school">University of Tehran, Tehran, Iran</p>
-            <p class="edu-note">Thesis: Design and Hardware Implementation of a MIMO-OFDM System Using High-Level Synthesis Techniques</p>
-          </div>
-          <p class="edu-dates">September 2015 – September 2019</p>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="sg-section" id="news" aria-labelledby="news-title">
-    <h2 id="news-title">Latest news</h2>
-    <div class="sg-body">
-      <ul class="news-list">
-        <li class="news">
-          <time class="news-date" datetime="2026-03">Mar 2026</time>
-          <span class="news-icon">{% include styleguide/icon.html name="award" %}<span class="visually-hidden">Award:</span></span>
-          <p class="news-text">Received the Pia Gratton Endowed Graduate Student Award at UC Irvine.</p>
-        </li>
-        <li class="news">
-          <time class="news-date" datetime="2026-01">Jan 2026</time>
-          <span class="news-icon">{% include styleguide/icon.html name="paper" %}<span class="visually-hidden">Paper:</span></span>
-          <p class="news-text">Our study of distributed uplink beamforming with carrier frequency offsets was published in IEEE Transactions on Vehicular Technology. <a href="#publications">Read the paper</a></p>
-        </li>
-        <li class="news">
-          <time class="news-date" datetime="2025-10">Oct 2025</time>
-          <span class="news-icon">{% include styleguide/icon.html name="talk" %}<span class="visually-hidden">Talk:</span></span>
-          <p class="news-text">Gave a lecture and a Student Paper Contest poster at the 59th Asilomar Conference. <a href="{{ '/posts/2025/10/blog-post-5/' | relative_url }}">Read the story</a></p>
-        </li>
-      </ul>
     </div>
   </section>
 
@@ -285,12 +437,13 @@
         {%- case t.class %}
         {%- when "type-hero" %}<p class="{{ t.class }}">Mehdi Zafari</p>
         {%- when "type-h1" %}<p class="{{ t.class }}">Publications</p>
-        {%- when "type-h2" %}<p class="{{ t.class }}">Selected publications</p>
+        {%- when "type-h2" %}<p class="{{ t.class }}">Latest news</p>
+        {%- when "type-sub" %}<p class="{{ t.class }}">Conference papers</p>
         {%- when "type-h3" %}<p class="{{ t.class }}">ADMM for Downlink Beamforming in Cell-Free Massive MIMO Systems</p>
         {%- when "type-body" %}<p class="{{ t.class }}">In cell-free massive MIMO systems with multiple distributed access points (APs) serving multiple users over the same time-frequency resources, downlink beamforming is done through spatial precoding. Precoding vectors can be optimally designed to use the minimum downlink transmit power while satisfying a quality-of-service requirement for each user.</p>
         {%- when "type-small" %}<p class="{{ t.class }}">Graduate Student Researcher, Department of Electrical Engineering and Computer Science, University of California, Irvine. July 2024 to present.</p>
         {%- when "type-mono" %}<p class="{{ t.class }}">arXiv 2511.09992 &nbsp; DOI 10.1109/TVT.2026.3656108 &nbsp; ICC 2026</p>
-        {%- when "type-ui" %}<p class="{{ t.class }}">Research &nbsp; Publications &nbsp; Talks &nbsp; Teaching &nbsp; Videos &nbsp; CV</p>
+        {%- when "type-ui" %}<p class="{{ t.class }}">Home &nbsp; News &nbsp; Publications &nbsp; CV &nbsp; Videos</p>
         {%- endcase %}
       </div>
       {%- endfor %}
@@ -303,7 +456,7 @@
       <p class="sg-note">Hover with a mouse, or press Tab to see focus states.</p>
       <p class="sg-row">
         <a class="btn btn--primary" href="#publications">View publications</a>
-        <a class="btn btn--secondary" href="#education">Download CV (PDF)</a>
+        <a class="btn btn--secondary" href="#cv">Download CV (PDF)</a>
         <a class="btn btn--text" href="#contact">Contact</a>
       </p>
       <p class="sg-note">Link buttons, always in this order and only when a link exists:</p>

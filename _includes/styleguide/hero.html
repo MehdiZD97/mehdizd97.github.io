@@ -1,9 +1,10 @@
 {%- comment -%}
-  Direction A hero: text and portrait, plus two switchable illustrations with
-  no box around them (cell-free beams by default, and the steerable array).
-  Without JavaScript only the cell-free view shows.
+  Hero shared by both directions: text and portrait, plus two switchable
+  illustrations with no box around them (cell-free beams first, then the
+  steerable array). Each direction's stylesheet colors them. Without
+  JavaScript only the cell-free view shows.
 {%- endcomment -%}
-<section class="hero" aria-labelledby="hero-name" data-hero="instrument">
+<section class="hero" aria-labelledby="hero-name" data-hero>
   <div class="hero__inner">
     {% include styleguide/hero-text.html %}
     <div class="hv">
@@ -13,7 +14,7 @@
       </div>
       <div class="hv-stage">
         <div class="hv-panel" id="hv-panel-cellfree" role="tabpanel" aria-labelledby="hv-tab-cellfree" data-view="cellfree">
-          {% include styleguide/svg-instrument-cellfree.html %}
+          {% include styleguide/svg-hero-cellfree.html %}
           <dl class="hv-readout hv-readout--az">
             <div><dt>AP1</dt><dd><span data-out="az1">345</span>&deg;</dd></div>
             <div><dt>AP2</dt><dd><span data-out="az2">290</span>&deg;</dd></div>
@@ -24,7 +25,7 @@
           <p class="hv-caption">Beam azimuth of each access point toward the target (0&deg; points east).</p>
         </div>
         <div class="hv-panel is-hidden" id="hv-panel-array" role="tabpanel" aria-labelledby="hv-tab-array" data-view="array">
-          {% include styleguide/svg-instrument-array.html %}
+          {% include styleguide/svg-hero-array.html %}
           <dl class="hv-readout">
             <div><dt>Steering angle</dt><dd><span data-out="theta">115</span>&deg;</dd></div>
             <div><dt>Beamwidth</dt><dd><span data-out="beamwidth">7.0</span>&deg;</dd></div>

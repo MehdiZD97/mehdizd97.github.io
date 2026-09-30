@@ -1,12 +1,12 @@
 ---
 layout: styleguide
-title: "Direction A: Instrument (chosen)"
+title: "Direction A: Instrument (alternate)"
 permalink: /dev/styleguide/instrument/
 sitemap: false
 direction: instrument
 letter: A
-signature: "two switchable views on the page itself. Cell-free (default): five access points and their CPU steer beams onto the pointer, which sends out sensing echoes. Array: a 16-element array whose beam follows the pointer, with dials for the phase shifts and a slider for keyboard or touch."
-hero_script: /dev/styleguide/assets/hero-instrument.js
+signature: "the shared hero with two switchable views, cell-free beams (first) and the steerable array, drawn in navy and amber on the page."
+hero_script: /dev/styleguide/assets/hero.js
 preload_fonts:
   - /dev/styleguide/fonts/ibm-plex-sans-latin-wght-normal.woff2
 principles:
@@ -20,6 +20,7 @@ type_scale:
   - { class: type-hero, label: "Hero name: IBM Plex Sans 600, 40 to 60 px" }
   - { class: type-h1, label: "Page title: 600, 32 to 40 px" }
   - { class: type-h2, label: "Section heading: 600, 24 to 30 px" }
+  - { class: type-sub, label: "Subsection heading: 600, 18 px, with an amber marker and a hairline" }
   - { class: type-h3, label: "Entry title: 600, 20 to 22 px" }
   - { class: type-body, label: "Body: 400, 17 px, line height 1.6, about 68 characters per line" }
   - { class: type-small, label: "Small: 14 px" }
@@ -28,6 +29,6 @@ type_scale:
 ---
 {% include styleguide/bar.html %}
 {% include styleguide/header.html %}
-{% include styleguide/hero-instrument.html %}
+{% include styleguide/hero.html %}
 {% include styleguide/sections.html %}
 {% include styleguide/footer.html %}
