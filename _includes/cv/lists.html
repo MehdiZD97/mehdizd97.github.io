@@ -1,0 +1,66 @@
+{%- comment -%}
+  The smaller CV lists, one per call. Parameter: list, one of
+    interests    research interests from _data/profile.yml
+    skills       _data/cv/skills.yml
+    service      _data/cv/service.yml
+    coursework   _data/cv/coursework.yml (only entries on the PDF CV)
+    conferences  _data/cv/conferences.yml
+{%- endcomment -%}
+{%- case include.list -%}
+
+{%- when "interests" %}
+<dl class="def-list">
+  {%- for g in site.data.profile.interests %}
+  <dt>{{ g.group | escape }}</dt>
+  <dd>{{ g.items | join: ", " | escape }}</dd>
+  {%- endfor %}
+</dl>
+
+{%- when "skills" %}
+<dl class="def-list">
+  {%- for g in site.data.cv.skills %}
+  <dt>{{ g.group | escape }}</dt>
+  <dd>{{ g.items | join: ", " | escape }}</dd>
+  {%- endfor %}
+</dl>
+
+{%- when "service" %}
+<ul class="row-list row-list--notes">
+  {%- for s in site.data.cv.service %}
+  <li class="row-item">
+    <span class="row-when">{{ s.years }}</span>
+    <span class="row-what">{{ s.role | escape }}</span>
+    <ul class="row-bullets">
+      {%- for v in s.venues %}
+      <li>{{ v.name | escape }}{% if v.short %} ({{ v.short | escape }}){% endif %}</li>
+      {%- endfor %}
+    </ul>
+  </li>
+  {%- endfor %}
+</ul>
+
+{%- when "coursework" %}
+<ul class="row-list row-list--notes">
+  {%- for c in site.data.cv.coursework %}
+  {%- if c.on_cv != true %}{% continue %}{% endif %}
+  <li class="row-item">
+    <span class="row-when">{{ c.term }}</span>
+    <span class="row-what">{{ c.course | escape }}</span>
+    <span class="row-where">{{ c.institution | escape }}</span>
+    <span class="row-note">Grade: {{ c.grade }}</span>
+  </li>
+  {%- endfor %}
+</ul>
+
+{%- when "conferences" %}
+<ul class="row-list">
+  {%- for c in site.data.cv.conferences %}
+  <li class="row-item">
+    <span class="row-when">{% for d in c.dates %}{{ d | date: "%b %Y" }}{% unless forloop.last %}, {% endunless %}{% endfor %}</span>
+    <span class="row-what">{{ c.event | escape }}</span>
+    <span class="row-where">{{ c.location | escape }}</span>
+  </li>
+  {%- endfor %}
+</ul>
+
+{%- endcase -%}

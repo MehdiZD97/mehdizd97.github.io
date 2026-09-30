@@ -1,0 +1,22 @@
+# Publication topics (PLAN 4.4). Publications list topic ids in `topics`; the
+# topic filters on /publications/ (Stage 6) use these labels, in this order.
+# TODO(mehdi): review the topic names and which papers carry them (proposed in Stage 4)
+
+- id: cell-free-isac
+  label: Cell-free ISAC
+- id: isac
+  label: Integrated sensing and communication
+- id: cell-free
+  label: Cell-free massive MIMO
+- id: distributed-optimization
+  label: Distributed optimization
+- id: distributed-beamforming
+  label: Distributed beamforming
+- id: machine-learning
+  label: Machine learning
+- id: generative-ai
+  label: Generative AI
+- id: experimental
+  label: Experiments and measurements
+- id: digital-twin
+  label: Digital twins

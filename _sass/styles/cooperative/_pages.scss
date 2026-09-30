@@ -19,6 +19,7 @@
 .prose h3 { margin-top: 1.75em; font-size: var(--text-h4); font-weight: 700; line-height: 1.25; }
 .prose h4 { margin-top: 1.5em; font-size: 1.0625rem; font-weight: 700; }
 .prose h2 + *, .prose h3 + *, .prose h4 + * { margin-top: 0.6em; }
+.prose > :first-child { margin-top: 0; }   // e.g. "Abstract" right under a page header
 .prose ul, .prose ol { padding-inline-start: 1.25em; }
 .prose li + li { margin-top: 0.35em; }
 .prose li::marker { color: var(--beam); }

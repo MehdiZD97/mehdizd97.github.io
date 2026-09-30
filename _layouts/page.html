@@ -4,16 +4,13 @@ layout: default
 {%- comment -%}
   Standard page: title, optional lead, then the content. Markdown content is
   set as prose unless the page sets `prose: false` (pages built from
-  components). Talk items (legacy collection) show their date and event.
+  components).
 {%- endcomment %}
 <main class="site-main" id="main">
   <header class="page-header">
     <h1 class="page-title">{{ page.title }}</h1>
     {%- if page.lead %}
     <p class="page-lead">{{ page.lead }}</p>
-    {%- endif %}
-    {%- if page.collection == "talks" %}
-    <p class="page-meta"><time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: "%B %-d, %Y" }}</time> <span>{{ page.venue }}{% if page.location %}, {{ page.location }}{% endif %}</span></p>
     {%- endif %}
   </header>
   <div class="page-content {% if page.prose == false %}page-flow{% else %}prose{% endif %}">

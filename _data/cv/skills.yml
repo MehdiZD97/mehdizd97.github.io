@@ -1,0 +1,13 @@
+# Skills (PLAN 4.4), the CV version (CONTENT-AUDIT section 11).
+# TODO(mehdi): also list NVIDIA Sionna, ray tracing, CVXPY, Gurobi, and Vivado HLS (they appear in CV bullets)? (open input 6)
+
+- group: Key skills
+  items: [Wireless Communications, Signal Processing, Optimization, Applied Machine Learning]
+- group: Programming
+  items: [C++, Python, TensorFlow, PyTorch, MATLAB, Verilog]
+- group: Software-defined radios
+  items: [USRP B210/X410, NVIDIA Aerial, GNU Radio, Iris SDR, Agora]
+- group: Simulation tools
+  items: [ns-3, Wireshark, Ansys HFSS, Simulink]
+- group: Embedded and FPGA
+  items: [ARM STM32, DSP, Atmel AVR, Xilinx ZedBoard]

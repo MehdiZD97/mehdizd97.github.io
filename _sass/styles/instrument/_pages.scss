@@ -20,6 +20,7 @@
 .prose h3 { margin-top: 1.75em; font-size: 1.125rem; font-weight: 600; }
 .prose h4 { margin-top: 1.5em; font-size: 1rem; font-weight: 600; }
 .prose h2 + *, .prose h3 + *, .prose h4 + * { margin-top: 0.6em; }
+.prose > :first-child { margin-top: 0; }   // e.g. "Abstract" right under a page header
 .prose ul, .prose ol { padding-inline-start: 1.25em; }
 .prose li + li { margin-top: 0.35em; }
 .prose li::marker { color: var(--signal); }

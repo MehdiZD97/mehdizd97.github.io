@@ -1,0 +1,91 @@
+# Talks and presentations (PLAN 4.4), newest first. Presentations only:
+# conferences attended without a talk go in news.yml (and the CV's
+# conferences list), not here. Shown in the CV (Home's CV section and
+# /cv/#talks). Kinds: Lecture, Poster, Invited talk, Workshop talk,
+# Competition talk, Project presentation, Demo.
+
+# TODO(mehdi): add the TiamiTwin talk at the IEEE MILCOM 2026 workshop once the date, location, and presenter are known (open input 4)
+# - id: milcom-2026
+#   date:
+#   title: "TiamiTwin: A Digital Twin for Bistatic ISAC Drone Sensing, Validated Against Measurements"
+#   kind: Workshop talk
+#   event: IEEE MILCOM 2026 Workshop
+#   location:
+#   pub: tiamitwin
+
+# TODO(mehdi): was ASSENT presented at IEEE ICC 2026? If so: date, city, and kind (open input 4)
+# - id: icc-2026
+#   date:
+#   title: "ASSENT: Learning-Based Association Optimization for Distributed Cell-Free ISAC"
+#   kind:
+#   event: IEEE International Conference on Communications (ICC 2026)
+#   location:
+#   pub: assent
+
+# TODO(mehdi): the 2026 UCI EECS Annual Technology Showcase (1st place): month, what you presented, and any photos or link (open inputs 2 and 4)
+# - id: eecs-showcase-2026
+#   date:
+#   title:
+#   kind: Demo
+#   event: UCI EECS Annual Technology Showcase
+#   location: Irvine, CA
+
+- id: grad-slam-2026
+  date: 2026-03-01
+  title: When Wireless Signals Become Our Eyes
+  kind: Competition talk
+  event: UCI Grad Slam finals
+  location: Irvine, CA
+  event_url: https://grad.uci.edu/professional-development/grad-slam/grad-slam-finalists/
+  video: ZPEh1HdD858       # "2026 UCI Grad Slam" on the UCIrvineGD channel
+  video_start: 3727        # the pitch starts at 1:02:07
+  note: 3rd place.
+
+- id: asilomar-2025
+  date: 2025-10-26
+  title: Coordinated Decentralized Resource Optimization for Cell-Free ISAC Systems
+  kind: Lecture
+  event: 59th Asilomar Conference on Signals, Systems, and Computers
+  location: Pacific Grove, CA
+  event_url: https://www.asilomarsscconf.org/
+  pub: decentralized-resource-optimization-cell-free-isac
+  story: /posts/2025/10/blog-post-5/
+  note: Best Paper Award finalist; also presented a poster in the Student Paper Contest.
+
+- id: asilomar-2024
+  date: 2024-10-28
+  title: ADMM for Downlink Beamforming in Cell-Free Massive MIMO Systems
+  kind: Lecture
+  event: 58th Asilomar Conference on Signals, Systems, and Computers
+  location: Pacific Grove, CA
+  event_url: https://www.asilomarsscconf.org/
+  pub: admm-downlink-beamforming-cell-free
+  story: /posts/2024/10/blog-post-3/
+
+- id: asilomar-2023
+  date: 2023-10-28
+  title: ML-Based Feedback-Free Adaptive MCS Selection for Massive Multi-User MIMO
+  kind: Poster
+  event: 57th Asilomar Conference on Signals, Systems, and Computers
+  location: Pacific Grove, CA
+  event_url: https://www.asilomarsscconf.org/
+  pub: ml-feedback-free-mcs-selection
+
+- id: tldr-2023
+  date: 2023-09-28
+  title: Distributed optimization for beamforming in massive MIMO systems
+  kind: Poster
+  event: Texas Colloquium on Distributed Learning (TL;DR 2023)
+  location: Rice University, Houston, TX
+  event_url: https://sites.google.com/view/tldr2023/home
+  pub: admm-downlink-beamforming-cell-free   # the v1 talk page linked this paper
+
+- id: mww-2023
+  date: 2023-01-28
+  title: DNN-based feedback-free adaptive modulation for massive MIMO
+  kind: Project presentation
+  event: POWDER-RENEW Mobile and Wireless Week
+  location: University of Utah, Salt Lake City, UT
+  event_url: https://www.powderwireless.net/news#news-jan28-2023
+  story: /posts/2023/01/blog-post-1/
+  note: 1st prize for the project.

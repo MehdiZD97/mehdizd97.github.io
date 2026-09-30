@@ -1,5 +1,5 @@
-# Identity, links, and files shown across the site (PLAN 4.4). Stage 3 added
-# the fields the site shell needs; Stage 4 adds intro, bio, and interests.
+# Identity, links, and files shown across the site (PLAN 4.4). Facts follow the
+# CV in _local/cv/ (CV_2026-09); see _local/plan/CONTENT-AUDIT.md section 1.
 
 name: Mehdi Zafari
 title: Ph.D. Candidate
@@ -8,17 +8,34 @@ affiliation: University of California, Irvine
 affiliation_short: UC Irvine
 advisor:
   name: Prof. A. Lee Swindlehurst
-  url: https://scholar.google.com/citations?user=ibAcKWwAAAAJ   # link used on the current site
+  url: https://scholar.google.com/citations?user=ibAcKWwAAAAJ   # TODO(mehdi): keep this Google Scholar link or use a UCI faculty page? (open input 7)
 headline: Signal processing and AI/ML for next-generation (5G/6G) wireless systems
 location: Irvine, California
-# TODO(mehdi): approve or rewrite the intro (drafted from CV facts for the Stage 2 style guide; Stage 4 finalizes it)
-intro: I design distributed algorithms and learning methods for cell-free MIMO and integrated sensing and communication, and test them with over-the-air experiments and RF digital twins.
 email: mzafarid@uci.edu
-photo: /assets/img/profile/mehdi-zafari-480.jpg   # sized variants in assets/img/profile/ (Stage 4 builds the image pipeline)
-cv_pdf: /files/Mehdi_Zafari_CV.pdf    # TODO(mehdi): add the public CV PDF (open input 5); links appear once the file exists
+photo: /assets/img/profile/mehdi-zafari-480.jpg   # one file, for structured data and social previews
+photo_image: profile/mehdi-zafari                 # the responsive variants (key in _data/images.yml)
+cv_pdf: /files/Mehdi_Zafari_CV.pdf   # TODO(mehdi): add the public CV PDF (open input 5); links appear once the file exists
+cv_updated: 2026-09-01               # the CV in _local/cv/ is CV_2026-09
+
+# TODO(mehdi): approve or rewrite the intro (first person, for the hero; built only from CV facts)
+intro: I design distributed algorithms and learning methods for cell-free MIMO and integrated sensing and communication, and test them with over-the-air experiments and RF digital twins.
+
+# TODO(mehdi): approve or rewrite the bio (third person, for the CV page and structured data; built only from CV facts)
+bio: |-
+  Mehdi Zafari is a Ph.D. candidate in Electrical Engineering and Computer Science at the University of California, Irvine, advised by Prof. A. Lee Swindlehurst. His research develops signal processing and AI/ML methods for next-generation (5G/6G) wireless systems, with a focus on cell-free MIMO and integrated sensing and communication (ISAC): distributed optimization (ADMM and consensus) for beamforming and resource allocation, and reinforcement learning and graph neural networks for cooperative ISAC networks.
+
+  He also builds and measures real systems. At Rice University, where he earned his M.S. in Electrical and Computer Engineering, he ran over-the-air experiments on the RENEW massive MIMO testbed and released over 200 datasets. As a Wireless AI Engineering Intern at Tiami Networks in 2026, he built high-fidelity RF digital twins with NVIDIA Sionna. His honors include the Pia Gratton Endowed Graduate Student Award, the Wireless History Foundation Scholarship Award, and a Best Paper Award finalist selection at the 2025 Asilomar Conference.
+
+interests:       # CV: Research interests
+  - group: Wireless communications
+    items: [Cell-Free MIMO, Integrated Sensing and Communication, Resource Allocation, Beamforming]
+  - group: ML and optimization
+    items: [AI/ML for Wireless, Distributed Optimization, Generative AI for Sensing and Wildfire Prediction]
+
 links:           # display order; each entry renders an icon plus an accessible label
   - { id: google-scholar, label: Google Scholar, url: "https://scholar.google.com/citations?user=lKiB9vIAAAAJ" }
   - { id: orcid, label: ORCID, url: "https://orcid.org/0000-0001-8894-8709" }
   - { id: github, label: GitHub, url: "https://github.com/MehdiZD97" }
   - { id: linkedin, label: LinkedIn, url: "https://www.linkedin.com/in/Mehdi-Zafari" }
   - { id: youtube, label: YouTube, url: "https://www.youtube.com/@MehdiZD97" }
+  # TODO(mehdi): add ResearchGate (https://www.researchgate.net/profile/Mehdi-Zafari)? (open input 7)

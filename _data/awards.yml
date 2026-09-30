@@ -1,0 +1,92 @@
+# Honors and awards (PLAN 4.4), newest first; the order here is the order on
+# the site. `on_cv: true` marks the awards listed in the PDF CV: Home's CV
+# section shows those, and the web CV shows every entry. Optional fields:
+# date (YYYY-MM-DD; day 01 when only the month is known), years (display
+# label for an award received more than once), detail, pub (publication
+# slug), talk (id in talks.yml), url.
+
+- year: 2026
+  title: Wireless History Foundation Scholarship Award
+  org: Wireless History Foundation
+  on_cv: true
+  # TODO(mehdi): the month (open input 2), and whether to label the award year (for example 2026–2027)
+
+- year: 2026
+  date: 2026-03-01
+  title: Pia Gratton Endowed Graduate Student Award
+  org: UC Irvine
+  on_cv: true
+
+- year: 2026
+  title: 1st Place, UCI EECS Annual Technology Showcase
+  org: UC Irvine
+  on_cv: true
+  # TODO(mehdi): the month (open input 2)
+
+- year: 2026
+  date: 2026-03-01
+  title: 3rd Place, UCI Grad Slam Competition
+  org: UC Irvine
+  talk: grad-slam-2026
+  on_cv: true
+
+- year: 2025
+  date: 2025-08-01
+  title: Best Paper Award Finalist, 59th Asilomar Conference
+  org: IEEE Asilomar Conference
+  pub: decentralized-resource-optimization-cell-free-isac
+  on_cv: true
+
+- year: 2025
+  date: 2025-01-01
+  title: AGS Travel Grant
+  org: UCI Associated Graduate Students
+  detail: Supported attendance and a presentation at the 2024 Asilomar Conference.
+  on_cv: false
+  # TODO(mehdi): keep or cut? It was on the v1 Awards page but is not on the CV (open input 6)
+
+- year: 2024
+  title: Graduate Dean’s Recruitment Fellowship Award
+  org: UC Irvine
+  on_cv: true
+  # The v1 site gave two months (July and September 2024), so only the year shows.
+
+- year: 2023
+  years: 2022, 2023
+  title: SIAWE Scholarship Award for Distinguished International Students
+  org: Rice University
+  detail: Society of Iranian-American Women for Education (SIAWE).
+  on_cv: true
+
+# TODO(mehdi): list the POWDER-RENEW Mobile and Wireless Week 1st prize as an honor? It is now the note on that talk (open input 6)
+# - year: 2023
+#   date: 2023-01-28
+#   title: 1st Prize, POWDER-RENEW Mobile and Wireless Week
+#   org: University of Utah
+#   talk: mww-2023
+#   on_cv: false
+
+- year: 2021
+  title: Rice University Graduate Fellowship
+  org: Rice University
+  on_cv: false
+
+- year: 2019
+  title: Exceptional Talent Award
+  org: University of Tehran
+  detail: Top 5% GPA.
+  on_cv: false
+
+- year: 2016
+  title: National Elites Foundation Fellowship
+  org: Iranian National Elites Foundation
+  on_cv: false
+
+- year: 2015
+  date: 2015-09-01
+  title: Ranked 47th, Iranian National University Entrance Exam (Konkoor)
+  on_cv: false
+
+- year: 2013
+  title: Ranked 3rd, Iranian National Mathematics Olympiad
+  on_cv: false

@@ -2,42 +2,44 @@
 layout: default
 ---
 {%- comment -%}
-  One publication (legacy collection fields until Stage 6 builds the detail
-  page with abstract, figure, BibTeX, and related items).
+  One publication (PLAN 4.4 schema). Stage 6 adds the breadcrumb, figure,
+  BibTeX copy panel, related items, and Google Scholar meta tags.
 {%- endcomment %}
-{%- assign authors = page.authors | replace: "Mehdi Zafari", "<strong>Mehdi Zafari</strong>" | replace: "M. Zafari", "<strong>M. Zafari</strong>" %}
+{%- case page.status -%}
+  {%- when "accepted" %}{% assign status_label = "Accepted" -%}
+  {%- when "under-review" %}{% assign status_label = "Under review" -%}
+  {%- when "preprint" %}{% assign status_label = "Preprint" -%}
+  {%- else %}{% assign status_label = "" -%}
+{%- endcase -%}
+{%- if page.type == "dataset" or page.type == "software" %}{% assign body_title = "Description" %}{% else %}{% assign body_title = "Abstract" %}{% endif %}
 <main class="site-main" id="main">
   <article class="publication">
     <header class="page-header">
       <h1 class="page-title page-title--long">{{ page.title }}</h1>
-      {%- if page.authors %}
-      <p class="page-authors">{{ authors }}</p>
+      <p class="page-authors">{% include authors.html list=page.authors %}</p>
+      <p class="page-meta">
+        <span>{% if page.status == "under-review" %}Submitted to {% endif %}{{ page.venue }}{% if page.type == "magazine" %} (magazine){% endif %}</span>
+        <time datetime="{{ page.date | date: '%Y-%m-%d' }}">{% if page.status == "published" %}{{ page.date | date: "%Y" }}{% else %}{{ page.date | date: "%B %Y" }}{% endif %}</time>
+      </p>
+      {%- if status_label != "" or page.award %}
+      <p class="pub-badges">
+        {%- if status_label != "" %}<span class="badge badge--status">{{ status_label }}</span>{% endif -%}
+        {%- if page.award %}<span class="badge badge--award">{% include icon.html name="award" %}{{ page.award }}</span>{% endif -%}
+      </p>
       {%- endif %}
-      {%- assign year = page.date | date: "%Y" %}
-      <p class="page-meta">{% if page.venue %}<span>{{ page.venue }}</span>{% endif %}{% unless page.venue contains year %} <time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ year }}</time>{% endunless %}</p>
-      {%- capture links -%}
-        {%- if page.arxiv %}<li><a class="linkbtn" href="{{ page.arxiv }}" target="_blank" rel="noopener">{% include icon.html name="arxiv" %}<span>arXiv</span>{% include newtab.html %}</a></li>{% endif -%}
-        {%- if page.doi -%}
-          {%- assign prefix = page.doi | slice: 0, 8 -%}
-          {%- if prefix == "10.1109/" %}{% assign doi_label = "IEEE Xplore" %}{% assign doi_icon = "ieee" %}
-          {%- elsif prefix == "10.21227" %}{% assign doi_label = "IEEE DataPort" %}{% assign doi_icon = "database" %}
-          {%- else %}{% assign doi_label = "DOI" %}{% assign doi_icon = "link" %}{% endif -%}
-          <li><a class="linkbtn" href="https://doi.org/{{ page.doi }}" target="_blank" rel="noopener">{% include icon.html name=doi_icon %}<span>{{ doi_label }}</span>{% include newtab.html %}</a></li>
-        {%- elsif page.paperurl -%}
-          <li><a class="linkbtn" href="{{ page.paperurl }}" target="_blank" rel="noopener">{% include icon.html name="paper" %}<span>Paper</span>{% include newtab.html %}</a></li>
-        {%- endif -%}
-        {%- if page.code %}<li><a class="linkbtn" href="{{ page.code }}" target="_blank" rel="noopener">{% include icon.html name="code" %}<span>Code</span>{% include newtab.html %}</a></li>{% endif -%}
-      {%- endcapture %}
-      {%- if links != "" %}
-      <ul class="linkbtns">{{ links }}</ul>
-      {%- endif %}
+      {% include pub-links.html pub=page %}
     </header>
-    {%- assign body = content | strip %}
-    {%- if body != "" %}
     <div class="page-content prose">
+      {%- assign body = content | strip %}
+      {%- if body != "" %}
+      <h2>{{ body_title }}</h2>
       {{ content }}
+      {%- endif %}
+      {%- if page.bibtex %}
+      <h2>BibTeX</h2>
+      <pre><code>{{ page.bibtex | strip | escape }}</code></pre>
+      {%- endif %}
     </div>
-    {%- endif %}
     <p class="more-link"><a href="{{ '/publications/' | relative_url }}">All publications</a></p>
   </article>
 </main>

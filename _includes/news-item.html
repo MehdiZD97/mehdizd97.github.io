@@ -1,0 +1,44 @@
+{%- comment -%}
+  One entry from _data/news.yml as a timeline item: date, an icon for its
+  type, the text (Markdown), and links to its publication, story, other URL,
+  or (when it has none of those) its talk. Parameter: item.
+{%- endcomment -%}
+{%- assign n = include.item -%}
+{%- case n.type -%}
+  {%- when "paper" %}{% assign n_icon = "paper" %}{% assign n_label = "Paper" -%}
+  {%- when "award" %}{% assign n_icon = "award" %}{% assign n_label = "Award" -%}
+  {%- when "talk" %}{% assign n_icon = "talk" %}{% assign n_label = "Talk" -%}
+  {%- when "career" %}{% assign n_icon = "career" %}{% assign n_label = "Career" -%}
+  {%- when "video" %}{% assign n_icon = "video" %}{% assign n_label = "Video" -%}
+  {%- when "release" %}{% assign n_icon = "code" %}{% assign n_label = "Release" -%}
+  {%- when "service" %}{% assign n_icon = "message" %}{% assign n_label = "Service" -%}
+  {%- else %}{% assign n_icon = "event" %}{% assign n_label = "Milestone" -%}
+{%- endcase -%}
+{%- capture n_links -%}
+  {%- if n.pub -%}
+    {%- assign n_pub = site.publications | where_exp: "doc", "doc.slug == n.pub" | first -%}
+    {%- if n_pub -%}
+      {%- case n_pub.type -%}
+        {%- when "dataset" %}{% assign n_pub_label = "See the dataset" -%}
+        {%- when "software" %}{% assign n_pub_label = "See the software" -%}
+        {%- else %}{% assign n_pub_label = "Read the paper" -%}
+      {%- endcase %} <a href="{{ n_pub.url | relative_url }}">{{ n_pub_label }}</a>
+    {%- endif -%}
+  {%- endif -%}
+  {%- if n.story %} <a href="{{ n.story | relative_url }}">Read the story</a>{% endif -%}
+  {%- if n.url -%}
+    {%- assign n_first = n.url | slice: 0 -%}
+    {%- if n_first == "/" %} <a href="{{ n.url | relative_url }}">{{ n.url_label | default: "Details" }}</a>
+    {%- else %} <a href="{{ n.url | escape }}" target="_blank" rel="noopener">{{ n.url_label | default: "Details" }}{% include newtab.html %}</a>
+    {%- endif -%}
+  {%- endif -%}
+{%- endcapture -%}
+{%- assign n_links_check = n_links | strip -%}
+{%- if n_links_check == "" and n.talk -%}
+  {%- capture n_links %} <a href="{{ '/cv/' | relative_url }}#{{ n.talk }}">Talk details</a>{% endcapture -%}
+{%- endif -%}
+<li class="news">
+  <time class="news-date" datetime="{{ n.date | date: '%Y-%m' }}">{{ n.date | date: "%b %Y" }}</time>
+  <span class="news-icon">{% include icon.html name=n_icon %}<span class="visually-hidden">{{ n_label }}:</span></span>
+  <p class="news-text">{{ n.text | markdownify | remove: "<p>" | remove: "</p>" | strip }}{{ n_links }}</p>
+</li>

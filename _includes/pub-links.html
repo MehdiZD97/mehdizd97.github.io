@@ -1,0 +1,28 @@
+{%- comment -%}
+  A publication's link buttons in the D7 order (PDF, arXiv, the DOI label from
+  _config.yml, Code, Slides, Video, Poster, Dataset), each only when present.
+  Parameter: pub. BibTeX lives on the detail page (Stage 6 adds the panel).
+{%- endcomment -%}
+{%- assign pl = include.pub -%}
+{%- capture pl_items -%}
+  {%- if pl.pdf %}{% include linkbtn.html url=pl.pdf label="PDF" icon="pdf" %}{% endif -%}
+  {%- if pl.arxiv %}{% assign pl_url = "https://arxiv.org/abs/" | append: pl.arxiv %}{% include linkbtn.html url=pl_url label="arXiv" icon="arxiv" %}{% endif -%}
+  {%- if pl.doi -%}
+    {%- assign pl_doi = site.doi_default -%}
+    {%- for pl_rule in site.doi_labels -%}
+      {%- assign pl_prefix = pl.doi | slice: 0, pl_rule.prefix.size -%}
+      {%- if pl_prefix == pl_rule.prefix %}{% assign pl_doi = pl_rule %}{% break %}{% endif -%}
+    {%- endfor -%}
+    {%- assign pl_url = "https://doi.org/" | append: pl.doi -%}
+    {% include linkbtn.html url=pl_url label=pl_doi.label icon=pl_doi.icon %}
+  {%- endif -%}
+  {%- if pl.code %}{% include linkbtn.html url=pl.code label="Code" icon="code" %}{% endif -%}
+  {%- if pl.slides %}{% include linkbtn.html url=pl.slides label="Slides" icon="slides" %}{% endif -%}
+  {%- if pl.video %}{% assign pl_url = "https://www.youtube.com/watch?v=" | append: pl.video %}{% include linkbtn.html url=pl_url label="Video" icon="video" %}{% endif -%}
+  {%- if pl.poster %}{% include linkbtn.html url=pl.poster label="Poster" icon="paper" %}{% endif -%}
+  {%- if pl.dataset %}{% include linkbtn.html url=pl.dataset label="Dataset" icon="database" %}{% endif -%}
+{%- endcapture -%}
+{%- assign pl_items = pl_items | strip -%}
+{%- if pl_items != "" %}
+<ul class="linkbtns">{{ pl_items }}</ul>
+{%- endif -%}

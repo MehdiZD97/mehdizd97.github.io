@@ -1,0 +1,37 @@
+# Education (PLAN 4.4), as in the CV; newest first. `logo` names the files in
+# assets/img/logos/ (logo-<logo>-72.png and its variants).
+# TODO(mehdi): show GPAs on the web CV? They are stored here but not displayed (open input 6)
+
+- degree: Ph.D.
+  field: Electrical Engineering and Computer Science
+  school: University of California, Irvine
+  school_short: UC Irvine
+  location: CA, USA
+  start: 2024-06-01
+  end: 2028-12-01
+  expected: true
+  gpa: 4/4
+  advisor: Prof. A. Lee Swindlehurst
+  logo: uci
+
+- degree: M.S.
+  field: Electrical and Computer Engineering
+  school: Rice University
+  school_short: Rice University
+  location: Houston, TX, USA
+  start: 2021-08-01
+  end: 2024-05-01
+  gpa: 3.92/4
+  thesis: "Distributed Multi-User Beamforming in the Presence of CFO: An Analytical and Experimental Study"
+  logo: rice
+
+- degree: B.S.
+  field: Electrical and Computer Engineering
+  school: University of Tehran
+  school_short: University of Tehran
+  location: Tehran, Iran
+  start: 2015-09-01
+  end: 2019-09-01
+  gpa: 3.7/4
+  thesis: Design and Hardware Implementation of a MIMO-OFDM System Using High-Level Synthesis Techniques
+  logo: tehran

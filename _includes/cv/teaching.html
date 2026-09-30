@@ -1,0 +1,22 @@
+{%- comment -%}
+  Teaching from _data/cv/teaching.yml, newest first. When every entry has the
+  same role, one note names it instead of repeating it on each row.
+{%- endcomment -%}
+{%- assign cteach = site.data.cv.teaching -%}
+{%- assign cteach_role = cteach.first.role -%}
+{%- assign cteach_same = cteach | where: "role", cteach_role -%}
+<ul class="row-list">
+  {%- for c in cteach %}
+  <li class="row-item">
+    <span class="row-when">{{ c.term }}</span>
+    <span class="row-what">{{ c.course | escape }}{% if c.code %} <span class="row-code">{{ c.code | escape }}</span>{% endif %}</span>
+    <span class="row-where">{{ c.institution | escape }}</span>
+    {%- if cteach_same.size != cteach.size %}
+    <span class="row-note">{{ c.role | escape }}</span>
+    {%- endif %}
+  </li>
+  {%- endfor %}
+</ul>
+{%- if cteach_same.size == cteach.size %}
+<p class="note">{{ cteach_role }} for every course listed.</p>
+{%- endif %}

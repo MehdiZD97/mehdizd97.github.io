@@ -1,0 +1,78 @@
+# Originals and output sizes for scripts/optimize_images.py (PLAN 4.2 and 4.7).
+# Jekyll skips this folder (its name starts with "_"), so originals are never
+# published. After adding or changing an entry, run (from the repo root):
+#     .venv/bin/python scripts/optimize_images.py
+#
+# Each key is the output name under assets/img/; files are <name>-<size>.<ext>.
+#   src:      the original, relative to _assets-src/
+#   widths:   output widths in px, for images that scale with the layout
+#             (srcset with w descriptors, plus a `sizes` attribute), or
+#   heights:  output heights in px for fixed-size images (1x, 2x, 3x)
+#   fallback: the size used for the <img> src and its width and height
+#   crop:     square (optional; center crop)
+#   trim:     true (optional; trims fully transparent margins)
+#   formats:  default [avif, webp, jpg]; use [webp, png] to keep transparency
+#   quality:  optional, overrides the lossy quality (AVIF 60, WebP 80, JPEG 82)
+#
+# Originals kept but not used on the site: images/my_images/IMG_5422.jpg,
+# IMG_5422_full.jpg, IMG_6100.jpg, IMG_6133.jpg (screenshots of the Danesh
+# Academy tutorial thumbnails) and Google_Scholar_logo.png (the site draws its
+# icons from Simple Icons). TODO(mehdi): keep or delete them? (open input 9)
+
+profile/mehdi-zafari:
+  src: images/profile4.jpeg          # TODO(mehdi): a higher-resolution original, if you have one (open input 9)
+  crop: square
+  widths: [160, 320, 480]
+  fallback: 320
+
+logos/logo-uci:
+  src: images/my_images/UCI_Seal_Logo.png
+  trim: true
+  heights: [72, 144, 216]
+  fallback: 72
+  formats: [webp, png]
+  quality: 90        # crisp edges on the small marks
+logos/logo-rice:
+  src: images/my_images/Rice_Shield_Logo.png
+  trim: true
+  heights: [72, 144, 216]
+  fallback: 72
+  formats: [webp, png]
+  quality: 90        # crisp edges on the small marks
+logos/logo-tehran:
+  src: images/my_images/UT_Logo.png
+  trim: true
+  heights: [72, 144, 216]
+  fallback: 72
+  formats: [webp, png]
+  quality: 90        # crisp edges on the small marks
+
+# Stories (_posts/)
+stories/rice-mu-mimo-aps:
+  src: images/my_images/experiments_APs.jpg
+  widths: [480, 800, 1200, 1600]
+  fallback: 800
+stories/rice-mu-mimo-ues:
+  src: images/my_images/experiments_UEs.jpg
+  widths: [480, 800, 1200, 1600]
+  fallback: 800
+stories/mww-2023-setup:
+  src: images/my_images/IMG_20230124_154625251_HDR.jpg
+  widths: [320, 480, 640]
+  fallback: 480
+stories/mww-2023-presentation:
+  src: images/my_images/IMG_20230127_154708512.jpg
+  widths: [480, 800, 1200]
+  fallback: 800
+stories/asilomar-2024-lecture:
+  src: images/my_images/IMG_7384.jpg
+  widths: [480, 800, 1200, 1600]
+  fallback: 800
+stories/asilomar-2025-portrait:
+  src: images/my_images/asilomar2025-1.jpeg
+  widths: [320, 480, 640]
+  fallback: 480
+stories/asilomar-2025-lecture:
+  src: images/my_images/asilomar2025-2.jpeg
+  widths: [480, 800, 1024]
+  fallback: 800

@@ -7,11 +7,12 @@ redirect_from:
   - /awards/
 ---
 {%- comment -%}
-  Temporary CV page (Stage 3): the v1 content in the new components. Stage 8
-  rebuilds it from _data/cv/ in CV order, synced with the latest CV (Stage 4).
+  Temporary CV page (Stage 4): every section from _data/ in CV order.
+  Stage 8 adds the contents list, the "Last updated" line, print styles,
+  and the redirect stubs for /talks/ and /teaching/.
 {%- endcomment -%}
-{%- assign logos = '/assets/img/logos/' | relative_url %}
 {%- capture cv_button %}{% include cv-pdf.html class="btn btn--primary" %}{% endcapture %}
+<div class="prose">{{ site.data.profile.bio | markdownify }}</div>
 {%- if cv_button != "" %}
 <p class="actions">{{ cv_button }}</p>
 {%- endif %}
@@ -19,168 +20,86 @@ redirect_from:
 <section class="section" id="education" aria-labelledby="education-title">
   <h2 class="section__title" id="education-title">Education</h2>
   <div class="section__body">
-    <ul class="edu-list">
-      <li class="edu">
-        <picture class="edu-logo">
-          <source type="image/webp" srcset="{{ logos }}logo-uci-72.webp 1x, {{ logos }}logo-uci-144.webp 2x, {{ logos }}logo-uci-216.webp 3x">
-          <img src="{{ logos }}logo-uci-72.png" srcset="{{ logos }}logo-uci-144.png 2x, {{ logos }}logo-uci-216.png 3x" width="72" height="72" alt="" loading="lazy">
-        </picture>
-        <div class="edu-body">
-          <h3 class="edu-degree">Ph.D. in Electrical Engineering and Computer Science</h3>
-          <p class="edu-school">UC Irvine</p>
-          <p class="edu-note">Recipient of the UCI Graduate Dean’s Recruitment Fellowship Award</p>
-        </div>
-        <p class="edu-dates">2028, expected</p>
-      </li>
-      <li class="edu">
-        <picture class="edu-logo">
-          <source type="image/webp" srcset="{{ logos }}logo-rice-72.webp 1x, {{ logos }}logo-rice-144.webp 2x, {{ logos }}logo-rice-216.webp 3x">
-          <img src="{{ logos }}logo-rice-72.png" srcset="{{ logos }}logo-rice-144.png 2x, {{ logos }}logo-rice-216.png 3x" width="60" height="72" alt="" loading="lazy">
-        </picture>
-        <div class="edu-body">
-          <h3 class="edu-degree">M.S. in Electrical and Computer Engineering</h3>
-          <p class="edu-school">Rice University</p>
-          <p class="edu-note">Thesis: Distributed Multi-User Beamforming in the Presence of CFO: An Analytical and Experimental Study</p>
-        </div>
-        <p class="edu-dates">2024</p>
-      </li>
-      <li class="edu">
-        <picture class="edu-logo">
-          <source type="image/webp" srcset="{{ logos }}logo-tehran-72.webp 1x, {{ logos }}logo-tehran-144.webp 2x, {{ logos }}logo-tehran-216.webp 3x">
-          <img src="{{ logos }}logo-tehran-72.png" srcset="{{ logos }}logo-tehran-144.png 2x, {{ logos }}logo-tehran-216.png 3x" width="72" height="72" alt="" loading="lazy">
-        </picture>
-        <div class="edu-body">
-          <h3 class="edu-degree">B.S. in Electrical and Computer Engineering</h3>
-          <p class="edu-school">University of Tehran</p>
-          <p class="edu-note">Thesis: Design and Hardware Implementation of a MIMO-OFDM System Using High-Level Synthesis Techniques</p>
-        </div>
-        <p class="edu-dates">2019</p>
-      </li>
-    </ul>
+    {% include cv/education.html level=3 %}
   </div>
 </section>
 
 <section class="section" id="interests" aria-labelledby="interests-title">
   <h2 class="section__title" id="interests-title">Research interests</h2>
   <div class="section__body">
-    <dl class="def-list">
-      <dt>Wireless communication</dt>
-      <dd>Integrated Sensing and Communication (ISAC), Cell‑Free / Distributed MIMO, Resource Allocation, Beamforming</dd>
-      <dt>ML and optimization</dt>
-      <dd>Distributed Optimizations, Reinforcement Learning, AI/ML for Next-Gen Wireless Systems</dd>
-    </dl>
+    {% include cv/lists.html list="interests" %}
   </div>
 </section>
 
 <section class="section" id="experience" aria-labelledby="experience-title">
-  <h2 class="section__title" id="experience-title">Professional work experience</h2>
+  <h2 class="section__title" id="experience-title">Experience</h2>
   <div class="section__body">
-    <ul class="row-list row-list--notes">
-      <li class="row-item">
-        <span class="row-when">Jul 2024 – present</span><span class="row-what">Research Assistant</span><span class="row-where">UC Irvine, EECS Department</span>
-        <ul class="row-bullets">
-          <li>Conducting research on Reinforcement Learning and Graph Neural Network (GNN) architectures for cooperative Integrated Sensing and Communications (ISAC) networks.</li>
-          <li>Designing decentralized ADMM-based algorithms for resource allocation in Cell-Free ISAC systems.</li>
-          <li>Developing large-scale network simulations and optimization pipelines using Python (PyTorch), CVXPY, and Gurobi.</li>
-          <li>Supervisor: Prof. A. Lee Swindlehurst</li>
-        </ul>
-      </li>
-      <li class="row-item">
-        <span class="row-when">Aug 2021 – Apr 2024</span><span class="row-what">Research Assistant</span><span class="row-where">Rice University, Department of Electrical and Computer Engineering</span>
-        <ul class="row-bullets">
-          <li>Conducted research on distributed multi‑user MIMO beamforming for next‑generation wireless networks.</li>
-          <li>Evaluated performance and robustness of distributed multi‑user beamforming techniques using RENEW platform.</li>
-          <li>Measurements: Collected over 200 datasets using the RENEW platform, featuring a 64‑antenna BS and up to 8 users. <a href="https://ieee-dataport.org/documents/distributed-multi-user-mimo-datasets" target="_blank" rel="noopener">Access the datasets{% include newtab.html %}</a>.</li>
-          <li>Supervisor: Dr. Rahman Doost-Mohammady</li>
-        </ul>
-      </li>
-      <li class="row-item">
-        <span class="row-when">Jan – May 2024</span><span class="row-what">Research Fellow</span><span class="row-where">Rice University, Data to Knowledge (D2K) Lab</span>
-        <ul class="row-bullets">
-          <li>Mentored five undergraduate students on a project sponsored by Rice EMS to conduct an analysis of their datasets across various domains.</li>
-          <li>Developed Time Series prediction models to anticipate future requirements within each area and provide insights into the overall organizational needs.</li>
-        </ul>
-      </li>
-      <li class="row-item">
-        <span class="row-when">Dec 2018 – Dec 2020</span><span class="row-what">Undergraduate Research Assistant</span><span class="row-where">University of Tehran, Array Processing Laboratory</span>
-        <ul class="row-bullets">
-          <li>Developed OFDM and SC-FDE systems on Xilinx FPGAs using High-Level Synthesis (HLS) as part of a broader study on MIMO communications.</li>
-          <li>Conducted full-stack system design, from theoretical modeling in MATLAB/Python to experimental evaluation and C/C++ implementation on hardware.</li>
-          <li>Supervisor: Dr. Aliazam Abbasfar</li>
-        </ul>
-      </li>
-      <li class="row-item">
-        <span class="row-when">May – Nov 2020</span><span class="row-what">Part-Time R&amp;D Engineer</span><span class="row-where">Transportation Innovation Center, Tehran, Iran</span>
-        <ul class="row-bullets">
-          <li>Designed and implemented hybrid radio links (FM analog and OFDM digital) for drones, enabling real-time transmission of video, GPS, and control commands.</li>
-          <li>Conducted research on telemetry system implementation strategies for vehicular communication in drone networks.</li>
-        </ul>
-      </li>
-      <li class="row-item">
-        <span class="row-when">May – Nov 2020</span><span class="row-what">Part-Time R&amp;D Engineer</span><span class="row-where">Sadr Electronic Dena, Tehran, Iran</span>
-        <ul class="row-bullets">
-          <li>Developed a 2.4GHz ISM band IoT system to enable remote control functionality for elevator central control boards.</li>
-          <li>Engineered embedded C/C++ firmware for AVR and ARM microcontrollers, implementing efficient serial data transmission protocols.</li>
-        </ul>
-      </li>
-      <li class="row-item">
-        <span class="row-when">Jul – Oct 2018</span><span class="row-what">Full-Time Intern</span><span class="row-where">Pionaria, Tehran, Iran</span>
-        <ul class="row-bullets">
-          <li>Simulated parabolic and patch antennas using HFSS and CST, specifically improving VSWR and Gain performance.</li>
-          <li>Implemented Point-to-Point and Point-to-Multi-Point wireless links, utilizing wireless network standards and Software-Defined Radio (SDR) concepts.</li>
-        </ul>
-      </li>
-    </ul>
+    {% include cv/experience.html %}
   </div>
 </section>
 
-<section class="section" id="skills" aria-labelledby="skills-title">
-  <h2 class="section__title" id="skills-title">Skills</h2>
+<section class="section" id="publications" aria-labelledby="publications-title">
+  <h2 class="section__title" id="publications-title">Selected publications</h2>
   <div class="section__body">
-    <dl class="def-list">
-      <dt>Key skills</dt>
-      <dd>Wireless Communication Systems, Statistical Signal Processing, Optimization, Applied ML</dd>
-      <dt>Programming</dt>
-      <dd>C, C++, Python, MATLAB, LaTeX, Verilog</dd>
-      <dt>Network simulators</dt>
-      <dd>NS‑3, Wireshark, OPNET, NS‑2</dd>
-      <dt>Software‑defined radios</dt>
-      <dd>GNU‑Radio, Agora, Iris‑SDR, USRP, WARP, SRS‑LTE</dd>
-      <dt>Embedded and FPGA</dt>
-      <dd>ARM‑STM32, DSP, Atmel‑AVR, FPGA: Xilinx‑Zedboard, Hihg‑Level Synthesis</dd>
-    </dl>
+    <div class="subsection subsection--entries">
+      {%- assign featured = site.publications | where: "featured", true | sort: "date" | reverse %}
+      {%- for pub in featured %}
+      {% include pub-item.html pub=pub level=3 %}
+      {%- endfor %}
+    </div>
+    <p class="more-link"><a href="{{ '/publications/' | relative_url }}">All publications, datasets, and software</a></p>
+  </div>
+</section>
+
+<section class="section" id="talks" aria-labelledby="talks-title">
+  <h2 class="section__title" id="talks-title">Talks</h2>
+  <div class="section__body">
+    <div class="subsection subsection--entries">
+      {%- for talk in site.data.talks %}
+      {% include talk-item.html talk=talk level=3 %}
+      {%- endfor %}
+    </div>
   </div>
 </section>
 
 <section class="section" id="honors" aria-labelledby="honors-title">
   <h2 class="section__title" id="honors-title">Honors and awards</h2>
   <div class="section__body">
-    <ul class="row-list">
-      <li class="row-item"><span class="row-when">2026</span><span class="row-what">Recipient of Pia Gratton Endowed Graduate Student Award</span><span class="row-where">UCI Samueli School of Engineering</span></li>
-      <li class="row-item"><span class="row-when">2026</span><span class="row-what">Won 3rd Place in the UCI Grad Slam Finals Competition</span><span class="row-where">UCI Graduate Division</span></li>
-      <li class="row-item"><span class="row-when">2024</span><span class="row-what">Recipient of Graduate Dean’s Recruitment Fellowship Award</span><span class="row-where">UCI Samueli School of Engineering</span></li>
-      <li class="row-item"><span class="row-when">2023</span><span class="row-what">Recipient of SIAWE Scholarship</span><span class="row-where">Recognized among distinguished international students</span></li>
-      <li class="row-item"><span class="row-when">2022</span><span class="row-what">Recipient of SIAWE Scholarship</span><span class="row-where">Recognized among distinguished international students</span></li>
-      <li class="row-item"><span class="row-when">2021</span><span class="row-what">Recipient of Graduate Fellowship</span><span class="row-where">Rice University, School of Engineering and Computing</span></li>
-      <li class="row-item"><span class="row-when">2019</span><span class="row-what">Recipient of Exceptional Talent Award</span><span class="row-where">Top 5% GPA, University of Tehran</span></li>
-      <li class="row-item"><span class="row-when">2016</span><span class="row-what">National Elites Foundation Fellowship</span><span class="row-where">Iranian National Elites Foundation</span></li>
-      <li class="row-item"><span class="row-when">2015</span><span class="row-what">Ranked 47th</span><span class="row-where">Iranian National University Entrance Exam (Konkoor)</span></li>
-      <li class="row-item"><span class="row-when">2013</span><span class="row-what">Ranked 3rd</span><span class="row-where">Iranian National Mathematics Olympiad</span></li>
-    </ul>
+    {% include cv/awards.html %}
+  </div>
+</section>
+
+<section class="section" id="service" aria-labelledby="service-title">
+  <h2 class="section__title" id="service-title">Service</h2>
+  <div class="section__body">
+    {% include cv/lists.html list="service" %}
   </div>
 </section>
 
 <section class="section" id="teaching" aria-labelledby="teaching-title">
-  <h2 class="section__title" id="teaching-title">Teaching assistant experience</h2>
+  <h2 class="section__title" id="teaching-title">Teaching</h2>
   <div class="section__body">
-    <ul class="row-list">
-      <li class="row-item"><span class="row-when">Spring 2025</span><span class="row-what">Introduction to Digital Logic Laboratory</span><span class="row-where">UC Irvine</span></li>
-      <li class="row-item"><span class="row-when">Spring 2024</span><span class="row-what">Applied Machine Learning &amp; Data Science</span><span class="row-where">Rice University</span></li>
-      <li class="row-item"><span class="row-when">Fall 2023</span><span class="row-what">Modern Communication: Theory and Practice</span><span class="row-where">Rice University</span></li>
-      <li class="row-item"><span class="row-when">Fall 2022</span><span class="row-what">Modern Communication: Theory and Practice</span><span class="row-where">Rice University</span></li>
-      <li class="row-item"><span class="row-when">Spring 2020</span><span class="row-what">Wireless Multimedia Communications</span><span class="row-where">University of Tehran</span></li>
-      <li class="row-item"><span class="row-when">Fall 2019</span><span class="row-what">Signals and Systems Analysis</span><span class="row-where">University of Tehran</span></li>
-      <li class="row-item"><span class="row-when">Spring 2019</span><span class="row-what">Digital Communications</span><span class="row-where">University of Tehran</span></li>
-    </ul>
+    {% include cv/teaching.html %}
+  </div>
+</section>
+
+<section class="section" id="skills" aria-labelledby="skills-title">
+  <h2 class="section__title" id="skills-title">Skills</h2>
+  <div class="section__body">
+    {% include cv/lists.html list="skills" %}
+  </div>
+</section>
+
+<section class="section" id="coursework" aria-labelledby="coursework-title">
+  <h2 class="section__title" id="coursework-title">Relevant coursework</h2>
+  <div class="section__body">
+    {% include cv/lists.html list="coursework" %}
+  </div>
+</section>
+
+<section class="section" id="conferences" aria-labelledby="conferences-title">
+  <h2 class="section__title" id="conferences-title">Selected conferences and workshops</h2>
+  <div class="section__body">
+    {% include cv/lists.html list="conferences" %}
   </div>
 </section>

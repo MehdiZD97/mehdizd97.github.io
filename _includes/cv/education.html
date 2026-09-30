@@ -1,0 +1,29 @@
+{%- comment -%}
+  Education from _data/cv/education.yml, with the university logos.
+  Parameters: level (heading level of each degree, default 3), short (true:
+  the short school name and no advisor or thesis lines).
+{%- endcomment -%}
+{%- assign ce_h = include.level | default: 3 -%}
+<ul class="edu-list">
+  {%- for e in site.data.cv.education %}
+  <li class="edu">
+    {%- assign ce_logo = "logos/logo-" | append: e.logo %}
+    {% include responsive-image.html name=ce_logo alt="" class="edu-logo" %}
+    <div class="edu-body">
+      <h{{ ce_h }} class="edu-degree">{{ e.degree }} in {{ e.field | escape }}</h{{ ce_h }}>
+      {%- if include.short %}
+      <p class="edu-school">{{ e.school_short | escape }}</p>
+      {%- else %}
+      <p class="edu-school">{{ e.school | escape }}, {{ e.location | escape }}</p>
+      {%- if e.advisor %}
+      <p class="edu-note">Advisor: {{ e.advisor | escape }}</p>
+      {%- endif %}
+      {%- if e.thesis %}
+      <p class="edu-note">Thesis: {{ e.thesis | escape }}</p>
+      {%- endif %}
+      {%- endif %}
+    </div>
+    <p class="edu-dates">{% include date-range.html start=e.start end=e.end format="long" expected=e.expected %}</p>
+  </li>
+  {%- endfor %}
+</ul>

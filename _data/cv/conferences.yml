@@ -1,0 +1,12 @@
+# Selected conferences and workshops attended, as in the CV (dates are the
+# months attended; day 01). Talks given there are in talks.yml.
+
+- event: Asilomar Conference on Signals, Systems, and Computers
+  dates: [2025-10-01, 2024-10-01, 2023-10-01]
+  location: Pacific Grove, CA
+- event: IEEE Military Communications Conference (MILCOM)
+  dates: [2025-10-01]
+  location: Los Angeles, CA
+- event: Texas Colloquium on Distributed Learning
+  dates: [2023-09-01]
+  location: Houston, TX

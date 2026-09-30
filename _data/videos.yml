@@ -2,11 +2,13 @@
 # YouTube 2026-09-29 (CONTENT-AUDIT section 13). Home shows the newest few;
 # /videos/ shows all (the full page, with click-to-load embeds, comes in Stage 8).
 #
+# description: one or two sentences (the two YouTube posts' text moved here in Stage 4)
 # host: only for videos published on someone else's channel (credited to Mehdi)
 # start: seconds where Mehdi's part begins in a longer video
 # duration: ISO 8601, as YouTube lists it
 # note: short line under the title on the card
 # source_title: title of the longer video that a `start` points into
+# TODO(mehdi): which @MehdiZD97 videos to feature on Home, and the one-line descriptions (open input 1)
 
 channel:
   name: Mehdi Zafari
@@ -21,12 +23,14 @@ videos:
     date: 2026-09-17
     duration: PT62M41S
     note: Python programming course, session 1 (in Persian)
+    description: "Session 1 of a Python programming course in Persian: machine thinking, number bases, and working with the command line."
   - id: ZPEh1HdD858
     title: When Wireless Signals Become Our Eyes
     date: 2026-03-27
     duration: PT111M56S
     start: 3727
     note: UCI Grad Slam finals pitch, 3rd place
+    description: My pitch in the 2026 UCI Grad Slam finals, which won 3rd place.
     source_title: 2026 UCI Grad Slam      # the full event video's title on YouTube
     host: { name: UCIrvineGD, url: "https://www.youtube.com/@UCIrvineGD" }
   - id: H-IcUX1w1Z0
@@ -34,16 +38,19 @@ videos:
     date: 2024-11-14
     duration: PT4M37S
     note: Tutorial
+    description: Definitions and details of the linear array response and the beamforming gain.
     host: { name: Danesh Academy, url: "https://www.youtube.com/@Daaneshacademy" }
   - id: NO37pcl0t7A
     title: "Understanding Antenna Parameters: Gain, Radiation Patterns, and More!"
     date: 2024-11-05
     duration: PT8M45S
     note: Tutorial
+    description: Brief definitions of key antenna parameters, from the radiation pattern to radiation efficiency, VSWR, directivity, and gain.
     host: { name: Danesh Academy, url: "https://www.youtube.com/@Daaneshacademy" }
   - id: 8NDZutr3OEE
     title: "Beamforming in Wireless Communications: Basics and Applications"
     date: 2024-06-12
     duration: PT41M51S
     note: Tutorial
+    description: A full tutorial on beamforming, covering antenna parameters such as gain and radiation patterns, the linear array model, beamforming and beam nulling techniques, and practical applications in wireless systems.
     host: { name: Danesh Academy, url: "https://www.youtube.com/@Daaneshacademy" }

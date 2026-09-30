@@ -1,0 +1,416 @@
+---
+title: Content review
+permalink: /dev/content/
+prose: false
+noindex: true
+sitemap: false
+styles: [/dev/content/content.css]
+lead: "Every fact on the site, read from _data/, _publications/, and _posts/, so Mehdi can check it in one place. Development builds only; highlighted rows need an answer."
+---
+{%- comment -%}
+  Content review page (PLAN Stage 4, task 4.8). It reads the data files and
+  collections directly, so it always shows the current content. Open
+  questions come from the TODO(mehdi) markers (_plugins/todo_collector.rb).
+{%- endcomment -%}
+{%- assign todos = site.data.todos -%}
+{%- assign proposed = site.data.news | where: "proposed", true -%}
+{%- assign pubs = site.publications | sort: "date" | reverse -%}
+{%- assign stories = site.posts -%}
+
+<div class="review-summary">
+  <p><strong class="review-count">{{ todos.size }}</strong> open questions (TODO markers)</p>
+  <p><strong class="review-count">{{ proposed.size }}</strong> proposed news items to confirm or cut</p>
+  <p><strong class="review-count">{{ pubs.size }}</strong> publications, <strong>{{ site.data.news.size }}</strong> news items, <strong>{{ site.data.talks.size }}</strong> talks, <strong>{{ site.data.awards.size }}</strong> awards, <strong>{{ site.data.videos.videos.size }}</strong> videos, <strong>{{ stories.size }}</strong> stories</p>
+</div>
+
+<nav class="review-toc" aria-label="Tables on this page">
+  <ul>
+    <li><a href="#todos">Open questions</a></li>
+    <li><a href="#profile">Profile</a></li>
+    <li><a href="#navigation">Navigation</a></li>
+    <li><a href="#news">News</a></li>
+    <li><a href="#talks">Talks</a></li>
+    <li><a href="#awards">Awards</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#topics">Topics</a></li>
+    <li><a href="#videos">Videos</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#service">Service</a></li>
+    <li><a href="#teaching">Teaching</a></li>
+    <li><a href="#coursework">Coursework</a></li>
+    <li><a href="#conferences">Conferences</a></li>
+    <li><a href="#stories">Stories</a></li>
+    <li><a href="#images">Images</a></li>
+  </ul>
+</nav>
+
+<section class="review" id="todos" aria-labelledby="todos-title">
+  <h2 id="todos-title">Open questions</h2>
+  <p class="note">Each row is a <code>TODO(mehdi)</code> marker in the source. Answer in chat or edit the file, then delete the marker.</p>
+  <div class="review-table-wrap">
+    <table class="review-table">
+      <thead><tr><th scope="col">#</th><th scope="col">File</th><th scope="col">Line</th><th scope="col">Question</th></tr></thead>
+      <tbody>
+        {%- for t in todos %}
+        <tr class="is-todo"><td>{{ forloop.index }}</td><td><code>{{ t.file }}</code></td><td>{{ t.line }}</td><td>{{ t.text | escape }}</td></tr>
+        {%- endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+{%- assign pr = site.data.profile %}
+<section class="review" id="profile" aria-labelledby="profile-title">
+  <h2 id="profile-title">Profile <code>_data/profile.yml</code></h2>
+  <div class="review-table-wrap">
+    <table class="review-table review-table--fields">
+      <tbody>
+        <tr><th scope="row">name</th><td>{{ pr.name }}</td></tr>
+        <tr><th scope="row">title</th><td>{{ pr.title }}</td></tr>
+        <tr><th scope="row">department</th><td>{{ pr.department }}</td></tr>
+        <tr><th scope="row">affiliation</th><td>{{ pr.affiliation }} ({{ pr.affiliation_short }})</td></tr>
+        <tr class="is-todo"><th scope="row">advisor</th><td>{{ pr.advisor.name }}, <a href="{{ pr.advisor.url }}">{{ pr.advisor.url }}</a></td></tr>
+        <tr><th scope="row">headline</th><td>{{ pr.headline }}</td></tr>
+        <tr><th scope="row">location</th><td>{{ pr.location }}</td></tr>
+        <tr><th scope="row">email</th><td>{{ pr.email }}</td></tr>
+        <tr><th scope="row">photo</th><td><code>{{ pr.photo }}</code>, variants <code>{{ pr.photo_image }}</code></td></tr>
+        {%- assign cv_file = site.static_files | where: "path", pr.cv_pdf | first %}
+        <tr{% unless cv_file %} class="is-todo"{% endunless %}><th scope="row">cv_pdf</th><td><code>{{ pr.cv_pdf }}</code>{% unless cv_file %} (file missing){% endunless %}</td></tr>
+        <tr><th scope="row">cv_updated</th><td>{{ pr.cv_updated | date: "%B %Y" }}</td></tr>
+        <tr class="is-todo"><th scope="row">intro (draft)</th><td>{{ pr.intro }}</td></tr>
+        <tr class="is-todo"><th scope="row">bio (draft)</th><td>{{ pr.bio | markdownify }}</td></tr>
+        <tr><th scope="row">interests</th><td>{% for g in pr.interests %}<strong>{{ g.group }}:</strong> {{ g.items | join: ", " }}{% unless forloop.last %}<br>{% endunless %}{% endfor %}</td></tr>
+        <tr><th scope="row">links</th><td>{% for l in pr.links %}{{ l.label }}: <a href="{{ l.url }}">{{ l.url }}</a>{% unless forloop.last %}<br>{% endunless %}{% endfor %}</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="review" id="navigation" aria-labelledby="navigation-title">
+  <h2 id="navigation-title">Navigation <code>_data/navigation.yml</code></h2>
+  <div class="review-table-wrap">
+    <table class="review-table">
+      <thead><tr><th scope="col">Label</th><th scope="col">URL</th><th scope="col">Home section</th><th scope="col">Also current on</th></tr></thead>
+      <tbody>
+        {%- for n in site.data.navigation %}
+        <tr><td>{{ n.label }}</td><td><code>{{ n.url }}</code></td><td><code>#{{ n.section }}</code></td><td>{% for m in n.match %}<code>{{ m }}</code>{% unless forloop.last %}, {% endunless %}{% endfor %}</td></tr>
+        {%- endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="review" id="news" aria-labelledby="news-title">
+  <h2 id="news-title">News <code>_data/news.yml</code></h2>
+  <p class="note">Newest first; Home shows the first {{ site.home.news }}. Highlighted rows are proposals (<code>proposed: true</code>).</p>
+  <div class="review-table-wrap">
+    <table class="review-table">
+      <thead><tr><th scope="col">Date</th><th scope="col">Type</th><th scope="col">Text</th><th scope="col">Links</th></tr></thead>
+      <tbody>
+        {%- for n in site.data.news %}
+        <tr{% if n.proposed %} class="is-todo"{% endif %}>
+          <td>{{ n.date | date: "%b %Y" }}</td>
+          <td>{{ n.type }}{% if n.pin %}, pinned{% endif %}</td>
+          <td>{{ n.text | markdownify | remove: "<p>" | remove: "</p>" }}</td>
+          <td>{% if n.pub %}pub <code>{{ n.pub }}</code><br>{% endif %}{% if n.talk %}talk <code>{{ n.talk }}</code><br>{% endif %}{% if n.story %}story <code>{{ n.story }}</code><br>{% endif %}{% if n.url %}<a href="{{ n.url }}">{{ n.url_label | default: n.url }}</a>{% endif %}</td>
+        </tr>
+        {%- endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="review" id="talks" aria-labelledby="talks-title">
+  <h2 id="talks-title">Talks <code>_data/talks.yml</code></h2>
+  <div class="review-table-wrap">
+    <table class="review-table">
+      <thead><tr><th scope="col">Date</th><th scope="col">Kind</th><th scope="col">Title</th><th scope="col">Event and place</th><th scope="col">Links</th><th scope="col">Note</th></tr></thead>
+      <tbody>
+        {%- for t in site.data.talks %}
+        <tr>
+          <td>{{ t.date | date: "%Y-%m-%d" }}<br><code>{{ t.id }}</code></td>
+          <td>{{ t.kind }}</td>
+          <td>{{ t.title }}</td>
+          <td>{{ t.event }}, {{ t.location }}</td>
+          <td>{% if t.pub %}pub <code>{{ t.pub }}</code><br>{% endif %}{% if t.video %}video <code>{{ t.video }}</code>{% if t.video_start %} from {{ t.video_start }} s{% endif %}<br>{% endif %}{% if t.slides %}slides <code>{{ t.slides }}</code><br>{% endif %}{% if t.story %}story <code>{{ t.story }}</code><br>{% endif %}{% if t.event_url %}<a href="{{ t.event_url }}">event</a>{% endif %}</td>
+          <td>{{ t.note }}</td>
+        </tr>
+        {%- endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="review" id="awards" aria-labelledby="awards-title">
+  <h2 id="awards-title">Honors and awards <code>_data/awards.yml</code></h2>
+  <div class="review-table-wrap">
+    <table class="review-table">
+      <thead><tr><th scope="col">Year</th><th scope="col">Title</th><th scope="col">Organization</th><th scope="col">On CV</th><th scope="col">Detail and links</th></tr></thead>
+      <tbody>
+        {%- for a in site.data.awards %}
+        <tr>
+          <td>{{ a.years | default: a.year }}{% if a.date %}<br>{{ a.date | date: "%b %Y" }}{% endif %}</td>
+          <td>{{ a.title }}</td>
+          <td>{{ a.org }}</td>
+          <td>{% if a.on_cv %}yes{% else %}no (site only){% endif %}</td>
+          <td>{{ a.detail }}{% if a.pub %} pub <code>{{ a.pub }}</code>{% endif %}{% if a.talk %} talk <code>{{ a.talk }}</code>{% endif %}{% if a.url %} <a href="{{ a.url }}">link</a>{% endif %}</td>
+        </tr>
+        {%- endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="review" id="publications" aria-labelledby="publications-title">
+  <h2 id="publications-title">Publications <code>_publications/</code></h2>
+  <div class="review-table-wrap">
+    <table class="review-table">
+      <thead><tr><th scope="col">Date</th><th scope="col">Slug</th><th scope="col">Type</th><th scope="col">Status</th><th scope="col">Venue (short)</th><th scope="col">Featured</th><th scope="col">Topics</th><th scope="col">Open questions</th></tr></thead>
+      <tbody>
+        {%- for p in pubs %}
+        {%- assign p_todos = todos | where: "file", p.path %}
+        <tr{% if p_todos.size > 0 %} class="is-todo"{% endif %}>
+          <td>{{ p.date | date: "%Y-%m-%d" }}</td>
+          <td><a href="#pub-{{ p.slug }}"><code>{{ p.slug }}</code></a></td>
+          <td>{{ p.type }}</td>
+          <td>{{ p.status }}</td>
+          <td>{{ p.venue_short }}</td>
+          <td>{% if p.featured %}yes{% endif %}</td>
+          <td>{{ p.topics | join: ", " }}</td>
+          <td>{{ p_todos.size }}</td>
+        </tr>
+        {%- endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  {%- for p in pubs %}
+  {%- assign p_todos = todos | where: "file", p.path %}
+  <h3 class="review-item" id="pub-{{ p.slug }}"><a href="{{ p.url | relative_url }}">{{ p.title }}</a></h3>
+  <div class="review-table-wrap">
+    <table class="review-table review-table--fields">
+      <tbody>
+        {%- for t in p_todos %}
+        <tr class="is-todo"><th scope="row">Question</th><td>{{ t.text | escape }} <span class="note">(line {{ t.line }})</span></td></tr>
+        {%- endfor %}
+        <tr><th scope="row">file and URL</th><td><code>{{ p.path }}</code>, <code>{{ p.url }}</code></td></tr>
+        <tr><th scope="row">authors</th><td>{{ p.authors | join: ", " }}</td></tr>
+        <tr><th scope="row">type, status</th><td>{{ p.type }}, {{ p.status }}</td></tr>
+        <tr><th scope="row">venue</th><td>{{ p.venue }} ({{ p.venue_short }})</td></tr>
+        <tr><th scope="row">date</th><td>{{ p.date | date: "%Y-%m-%d" }}</td></tr>
+        {%- assign optional_fields = "doi,arxiv,code,pdf,slides,video,poster,dataset,award,image,image_alt" | split: "," %}
+        {%- for field in optional_fields %}
+        {%- if p[field] %}
+        <tr><th scope="row">{{ field }}</th><td>{{ p[field] }}</td></tr>
+        {%- endif %}
+        {%- endfor %}
+        <tr><th scope="row">featured</th><td>{% if p.featured %}yes{% else %}no{% endif %}</td></tr>
+        <tr><th scope="row">topics</th><td>{{ p.topics | join: ", " }}</td></tr>
+        <tr><th scope="row">redirect_from</th><td>{% for r in p.redirect_from %}<code>{{ r }}</code>{% unless forloop.last %}, {% endunless %}{% endfor %}</td></tr>
+        {%- assign p_body = p.content | strip_html | strip %}
+        <tr{% if p_body == "" %} class="is-todo"{% endif %}><th scope="row">abstract or description</th><td>{{ p_body | default: "(none)" }}</td></tr>
+        {%- if p.bibtex %}
+        <tr><th scope="row">bibtex</th><td><pre class="review-bib">{{ p.bibtex | strip | escape }}</pre></td></tr>
+        {%- endif %}
+      </tbody>
+    </table>
+  </div>
+  {%- endfor %}
+</section>
+
+<section class="review" id="topics" aria-labelledby="topics-title">
+  <h2 id="topics-title">Topics <code>_data/topics.yml</code></h2>
+  <div class="review-table-wrap">
+    <table class="review-table">
+      <thead><tr><th scope="col">Id</th><th scope="col">Label</th><th scope="col">Publications</th></tr></thead>
+      <tbody>
+        {%- for t in site.data.topics %}
+        {%- assign t_pubs = site.publications | where_exp: "doc", "doc.topics contains t.id" %}
+        <tr><td><code>{{ t.id }}</code></td><td>{{ t.label }}</td><td>{{ t_pubs.size }}: {% for doc in t_pubs %}<code>{{ doc.slug }}</code>{% unless forloop.last %}, {% endunless %}{% endfor %}</td></tr>
+        {%- endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+{%- assign ch = site.data.videos.channel %}
+<section class="review" id="videos" aria-labelledby="videos-title">
+  <h2 id="videos-title">Videos <code>_data/videos.yml</code></h2>
+  <div class="review-table-wrap">
+    <table class="review-table review-table--fields">
+      <tbody>
+        <tr><th scope="row">channel</th><td>{{ ch.name }} ({{ ch.handle }}), <a href="{{ ch.url }}">{{ ch.url }}</a></td></tr>
+        <tr{% unless ch.description %} class="is-todo"{% endunless %}><th scope="row">channel description</th><td>{{ ch.description | default: "(missing)" }}</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="review-table-wrap">
+    <table class="review-table">
+      <thead><tr><th scope="col">Date</th><th scope="col">Id</th><th scope="col">Title</th><th scope="col">Duration and start</th><th scope="col">Host</th><th scope="col">Note and description</th></tr></thead>
+      <tbody>
+        {%- for v in site.data.videos.videos %}
+        <tr>
+          <td>{{ v.date | date: "%Y-%m-%d" }}</td>
+          <td><a href="https://www.youtube.com/watch?v={{ v.id }}"><code>{{ v.id }}</code></a></td>
+          <td{% if v.language and v.language != "en" %} lang="{{ v.language }}"{% if v.language == "fa" %} dir="rtl"{% endif %}{% endif %}>{{ v.title }}</td>
+          <td>{{ v.duration }}{% if v.start %}, from {{ v.start }} s{% endif %}</td>
+          <td>{% if v.host %}{{ v.host.name }}{% else %}own channel{% endif %}</td>
+          <td>{{ v.note }}<br>{{ v.description }}</td>
+        </tr>
+        {%- endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="review" id="education" aria-labelledby="education-title">
+  <h2 id="education-title">Education <code>_data/cv/education.yml</code></h2>
+  <div class="review-table-wrap">
+    <table class="review-table">
+      <thead><tr><th scope="col">Degree</th><th scope="col">School</th><th scope="col">Dates</th><th scope="col">GPA (not shown)</th><th scope="col">Advisor or thesis</th></tr></thead>
+      <tbody>
+        {%- for e in site.data.cv.education %}
+        <tr>
+          <td>{{ e.degree }} in {{ e.field }}</td>
+          <td>{{ e.school }} ({{ e.school_short }}), {{ e.location }}</td>
+          <td>{% include date-range.html start=e.start end=e.end format="long" expected=e.expected %}</td>
+          <td class="is-todo">{{ e.gpa }}</td>
+          <td>{% if e.advisor %}Advisor: {{ e.advisor }}{% endif %}{% if e.thesis %}Thesis: {{ e.thesis }}{% endif %}</td>
+        </tr>
+        {%- endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="review" id="experience" aria-labelledby="experience-title">
+  <h2 id="experience-title">Experience <code>_data/cv/experience.yml</code></h2>
+  <div class="review-table-wrap">
+    <table class="review-table">
+      <thead><tr><th scope="col">Dates</th><th scope="col">Role</th><th scope="col">Home summary (draft)</th><th scope="col">CV bullets, then site-only bullets</th></tr></thead>
+      <tbody>
+        {%- for x in site.data.cv.experience %}
+        <tr>
+          <td>{% include date-range.html start=x.start end=x.end %}</td>
+          <td><strong>{{ x.title }}</strong><br>{% if x.unit %}{{ x.unit }}, {% endif %}{{ x.org }}, {{ x.location }}<br>short: {{ x.where }}{% if x.supervisor %}<br>Supervisor: {{ x.supervisor }}{% endif %}<br>{% if x.on_cv %}on the CV{% else %}site only{% endif %}</td>
+          <td class="is-todo">{{ x.summary }}</td>
+          <td><ul>{% for b in x.bullets %}<li>{{ b | markdownify | remove: "<p>" | remove: "</p>" }}</li>{% endfor %}{% for b in x.extra %}<li class="review-extra">{{ b | markdownify | remove: "<p>" | remove: "</p>" }} (site only)</li>{% endfor %}</ul></td>
+        </tr>
+        {%- endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="review" id="skills" aria-labelledby="skills-title">
+  <h2 id="skills-title">Skills <code>_data/cv/skills.yml</code></h2>
+  <div class="review-table-wrap">
+    <table class="review-table review-table--fields">
+      <tbody>
+        {%- for g in site.data.cv.skills %}
+        <tr><th scope="row">{{ g.group }}</th><td>{{ g.items | join: ", " }}</td></tr>
+        {%- endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="review" id="service" aria-labelledby="service-title">
+  <h2 id="service-title">Service <code>_data/cv/service.yml</code></h2>
+  <div class="review-table-wrap">
+    <table class="review-table review-table--fields">
+      <tbody>
+        {%- for s in site.data.cv.service %}
+        <tr><th scope="row">{{ s.role }}, {{ s.years }}</th><td>{% for v in s.venues %}{{ v.name }}{% if v.short %} ({{ v.short }}){% endif %}{% unless forloop.last %}<br>{% endunless %}{% endfor %}</td></tr>
+        {%- endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="review" id="teaching" aria-labelledby="teaching-title">
+  <h2 id="teaching-title">Teaching <code>_data/cv/teaching.yml</code></h2>
+  <div class="review-table-wrap">
+    <table class="review-table">
+      <thead><tr><th scope="col">Term</th><th scope="col">Course</th><th scope="col">Institution</th><th scope="col">Role</th></tr></thead>
+      <tbody>
+        {%- for c in site.data.cv.teaching %}
+        <tr><td>{{ c.term }}</td><td>{{ c.course | escape }}{% if c.code %} ({{ c.code }}){% endif %}</td><td>{{ c.institution }}</td><td>{{ c.role }}</td></tr>
+        {%- endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="review" id="coursework" aria-labelledby="coursework-title">
+  <h2 id="coursework-title">Coursework <code>_data/cv/coursework.yml</code></h2>
+  <div class="review-table-wrap">
+    <table class="review-table">
+      <thead><tr><th scope="col">Term</th><th scope="col">Course</th><th scope="col">Grade</th><th scope="col">Institution</th></tr></thead>
+      <tbody>
+        {%- for c in site.data.cv.coursework %}
+        <tr><td>{{ c.term }}</td><td>{{ c.course | escape }}</td><td>{{ c.grade }}</td><td>{{ c.institution }}</td></tr>
+        {%- endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="review" id="conferences" aria-labelledby="conferences-title">
+  <h2 id="conferences-title">Conferences attended <code>_data/cv/conferences.yml</code></h2>
+  <div class="review-table-wrap">
+    <table class="review-table">
+      <thead><tr><th scope="col">Event</th><th scope="col">Dates</th><th scope="col">Location</th></tr></thead>
+      <tbody>
+        {%- for c in site.data.cv.conferences %}
+        <tr><td>{{ c.event }}</td><td>{% for d in c.dates %}{{ d | date: "%b %Y" }}{% unless forloop.last %}, {% endunless %}{% endfor %}</td><td>{{ c.location }}</td></tr>
+        {%- endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="review" id="stories" aria-labelledby="stories-title">
+  <h2 id="stories-title">Stories <code>_posts/</code></h2>
+  <p class="note">Descriptions should be 140 to 160 characters (PLAN 4.8); rows outside that range are highlighted.</p>
+  <div class="review-table-wrap">
+    <table class="review-table">
+      <thead><tr><th scope="col">Date</th><th scope="col">Title and URL</th><th scope="col">Description</th><th scope="col">Image</th><th scope="col">Open questions</th></tr></thead>
+      <tbody>
+        {%- for s in stories %}
+        {%- assign s_todos = todos | where: "file", s.path %}
+        {%- assign s_len = s.description | size %}
+        <tr{% if s_todos.size > 0 or s_len < 140 or s_len > 160 %} class="is-todo"{% endif %}>
+          <td>{{ s.date | date: "%Y-%m-%d" }}</td>
+          <td><a href="{{ s.url | relative_url }}">{{ s.title }}</a><br><code>{{ s.url }}</code></td>
+          <td>{{ s.description }} <span class="note">({{ s_len }} characters)</span></td>
+          <td>{% if s.image %}<code>{{ s.image }}</code><br>{{ s.image_alt }}{% else %}(none){% endif %}</td>
+          <td>{% for t in s_todos %}{{ t.text | escape }}{% unless forloop.last %}<br>{% endunless %}{% endfor %}</td>
+        </tr>
+        {%- endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="review" id="images" aria-labelledby="images-title">
+  <h2 id="images-title">Images <code>_data/images.yml</code></h2>
+  <p class="note">Made by <code>scripts/optimize_images.py</code> from the originals in <code>_assets-src/</code> (see <code>_assets-src/images.yml</code>).</p>
+  <div class="review-table-wrap">
+    <table class="review-table">
+      <thead><tr><th scope="col">Name</th><th scope="col">Sizes</th><th scope="col">Formats</th><th scope="col">Preview</th></tr></thead>
+      <tbody>
+        {%- for im in site.data.images %}
+        <tr>
+          <td><code>{{ im[0] }}</code></td>
+          <td>{% for v in im[1].variants %}{{ v.w }}×{{ v.h }}{% unless forloop.last %}, {% endunless %}{% endfor %}</td>
+          <td>{{ im[1].formats | join: ", " }}</td>
+          <td class="review-thumb">{% assign im_name = im[0] %}{% include responsive-image.html name=im_name alt="" sizes="6rem" %}</td>
+        </tr>
+        {%- endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>

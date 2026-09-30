@@ -1,0 +1,37 @@
+# Teaching (PLAN 4.4), newest first (CONTENT-AUDIT section 10; not on the
+# PDF CV). Mentoring appears under the Research Fellow role in experience.yml.
+# TODO(mehdi): include courses you taught as the instructor, such as the online Python course (title, dates, audience, public link)? (open input 8)
+
+- course: Introduction to Control Systems + Lab
+  code: EECS 160A/LA
+  term: Fall 2026
+  institution: UC Irvine
+  role: Teaching assistant
+- course: Introduction to Digital Logic Laboratory
+  term: Spring 2025
+  institution: UC Irvine
+  role: Teaching assistant
+- course: Applied Machine Learning & Data Science
+  term: Spring 2024
+  institution: Rice University
+  role: Teaching assistant
+- course: "Modern Communication: Theory and Practice"
+  term: Fall 2023
+  institution: Rice University
+  role: Teaching assistant
+- course: "Modern Communication: Theory and Practice"
+  term: Fall 2022
+  institution: Rice University
+  role: Teaching assistant
+- course: Wireless Multimedia Communications
+  term: Spring 2020
+  institution: University of Tehran
+  role: Teaching assistant
+- course: Signals and Systems Analysis
+  term: Fall 2019
+  institution: University of Tehran
+  role: Teaching assistant
+- course: Digital Communications
+  term: Spring 2019
+  institution: University of Tehran
+  role: Teaching assistant

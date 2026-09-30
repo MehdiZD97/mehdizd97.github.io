@@ -1,0 +1,163 @@
+# News (PLAN 4.4), newest first; the order here is the order on the site.
+# One entry per milestone. Markdown is allowed in `text`.
+#   type: paper | award | talk | career | video | release | service | milestone
+#   pub: publication slug; talk: id in talks.yml; story: URL of a story;
+#   url and url_label: any other link (internal URLs start with "/");
+#   pin: true keeps an item on Home even when it is older.
+# TODO(mehdi): confirm or cut the entries marked `proposed: true` (new in Stage 4, from CONTENT-AUDIT section 8)
+
+# TODO(mehdi): the month of the Wireless History Foundation Scholarship (open input 2); the entry waits for it
+# - date: 2026-MM-01
+#   type: award
+#   text: Received the Wireless History Foundation Scholarship Award.
+
+# TODO(mehdi): the month of the UCI EECS Annual Technology Showcase prize (open input 2); the entry waits for it
+# - date: 2026-MM-01
+#   type: award
+#   text: Won 1st place at the UCI EECS Annual Technology Showcase.
+
+- date: 2026-07-01
+  type: paper
+  text: Our paper **TiamiTwin**, a digital twin for bistatic ISAC drone sensing validated against measurements, was accepted to the IEEE MILCOM Workshop.
+  pub: tiamitwin
+  proposed: true
+
+- date: 2026-07-01
+  type: paper
+  text: Submitted **CORDIS**, a scalable coordinated resource allocation framework for distributed cell-free ISAC, to IEEE Transactions on Wireless Communications.
+  pub: cordis
+  proposed: true
+
+- date: 2026-06-01
+  type: career
+  text: Joined Tiami Networks in Sacramento, CA, as a Wireless AI Engineering Intern.
+  proposed: true
+
+- date: 2026-03-01
+  type: award
+  text: Received the Pia Gratton Endowed Graduate Student Award at UC Irvine.
+
+- date: 2026-03-01
+  type: award
+  text: Won 3rd place in the UCI Grad Slam finals with the pitch "When Wireless Signals Become Our Eyes."
+  talk: grad-slam-2026
+  url: https://www.youtube.com/watch?v=ZPEh1HdD858&t=3727s
+  url_label: Watch the pitch
+
+- date: 2026-03-01
+  type: paper
+  text: Submitted our paper on robust wildfire forecasting under partial observability to IEEE Transactions on Geoscience and Remote Sensing; the preprint is on arXiv.
+  pub: wildfire-forecasting-partial-observability
+  proposed: true
+
+- date: 2026-01-01
+  type: paper
+  text: Our experimental study of distributed uplink beamforming with carrier frequency offsets was published in IEEE Transactions on Vehicular Technology.
+  pub: distributed-uplink-beamforming-cfo
+
+- date: 2026-01-01
+  type: paper
+  text: Our paper **ASSENT** was accepted to IEEE ICC 2026.
+  pub: assent
+
+- date: 2025-12-01
+  type: paper
+  text: Our magazine article on multi-domain optimization for ISAC was published in IEEE Wireless Communications.
+  pub: multi-domain-optimization-isac
+  proposed: true
+
+- date: 2025-12-01
+  type: release
+  text: Released the Deep-Gen-Project repository on spatiotemporal generative models for wildfire spread prediction.
+  pub: deep-gen-wildfire-prediction
+
+- date: 2025-11-01
+  type: release
+  text: Posted the **ASSENT** preprint on arXiv, with its code and datasets on GitHub.
+  pub: assent
+
+- date: 2025-10-01
+  type: talk
+  text: Gave a lecture and presented a poster in the Student Paper Contest at the 59th Asilomar Conference.
+  talk: asilomar-2025
+  story: /posts/2025/10/blog-post-5/
+
+- date: 2025-10-01
+  type: milestone
+  text: Attended IEEE MILCOM 2025 in Los Angeles.
+  url: https://milcom2025.ieee-milcom.org/
+  url_label: Conference website
+
+- date: 2025-08-01
+  type: award
+  text: Our Asilomar 2025 paper was shortlisted for the Best Paper Award.
+  pub: decentralized-resource-optimization-cell-free-isac
+
+- date: 2025-04-01
+  type: release
+  text: Released a simulation framework for distributed cell-free ISAC systems on GitHub.
+  pub: distributed-cellfree-isac
+
+- date: 2024-11-01
+  type: video
+  text: Posted two short tutorial videos on YouTube, on antenna parameters and the linear array model.
+  url: /videos/
+  url_label: Watch the videos
+
+- date: 2024-10-01
+  type: talk
+  text: Gave a lecture at the 58th Asilomar Conference.
+  talk: asilomar-2024
+  story: /posts/2024/10/blog-post-3/
+
+- date: 2024-09-01
+  type: release
+  text: Published the Distributed Multi-User MIMO Datasets on IEEE DataPort.
+  pub: distributed-mu-mimo-datasets
+  proposed: true
+
+- date: 2024-07-01   # TODO(mehdi): July (v1 news) or September 2024 (v1 Awards page)?
+  type: award
+  text: Received the Graduate Dean’s Recruitment Fellowship Award from UC Irvine.
+
+- date: 2024-06-01
+  type: milestone
+  text: Started my Ph.D. at UC Irvine with Prof. A. Lee Swindlehurst.
+  proposed: true
+
+- date: 2024-06-01
+  type: video
+  text: Posted a full tutorial on beamforming on YouTube.
+  url: /videos/
+  url_label: Watch the video
+  proposed: true
+
+- date: 2024-05-01
+  type: milestone
+  text: Completed my M.S. at Rice University.
+  proposed: true
+
+- date: 2023-10-01
+  type: talk
+  text: Presented a poster at the 57th Asilomar Conference.
+  talk: asilomar-2023
+  proposed: true
+
+- date: 2023-09-01
+  type: talk
+  text: Presented a poster at the Texas Colloquium on Distributed Learning.
+  talk: tldr-2023
+  proposed: true
+
+- date: 2023-01-01
+  type: award
+  text: Won 1st prize for our project at the POWDER-RENEW Mobile and Wireless Week.
+  talk: mww-2023
+  story: /posts/2023/01/blog-post-1/
+  proposed: true
+
+- date: 2022-11-01
+  type: milestone
+  text: Ran a multi-user MIMO measurement campaign on the RENEW platform at Rice University.
+  story: /posts/2022/11/blog-post-0/
+  proposed: true

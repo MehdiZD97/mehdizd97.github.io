@@ -1,0 +1,33 @@
+{%- comment -%}
+  Experience from _data/cv/experience.yml, in file order. Parameters:
+  summary (true: the one-line summary for Home; otherwise the CV bullets,
+  the site-only bullets, and the supervisor), cv_only (true: only roles on
+  the PDF CV).
+{%- endcomment -%}
+<ul class="row-list row-list--notes">
+  {%- for x in site.data.cv.experience %}
+  {%- if include.cv_only and x.on_cv != true %}{% continue %}{% endif %}
+  <li class="row-item">
+    <span class="row-when">{% include date-range.html start=x.start end=x.end %}</span>
+    <span class="row-what">{{ x.title | escape }}</span>
+    <span class="row-where">{{ x.where | escape }}</span>
+    {%- if include.summary %}
+    {%- if x.summary %}
+    <span class="row-note">{{ x.summary | escape }}</span>
+    {%- endif %}
+    {%- else %}
+    <ul class="row-bullets">
+      {%- for b in x.bullets %}
+      <li>{{ b | markdownify | remove: "<p>" | remove: "</p>" | strip }}</li>
+      {%- endfor %}
+      {%- for b in x.extra %}
+      <li>{{ b | markdownify | remove: "<p>" | remove: "</p>" | strip }}</li>
+      {%- endfor %}
+      {%- if x.supervisor %}
+      <li>Supervisor: {{ x.supervisor | escape }}</li>
+      {%- endif %}
+    </ul>
+    {%- endif %}
+  </li>
+  {%- endfor %}
+</ul>

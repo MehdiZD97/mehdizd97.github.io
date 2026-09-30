@@ -1,0 +1,31 @@
+{%- comment -%}
+  Honors and awards from _data/awards.yml, in file order (newest first).
+  The title links to the related publication, the event page, or the talk.
+  Parameter: cv_only (true: only the awards listed in the PDF CV).
+{%- endcomment -%}
+<ul class="row-list">
+  {%- for a in site.data.awards %}
+  {%- if include.cv_only and a.on_cv != true %}{% continue %}{% endif %}
+  {%- assign ca_href = nil %}{% assign ca_external = false %}
+  {%- if a.pub %}
+    {%- assign ca_pub = site.publications | where_exp: "doc", "doc.slug == a.pub" | first %}
+    {%- if ca_pub %}{% assign ca_href = ca_pub.url | relative_url %}{% endif %}
+  {%- elsif a.url %}{% assign ca_href = a.url %}{% assign ca_external = true %}
+  {%- elsif a.talk %}{% assign ca_href = '/cv/' | relative_url | append: '#' | append: a.talk %}
+  {%- endif %}
+  <li class="row-item">
+    <span class="row-when">{{ a.years | default: a.year }}</span>
+    <span class="row-what">
+      {%- if ca_href and ca_external %}<a href="{{ ca_href | escape }}" target="_blank" rel="noopener">{{ a.title | escape }}{% include newtab.html %}</a>
+      {%- elsif ca_href %}<a href="{{ ca_href }}">{{ a.title | escape }}</a>
+      {%- else %}{{ a.title | escape }}{% endif -%}
+    </span>
+    {%- if a.org %}
+    <span class="row-where">{{ a.org | escape }}</span>
+    {%- endif %}
+    {%- if a.detail %}
+    <span class="row-note">{{ a.detail | escape }}</span>
+    {%- endif %}
+  </li>
+  {%- endfor %}
+</ul>

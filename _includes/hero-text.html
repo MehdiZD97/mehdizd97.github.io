@@ -6,11 +6,8 @@
 {%- assign profile = site.data.profile -%}
 <div class="hero__text">
   <div class="hero__id">
-    {%- assign img = '/assets/img/profile/mehdi-zafari-' | relative_url %}
-    <picture class="hero__photo">
-      <source type="image/webp" srcset="{{ img }}160.webp 160w, {{ img }}320.webp 320w, {{ img }}480.webp 480w" sizes="(min-width: 56.25rem) 8.5rem, 6rem">
-      <img src="{{ img }}320.jpg" srcset="{{ img }}160.jpg 160w, {{ img }}320.jpg 320w, {{ img }}480.jpg 480w" sizes="(min-width: 56.25rem) 8.5rem, 6rem" width="320" height="320" alt="Portrait of {{ profile.name }}" fetchpriority="high" decoding="async">
-    </picture>
+    {%- capture photo_alt %}Portrait of {{ profile.name }}{% endcapture %}
+    {% include responsive-image.html name=profile.photo_image alt=photo_alt class="hero__photo" sizes="(min-width: 56.25rem) 8.5rem, 6rem" priority=true %}
     <div class="hero__id-text">
       <h1 class="hero__name" id="hero-name">{{ profile.name }}</h1>
       <p class="hero__title">{{ profile.title }}, {{ profile.affiliation_short }}</p>

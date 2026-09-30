@@ -1,0 +1,118 @@
+# Experience (PLAN 4.4), in CV order. Titles, organizations, dates, and
+# `bullets` follow the CV exactly; `extra` holds site-only bullets shown after
+# them on the web CV. `summary` is one line for Home, condensed from the
+# bullets with no new facts. `where` is the short place label for lists.
+# `end` empty means "present". Markdown is allowed in bullets.
+# TODO(mehdi): review the one-line summaries (drafted from the CV bullets, CONTENT-AUDIT section 4)
+
+- title: Graduate Student Researcher
+  org: University of California, Irvine
+  unit: Department of Electrical Engineering and Computer Science
+  location: Irvine, CA
+  where: EECS, UC Irvine
+  start: 2024-07-01
+  end:
+  summary: Reinforcement learning and GNN models for cooperative ISAC networks; distributed ADMM and consensus algorithms for beamforming and resource allocation in cell-free ISAC.
+  bullets:
+    - Conduct research on reinforcement learning and graph neural network (GNN)-based models for cooperative ISAC networks
+    - Design distributed algorithms based on ADMM/consensus for beamforming and resource allocation in cell-free ISAC systems
+    - Develop large-scale network simulations and implement optimization/learning pipelines using Python/PyTorch, CVXPY, Gurobi
+  supervisor: Prof. A. Lee Swindlehurst
+  on_cv: true
+
+- title: Wireless AI Engineering Intern
+  org: Tiami Networks
+  location: Sacramento, CA
+  where: Tiami Networks, Sacramento, CA
+  start: 2026-06-01
+  end: 2026-09-01
+  summary: ISAC channel models and high-fidelity RF digital twins with NVIDIA Sionna and ray tracing.
+  bullets:
+    - Investigated ISAC channel models and constructed high-fidelity RF digital twins using NVIDIA Sionna and ray-tracing engines
+    - Analyzed spatial propagation characteristics to optimize sensing algorithms and facilitate integration with Open RAN architectures
+  on_cv: true
+
+- title: Graduate Research Assistant
+  org: Rice University
+  unit: Department of Electrical and Computer Engineering
+  location: Houston, TX
+  where: ECE, Rice University
+  start: 2021-08-01
+  end: 2024-04-01
+  summary: Distributed multi-user MIMO beamforming with over-the-air experiments on the RENEW massive MIMO testbed; four papers and over 200 released datasets.
+  bullets:
+    - Conducted research on distributed multi-user MIMO beamforming for next-generation wireless networks
+    - Performed over-the-air experiments using the RENEW massive MIMO testbed to evaluate distributed multi-user beamforming
+    - Published four research papers and released over 200 datasets collected via the RENEW platform
+  extra:
+    - "Datasets: [Distributed Multi-User MIMO Datasets](/publications/distributed-mu-mimo-datasets/) on IEEE DataPort"
+  supervisor: Dr. Rahman Doost-Mohammady
+  on_cv: true
+
+- title: Research Fellow
+  org: Rice University
+  unit: Rice Data to Knowledge (D2K) Lab
+  location: Houston, TX
+  where: Rice D2K Lab
+  start: 2024-01-01
+  end: 2024-04-01
+  summary: Mentoring five undergraduate students on a Rice EMS-sponsored project analyzing operational data across multiple domains.
+  bullets:
+    - Mentored five undergrad students on a Rice EMS-sponsored project to analyze operational data across multiple domains
+  extra:
+    - Developed time-series prediction models to anticipate future requirements in each area
+  on_cv: true
+
+- title: Undergraduate Research Assistant
+  org: University of Tehran
+  unit: Array Processing Lab
+  location: Tehran, Iran
+  where: Array Processing Lab, University of Tehran
+  start: 2018-12-01
+  end: 2020-12-01
+  summary: Hardware implementation of MIMO-OFDM systems on the Xilinx ZedBoard, from MATLAB and Python models to Vivado HLS.
+  bullets:
+    - Conducted research on the hardware implementation of MIMO OFDM systems using the Xilinx ZedBoard platform
+    - Designed full-stack OFDM system, from theoretical modeling in MATLAB/Python to hardware implementation via Vivado-HLS
+  extra:
+    - Developed OFDM and SC-FDE systems on Xilinx FPGAs using High-Level Synthesis (HLS)
+  supervisor: Dr. Aliazam Abbasfar
+  on_cv: true
+
+- title: Part-Time R&D Engineer
+  org: Transportation Innovation Center
+  location: Tehran, Iran
+  where: Transportation Innovation Center, Tehran
+  start: 2020-05-01
+  end: 2020-11-01
+  summary: Hybrid radio links (FM analog and OFDM digital) for radio-controlled camera drones.
+  bullets:
+    - Designed and implemented hybrid radio links (FM analog and OFDM digital) for radio-controlled camera drones
+  extra:
+    - Researched telemetry system implementation strategies for vehicular communication in drone networks
+  on_cv: true
+
+- title: Part-Time R&D Engineer
+  org: Sadr Electronic Dena
+  location: Tehran, Iran
+  where: Sadr Electronic Dena, Tehran
+  start: 2020-05-01
+  end: 2020-11-01
+  summary: A 2.4 GHz ISM-band IoT system for remote control of elevator central control boards.
+  bullets:
+    - Developed a 2.4GHz ISM band IoT system to enable remote control functionality for elevator central control boards
+  extra:
+    - Engineered embedded C/C++ firmware for AVR and ARM microcontrollers with serial data transmission protocols
+  on_cv: true
+
+- title: Full-Time Intern
+  org: Pionaria
+  location: Tehran, Iran
+  where: Pionaria, Tehran
+  start: 2018-07-01
+  end: 2018-10-01
+  bullets: []
+  extra:
+    - Simulated parabolic and patch antennas in HFSS and CST, improving VSWR and gain
+    - Implemented point-to-point and point-to-multipoint wireless links using wireless network standards and software-defined radio (SDR) concepts
+  on_cv: false     # site-only (v1 CV page); kept on the web CV

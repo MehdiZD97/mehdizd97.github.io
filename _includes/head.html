@@ -28,13 +28,19 @@
 <meta property="og:title" content="{{ page_title | escape }}">
 <meta property="og:description" content="{{ description | escape }}">
 <meta property="og:url" content="{{ page.url | absolute_url }}">
-<meta property="og:image" content="{{ profile.photo | absolute_url }}">
+<meta property="og:image" content="{{ page.image | default: profile.photo | absolute_url }}">
+{%- if page.image and page.image_alt %}
+<meta property="og:image:alt" content="{{ page.image_alt | escape }}">
+{%- endif %}
 <meta name="twitter:card" content="summary">
 {% include theme-script.html %}
 {%- for font in d.preload %}
 <link rel="preload" href="{{ '/assets/fonts/' | append: font | relative_url }}" as="font" type="font/woff2" crossorigin>
 {%- endfor %}
 <link rel="stylesheet" href="{{ '/assets/css/' | append: style | append: '.css' | relative_url }}">
+{%- for sheet in page.styles %}
+<link rel="stylesheet" href="{{ sheet | relative_url }}">
+{%- endfor %}
 <link rel="icon" href="{{ '/assets/icons/' | append: style | append: '/favicon.ico' | relative_url }}" sizes="48x48">
 <link rel="icon" href="{{ '/assets/icons/' | append: style | append: '/favicon.svg' | relative_url }}" type="image/svg+xml">
 <link rel="apple-touch-icon" href="{{ '/assets/icons/' | append: style | append: '/apple-touch-icon.png' | relative_url }}">
