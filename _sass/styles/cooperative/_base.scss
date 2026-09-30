@@ -1,0 +1,9 @@
+html { background: var(--paper); color: var(--ink); }
+body { font: 400 var(--text-body)/1.55 var(--font); font-optical-sizing: auto; -webkit-font-smoothing: antialiased; }
+a { color: var(--link); text-decoration-thickness: 2px; text-underline-offset: 0.18em; text-decoration-color: color-mix(in srgb, var(--link) 45%, transparent); }
+:focus-visible { outline: 3px solid var(--link); outline-offset: 2px; }
+code { font-family: var(--font-mono); font-size: 0.875em; }
+@media (hover: hover) and (pointer: fine) {
+  a:hover { text-decoration-color: currentColor; }
+}
+.skip-link { border-radius: var(--pill); }

@@ -1,0 +1,12 @@
+<script>
+  /* Before the first paint: mark JavaScript as available and apply a stored
+     theme. The site is light unless the visitor chose dark (PLAN D9). */
+  (function () {
+    var root = document.documentElement;
+    root.classList.add("js");
+    try {
+      var theme = localStorage.getItem("theme");
+      if (theme === "light" || theme === "dark") root.setAttribute("data-theme", theme);
+    } catch (e) {}
+  })();
+</script>

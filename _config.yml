@@ -1,151 +1,68 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your entire site, values
-# which you are expected to set up once and rarely need to edit after that.
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# `jekyll serve -l -H localhost`. If you change this file, please restart the 
-# server process.
+# Site settings for mehdizd97.github.io (Jekyll 4, built by GitHub Actions).
+# Content lives in _data/, _pages/, _posts/, and the collections; this file
+# holds settings only. Restart `bundle exec jekyll serve` after editing it.
 
-# Theme Settings
-#
-# Review documentation to determine if you should use `theme` or `remote_theme`
-# https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/#installing-the-theme
-#theme                   : minimal-mistakes-jekyll
-#remote_theme           : "mmistakes/minimal-mistakes"
-#remote_theme: "mmistakes/minimal-mistakes@4.26.2"
-#minimal_mistakes_skin     : "default" # "default", "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
+title: Mehdi Zafari
+description: "Mehdi Zafari is a Ph.D. candidate at UC Irvine researching signal processing and AI/ML for next-generation (5G/6G) wireless systems, cell-free MIMO, and ISAC."
+url: https://mehdizd97.github.io
+baseurl: ""
+lang: en-US
+timezone: America/Los_Angeles
 
-# Basic Site Settings
-locale                   : "en-US"
-title                    : "Mehdi Zafari"
-title_separator          : "-"
-name                     : &name "Mehdi Zafari"
-description              : "Mehdi Zafari is a Ph.D. candidate at UC Irvine researching signal processing and AI/ML for next-generation (5G/6G) wireless systems, cell-free MIMO, and ISAC."
-url                      : https://mehdizd97.github.io # the base hostname & protocol for your site e.g. "https://[your GitHub username].github.io"
-baseurl                  : "" # the subpath of your site, e.g. "/blog"
-repository               : "mehdizd97/mehdizd97.github.io"
+# Style: cooperative (B, the main style) or instrument (A, the alternate).
+# Both are built from _sass/ with the palettes in _data/design.yml.
+design: cooperative
 
-# Site Author - The following control what appear as part of the author content on the side bar.
-#               If a field is blank the icon and link will not appear, otherwise it will be shown.
-#               Additional customization can be done by editing /_includes/author-profile.html
-author:
-  # Biographic information
-  avatar           : "profile4.jpeg"
-  name             : "Mehdi Zafari"
-  pronouns         : # example: "she/her"  
-#  bio              : "PhD Student | AI/ML-Driven Wireless Systems Researcher"
-  bio              : "PhD Candidate | AI/ML for Next-Gen Wireless Communications"
-  location         : "Irvine, California"
-  employer         : "https://uci.edu/"
-  uri              : # "https://mehdizd97.github.io/"
-  email            : "mzafarid@uci.edu"
+# Contact form endpoint (Formspree). Keep it: the contact page posts here.
+formspree: https://formspree.io/f/mwppwoye
 
-  # Academic websites
-  arxiv            : # URL - Update with the correct link to your profile
-  googlescholar    : "https://scholar.google.com/citations?user=lKiB9vIAAAAJ"
-  impactstory      : # URL
-  orcid            : "https://orcid.org/0000-0001-8894-8709"
-  semantic         : # URL
-  pubmed           : # URL
-  researchgate     : # "https://www.researchgate.net/profile/Mehdi-Zafari?ev=hdr_xprf"
-  scopus           : # URL
+# Collections, until Stages 4 and 6 move talks and publications into the
+# new content model. Each item sets its own permalink (the v1 URLs).
+collections:
+  publications:
+    output: true
+    permalink: /:collection/:path/
+  talks:
+    output: true
+    permalink: /:collection/:path/
 
-  # Repositories and software development
-  bitbucket        : # Username - Update with your username on the site
-  codepen          : # Username
-  dribbble         : # Username
-  github           : "mehdizd97"
-  kaggle           : # Username  
-  stackoverflow    : # User number or user number and name (i.e., use "1" or "1/jeff-atwood")    
+defaults:
+  - scope: { path: "", type: pages }
+    values: { layout: page }
+  - scope: { path: "", type: posts }
+    values: { layout: post }
+  - scope: { path: "", type: publications }
+    values: { layout: publication }
+  - scope: { path: "", type: talks }
+    values: { layout: page }
 
-  # Social media
-  bluesky          : # Replace this with you Bluesky username
-  facebook         : # Username
-  flickr           : # Username
-  foursquare       : # Username
-  goodreads        : # Username
-  google_plus      : # Username
-  keybase          : # Username
-  instagram        : # Username
-  lastfm           : # Username
-  linkedin         : "Mehdi-Zafari"
-  mastodon         : # URL
-  medium           : # URL
-  pinterest        : # Username
-  soundcloud       : # Username
-  steam            : # Username
-  telegram         : # URL
-  tumblr           : # Username
-  twitter          : # Username for X / Twitter
-  vine             : # Username
-  weibo            : # Username
-  wikipedia        : # Username
-  xing             : # Username
-  youtube          : # Username
-  zhihu            : # Username
+# Stories (posts) set their own permalinks: /posts/YYYY/MM/blog-post-N/.
+permalink: /:categories/:title/
+future: true
+excerpt_separator: "\n\n"
 
-# Publication Category - The following the list of publication categories and their headings
-publication_category:
-  books:
-    title: 'Books'
-  manuscripts:
-    title: 'Journal Articles'    
-  conferences:
-    title: 'Conference Papers'
-  datasets:
-    title: 'Datasets'
-  repos:
-    title: 'GitHub Repositories'
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  hard_wrap: false
+  auto_ids: true
+  smart_quotes: lsquo,rsquo,ldquo,rdquo
 
-# Site Settings
-teaser                   :  # filename of teaser fallback teaser image placed in /images/, .e.g. "500x300.png"
-logo                     :
-breadcrumbs              : false # true, false (default)
-words_per_minute         : 160
-future                   : true
-read_more                : "disabled" # if enabled, adds "Read more" links to excerpts
-atom_feed:
-  hide                   : false     # change to true to hide the RSS feed in the footer
-  path                   : # blank (default) uses feed.xml
+sass:
+  sass_dir: _sass
+  style: compressed
 
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-redirect-from
 
-# SEO Related
-google_site_verification :
-bing_site_verification   :
-alexa_site_verification  :
-yandex_site_verification :
-
-
-# Social Sharing
-twitter:
-  username               : &twitter
-facebook:
-  username               :
-  app_id                 :
-  publisher              :
-og_image                 :  # Open Graph/Twitter default site image
-# For specifying social profiles
-# - https://developers.google.com/structured-data/customize/social-profiles
-social:
-  type                   : # Person or Organization (defaults to Person)
-  name                   : # If the user or organization name differs from the site's name
-  links: # An array of links to social media profiles
-
-
-# Analytics
-analytics:
-  provider               :  "false" # false (default), "google", "google-universal", "google-analytics-4", "custom"
-  google:
-    tracking_id          :
-
-
-# Reading Files
+# Folders starting with "_" are skipped unless listed here.
 include:
-  - .htaccess
   - _pages
-  - files
+
 exclude:
-  # Repository and tooling files
   - CLAUDE.md
   - README.md
   - UPDATING.md
@@ -155,130 +72,5 @@ exclude:
   - Gemfile.lock
   - .ruby-version
   - vendor/
-  - .bundle/
-  - .github/
-  - .sass-cache/
-  - .jekyll-cache/
   - node_modules/
-  - package.json
   - package-lock.json
-  # Legacy theme JavaScript sources (bundled into main.min.js; removed in Stage 3)
-  - assets/js/_main.js
-  - assets/js/plugins
-  - assets/js/vendor
-keep_files:
-  - .git
-  - .svn
-encoding: "utf-8"
-markdown_ext: "markdown,mkdown,mkdn,mkd,md"
-
-
-# Conversion
-markdown: kramdown
-highlighter: rouge
-lsi: false
-excerpt_separator: "\n\n"
-incremental: false
-
-
-# Markdown Processing
-kramdown:
-  input: GFM
-  hard_wrap: false
-  auto_ids: true
-  footnote_nr: 1
-  entity_output: as_char
-  toc_levels: 1..6
-  smart_quotes: lsquo,rsquo,ldquo,rdquo
-  enable_coderay: false
-
-
-# These settings control the types of collections used by the template
-collections:
-  publications:
-    output: true
-    permalink: /:collection/:path/
-  talks:
-    output: true
-    permalink: /:collection/:path/.
-
-
-# These settings control how pages and collections are included in the site
-defaults:
-  # _posts
-  - scope:
-      path: ""
-      type: posts
-    values:
-      layout: single
-#      layout: post-article
-      author_profile: true
-      read_time: true
-      share: true
-      related: true
-  # _pages
-  - scope:
-      path: ""
-      type: pages
-    values:
-      layout: single
-      author_profile: true
-  # _publications
-  - scope:
-      path: ""
-      type: publications
-    values:
-      layout: single
-      author_profile: true
-      share: true
-  # _talks
-  - scope:
-      path: ""
-      type: talks
-    values:
-      layout: talk
-      author_profile: true
-      share: true
-
-
-# Sass/SCSS
-sass:
-  sass_dir: _sass
-  style: compressed # http://sass-lang.com/documentation/file.SASS_REFERENCE.html#output_style
-  # Temporary (removed in Stage 3 with the legacy theme): hide Dart Sass
-  # deprecation noise from the vendored academicpages styles in _sass/ and
-  # from the @import rules in assets/css/main.scss.
-  quiet_deps: true
-  silence_deprecations:
-    - import
-
-
-# Outputting
-permalink: /:categories/:title/
-# paginate: 5 # amount of posts to show
-# paginate_path: /page:num/
-timezone: America/Los_Angeles # Etc/UTC # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-
-
-# Plugins
-plugins:
-  - jekyll-feed
-  - jekyll-sitemap
-  - jekyll-redirect-from
-
-
-# Tag links (legacy theme only; removed in Stage 3)
-# The tag archive pages are gone. The legacy templates still link tags to
-# /tags/<tag>/, and those URLs redirect to /year-archive/ (see
-# _pages/year-archive.html) until Stage 7 points them at /news/.
-tag_archive:
-  type: jekyll-archives
-  path: /tags/
-
-
-# HTML Compression
-# - http://jch.penibelst.de/
-compress_html:
-  clippings: all
-  ignore:
-    envs: development

@@ -1,0 +1,48 @@
+// Buttons
+.btn {
+  position: relative; overflow: hidden;
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  min-height: 2.75rem; padding: 0 1.125rem;
+  border: 1.5px solid var(--ink); border-radius: var(--radius);
+  font: 600 var(--text-ui)/1 var(--font-sans); text-decoration: none;
+}
+.btn--primary { background: var(--ink); color: var(--paper); }
+.btn--secondary { background: transparent; color: var(--ink); }
+.btn--text { border-color: transparent; padding-inline: 0.25rem; overflow: visible; text-decoration: underline; text-decoration-color: var(--signal); }
+.btn--small { min-height: 2.25rem; padding: 0 0.75rem; font-size: var(--text-small); }
+.btn .icon { width: 1rem; height: 1rem; }
+.btn::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px;
+  background: var(--signal-bright); transform: scaleX(0); transform-origin: left;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.btn--text::after { content: none; }
+.btn:focus-visible::after { transform: scaleX(1); }
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover { color: inherit; }
+  .btn--primary:hover { color: var(--paper); }
+  .btn:hover::after { transform: scaleX(1); }
+  .btn--text:hover { color: var(--signal); }
+}
+
+// Link buttons
+.linkbtn {
+  position: relative; display: inline-flex; align-items: center; gap: 0.4rem;
+  min-height: 2.25rem; padding: 0 0.625rem;
+  border: 1px solid var(--grid); border-radius: var(--radius);
+  background: var(--panel); color: var(--ink);
+  font: 500 var(--text-mono)/1 var(--font-mono); text-decoration: none;
+}
+.linkbtn .icon { width: 1rem; height: 1rem; color: var(--slate); }
+.linkbtn::after {
+  content: ""; position: absolute; inset: -1px; pointer-events: none;
+  border: 1px solid var(--signal-bright); border-radius: inherit;
+  opacity: 0; transition: opacity var(--dur-fast) var(--ease-out);
+}
+.linkbtn[aria-expanded="true"]::after { opacity: 1; }
+.linkbtn[aria-expanded="true"] .icon { color: var(--signal); }
+@media (hover: hover) and (pointer: fine) {
+  .linkbtn:hover { color: var(--ink); }
+  .linkbtn:hover::after { opacity: 1; }
+  .linkbtn:hover .icon { color: var(--signal); }
+}

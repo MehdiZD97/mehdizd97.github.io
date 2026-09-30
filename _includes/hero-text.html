@@ -1,0 +1,27 @@
+{%- comment -%}
+  Hero text from _data/profile.yml: portrait, name (the page's h1), title,
+  headline, intro, actions, and profile links. Stage 5 adds the signature
+  visual beside it.
+{%- endcomment -%}
+{%- assign profile = site.data.profile -%}
+<div class="hero__text">
+  <div class="hero__id">
+    {%- assign img = '/assets/img/profile/mehdi-zafari-' | relative_url %}
+    <picture class="hero__photo">
+      <source type="image/webp" srcset="{{ img }}160.webp 160w, {{ img }}320.webp 320w, {{ img }}480.webp 480w" sizes="(min-width: 56.25rem) 8.5rem, 6rem">
+      <img src="{{ img }}320.jpg" srcset="{{ img }}160.jpg 160w, {{ img }}320.jpg 320w, {{ img }}480.jpg 480w" sizes="(min-width: 56.25rem) 8.5rem, 6rem" width="320" height="320" alt="Portrait of {{ profile.name }}" fetchpriority="high" decoding="async">
+    </picture>
+    <div class="hero__id-text">
+      <h1 class="hero__name" id="hero-name">{{ profile.name }}</h1>
+      <p class="hero__title">{{ profile.title }}, {{ profile.affiliation_short }}</p>
+    </div>
+  </div>
+  <p class="hero__headline">{{ profile.headline }}</p>
+  <p class="hero__intro">{{ profile.intro | default: site.description }}</p>
+  <p class="hero__actions">
+    <a class="btn btn--primary" href="{{ '/publications/' | relative_url }}">View publications</a>
+    {% include cv-pdf.html %}
+    <a class="btn btn--text" href="{{ '/contact/' | relative_url }}">Contact</a>
+  </p>
+  {% include profile-links.html %}
+</div>

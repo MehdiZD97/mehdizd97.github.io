@@ -1,31 +1,21 @@
----
-layout: compress
----
-
-{% include base_path %}
-
 <!doctype html>
-<html lang="{{ site.locale | slice: 0,2 }}" class="no-js">
-  <head>
-    {% include head.html %}
-    {% include head/custom.html %}
-  </head>
-
-  <body>
-
-    {% include browser-upgrade.html %}
-    {% include masthead.html %}
-
-    {{ content }}
-
-    <div class="page__footer">
-      <footer>
-        {% include footer/custom.html %}
-        {% include footer.html %}
-      </footer>
-    </div>
-
-    {% include scripts.html %}
-
-  </body>
+{%- comment -%}
+  Base layout (PLAN 3.4): skip link, header, the page's main content, footer,
+  and scripts. Child layouts provide <main id="main">. Pages can add module
+  scripts with `scripts: [/assets/js/...]` in their front matter.
+{%- endcomment %}
+<html lang="{{ site.lang | default: 'en-US' }}">
+<head>
+  {% include head.html %}
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  {% include header.html %}
+  {{ content }}
+  {% include footer.html %}
+  <script type="module" src="{{ '/assets/js/site.js' | relative_url }}"></script>
+  {%- for script in page.scripts %}
+  <script type="module" src="{{ script | relative_url }}"></script>
+  {%- endfor %}
+</body>
 </html>

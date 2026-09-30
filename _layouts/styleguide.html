@@ -1,75 +1,33 @@
 <!doctype html>
 {%- comment -%}
-  Layout for the style guide (/dev/styleguide/), a development reference for
-  both design directions; independent of the legacy theme; never on the live site.
-  theme_default (from _data/styleguide.yml): light (dark only when the visitor
-  picks it with the toggle) or system (follow the operating system).
+  Layout for the style guide (/dev/styleguide/): a development reference
+  that shows both styles side by side with the site's own stylesheets,
+  header, footer, and script. Production builds drop /dev/ (_plugins/dev_filter.rb).
+  Front matter: direction (cooperative or instrument; none for the overview),
+  sections (in-page menu targets), hero_script.
 {%- endcomment -%}
-{%- assign d = site.data.styleguide.directions | where: "id", page.direction | first -%}
-{%- assign theme_default = d.theme_default | default: 'system' -%}
-<html lang="en-US" data-direction="{{ page.direction | default: 'overview' }}" data-theme-default="{{ theme_default }}">
+{%- assign d = site.data.design.directions | where: "id", page.direction | first -%}
+<html lang="en-US" data-direction="{{ page.direction | default: 'overview' }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
   <title>{{ page.title }} | Style guide</title>
-  <script>
-    // Mark JavaScript as available and apply a stored theme choice before the first paint.
-    (function () {
-      document.documentElement.classList.add("js");
-      try {
-        var theme = localStorage.getItem("sg-theme");
-        if (theme === "light" || theme === "dark") {
-          document.documentElement.setAttribute("data-theme", theme);
-        }
-      } catch (e) {}
-    })();
-  </script>
+  {% include theme-script.html %}
   {%- if d %}
-  <style>
-    :root {
-      color-scheme: light;
-      {%- for c in d.colors %}
-      --{{ c.id }}: {{ c.light }};
-      {%- endfor %}
-      {%- for t in d.tokens %}
-      --{{ t.id }}: {{ t.light }};
-      {%- endfor %}
-    }
-    :root[data-theme="dark"] {
-      color-scheme: dark;
-      {%- for c in d.colors %}
-      --{{ c.id }}: {{ c.dark }};
-      {%- endfor %}
-      {%- for t in d.tokens %}
-      --{{ t.id }}: {{ t.dark }};
-      {%- endfor %}
-    }
-    {%- if theme_default == "system" %}
-    @media (prefers-color-scheme: dark) {
-      :root:not([data-theme="light"]) {
-        color-scheme: dark;
-        {%- for c in d.colors %}
-        --{{ c.id }}: {{ c.dark }};
-        {%- endfor %}
-        {%- for t in d.tokens %}
-        --{{ t.id }}: {{ t.dark }};
-        {%- endfor %}
-      }
-    }
-    {%- endif %}
-  </style>
-  {%- endif %}
-  {%- for font in page.preload_fonts %}
-  <link rel="preload" href="{{ font | relative_url }}" as="font" type="font/woff2" crossorigin>
+  {%- for font in d.preload %}
+  <link rel="preload" href="{{ '/assets/fonts/' | append: font | relative_url }}" as="font" type="font/woff2" crossorigin>
   {%- endfor %}
-  <link rel="stylesheet" href="{{ '/dev/styleguide/assets/sg.css' | relative_url }}">
-  {%- if d %}
-  <link rel="stylesheet" href="{{ '/dev/styleguide/assets/' | append: page.direction | append: '.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/' | append: page.direction | append: '.css' | relative_url }}">
+  <link rel="icon" href="{{ '/assets/icons/' | append: page.direction | append: '/favicon.svg' | relative_url }}" type="image/svg+xml">
   {%- endif %}
+  <link rel="stylesheet" href="{{ '/dev/styleguide/assets/sg.css' | relative_url }}">
 </head>
 <body>
   {{ content }}
+  {%- if d %}
+  <script type="module" src="{{ '/assets/js/site.js' | relative_url }}"></script>
+  {%- endif %}
   <script type="module" src="{{ '/dev/styleguide/assets/sg.js' | relative_url }}"></script>
   {%- if page.hero_script %}
   <script type="module" src="{{ page.hero_script | relative_url }}"></script>

@@ -1,0 +1,6 @@
+{%- comment -%}
+  Monogram for A (Instrument): "MZ" in IBM Plex Mono Medium (SIL OFL 1.1),
+  outlines extracted with fontTools, in a square with the amber status corner.
+  Colors come from CSS (header) or from _local/tools/make_icons.py (favicons).
+{%- endcomment -%}
+<svg class="monogram monogram--instrument {{ include.class }}" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect class="monogram__bg" x="1.5" y="1.5" width="61" height="61"/><path class="monogram__mz" d="M26.52 30.93L26.6 24.91H26.37L22.36 35.2L18.35 24.91H18.12L18.21 30.93V40.5H15.37V20.5H19.3L22.36 28.44H22.56L25.66 20.5H29.35V40.5H26.52ZM45.63 40.5H31.19V37.66L41.7 23.19H31.59V20.5H45.23V23.34L34.71 37.81H45.63Z"/><rect class="monogram__corner" x="49" y="49" width="15" height="15"/></svg>

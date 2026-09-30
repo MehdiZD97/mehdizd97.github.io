@@ -1,0 +1,112 @@
+// Hero: the blue field with the name, portrait, and (from Stage 5) the signature views.
+.hero { position: relative; overflow: hidden; background: var(--field); color: var(--on-field); }
+.hero::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 80% 90% at 65% 45%, transparent 55%, var(--vignette) 100%);
+}
+.hero__inner {
+  position: relative; max-width: var(--wrap); margin: 0 auto;
+  padding: var(--space-6) var(--gutter) var(--space-7);
+  display: grid; gap: var(--space-5);
+}
+@media (min-width: 56.25rem) {
+  .hero__inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); align-items: center; gap: var(--space-6); padding-block: var(--space-7) var(--space-8); }
+  .hero__inner--text { grid-template-columns: minmax(0, 46rem); }
+}
+.hero__text { display: grid; gap: var(--space-4); align-content: start; }
+.hero__id { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-4); }
+.hero__id-text { display: grid; gap: var(--space-2); }
+.hero__photo { display: block; flex: none; width: 6rem; }
+.hero__photo img { display: block; width: 100%; height: auto; border-radius: 50%; box-shadow: 0 0 0 3px var(--on-field); }
+@media (min-width: 40rem) {
+  .hero__id { flex-direction: row; align-items: center; gap: var(--space-5); }
+}
+@media (min-width: 56.25rem) {
+  .hero__photo { width: 8rem; }
+}
+.hero__name { font-size: var(--text-hero); font-weight: 780; line-height: 0.92; letter-spacing: -0.035em; }
+.hero__title { font-size: 1.125rem; font-weight: 600; color: var(--on-field-muted); }
+.hero__headline { font-size: var(--text-h3); font-weight: 650; line-height: 1.22; max-width: 22ch; letter-spacing: -0.01em; }
+.hero__intro { color: var(--on-field-muted); max-width: 46ch; }
+.hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); margin-top: var(--space-2); }
+.hero .btn--primary { background: var(--on-field); color: var(--field); }
+.hero .btn--secondary { border-color: color-mix(in srgb, var(--on-field) 60%, transparent); color: var(--on-field); }
+.hero .btn--text { color: var(--on-field); }
+
+// Profile links: icon circles (labels for screen readers only)
+.profile-links { list-style: none; display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.profile-links a {
+  display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border-radius: 50%;
+  border: 1.5px solid color-mix(in srgb, var(--on-field) 45%, transparent); color: var(--on-field);
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.profile-links .icon { width: 1.125rem; height: 1.125rem; }
+.profile-links__label { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (hover: hover) and (pointer: fine) {
+  .profile-links a:hover { transform: translateY(-2px); }
+}
+
+// Signature: the two hero views (cell-free and array), drawn on the field
+.hv { display: grid; gap: var(--space-2); min-width: 0; }
+.hv-tabs { display: flex; justify-content: center; gap: var(--space-2); }
+.hv-tab {
+  position: relative; min-width: 8rem; min-height: 2.5rem; padding: 0 0.75rem;
+  border: 0; background: none; color: var(--on-field-muted); font: 650 var(--text-ui)/1 var(--font);
+}
+.hv-tab[aria-selected="true"] { color: var(--on-field); }
+.hv-tab::after {
+  content: ""; position: absolute; left: 0.75rem; right: 0.75rem; bottom: 0.3rem; height: 3px; border-radius: var(--pill);
+  background: var(--beam-bright); transform: scaleX(0); transform-origin: left;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.hv-tab[aria-selected="true"]::after { transform: scaleX(1); }
+@media (hover: hover) and (pointer: fine) {
+  .hv-tab:hover { color: var(--on-field); }
+}
+.hv-panel { display: grid; gap: var(--space-3); align-content: start; }
+.hv-svg { width: 100%; height: auto; touch-action: pan-y; }
+.hv-dot { fill: var(--on-field-muted); fill-opacity: 0.35; }
+.hv-label text, text.hv-label { fill: var(--on-field-muted); font: 600 11px var(--font); }
+@media (max-width: 40rem) {
+  .hv-label text, text.hv-label { font-size: 15px; }
+}
+.hv-fronthaul line { stroke: var(--on-field-muted); stroke-opacity: 0.5; stroke-width: 1.25; stroke-dasharray: 3 4; stroke-linecap: round; }
+.hv-stop--near { stop-color: var(--beam-bright); stop-opacity: 0.8; }
+.hv-stop--mid { stop-color: var(--beam-bright); stop-opacity: 0.42; }
+.hv-stop--far { stop-color: var(--beam-bright); stop-opacity: 0; }
+.hv-ap-waves { fill: none; stroke: var(--beam-bright); stroke-width: 1.4; stroke-linecap: round; }
+.hv-ap-mast { fill: none; stroke: var(--on-field); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.hv-ap-head { fill: var(--on-field); }
+.hv-cpu-body { fill: var(--field); stroke: var(--on-field); stroke-width: 1.6; }
+.hv-cpu-core { fill: var(--on-field); }
+.hv-cpu-pins { fill: none; stroke: var(--on-field); stroke-width: 1.6; stroke-linecap: round; }
+.hv-reticle, .hv-reticle-ticks { fill: none; stroke: var(--on-field); stroke-width: 1.6; stroke-linecap: round; }
+.hv-reticle-dot { fill: var(--echo-bright); }
+.hv-echo {
+  fill: none; stroke: var(--echo-bright); stroke-width: 1.25; opacity: 0;
+  vector-effect: non-scaling-stroke; transform-box: fill-box; transform-origin: center;
+  animation: hv-echo 2.8s cubic-bezier(0.2, 0.6, 0.3, 1) infinite;
+}
+.hv-echo--late { animation-delay: 1.4s; }
+.is-paused .hv-echo, .hv-panel.is-hidden .hv-echo { animation-play-state: paused; }
+@keyframes hv-echo {
+  0% { transform: scale(0.9); opacity: 0.9; }
+  100% { transform: scale(3.4); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hv-echo { display: none; }
+}
+.hv-grid path, .hv-grid line { fill: none; stroke: var(--on-field-muted); stroke-opacity: 0.35; stroke-width: 1; }
+.hv-pattern { fill: var(--beam-bright); fill-opacity: 0.22; stroke: var(--beam-bright); stroke-width: 1.75; stroke-linejoin: round; }
+.hv-ray { stroke: var(--echo-bright); stroke-width: 1; stroke-dasharray: 3 4; }
+.hv-element { fill: var(--on-field); }
+.hv-dial { fill: none; stroke: var(--on-field-muted); stroke-opacity: 0.6; stroke-width: 1; }
+.hv-needle { stroke: var(--beam-bright); stroke-width: 1.5; stroke-linecap: round; }
+.hv-readout { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.25rem 1.5rem; margin: 0; font: 500 0.8125rem/1.5 var(--font); }
+.hv-readout div { display: flex; gap: 0.5rem; }
+.hv-readout dt { color: var(--on-field-muted); }
+.hv-readout dd { margin: 0; color: var(--on-field); font-variant-numeric: tabular-nums; }
+.hv-readout--az dd { min-width: 4ch; }
+.hv-caption { text-align: center; font-size: 0.75rem; color: var(--on-field-muted); }
+.hv-control { display: flex; align-items: center; gap: var(--space-3); justify-self: center; width: 100%; max-width: 26rem; font-weight: 650; font-size: 0.8125rem; color: var(--on-field-muted); }
+.hv-control input { flex: 1; min-height: 1.5rem; accent-color: var(--beam-bright); }

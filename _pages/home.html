@@ -1,0 +1,109 @@
+---
+layout: home
+permalink: /
+redirect_from:
+  - /about/
+  - /about.html
+---
+{%- comment -%}
+  Temporary home page (Stage 3): the v1 content in the new shell. Stage 5
+  replaces it with the data-driven home (News, Publications, CV, Videos).
+{%- endcomment -%}
+{%- assign logos = '/assets/img/logos/' | relative_url %}
+<section class="section" id="about" aria-labelledby="about-title">
+  <h2 class="section__title" id="about-title">About me</h2>
+  <div class="section__body">
+    <div class="prose"><p>I am a Ph.D. candidate at UC Irvine, where I work under the supervision of <a href="{{ site.data.profile.advisor.url }}" target="_blank" rel="noopener">Professor Lee Swindlehurst{% include newtab.html %}</a>. My research centers on advancing wireless communication systems through signal processing, optimization techniques, AI/machine learning, and hands-on experimental implementations.</p></div>
+    <section class="subsection" aria-labelledby="interests-title">
+      <h3 class="subsection__title" id="interests-title">Research interests</h3>
+      <div class="prose">
+        <ul>
+          <li>Wireless communication systems</li>
+          <li>Integrated sensing and communication</li>
+          <li>Cell-free and distributed massive MIMO</li>
+          <li>AI and machine learning for wireless networks</li>
+          <li>Distributed and decentralized optimization</li>
+        </ul>
+      </div>
+    </section>
+    <section class="subsection" aria-labelledby="education-title">
+      <h3 class="subsection__title" id="education-title">Education</h3>
+      <ul class="edu-list">
+        <li class="edu">
+          <picture class="edu-logo">
+            <source type="image/webp" srcset="{{ logos }}logo-uci-72.webp 1x, {{ logos }}logo-uci-144.webp 2x, {{ logos }}logo-uci-216.webp 3x">
+            <img src="{{ logos }}logo-uci-72.png" srcset="{{ logos }}logo-uci-144.png 2x, {{ logos }}logo-uci-216.png 3x" width="72" height="72" alt="" loading="lazy">
+          </picture>
+          <div class="edu-body">
+            <h4 class="edu-degree">Ph.D., Electrical Engineering and Computer Science</h4>
+            <p class="edu-school">UC Irvine</p>
+          </div>
+          <p class="edu-dates">2028, expected</p>
+        </li>
+        <li class="edu">
+          <picture class="edu-logo">
+            <source type="image/webp" srcset="{{ logos }}logo-rice-72.webp 1x, {{ logos }}logo-rice-144.webp 2x, {{ logos }}logo-rice-216.webp 3x">
+            <img src="{{ logos }}logo-rice-72.png" srcset="{{ logos }}logo-rice-144.png 2x, {{ logos }}logo-rice-216.png 3x" width="60" height="72" alt="" loading="lazy">
+          </picture>
+          <div class="edu-body">
+            <h4 class="edu-degree">M.S., Electrical and Computer Engineering</h4>
+            <p class="edu-school">Rice University</p>
+          </div>
+          <p class="edu-dates">2024</p>
+        </li>
+        <li class="edu">
+          <picture class="edu-logo">
+            <source type="image/webp" srcset="{{ logos }}logo-tehran-72.webp 1x, {{ logos }}logo-tehran-144.webp 2x, {{ logos }}logo-tehran-216.webp 3x">
+            <img src="{{ logos }}logo-tehran-72.png" srcset="{{ logos }}logo-tehran-144.png 2x, {{ logos }}logo-tehran-216.png 3x" width="72" height="72" alt="" loading="lazy">
+          </picture>
+          <div class="edu-body">
+            <h4 class="edu-degree">B.S., Electrical and Computer Engineering</h4>
+            <p class="edu-school">University of Tehran</p>
+          </div>
+          <p class="edu-dates">2019</p>
+        </li>
+      </ul>
+    </section>
+  </div>
+</section>
+
+<section class="section" id="recent-publications" aria-labelledby="recent-publications-title">
+  <h2 class="section__title" id="recent-publications-title">Recent publications</h2>
+  <div class="section__body">
+    <ul class="row-list row-list--notes">
+      <li class="row-item"><span class="row-when">Mar 2026</span><span class="row-what">Robust Wildfire Forecasting under Partial Observability: From Reconstruction to Prediction</span><span class="row-note">Submitted to IEEE TGRS Journal</span></li>
+      <li class="row-item"><span class="row-when">Jan 2026</span><span class="row-what">An Analytical and Experimental Study of Distributed Uplink Beamforming in the Presence of Carrier Frequency Offsets</span><span class="row-note">Published at IEEE TVT Journal</span></li>
+      <li class="row-item"><span class="row-when">Jan 2026</span><span class="row-what">ASSENT: Learning-Based Association Optimization for Distributed Cell-Free ISAC</span><span class="row-note">Accepted to the IEEE ICC</span></li>
+      <li class="row-item"><span class="row-when">Nov 2025</span><span class="row-what">ASSENT-CellFree-ISAC: Simulation Framework</span><span class="row-note">GitHub repository</span></li>
+      <li class="row-item"><span class="row-when">2025</span><span class="row-what">Coordinated Decentralized Resource Optimization for Cell-Free ISAC Systems</span><span class="row-note">Asilomar</span></li>
+      <li class="row-item"><span class="row-when">2025</span><span class="row-what">Distributed Cell-Free ISAC Simulation Framework</span><span class="row-note">GitHub repository</span></li>
+      <li class="row-item"><span class="row-when">2024</span><span class="row-what">ADMM for Downlink Beamforming in Cell-Free Massive MIMO Systems</span><span class="row-note">Asilomar</span></li>
+    </ul>
+    <p class="more-link"><a href="{{ '/publications/' | relative_url }}">All publications</a></p>
+  </div>
+</section>
+
+<section class="section" id="recent-news" aria-labelledby="recent-news-title">
+  <h2 class="section__title" id="recent-news-title">Recent news</h2>
+  <div class="section__body">
+    <ul class="news-list">
+      <li class="news"><time class="news-date" datetime="2026-03">Mar 2026</time><span class="news-icon">{% include icon.html name="award" %}</span><p class="news-text">Received the Pia Gratton Endowed Graduate Student Award from the UCI Samueli School of Engineering.</p></li>
+      <li class="news"><time class="news-date" datetime="2026-03">Mar 2026</time><span class="news-icon">{% include icon.html name="award" %}</span><p class="news-text">Won 3rd place in the UCI Grad Slam Finals competition. <a href="https://grad.uci.edu/professional-development/grad-slam/grad-slam-finalists/" target="_blank" rel="noopener">Read more{% include newtab.html %}</a></p></li>
+      <li class="news"><time class="news-date" datetime="2026-02">Feb 2026</time><span class="news-icon">{% include icon.html name="award" %}</span><p class="news-text">Selected as a finalist in the UCI Grad Slam Finals competition. <a href="https://grad.uci.edu/professional-development/grad-slam/grad-slam-finalists/" target="_blank" rel="noopener">Read more{% include newtab.html %}</a></p></li>
+      <li class="news"><time class="news-date" datetime="2026-01">Jan 2026</time><span class="news-icon">{% include icon.html name="talk" %}</span><p class="news-text">I will be presenting at the UCI Grad Slam Semi Finals.</p></li>
+      <li class="news"><time class="news-date" datetime="2026-01">Jan 2026</time><span class="news-icon">{% include icon.html name="paper" %}</span><p class="news-text">My experimental paper is published at the IEEE TVT journal (see <a href="{{ '/publications/' | relative_url }}">Publications</a>).</p></li>
+      <li class="news"><time class="news-date" datetime="2026-01">Jan 2026</time><span class="news-icon">{% include icon.html name="paper" %}</span><p class="news-text">My ASSENT paper is accepted at the IEEE ICC 2026.</p></li>
+      <li class="news"><time class="news-date" datetime="2025-12">Dec 2025</time><span class="news-icon">{% include icon.html name="code" %}</span><p class="news-text">Released a GitHub repository for our GenAI-based wildfire prediction project.</p></li>
+      <li class="news"><time class="news-date" datetime="2025-11">Nov 2025</time><span class="news-icon">{% include icon.html name="paper" %}</span><p class="news-text">Published a preprint of the ASSENT paper and its GitHub repository.</p></li>
+      <li class="news"><time class="news-date" datetime="2025-10">Oct 2025</time><span class="news-icon">{% include icon.html name="talk" %}</span><p class="news-text">Lecture presentation at the 59th Asilomar Conference.</p></li>
+      <li class="news"><time class="news-date" datetime="2025-10">Oct 2025</time><span class="news-icon">{% include icon.html name="talk" %}</span><p class="news-text">Poster presentation at the Student Paper Contest (SPC) of Asilomar Conference.</p></li>
+      <li class="news"><time class="news-date" datetime="2025-10">Oct 2025</time><span class="news-icon">{% include icon.html name="event" %}</span><p class="news-text">Attended the IEEE MILCOM 2025 conference in LA, CA.</p></li>
+      <li class="news"><time class="news-date" datetime="2025-08">Aug 2025</time><span class="news-icon">{% include icon.html name="award" %}</span><p class="news-text">My submission to Asilomar 2025 has been shortlisted for the Best Paper Award contest.</p></li>
+      <li class="news"><time class="news-date" datetime="2025-04">Apr 2025</time><span class="news-icon">{% include icon.html name="code" %}</span><p class="news-text">Released a simulation framework for distributed cell-free ISAC systems on GitHub.</p></li>
+      <li class="news"><time class="news-date" datetime="2024-11">Nov 2024</time><span class="news-icon">{% include icon.html name="video" %}</span><p class="news-text">Posted two short tutorial videos on YouTube.</p></li>
+      <li class="news"><time class="news-date" datetime="2024-10">Oct 2024</time><span class="news-icon">{% include icon.html name="talk" %}</span><p class="news-text">Presented a lecture of my recent paper at the 58th Asilomar Conference.</p></li>
+      <li class="news"><time class="news-date" datetime="2024-07">Jul 2024</time><span class="news-icon">{% include icon.html name="award" %}</span><p class="news-text">Received the Graduate Dean’s Recruitment Fellowship Award from UC Irvine.</p></li>
+    </ul>
+    <p class="more-link"><a href="{{ '/year-archive/' | relative_url }}">All news and posts</a></p>
+  </div>
+</section>

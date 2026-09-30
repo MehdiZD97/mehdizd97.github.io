@@ -1,0 +1,25 @@
+// Page frame and sections
+.site-main { width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter) var(--space-8); }
+.section { display: grid; gap: var(--space-5); padding-top: var(--space-7); }
+.section__title { font-size: var(--text-h2); font-weight: 760; line-height: 1.05; letter-spacing: -0.03em; }
+@media (min-width: 56.25rem) {
+  .section { padding-top: var(--space-8); }
+}
+.section__body { display: grid; gap: var(--space-4); min-width: 0; }
+
+// Subsections: the gap under the heading equals the gap between items
+// (24 px; 40 px for publication and talk entries; Mehdi's rule, Stage 2).
+.subsection { display: grid; gap: var(--space-5); }
+.subsection--entries { gap: 2.5rem; }
+.subsection + .subsection { margin-top: var(--space-7); }
+.subsection + .more-link { margin-top: var(--space-5); }
+.videos + .more-link { margin-top: var(--space-4); }
+:not(.subsection) + .subsection { margin-top: var(--space-4); }   // after a paragraph or a button row
+.subsection__title { font-size: var(--text-h3); font-weight: 750; line-height: 1.15; letter-spacing: -0.02em; }
+.subsection__title::after { content: ""; display: block; width: 2.5rem; height: 4px; margin-top: 0.5rem; border-radius: 2px; background: var(--beam-bright); }
+
+.more-link { font-weight: 650; }
+.more-link a { color: var(--link); }
+.channel { justify-content: space-between; color: var(--slate); }
+.lead { font-size: var(--text-h3); font-weight: 500; line-height: 1.3; max-width: 36ch; letter-spacing: -0.01em; }
+.note { color: var(--slate); font-size: var(--text-ui); }

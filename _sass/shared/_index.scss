@@ -1,0 +1,4 @@
+// Structure shared by both styles (PLAN 3.1). Colors, type, and shapes live
+// in each style's module (_sass/styles/cooperative/, _sass/styles/instrument/).
+@use "reset";
+@use "structure";

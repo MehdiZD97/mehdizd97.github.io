@@ -11,8 +11,8 @@ sitemap: false
   <p>The pages follow the proposed home page: the hero (two switchable views, cell-free first), then News, Publications (journal and conference groups), CV (education, experience, honors and awards, teaching, talks), and Videos. The header stays at the top and its underline follows the section in view.</p>
   <p>These pages are for development only: hidden from search engines, and kept out of the live site's build from Stage 3 on.</p>
   <div class="ov-grid">
-    {%- assign main = site.data.styleguide.directions | where: "role", "main" %}
-    {%- assign alternates = site.data.styleguide.directions | where_exp: "d", "d.role != 'main'" %}
+    {%- assign main = site.data.design.directions | where: "role", "main" %}
+    {%- assign alternates = site.data.design.directions | where_exp: "d", "d.role != 'main'" %}
     {%- assign ordered = main | concat: alternates %}
     {%- for dir in ordered %}
     {%- assign letter = dir.letter %}

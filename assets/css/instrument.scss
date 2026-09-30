@@ -1,0 +1,28 @@
+---
+# Stylesheet for the instrument style: shared structure, the style's module in
+# _sass/styles/instrument/, and its palette from _data/design.yml (light by default;
+# dark when the visitor picks it, PLAN D9). _config.yml (design) picks the
+# stylesheet the site loads; the style guide loads both.
+---
+@use "shared";
+@use "styles/instrument";
+{%- assign d = site.data.design.directions | where: "id", "instrument" | first %}
+
+:root {
+  color-scheme: light;
+{%- for c in d.colors %}
+  --{{ c.id }}: {{ c.light }};
+{%- endfor %}
+{%- for t in d.tokens %}
+  --{{ t.id }}: {{ t.light }};
+{%- endfor %}
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+{%- for c in d.colors %}
+  --{{ c.id }}: {{ c.dark }};
+{%- endfor %}
+{%- for t in d.tokens %}
+  --{{ t.id }}: {{ t.dark }};
+{%- endfor %}
+}

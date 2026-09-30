@@ -1,11 +1,10 @@
 ---
-layout: archive
+title: News and posts
 permalink: /year-archive/
-title: "News & Blog Posts"
-author_profile: true
+prose: false
 redirect_from:
   - /wordpress/blog-posts/
-  # Former tag archive pages (move to /news/ in Stage 7)
+  # Former tag archive pages (they move to /news/ in Stage 7)
   - /tags/
   - /tags/asilomar/
   - /tags/conference/
@@ -20,15 +19,18 @@ redirect_from:
   - /tags/workshop/
   - /tags/youtube/
 ---
-
-{% include base_path %}
-{% capture written_year %}'None'{% endcapture %}
-{% for post in site.posts %}
-  {% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
-  {% if year != written_year %}
-    <h2 id="{{ year | slugify }}" class="archive__subtitle" style="margin-top: 2rem; margin-bottom: 1rem;">{{ year }}</h2>
-    {% capture written_year %}{{ year }}{% endcapture %}
-  {% endif %}
-<!--  {% include archive-single.html %}-->
-  {% include post-preview.html %}
-{% endfor %}
+{%- comment -%}
+  Temporary news page (Stage 3): stories by year. Stage 7 builds /news/ from
+  _data/news.yml and redirects this URL there.
+{%- endcomment -%}
+{%- assign years = site.posts | group_by_exp: "p", "p.date | date: '%Y'" %}
+{%- for year in years %}
+<section class="subsection" id="year-{{ year.name }}" aria-labelledby="year-{{ year.name }}-title">
+  <h2 class="subsection__title" id="year-{{ year.name }}-title">{{ year.name }}</h2>
+  <ul class="row-list row-list--notes">
+    {%- for post in year.items %}
+    {% include post-item.html post=post %}
+    {%- endfor %}
+  </ul>
+</section>
+{%- endfor %}

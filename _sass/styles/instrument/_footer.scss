@@ -1,0 +1,9 @@
+// Footer
+.site-footer { background: var(--panel); border-top: 1px solid var(--grid); }
+.site-footer__inner { max-width: var(--wrap); margin: 0 auto; padding: var(--space-6) var(--gutter); display: grid; gap: var(--space-4); }
+.site-footer__name { font-weight: 600; }
+.site-footer__name span { display: block; font-size: var(--text-small); font-weight: 400; color: var(--slate); }
+.site-footer__links { list-style: none; display: flex; flex-wrap: wrap; gap: 0.25rem 1.5rem; font: 400 var(--text-mono)/1 var(--font-mono); }
+.site-footer__links a { display: inline-flex; align-items: center; gap: 0.4rem; min-height: 2rem; text-decoration: none; }
+.site-footer__links .icon { width: 1rem; height: 1rem; }
+.site-footer__meta { font: 400 var(--text-mono)/1.5 var(--font-mono); color: var(--slate); }

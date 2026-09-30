@@ -1,0 +1,31 @@
+{%- comment -%}
+  One talk from the legacy collection (temporary: Stage 4 moves talks into
+  _data/talks.yml and Stage 8 into the CV). Parameters: talk, level.
+{%- endcomment -%}
+{%- assign t = include.talk -%}
+{%- assign h = include.level | default: 3 -%}
+{%- assign summary = t.summary | default: t.content | strip_html | normalize_whitespace | truncatewords: 40 -%}
+{%- capture links -%}
+  {%- if t.event_url %}<li><a class="linkbtn" href="{{ t.event_url }}" target="_blank" rel="noopener">{% include icon.html name="event" %}<span>Event</span>{% include newtab.html %}</a></li>{% endif -%}
+  {%- if t.paper_url %}<li><a class="linkbtn" href="{{ t.paper_url }}" target="_blank" rel="noopener">{% include icon.html name="paper" %}<span>Paper</span>{% include newtab.html %}</a></li>{% endif -%}
+  {%- if t.slides_url %}<li><a class="linkbtn" href="{{ t.slides_url }}" target="_blank" rel="noopener">{% include icon.html name="slides" %}<span>Slides</span>{% include newtab.html %}</a></li>{% endif -%}
+  {%- if t.video_url %}<li><a class="linkbtn" href="{{ t.video_url }}" target="_blank" rel="noopener">{% include icon.html name="video" %}<span>Video</span>{% include newtab.html %}</a></li>{% endif -%}
+{%- endcapture -%}
+<article class="talk">
+  <div class="talk-meta">
+    <time class="talk-date" datetime="{{ t.date | date: '%Y-%m-%d' }}">{{ t.date | date: "%b %Y" }}</time>
+    {%- if t.type %}
+    <span class="talk-kind">{{ t.type }}</span>
+    {%- endif %}
+  </div>
+  <div class="talk-body">
+    <h{{ h }} class="talk-title">{{ t.title }}</h{{ h }}>
+    <p class="talk-event">{{ t.venue }}{% if t.location %}, {{ t.location }}{% endif %}</p>
+    {%- if summary != "" %}
+    <p class="talk-note">{{ summary }}</p>
+    {%- endif %}
+    {%- if links != "" %}
+    <ul class="linkbtns">{{ links }}</ul>
+    {%- endif %}
+  </div>
+</article>

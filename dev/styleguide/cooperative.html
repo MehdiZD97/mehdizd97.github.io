@@ -7,8 +7,7 @@ direction: cooperative
 letter: B
 signature: "the shared hero with two switchable views, cell-free beams (first) and the steerable array, drawn in white, orange, and cyan on the blue field."
 hero_script: /dev/styleguide/assets/hero.js
-preload_fonts:
-  - /dev/styleguide/fonts/bricolage-grotesque-latin-standard-normal.woff2
+sections: [news, publications, cv, videos]   # the menu scrolls to these (site header)
 principles:
   - name: Many nodes, one beam
     text: Like cooperating access points, every section serves one goal; the hero shows the idea literally.
@@ -28,7 +27,7 @@ type_scale:
   - { class: type-ui, label: "Navigation and buttons: 600 to 650, 15 px" }
 ---
 {% include styleguide/bar.html %}
-{% include styleguide/header.html %}
+{% include header.html %}
 {% include styleguide/hero.html %}
 {% include styleguide/sections.html %}
-{% include styleguide/footer.html %}
+{% include footer.html %}

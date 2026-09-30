@@ -1,0 +1,60 @@
+// Page headers
+.page-header { display: grid; gap: var(--space-3); padding: var(--space-7) 0 var(--space-6); border-bottom: 1px solid var(--grid); margin-bottom: var(--space-2); }
+.page-title { font-size: var(--text-h1); font-weight: 600; line-height: 1.1; letter-spacing: -0.02em; max-width: 30ch; }
+.page-title--long { font-size: var(--text-h2); max-width: 40ch; }
+.page-lead { font-size: 1.125rem; color: var(--slate); max-width: 60ch; }
+.page-meta { display: flex; flex-wrap: wrap; gap: 0.25rem var(--space-4); font: 500 var(--text-mono)/1.6 var(--font-mono); color: var(--slate); }
+.page-authors strong { font-weight: 600; }
+.page-header .linkbtns { margin-top: var(--space-2); }
+.page-content { padding-top: var(--space-5); }
+.page-content > .section:first-child { padding-top: var(--space-4); }
+.page-content + .more-link { margin-top: var(--space-7); }
+// Pages built from components (prose: false): blocks after an intro line or a
+// button row get room; the subsection rhythm rules are more specific and win.
+.page-flow > * + * { margin-top: var(--space-6); }
+
+// Prose: Markdown content (stories, the CV, simple pages)
+.prose { max-width: var(--measure); }
+.prose > * + * { margin-top: 1em; }
+.prose h2 { margin-top: 2.25em; font-size: var(--text-h3); font-weight: 600; line-height: 1.3; }
+.prose h3 { margin-top: 1.75em; font-size: 1.125rem; font-weight: 600; }
+.prose h4 { margin-top: 1.5em; font-size: 1rem; font-weight: 600; }
+.prose h2 + *, .prose h3 + *, .prose h4 + * { margin-top: 0.6em; }
+.prose ul, .prose ol { padding-inline-start: 1.25em; }
+.prose li + li { margin-top: 0.35em; }
+.prose li::marker { color: var(--signal); }
+.prose img { border: 1px solid var(--grid); border-radius: var(--radius); }
+.prose figure, .prose .figure-row, .prose .embed { margin-block: 1.75em; }
+.prose figcaption { margin-top: var(--space-2); font: 400 var(--text-mono)/1.5 var(--font-mono); color: var(--slate); }
+.prose blockquote { padding-inline-start: var(--space-4); border-inline-start: 2px solid var(--signal-bright); color: var(--slate); }
+.prose hr { border: 0; border-top: 1px solid var(--grid); margin-block: 2em; }
+.prose pre { overflow-x: auto; padding: var(--space-3) var(--space-4); border: 1px solid var(--grid); background: var(--panel); font-size: var(--text-mono); }
+.prose details { padding: var(--space-3) var(--space-4); border: 1px solid var(--grid); background: var(--panel); }
+.prose summary { cursor: pointer; font-weight: 600; }
+.prose table { width: 100%; border-collapse: collapse; font-size: var(--text-small); }
+.prose th, .prose td { padding: 0.5rem 0.75rem 0.5rem 0; border-bottom: 1px solid var(--grid); text-align: start; }
+
+// Two photos side by side: a 3:4 portrait next to a 4:3 landscape keep one height.
+.figure-row { display: grid; grid-template-columns: 3fr 5.33fr; gap: var(--space-3); align-items: start; }
+.figure-row img { width: 100%; }
+
+// Forms
+.form { display: grid; gap: var(--space-4); max-width: 36rem; }
+.field { display: grid; gap: var(--space-2); }
+.field label { font: 500 var(--text-mono)/1.4 var(--font-mono); color: var(--slate); }
+.field input, .field textarea {
+  width: 100%; padding: 0.7rem 0.8rem; border: 1px solid var(--grid); border-radius: var(--radius);
+  background: var(--panel); color: var(--ink); font: inherit;
+}
+.field textarea { min-height: 10rem; resize: vertical; }
+.field input:focus-visible, .field textarea:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+.form .btn { justify-self: start; }
+
+// Not found
+.notfound { display: grid; gap: var(--space-5); padding: var(--space-8) 0 var(--space-6); max-width: 40rem; }
+.notfound__art { width: 11rem; height: auto; }
+.notfound__art .nf-mast { fill: none; stroke: var(--ink); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.notfound__art .nf-waves { fill: none; stroke: var(--signal); stroke-width: 2; stroke-linecap: round; }
+.notfound__art .nf-beam { fill: none; stroke: var(--slate); stroke-width: 1.5; stroke-dasharray: 4 5; stroke-linecap: round; }
+.notfound__art .nf-miss { fill: none; stroke: var(--signal); stroke-width: 2; stroke-linecap: round; }
+.notfound .actions { margin-top: var(--space-2); }

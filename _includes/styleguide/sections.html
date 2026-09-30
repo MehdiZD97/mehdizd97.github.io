@@ -1,55 +1,55 @@
 {%- comment -%}
-  Style guide sections shared by both directions; each direction's stylesheet
-  decides the look. The content sections follow the proposed home page order
+  Style guide sections shared by both directions; the site's stylesheet
+  for the page's style decides the look. The content sections follow the proposed home page order
   (News, Publications, CV, Videos), so the header's scroll-following underline
   can be tried; the style reference (palette, type, buttons) follows.
   Content is real (CV and CONTENT-AUDIT.md); the BibTeX entry is a sample
   built from verified fields (Stage 4 fetches the official records).
 {%- endcomment -%}
-{%- assign d = site.data.styleguide.directions | where: "id", page.direction | first -%}
+{%- assign d = site.data.design.directions | where: "id", page.direction | first -%}
 {%- assign newtab = '<span class="visually-hidden"> (opens in a new tab)</span>' -%}
-{%- assign img = '/dev/styleguide/img/' | relative_url -%}
-<main class="sg-main" id="main">
+{%- assign img = '/assets/img/' | relative_url -%}
+<main class="site-main" id="main">
 
-  <section class="sg-section" id="news" aria-labelledby="news-title">
-    <h2 id="news-title">Latest news</h2>
-    <div class="sg-body">
+  <section class="section" id="news" aria-labelledby="news-title">
+    <h2 class="section__title" id="news-title">Latest news</h2>
+    <div class="section__body">
       <ul class="news-list">
         <li class="news">
           <time class="news-date" datetime="2026-07">Jul 2026</time>
-          <span class="news-icon">{% include styleguide/icon.html name="paper" %}<span class="visually-hidden">Paper:</span></span>
+          <span class="news-icon">{% include icon.html name="paper" %}<span class="visually-hidden">Paper:</span></span>
           <p class="news-text">Our paper TiamiTwin, a digital twin for bistatic ISAC drone sensing, was accepted to the IEEE MILCOM Workshop.</p>
         </li>
         <li class="news">
           <time class="news-date" datetime="2026-06">Jun 2026</time>
-          <span class="news-icon">{% include styleguide/icon.html name="career" %}<span class="visually-hidden">Career:</span></span>
+          <span class="news-icon">{% include icon.html name="career" %}<span class="visually-hidden">Career:</span></span>
           <p class="news-text">Joined Tiami Networks in Sacramento as a Wireless AI Engineering Intern.</p>
         </li>
         <li class="news">
           <time class="news-date" datetime="2026-03">Mar 2026</time>
-          <span class="news-icon">{% include styleguide/icon.html name="award" %}<span class="visually-hidden">Award:</span></span>
+          <span class="news-icon">{% include icon.html name="award" %}<span class="visually-hidden">Award:</span></span>
           <p class="news-text">Won 3rd place in the UCI Grad Slam finals. <a href="https://www.youtube.com/watch?v=ZPEh1HdD858&amp;t=3727s" target="_blank" rel="noopener">Watch the pitch{{ newtab }}</a></p>
         </li>
         <li class="news">
           <time class="news-date" datetime="2026-03">Mar 2026</time>
-          <span class="news-icon">{% include styleguide/icon.html name="award" %}<span class="visually-hidden">Award:</span></span>
+          <span class="news-icon">{% include icon.html name="award" %}<span class="visually-hidden">Award:</span></span>
           <p class="news-text">Received the Pia Gratton Endowed Graduate Student Award at UC Irvine.</p>
         </li>
         <li class="news">
           <time class="news-date" datetime="2026-01">Jan 2026</time>
-          <span class="news-icon">{% include styleguide/icon.html name="paper" %}<span class="visually-hidden">Paper:</span></span>
+          <span class="news-icon">{% include icon.html name="paper" %}<span class="visually-hidden">Paper:</span></span>
           <p class="news-text">Our study of distributed uplink beamforming with carrier frequency offsets was published in IEEE Transactions on Vehicular Technology. <a href="#pub-tvt">Read the paper</a></p>
         </li>
       </ul>
-      <p class="sg-more"><a href="{{ '/year-archive/' | relative_url }}">All news</a></p>
+      <p class="more-link"><a href="{{ '/year-archive/' | relative_url }}">All news</a></p>
     </div>
   </section>
 
-  <section class="sg-section" id="publications" aria-labelledby="publications-title">
-    <h2 id="publications-title">Publications</h2>
-    <div class="sg-body">
-      <section class="sg-sub sg-sub--entries" aria-labelledby="pubs-journal-title">
-        <h3 id="pubs-journal-title">Journal and magazine papers</h3>
+  <section class="section" id="publications" aria-labelledby="publications-title">
+    <h2 class="section__title" id="publications-title">Publications</h2>
+    <div class="section__body">
+      <section class="subsection subsection--entries" aria-labelledby="pubs-journal-title">
+        <h3 class="subsection__title" id="pubs-journal-title">Journal and magazine papers</h3>
         <article class="pub">
           <div class="pub-meta">
             <span class="pub-year">Jul 2026</span>
@@ -75,8 +75,8 @@
             <p class="pub-venue">Submitted to IEEE Transactions on Geoscience and Remote Sensing</p>
             <p class="pub-badges"><span class="badge badge--status">Under review</span></p>
             <ul class="linkbtns">
-              <li><a class="linkbtn" href="https://arxiv.org/abs/2603.09042" target="_blank" rel="noopener">{% include styleguide/icon.html name="arxiv" %}<span>arXiv</span>{{ newtab }}</a></li>
-              <li><a class="linkbtn" href="https://github.com/LS-Wireless/Robust-Wildfire-Forecasting" target="_blank" rel="noopener">{% include styleguide/icon.html name="code" %}<span>Code</span>{{ newtab }}</a></li>
+              <li><a class="linkbtn" href="https://arxiv.org/abs/2603.09042" target="_blank" rel="noopener">{% include icon.html name="arxiv" %}<span>arXiv</span>{{ newtab }}</a></li>
+              <li><a class="linkbtn" href="https://github.com/LS-Wireless/Robust-Wildfire-Forecasting" target="_blank" rel="noopener">{% include icon.html name="code" %}<span>Code</span>{{ newtab }}</a></li>
             </ul>
           </div>
         </article>
@@ -91,9 +91,9 @@
             <p class="pub-authors"><strong>M. Zafari</strong>, D. Pandey, and R. Doost-Mohammady</p>
             <p class="pub-venue">IEEE Transactions on Vehicular Technology</p>
             <ul class="linkbtns">
-              <li><a class="linkbtn" href="https://arxiv.org/abs/2508.08506" target="_blank" rel="noopener">{% include styleguide/icon.html name="arxiv" %}<span>arXiv</span>{{ newtab }}</a></li>
-              <li><a class="linkbtn" href="https://doi.org/10.1109/TVT.2026.3656108" target="_blank" rel="noopener">{% include styleguide/icon.html name="ieee" %}<span>IEEE Xplore</span>{{ newtab }}</a></li>
-              <li><button class="linkbtn" type="button" aria-expanded="false" aria-controls="bib-tvt" data-bib-toggle>{% include styleguide/icon.html name="bibtex" %}<span>BibTeX</span></button></li>
+              <li><a class="linkbtn" href="https://arxiv.org/abs/2508.08506" target="_blank" rel="noopener">{% include icon.html name="arxiv" %}<span>arXiv</span>{{ newtab }}</a></li>
+              <li><a class="linkbtn" href="https://doi.org/10.1109/TVT.2026.3656108" target="_blank" rel="noopener">{% include icon.html name="ieee" %}<span>IEEE Xplore</span>{{ newtab }}</a></li>
+              <li><button class="linkbtn" type="button" aria-expanded="false" aria-controls="bib-tvt" data-bib-toggle>{% include icon.html name="bibtex" %}<span>BibTeX</span></button></li>
             </ul>
             <div class="bibtex" id="bib-tvt" hidden>
 <pre id="bib-tvt-text">@article{zafari2026distributed,
@@ -104,7 +104,7 @@
   year    = {2026},
   doi     = {10.1109/TVT.2026.3656108}
 }</pre>
-              <p class="bibtex__actions"><button class="btn btn--secondary btn--small" type="button" data-copy="bib-tvt-text">{% include styleguide/icon.html name="copy" %}Copy</button> <span class="bibtex__status" role="status" data-copy-status></span></p>
+              <p class="bibtex__actions"><button class="btn btn--secondary btn--small" type="button" data-copy="bib-tvt-text">{% include icon.html name="copy" %}Copy</button> <span class="bibtex__status" role="status" data-copy-status></span></p>
             </div>
           </div>
         </article>
@@ -119,15 +119,15 @@
             <p class="pub-authors">R. Liu, M. Li, <strong>M. Zafari</strong>, B. Ottersten, and A. L. Swindlehurst</p>
             <p class="pub-venue">IEEE Wireless Communications (magazine)</p>
             <ul class="linkbtns">
-              <li><a class="linkbtn" href="https://arxiv.org/abs/2506.16011" target="_blank" rel="noopener">{% include styleguide/icon.html name="arxiv" %}<span>arXiv</span>{{ newtab }}</a></li>
-              <li><a class="linkbtn" href="https://doi.org/10.1109/MWC.2025.3646980" target="_blank" rel="noopener">{% include styleguide/icon.html name="ieee" %}<span>IEEE Xplore</span>{{ newtab }}</a></li>
+              <li><a class="linkbtn" href="https://arxiv.org/abs/2506.16011" target="_blank" rel="noopener">{% include icon.html name="arxiv" %}<span>arXiv</span>{{ newtab }}</a></li>
+              <li><a class="linkbtn" href="https://doi.org/10.1109/MWC.2025.3646980" target="_blank" rel="noopener">{% include icon.html name="ieee" %}<span>IEEE Xplore</span>{{ newtab }}</a></li>
             </ul>
           </div>
         </article>
       </section>
 
-      <section class="sg-sub sg-sub--entries" aria-labelledby="pubs-conference-title">
-        <h3 id="pubs-conference-title">Conference papers</h3>
+      <section class="subsection subsection--entries" aria-labelledby="pubs-conference-title">
+        <h3 class="subsection__title" id="pubs-conference-title">Conference papers</h3>
         <article class="pub">
           <div class="pub-meta">
             <span class="pub-year">Jul 2026</span>
@@ -152,8 +152,8 @@
             <p class="pub-authors"><strong>M. Zafari</strong> and A. L. Swindlehurst</p>
             <p class="pub-venue">IEEE International Conference on Communications (ICC)</p>
             <ul class="linkbtns">
-              <li><a class="linkbtn" href="https://arxiv.org/abs/2511.09992" target="_blank" rel="noopener">{% include styleguide/icon.html name="arxiv" %}<span>arXiv</span>{{ newtab }}</a></li>
-              <li><a class="linkbtn" href="https://github.com/LS-Wireless/ASSENT-CellFree-ISAC" target="_blank" rel="noopener">{% include styleguide/icon.html name="code" %}<span>Code</span>{{ newtab }}</a></li>
+              <li><a class="linkbtn" href="https://arxiv.org/abs/2511.09992" target="_blank" rel="noopener">{% include icon.html name="arxiv" %}<span>arXiv</span>{{ newtab }}</a></li>
+              <li><a class="linkbtn" href="https://github.com/LS-Wireless/ASSENT-CellFree-ISAC" target="_blank" rel="noopener">{% include icon.html name="code" %}<span>Code</span>{{ newtab }}</a></li>
             </ul>
           </div>
         </article>
@@ -167,33 +167,33 @@
             <h4 class="pub-title"><a href="#publications">Coordinated Decentralized Resource Optimization for Cell-Free ISAC Systems</a></h4>
             <p class="pub-authors"><strong>M. Zafari</strong>, R. Liu, and A. L. Swindlehurst</p>
             <p class="pub-venue">59th Asilomar Conference on Signals, Systems, and Computers</p>
-            <p class="pub-badges"><span class="badge badge--award">{% include styleguide/icon.html name="award" %}Best Paper Award Finalist</span></p>
+            <p class="pub-badges"><span class="badge badge--award">{% include icon.html name="award" %}Best Paper Award Finalist</span></p>
             <ul class="linkbtns">
-              <li><a class="linkbtn" href="https://arxiv.org/abs/2508.01044" target="_blank" rel="noopener">{% include styleguide/icon.html name="arxiv" %}<span>arXiv</span>{{ newtab }}</a></li>
-              <li><a class="linkbtn" href="https://github.com/MehdiZD97/distributed-cellfree-isac" target="_blank" rel="noopener">{% include styleguide/icon.html name="code" %}<span>Code</span>{{ newtab }}</a></li>
+              <li><a class="linkbtn" href="https://arxiv.org/abs/2508.01044" target="_blank" rel="noopener">{% include icon.html name="arxiv" %}<span>arXiv</span>{{ newtab }}</a></li>
+              <li><a class="linkbtn" href="https://github.com/MehdiZD97/distributed-cellfree-isac" target="_blank" rel="noopener">{% include icon.html name="code" %}<span>Code</span>{{ newtab }}</a></li>
             </ul>
           </div>
         </article>
       </section>
-      <p class="sg-more"><a href="{{ '/publications/' | relative_url }}">All publications, datasets, and software</a></p>
+      <p class="more-link"><a href="{{ '/publications/' | relative_url }}">All publications, datasets, and software</a></p>
     </div>
   </section>
 
-  <section class="sg-section" id="cv" aria-labelledby="cv-title">
-    <h2 id="cv-title">Curriculum vitae</h2>
-    <div class="sg-body">
-      <p class="sg-row">
-        <a class="btn btn--primary" href="#cv">{% include styleguide/icon.html name="pdf" %}Download CV (PDF)</a>
+  <section class="section" id="cv" aria-labelledby="cv-title">
+    <h2 class="section__title" id="cv-title">Curriculum vitae</h2>
+    <div class="section__body">
+      <p class="actions">
+        <a class="btn btn--primary" href="#cv">{% include icon.html name="pdf" %}Download CV (PDF)</a>
         <a class="btn btn--secondary" href="{{ '/cv/' | relative_url }}">Full CV</a>
       </p>
 
-      <section class="sg-sub" id="education" aria-labelledby="education-title">
-        <h3 id="education-title">Education</h3>
+      <section class="subsection" id="education" aria-labelledby="education-title">
+        <h3 class="subsection__title" id="education-title">Education</h3>
         <ul class="edu-list">
           <li class="edu">
             <picture class="edu-logo">
-              <source type="image/webp" srcset="{{ img }}logo-uci-72.webp 1x, {{ img }}logo-uci-144.webp 2x, {{ img }}logo-uci-216.webp 3x">
-              <img src="{{ img }}logo-uci-72.png" srcset="{{ img }}logo-uci-144.png 2x, {{ img }}logo-uci-216.png 3x" width="72" height="72" alt="" loading="lazy">
+              <source type="image/webp" srcset="{{ img }}logos/logo-uci-72.webp 1x, {{ img }}logos/logo-uci-144.webp 2x, {{ img }}logos/logo-uci-216.webp 3x">
+              <img src="{{ img }}logos/logo-uci-72.png" srcset="{{ img }}logos/logo-uci-144.png 2x, {{ img }}logos/logo-uci-216.png 3x" width="72" height="72" alt="" loading="lazy">
             </picture>
             <div class="edu-body">
               <h4 class="edu-degree">Ph.D. in Electrical Engineering and Computer Science</h4>
@@ -204,8 +204,8 @@
           </li>
           <li class="edu">
             <picture class="edu-logo">
-              <source type="image/webp" srcset="{{ img }}logo-rice-72.webp 1x, {{ img }}logo-rice-144.webp 2x, {{ img }}logo-rice-216.webp 3x">
-              <img src="{{ img }}logo-rice-72.png" srcset="{{ img }}logo-rice-144.png 2x, {{ img }}logo-rice-216.png 3x" width="60" height="72" alt="" loading="lazy">
+              <source type="image/webp" srcset="{{ img }}logos/logo-rice-72.webp 1x, {{ img }}logos/logo-rice-144.webp 2x, {{ img }}logos/logo-rice-216.webp 3x">
+              <img src="{{ img }}logos/logo-rice-72.png" srcset="{{ img }}logos/logo-rice-144.png 2x, {{ img }}logos/logo-rice-216.png 3x" width="60" height="72" alt="" loading="lazy">
             </picture>
             <div class="edu-body">
               <h4 class="edu-degree">M.S. in Electrical and Computer Engineering</h4>
@@ -216,8 +216,8 @@
           </li>
           <li class="edu">
             <picture class="edu-logo">
-              <source type="image/webp" srcset="{{ img }}logo-tehran-72.webp 1x, {{ img }}logo-tehran-144.webp 2x, {{ img }}logo-tehran-216.webp 3x">
-              <img src="{{ img }}logo-tehran-72.png" srcset="{{ img }}logo-tehran-144.png 2x, {{ img }}logo-tehran-216.png 3x" width="72" height="72" alt="" loading="lazy">
+              <source type="image/webp" srcset="{{ img }}logos/logo-tehran-72.webp 1x, {{ img }}logos/logo-tehran-144.webp 2x, {{ img }}logos/logo-tehran-216.webp 3x">
+              <img src="{{ img }}logos/logo-tehran-72.png" srcset="{{ img }}logos/logo-tehran-144.png 2x, {{ img }}logos/logo-tehran-216.png 3x" width="72" height="72" alt="" loading="lazy">
             </picture>
             <div class="edu-body">
               <h4 class="edu-degree">B.S. in Electrical and Computer Engineering</h4>
@@ -229,8 +229,8 @@
         </ul>
       </section>
 
-      <section class="sg-sub" id="experience" aria-labelledby="experience-title">
-        <h3 id="experience-title">Experience</h3>
+      <section class="subsection" id="experience" aria-labelledby="experience-title">
+        <h3 class="subsection__title" id="experience-title">Experience</h3>
         <ul class="row-list row-list--notes">
           <li class="row-item"><span class="row-when">Jul 2024 – present</span><span class="row-what">Graduate Student Researcher</span><span class="row-where">EECS, UC Irvine</span><span class="row-note">Reinforcement learning and GNN models for cooperative ISAC networks; distributed ADMM and consensus algorithms for beamforming and resource allocation in cell-free ISAC.</span></li>
           <li class="row-item"><span class="row-when">Jun – Sep 2026</span><span class="row-what">Wireless AI Engineering Intern</span><span class="row-where">Tiami Networks, Sacramento, CA</span><span class="row-note">ISAC channel models and high-fidelity RF digital twins with NVIDIA Sionna and ray tracing.</span></li>
@@ -242,8 +242,8 @@
         </ul>
       </section>
 
-      <section class="sg-sub" id="honors" aria-labelledby="honors-title">
-        <h3 id="honors-title">Honors and awards</h3>
+      <section class="subsection" id="honors" aria-labelledby="honors-title">
+        <h3 class="subsection__title" id="honors-title">Honors and awards</h3>
         <ul class="row-list">
           <li class="row-item"><span class="row-when">2026</span><span class="row-what">Wireless History Foundation Scholarship Award</span><span class="row-where">Wireless History Foundation</span></li>
           <li class="row-item"><span class="row-when">2026</span><span class="row-what">Pia Gratton Endowed Graduate Student Award</span><span class="row-where">UC Irvine</span></li>
@@ -255,8 +255,8 @@
         </ul>
       </section>
 
-      <section class="sg-sub" id="teaching" aria-labelledby="teaching-title">
-        <h3 id="teaching-title">Teaching</h3>
+      <section class="subsection" id="teaching" aria-labelledby="teaching-title">
+        <h3 class="subsection__title" id="teaching-title">Teaching</h3>
         <ul class="row-list">
           <li class="row-item"><span class="row-when">Fall 2026</span><span class="row-what">Introduction to Control Systems + Lab <span class="row-code">EECS 160A/LA</span></span><span class="row-where">UC Irvine</span></li>
           <li class="row-item"><span class="row-when">Spring 2025</span><span class="row-what">Introduction to Digital Logic Laboratory</span><span class="row-where">UC Irvine</span></li>
@@ -267,11 +267,11 @@
           <li class="row-item"><span class="row-when">Fall 2019</span><span class="row-what">Signals and Systems Analysis</span><span class="row-where">University of Tehran</span></li>
           <li class="row-item"><span class="row-when">Spring 2019</span><span class="row-what">Digital Communications</span><span class="row-where">University of Tehran</span></li>
         </ul>
-        <p class="sg-note">Teaching assistant for every course listed.</p>
+        <p class="note">Teaching assistant for every course listed.</p>
       </section>
 
-      <section class="sg-sub sg-sub--entries" id="talks" aria-labelledby="talks-title">
-        <h3 id="talks-title">Talks</h3>
+      <section class="subsection subsection--entries" id="talks" aria-labelledby="talks-title">
+        <h3 class="subsection__title" id="talks-title">Talks</h3>
         <article class="talk">
           <div class="talk-meta">
             <time class="talk-date" datetime="2026-03">Mar 2026</time>
@@ -282,8 +282,8 @@
             <p class="talk-event">UCI Grad Slam finals, Irvine, CA</p>
             <p class="talk-note">3rd place. The pitch starts at 1:02:07 in the event video.</p>
             <ul class="linkbtns">
-              <li><a class="linkbtn" href="https://www.youtube.com/watch?v=ZPEh1HdD858&amp;t=3727s" target="_blank" rel="noopener">{% include styleguide/icon.html name="video" %}<span>Video</span>{{ newtab }}</a></li>
-              <li><a class="linkbtn" href="https://grad.uci.edu/professional-development/grad-slam/grad-slam-finalists/" target="_blank" rel="noopener">{% include styleguide/icon.html name="event" %}<span>Event</span>{{ newtab }}</a></li>
+              <li><a class="linkbtn" href="https://www.youtube.com/watch?v=ZPEh1HdD858&amp;t=3727s" target="_blank" rel="noopener">{% include icon.html name="video" %}<span>Video</span>{{ newtab }}</a></li>
+              <li><a class="linkbtn" href="https://grad.uci.edu/professional-development/grad-slam/grad-slam-finalists/" target="_blank" rel="noopener">{% include icon.html name="event" %}<span>Event</span>{{ newtab }}</a></li>
             </ul>
           </div>
         </article>
@@ -297,9 +297,9 @@
             <p class="talk-event">59th Asilomar Conference on Signals, Systems, and Computers, Pacific Grove, CA</p>
             <p class="talk-note">Best Paper Award finalist; also presented a poster in the Student Paper Contest.</p>
             <ul class="linkbtns">
-              <li><a class="linkbtn" href="https://arxiv.org/abs/2508.01044" target="_blank" rel="noopener">{% include styleguide/icon.html name="paper" %}<span>Paper</span>{{ newtab }}</a></li>
-              <li><a class="linkbtn" href="https://www.asilomarsscconf.org/" target="_blank" rel="noopener">{% include styleguide/icon.html name="event" %}<span>Event</span>{{ newtab }}</a></li>
-              <li><a class="linkbtn" href="{{ '/posts/2025/10/blog-post-5/' | relative_url }}">{% include styleguide/icon.html name="story" %}<span>Story</span></a></li>
+              <li><a class="linkbtn" href="https://arxiv.org/abs/2508.01044" target="_blank" rel="noopener">{% include icon.html name="paper" %}<span>Paper</span>{{ newtab }}</a></li>
+              <li><a class="linkbtn" href="https://www.asilomarsscconf.org/" target="_blank" rel="noopener">{% include icon.html name="event" %}<span>Event</span>{{ newtab }}</a></li>
+              <li><a class="linkbtn" href="{{ '/posts/2025/10/blog-post-5/' | relative_url }}">{% include icon.html name="story" %}<span>Story</span></a></li>
             </ul>
           </div>
         </article>
@@ -312,8 +312,8 @@
             <h4 class="talk-title">ADMM for Downlink Beamforming in Cell-Free Massive MIMO Systems</h4>
             <p class="talk-event">58th Asilomar Conference on Signals, Systems, and Computers, Pacific Grove, CA</p>
             <ul class="linkbtns">
-              <li><a class="linkbtn" href="https://doi.org/10.1109/IEEECONF60004.2024.10943106" target="_blank" rel="noopener">{% include styleguide/icon.html name="paper" %}<span>Paper</span>{{ newtab }}</a></li>
-              <li><a class="linkbtn" href="{{ '/posts/2024/10/blog-post-3/' | relative_url }}">{% include styleguide/icon.html name="story" %}<span>Story</span></a></li>
+              <li><a class="linkbtn" href="https://doi.org/10.1109/IEEECONF60004.2024.10943106" target="_blank" rel="noopener">{% include icon.html name="paper" %}<span>Paper</span>{{ newtab }}</a></li>
+              <li><a class="linkbtn" href="{{ '/posts/2024/10/blog-post-3/' | relative_url }}">{% include icon.html name="story" %}<span>Story</span></a></li>
             </ul>
           </div>
         </article>
@@ -321,19 +321,19 @@
     </div>
   </section>
 
-  <section class="sg-section" id="videos" aria-labelledby="videos-title">
-    <h2 id="videos-title">Videos</h2>
-    <div class="sg-body">
-      <p class="sg-row sg-channel">
+  <section class="section" id="videos" aria-labelledby="videos-title">
+    <h2 class="section__title" id="videos-title">Videos</h2>
+    <div class="section__body">
+      <p class="actions channel">
         <span>Tutorials and talks. New videos come to my YouTube channel, <a href="https://www.youtube.com/@MehdiZD97" target="_blank" rel="noopener">@MehdiZD97{{ newtab }}</a>.</span>
-        <a class="btn btn--secondary btn--small" href="https://www.youtube.com/@MehdiZD97?sub_confirmation=1" target="_blank" rel="noopener">{% include styleguide/icon.html name="youtube" %}Subscribe{{ newtab }}</a>
+        <a class="btn btn--secondary btn--small" href="https://www.youtube.com/@MehdiZD97?sub_confirmation=1" target="_blank" rel="noopener">{% include icon.html name="youtube" %}Subscribe{{ newtab }}</a>
       </p>
       <div class="videos">
         {%- comment -%} Newest first by upload date (YouTube, checked 2026-09-29): 2026-09-17, 2026-03-27, 2024-11-14, 2024-11-05, 2024-06-12. {%- endcomment %}
         <article class="video">
           <div class="video-thumb">
             <img src="https://i.ytimg.com/vi/16-DP_fDdp4/mqdefault.jpg" width="320" height="180" alt="" loading="lazy">
-            <span class="video-play" aria-hidden="true">{% include styleguide/icon.html name="play" %}</span>
+            <span class="video-play" aria-hidden="true">{% include icon.html name="play" %}</span>
             <span class="video-duration">1:02:41</span>
           </div>
           <h3 class="video-title" lang="fa" dir="rtl"><a href="https://www.youtube.com/watch?v=16-DP_fDdp4" target="_blank" rel="noopener">آموزش برنامه‌نویسی پایتون | جلسه ۱: تفکر ماشین، مبناهای اعداد و کار با خط فرمان<span class="visually-hidden" lang="en" dir="ltr"> (opens in a new tab)</span></a></h3>
@@ -342,7 +342,7 @@
         <article class="video">
           <div class="video-thumb">
             <img src="https://i.ytimg.com/vi/ZPEh1HdD858/mqdefault.jpg" width="320" height="180" alt="" loading="lazy">
-            <span class="video-play" aria-hidden="true">{% include styleguide/icon.html name="play" %}</span>
+            <span class="video-play" aria-hidden="true">{% include icon.html name="play" %}</span>
             <span class="video-duration">from 1:02:07</span>
           </div>
           <h3 class="video-title"><a href="https://www.youtube.com/watch?v=ZPEh1HdD858&amp;t=3727s" target="_blank" rel="noopener">When Wireless Signals Become Our Eyes{{ newtab }}</a></h3>
@@ -351,7 +351,7 @@
         <article class="video">
           <div class="video-thumb">
             <img src="https://i.ytimg.com/vi/H-IcUX1w1Z0/mqdefault.jpg" width="320" height="180" alt="" loading="lazy">
-            <span class="video-play" aria-hidden="true">{% include styleguide/icon.html name="play" %}</span>
+            <span class="video-play" aria-hidden="true">{% include icon.html name="play" %}</span>
             <span class="video-duration">4:37</span>
           </div>
           <h3 class="video-title"><a href="https://www.youtube.com/watch?v=H-IcUX1w1Z0" target="_blank" rel="noopener">Linear Array Antennas: Models, Approximations, and Responses Explained{{ newtab }}</a></h3>
@@ -360,7 +360,7 @@
         <article class="video">
           <div class="video-thumb">
             <img src="https://i.ytimg.com/vi/NO37pcl0t7A/mqdefault.jpg" width="320" height="180" alt="" loading="lazy">
-            <span class="video-play" aria-hidden="true">{% include styleguide/icon.html name="play" %}</span>
+            <span class="video-play" aria-hidden="true">{% include icon.html name="play" %}</span>
             <span class="video-duration">8:45</span>
           </div>
           <h3 class="video-title"><a href="https://www.youtube.com/watch?v=NO37pcl0t7A" target="_blank" rel="noopener">Understanding Antenna Parameters: Gain, Radiation Patterns, and More!{{ newtab }}</a></h3>
@@ -369,7 +369,7 @@
         <article class="video">
           <div class="video-thumb">
             <img src="https://i.ytimg.com/vi/8NDZutr3OEE/mqdefault.jpg" width="320" height="180" alt="" loading="lazy">
-            <span class="video-play" aria-hidden="true">{% include styleguide/icon.html name="play" %}</span>
+            <span class="video-play" aria-hidden="true">{% include icon.html name="play" %}</span>
             <span class="video-duration">41:51</span>
           </div>
           <h3 class="video-title"><a href="https://www.youtube.com/watch?v=8NDZutr3OEE" target="_blank" rel="noopener">Beamforming in Wireless Communications: Basics and Applications{{ newtab }}</a></h3>
@@ -377,26 +377,26 @@
         </article>
       </div>
       {%- comment -%} On the site this links to /videos/ (Stage 8); the style guide has no such page. {%- endcomment %}
-      <p class="sg-more"><a href="#videos">All videos</a></p>
+      <p class="more-link"><a href="#videos">All videos</a></p>
     </div>
   </section>
 
-  <section class="sg-section sg-section--ref" id="about" aria-labelledby="about-title">
-    <h2 id="about-title">Direction {{ page.letter }}: {{ d.name }}</h2>
-    <div class="sg-body">
-      <p class="sg-lead">{{ d.summary }}</p>
+  <section class="section sg-ref" id="about" aria-labelledby="about-title">
+    <h2 class="section__title" id="about-title">Direction {{ page.letter }}: {{ d.name }}</h2>
+    <div class="section__body">
+      <p class="lead">{{ d.summary }}</p>
       <ul class="sg-principles">
         {%- for p in page.principles %}
         <li><strong>{{ p.name }}.</strong> {{ p.text }}</li>
         {%- endfor %}
       </ul>
-      <p class="sg-note">Type: {{ d.fonts }}. Signature: {{ page.signature }}</p>
+      <p class="note">Type: {{ d.fonts }}. Signature: {{ page.signature }}</p>
     </div>
   </section>
 
-  <section class="sg-section sg-section--ref" id="palette" aria-labelledby="palette-title">
-    <h2 id="palette-title">Palette</h2>
-    <div class="sg-body">
+  <section class="section sg-ref" id="palette" aria-labelledby="palette-title">
+    <h2 class="section__title" id="palette-title">Palette</h2>
+    <div class="section__body">
       <ul class="sg-swatches">
         {%- for c in d.colors %}
         <li class="sg-swatch">
@@ -431,9 +431,9 @@
     </div>
   </section>
 
-  <section class="sg-section sg-section--ref" id="type" aria-labelledby="type-title">
-    <h2 id="type-title">Type</h2>
-    <div class="sg-body sg-type">
+  <section class="section sg-ref" id="type" aria-labelledby="type-title">
+    <h2 class="section__title" id="type-title">Type</h2>
+    <div class="section__body sg-type">
       {%- for t in page.type_scale %}
       <div class="sg-type__row">
         <p class="sg-type__meta">{{ t.label }}</p>
@@ -453,24 +453,24 @@
     </div>
   </section>
 
-  <section class="sg-section sg-section--ref" id="buttons" aria-labelledby="buttons-title">
-    <h2 id="buttons-title">Buttons</h2>
-    <div class="sg-body">
-      <p class="sg-note">Hover with a mouse, or press Tab to see focus states.</p>
-      <p class="sg-row">
+  <section class="section sg-ref" id="buttons" aria-labelledby="buttons-title">
+    <h2 class="section__title" id="buttons-title">Buttons</h2>
+    <div class="section__body">
+      <p class="note">Hover with a mouse, or press Tab to see focus states.</p>
+      <p class="actions">
         <a class="btn btn--primary" href="#publications">View publications</a>
         <a class="btn btn--secondary" href="#cv">Download CV (PDF)</a>
         <a class="btn btn--text" href="#contact">Contact</a>
       </p>
-      <p class="sg-note">Link buttons, always in this order and only when a link exists:</p>
+      <p class="note">Link buttons, always in this order and only when a link exists:</p>
       <ul class="linkbtns">
-        <li><a class="linkbtn" href="#publications">{% include styleguide/icon.html name="pdf" %}<span>PDF</span></a></li>
-        <li><a class="linkbtn" href="#publications">{% include styleguide/icon.html name="arxiv" %}<span>arXiv</span></a></li>
-        <li><a class="linkbtn" href="#publications">{% include styleguide/icon.html name="ieee" %}<span>IEEE Xplore</span></a></li>
-        <li><a class="linkbtn" href="#publications">{% include styleguide/icon.html name="code" %}<span>Code</span></a></li>
-        <li><a class="linkbtn" href="#publications">{% include styleguide/icon.html name="slides" %}<span>Slides</span></a></li>
-        <li><a class="linkbtn" href="#publications">{% include styleguide/icon.html name="video" %}<span>Video</span></a></li>
-        <li><a class="linkbtn" href="#publications">{% include styleguide/icon.html name="bibtex" %}<span>BibTeX</span></a></li>
+        <li><a class="linkbtn" href="#publications">{% include icon.html name="pdf" %}<span>PDF</span></a></li>
+        <li><a class="linkbtn" href="#publications">{% include icon.html name="arxiv" %}<span>arXiv</span></a></li>
+        <li><a class="linkbtn" href="#publications">{% include icon.html name="ieee" %}<span>IEEE Xplore</span></a></li>
+        <li><a class="linkbtn" href="#publications">{% include icon.html name="code" %}<span>Code</span></a></li>
+        <li><a class="linkbtn" href="#publications">{% include icon.html name="slides" %}<span>Slides</span></a></li>
+        <li><a class="linkbtn" href="#publications">{% include icon.html name="video" %}<span>Video</span></a></li>
+        <li><a class="linkbtn" href="#publications">{% include icon.html name="bibtex" %}<span>BibTeX</span></a></li>
       </ul>
     </div>
   </section>

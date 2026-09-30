@@ -7,8 +7,7 @@ direction: instrument
 letter: A
 signature: "the shared hero with two switchable views, cell-free beams (first) and the steerable array, drawn in navy and amber on the page."
 hero_script: /dev/styleguide/assets/hero.js
-preload_fonts:
-  - /dev/styleguide/fonts/ibm-plex-sans-latin-wght-normal.woff2
+sections: [news, publications, cv, videos]   # the menu scrolls to these (site header)
 principles:
   - name: Every mark carries a value
     text: Graphics are data, not decoration; the beam plot is computed from the array factor.
@@ -28,7 +27,7 @@ type_scale:
   - { class: type-ui, label: "Navigation and buttons: 500 to 600, 15 px" }
 ---
 {% include styleguide/bar.html %}
-{% include styleguide/header.html %}
+{% include header.html %}
 {% include styleguide/hero.html %}
 {% include styleguide/sections.html %}
-{% include styleguide/footer.html %}
+{% include footer.html %}

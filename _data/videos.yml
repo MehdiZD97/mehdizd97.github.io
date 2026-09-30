@@ -1,0 +1,49 @@
+# Videos (PLAN 4.4 and D8), newest first by upload date. Facts checked on
+# YouTube 2026-09-29 (CONTENT-AUDIT section 13). Home shows the newest few;
+# /videos/ shows all (the full page, with click-to-load embeds, comes in Stage 8).
+#
+# host: only for videos published on someone else's channel (credited to Mehdi)
+# start: seconds where Mehdi's part begins in a longer video
+# duration: ISO 8601, as YouTube lists it
+# note: short line under the title on the card
+# source_title: title of the longer video that a `start` points into
+
+channel:
+  name: Mehdi Zafari
+  handle: "@MehdiZD97"
+  url: https://www.youtube.com/@MehdiZD97
+  description:           # TODO(mehdi): one sentence about the channel (Stage 8)
+
+videos:
+  - id: 16-DP_fDdp4
+    title: "آموزش برنامه‌نویسی پایتون | جلسه ۱: تفکر ماشین، مبناهای اعداد و کار با خط فرمان"
+    language: fa
+    date: 2026-09-17
+    duration: PT62M41S
+    note: Python programming course, session 1 (in Persian)
+  - id: ZPEh1HdD858
+    title: When Wireless Signals Become Our Eyes
+    date: 2026-03-27
+    duration: PT111M56S
+    start: 3727
+    note: UCI Grad Slam finals pitch, 3rd place
+    source_title: 2026 UCI Grad Slam      # the full event video's title on YouTube
+    host: { name: UCIrvineGD, url: "https://www.youtube.com/@UCIrvineGD" }
+  - id: H-IcUX1w1Z0
+    title: "Linear Array Antennas: Models, Approximations, and Responses Explained"
+    date: 2024-11-14
+    duration: PT4M37S
+    note: Tutorial
+    host: { name: Danesh Academy, url: "https://www.youtube.com/@Daaneshacademy" }
+  - id: NO37pcl0t7A
+    title: "Understanding Antenna Parameters: Gain, Radiation Patterns, and More!"
+    date: 2024-11-05
+    duration: PT8M45S
+    note: Tutorial
+    host: { name: Danesh Academy, url: "https://www.youtube.com/@Daaneshacademy" }
+  - id: 8NDZutr3OEE
+    title: "Beamforming in Wireless Communications: Basics and Applications"
+    date: 2024-06-12
+    duration: PT41M51S
+    note: Tutorial
+    host: { name: Danesh Academy, url: "https://www.youtube.com/@Daaneshacademy" }

@@ -1,0 +1,6 @@
+{%- comment -%}
+  Monogram for B (Cooperative): "MZ" in Bricolage Grotesque ExtraBold (wght 800,
+  opsz 96; SIL OFL 1.1), outlines extracted with fontTools. Colors come from CSS
+  (header) or from _local/tools/make_icons.py (favicons).
+{%- endcomment -%}
+<svg class="monogram monogram--cooperative {{ include.class }}" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><circle class="monogram__bg" cx="32" cy="32" r="32"/><path class="monogram__mz" d="M11.33 42.5V21.5H19.07L23.36 36.42H23.42L27.62 21.5H34.94V42.5H30.17V26.69H30.11L25.37 42.5H20.85L16.17 26.69H16.11V42.5ZM36.63 42.5V38.11L46.56 25.99V25.89H36.63V21.5H52.51V25.92L42.61 38.01V38.11H52.67V42.5Z"/></svg>

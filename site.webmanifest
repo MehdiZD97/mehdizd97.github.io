@@ -1,0 +1,23 @@
+---
+layout: null
+sitemap: false
+---
+{%- comment -%} Web app manifest (PLAN 3.8): name and icons of the style set in _config.yml. {%- endcomment -%}
+{%- assign style = site.design | default: "cooperative" -%}
+{%- assign d = site.data.design.directions | where: "id", style | first -%}
+{%- assign colors = d.colors | concat: d.tokens -%}
+{%- if style == "cooperative" %}{% assign theme = colors | where: "id", "field" | first %}{% else %}{% assign theme = colors | where: "id", "paper" | first %}{% endif -%}
+{%- assign background = colors | where: "id", "paper" | first -%}
+{
+  "name": {{ site.title | jsonify }},
+  "short_name": {{ site.title | jsonify }},
+  "description": {{ site.description | jsonify }},
+  "start_url": {{ "/" | relative_url | jsonify }},
+  "display": "browser",
+  "theme_color": {{ theme.light | jsonify }},
+  "background_color": {{ background.light | jsonify }},
+  "icons": [
+    { "src": {{ "/assets/icons/" | append: style | append: "/icon-192.png" | relative_url | jsonify }}, "sizes": "192x192", "type": "image/png" },
+    { "src": {{ "/assets/icons/" | append: style | append: "/icon-512.png" | relative_url | jsonify }}, "sizes": "512x512", "type": "image/png" }
+  ]
+}

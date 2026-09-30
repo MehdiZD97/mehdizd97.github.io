@@ -1,42 +1,42 @@
-{% include base_path %}
-
+{%- comment -%}
+  Document head: title, description, canonical, basic Open Graph, the theme
+  script, fonts, the stylesheet of the style set in _config.yml (`design`),
+  icons, and the feed. Stage 9 completes SEO and structured data.
+{%- endcomment -%}
+{%- assign style = site.design | default: "cooperative" -%}
+{%- assign d = site.data.design.directions | where: "id", style | first -%}
+{%- assign profile = site.data.profile -%}
+{%- if page.url == "/" -%}
+  {%- capture page_title -%}{{ site.title }} | {{ profile.title }}, {{ profile.affiliation_short }}{%- endcapture -%}
+{%- elsif page.title -%}
+  {%- capture page_title -%}{{ page.title }} | {{ site.title }}{%- endcapture -%}
+{%- else -%}
+  {%- assign page_title = site.title -%}
+{%- endif -%}
+{%- assign page_title = page_title | strip_html | normalize_whitespace -%}
+{%- assign description = page.description | default: site.description | strip_html | normalize_whitespace -%}
 <meta charset="utf-8">
-
-{% include seo.html %}
-
-<meta name="description" content="Mehdi Zafari – Ph.D. student at UC Irvine researching AI/ML-driven wireless communication systems. Explore my publications, research, and contact details.">
-
-<link href="{% if site.atom_feed.path %}{{ site.atom_feed.path }}{% else %}{{ base_path }}/feed.xml{% endif %}" type="application/atom+xml" rel="alternate" title="{{ site.title }} Feed">
-
-<!-- http://t.co/dKP3o1e -->
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<script>
-  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
-</script>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Mehdi Zafari",
-  "url": "https://mehdizd97.github.io",
-  "affiliation": {
-    "@type": "EducationalOrganization",
-    "name": "University of California, Irvine"
-  },
-  "jobTitle": "Ph.D. Student",
-  "sameAs": [
-    "https://scholar.google.com/citations?user=lKiB9vIAAAAJ",
-    "https://www.linkedin.com/in/Mehdi-Zafari/",
-    "https://github.com/mehdizd97"
-  ]
-}
-</script>
-
-<!-- For all browsers -->
-<link rel="stylesheet" href="{{ base_path }}/assets/css/main.css">
-
-<meta http-equiv="cleartype" content="on">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ page_title | escape }}</title>
+<meta name="description" content="{{ description | escape }}">
+<link rel="canonical" href="{{ page.url | absolute_url }}">
+{%- if page.noindex %}
+<meta name="robots" content="noindex">
+{%- endif %}
+<meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+<meta property="og:site_name" content="{{ site.title }}">
+<meta property="og:title" content="{{ page_title | escape }}">
+<meta property="og:description" content="{{ description | escape }}">
+<meta property="og:url" content="{{ page.url | absolute_url }}">
+<meta property="og:image" content="{{ profile.photo | absolute_url }}">
+<meta name="twitter:card" content="summary">
+{% include theme-script.html %}
+{%- for font in d.preload %}
+<link rel="preload" href="{{ '/assets/fonts/' | append: font | relative_url }}" as="font" type="font/woff2" crossorigin>
+{%- endfor %}
+<link rel="stylesheet" href="{{ '/assets/css/' | append: style | append: '.css' | relative_url }}">
+<link rel="icon" href="{{ '/assets/icons/' | append: style | append: '/favicon.ico' | relative_url }}" sizes="48x48">
+<link rel="icon" href="{{ '/assets/icons/' | append: style | append: '/favicon.svg' | relative_url }}" type="image/svg+xml">
+<link rel="apple-touch-icon" href="{{ '/assets/icons/' | append: style | append: '/apple-touch-icon.png' | relative_url }}">
+<link rel="manifest" href="{{ '/site.webmanifest' | relative_url }}">
+{% feed_meta %}

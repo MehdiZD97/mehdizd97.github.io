@@ -1,0 +1,30 @@
+---
+title: Page not found
+permalink: /404.html
+sitemap: false
+noindex: true
+layout: default
+---
+{%- comment -%}
+  Not found: says what happened and offers the main sections (PLAN 3.10).
+  The drawing: an access point whose beam misses its target.
+{%- endcomment -%}
+<main class="site-main" id="main">
+  <div class="notfound">
+    <svg class="notfound__art" viewBox="0 0 176 96" aria-hidden="true" focusable="false">
+      <path class="nf-mast" d="M24 86 32 40 40 86M27 70h10M29 58h6M32 40v-4"/>
+      <path class="nf-waves" d="M22 30a14 14 0 0 1 20 0M16 24a22 22 0 0 1 32 0"/>
+      <path class="nf-beam" d="M44 42 150 30"/>
+      <circle class="nf-miss" cx="156" cy="62" r="11"/>
+      <path class="nf-miss" d="M156 46v6M156 72v6M140 62h6M166 62h6"/>
+    </svg>
+    <h1 class="page-title">Page not found</h1>
+    <p class="page-lead">The beam missed: this page does not exist, or it moved when the site was redesigned. These pages are a good place to start.</p>
+    <p class="actions">
+      {%- for item in site.data.navigation %}
+      <a class="btn btn--small {% if forloop.first %}btn--primary{% else %}btn--secondary{% endif %}" href="{{ item.url | relative_url }}">{{ item.label }}</a>
+      {%- endfor %}
+      <a class="btn btn--small btn--secondary" href="{{ '/contact/' | relative_url }}">Contact</a>
+    </p>
+  </div>
+</main>

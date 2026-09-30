@@ -1,0 +1,110 @@
+// Hero: on the page itself, with the portrait beside the name.
+.hero__inner {
+  max-width: var(--wrap); margin: 0 auto;
+  padding: var(--space-6) var(--gutter) var(--space-7);
+  display: grid; gap: var(--space-6);
+}
+@media (min-width: 56.25rem) {
+  .hero__inner { grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); align-items: center; gap: var(--space-7); padding-block: var(--space-7) var(--space-5); }
+  .hero__inner--text { grid-template-columns: minmax(0, 46rem); }
+}
+.hero__text { display: grid; gap: var(--space-4); align-content: start; }
+.hero__name { font-size: var(--text-hero); font-weight: 600; line-height: 1.02; letter-spacing: -0.025em; }
+.hero__title { font-size: 1.125rem; font-weight: 500; color: var(--slate); }
+.hero__headline { font-size: var(--text-h3); font-weight: 500; line-height: 1.35; max-width: 30ch; }
+.hero__intro { color: var(--slate); max-width: 52ch; }
+.hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); margin-top: var(--space-2); }
+
+// Portrait with the amber status mark of the monogram
+.hero__id { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-4); }
+.hero__id-text { display: grid; gap: var(--space-1); }
+.hero__photo { position: relative; display: block; flex: none; width: 6rem; }
+.hero__photo img { display: block; width: 100%; height: auto; border: 1px solid var(--grid); border-radius: var(--radius); background: var(--panel); }
+.hero__photo::after { content: ""; position: absolute; right: -4px; bottom: -4px; width: 0.75rem; height: 0.75rem; background: var(--signal-bright); }
+@media (min-width: 40rem) {
+  .hero__id { flex-direction: row; align-items: center; gap: var(--space-5); }
+}
+@media (min-width: 56.25rem) {
+  .hero__photo { width: 8.5rem; }
+}
+
+// Profile links: icon plus a mono label
+.profile-links { list-style: none; display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; font: 400 var(--text-mono)/1 var(--font-mono); }
+.profile-links a { display: inline-flex; align-items: center; gap: 0.4rem; min-height: 2rem; color: var(--slate); text-decoration: none; }
+.profile-links .icon { width: 1rem; height: 1rem; }
+@media (hover: hover) and (pointer: fine) {
+  .profile-links a:hover { color: var(--signal); }
+}
+
+// Signature: two views on the page itself (no box), switched by tabs
+.hv { display: grid; gap: var(--space-2); min-width: 0; }
+.hv-tabs { display: flex; justify-content: center; gap: var(--space-2); }
+.hv-tab {
+  position: relative; min-width: 8rem; min-height: 2.5rem; padding: 0 0.75rem;
+  border: 0; background: none; color: var(--slate);
+  font: 500 var(--text-mono)/1 var(--font-mono); letter-spacing: 0.02em;
+}
+.hv-tab[aria-selected="true"] { color: var(--ink); }
+.hv-tab::after {
+  content: ""; position: absolute; left: 0.75rem; right: 0.75rem; bottom: 0.3rem; height: 2px;
+  background: var(--signal-bright); transform: scaleX(0); transform-origin: left;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.hv-tab[aria-selected="true"]::after { transform: scaleX(1); }
+@media (hover: hover) and (pointer: fine) {
+  .hv-tab:hover { color: var(--ink); }
+}
+.hv-panel { display: grid; gap: var(--space-3); align-content: start; }
+.hv-svg { width: 100%; height: auto; touch-action: pan-y; }
+.hv-dot { fill: var(--grid); }
+.hv-label text, text.hv-label { fill: var(--slate); font: 500 11px var(--font-mono); }
+@media (max-width: 40rem) {
+  .hv-label text, text.hv-label { font-size: 15px; }
+}
+
+// Cell-free view
+.hv-fronthaul line { stroke: var(--slate); stroke-opacity: 0.45; stroke-width: 1.25; stroke-dasharray: 3 4; stroke-linecap: round; }
+.hv-stop--near { stop-color: var(--signal-bright); stop-opacity: 0.6; }
+.hv-stop--mid { stop-color: var(--signal-bright); stop-opacity: 0.28; }
+.hv-stop--far { stop-color: var(--signal-bright); stop-opacity: 0; }
+.hv-ap-waves { fill: none; stroke: var(--signal); stroke-width: 1.4; stroke-linecap: round; }
+.hv-ap-mast { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.hv-ap-head { fill: var(--ink); }
+.hv-cpu-body { fill: var(--paper); stroke: var(--ink); stroke-width: 1.6; }
+.hv-cpu-core { fill: var(--ink); }
+.hv-cpu-pins { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; }
+.hv-reticle { fill: none; stroke: var(--ink); stroke-width: 1.6; }
+.hv-reticle-ticks { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; }
+.hv-reticle-dot { fill: var(--signal); }
+.hv-echo {
+  fill: none; stroke: var(--signal-bright); stroke-width: 1.25; opacity: 0;
+  vector-effect: non-scaling-stroke; transform-box: fill-box; transform-origin: center;
+  animation: hv-echo 2.8s cubic-bezier(0.2, 0.6, 0.3, 1) infinite;
+}
+.hv-echo--late { animation-delay: 1.4s; }
+.is-paused .hv-echo, .hv-panel.is-hidden .hv-echo { animation-play-state: paused; }
+@keyframes hv-echo {
+  0% { transform: scale(0.9); opacity: 0.85; }
+  100% { transform: scale(3.4); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hv-echo { display: none; }
+}
+
+// Array view
+.hv-grid path, .hv-grid line { fill: none; stroke: var(--grid); stroke-width: 1; }
+.hv-pattern { fill: var(--signal-bright); fill-opacity: 0.14; stroke: var(--signal-bright); stroke-width: 1.75; stroke-linejoin: round; }
+.hv-ray { stroke: var(--signal); stroke-width: 1; stroke-dasharray: 3 4; }
+.hv-element { fill: var(--ink); }
+.hv-dial { fill: none; stroke: var(--grid); stroke-width: 1; }
+.hv-needle { stroke: var(--signal); stroke-width: 1.5; stroke-linecap: round; }
+
+// Readouts under each view (no rules, no box)
+.hv-readout { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.25rem 1.5rem; margin: 0; font: 400 var(--text-mono)/1.5 var(--font-mono); }
+.hv-readout div { display: flex; gap: 0.5rem; }
+.hv-readout dt { color: var(--slate); }
+.hv-readout dd { margin: 0; font-variant-numeric: tabular-nums; }
+.hv-readout--az dd { min-width: 4ch; }
+.hv-caption { text-align: center; font: 400 0.75rem/1.4 var(--font-mono); color: var(--slate); }
+.hv-control { display: flex; align-items: center; gap: var(--space-3); justify-self: center; width: 100%; max-width: 26rem; font: 500 var(--text-mono)/1 var(--font-mono); color: var(--slate); }
+.hv-control input { flex: 1; min-height: 1.5rem; accent-color: var(--signal); }

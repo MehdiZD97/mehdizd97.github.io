@@ -1,0 +1,24 @@
+# Identity, links, and files shown across the site (PLAN 4.4). Stage 3 added
+# the fields the site shell needs; Stage 4 adds intro, bio, and interests.
+
+name: Mehdi Zafari
+title: Ph.D. Candidate
+department: Department of Electrical Engineering and Computer Science
+affiliation: University of California, Irvine
+affiliation_short: UC Irvine
+advisor:
+  name: Prof. A. Lee Swindlehurst
+  url: https://scholar.google.com/citations?user=ibAcKWwAAAAJ   # link used on the current site
+headline: Signal processing and AI/ML for next-generation (5G/6G) wireless systems
+location: Irvine, California
+# TODO(mehdi): approve or rewrite the intro (drafted from CV facts for the Stage 2 style guide; Stage 4 finalizes it)
+intro: I design distributed algorithms and learning methods for cell-free MIMO and integrated sensing and communication, and test them with over-the-air experiments and RF digital twins.
+email: mzafarid@uci.edu
+photo: /assets/img/profile/mehdi-zafari-480.jpg   # sized variants in assets/img/profile/ (Stage 4 builds the image pipeline)
+cv_pdf: /files/Mehdi_Zafari_CV.pdf    # TODO(mehdi): add the public CV PDF (open input 5); links appear once the file exists
+links:           # display order; each entry renders an icon plus an accessible label
+  - { id: google-scholar, label: Google Scholar, url: "https://scholar.google.com/citations?user=lKiB9vIAAAAJ" }
+  - { id: orcid, label: ORCID, url: "https://orcid.org/0000-0001-8894-8709" }
+  - { id: github, label: GitHub, url: "https://github.com/MehdiZD97" }
+  - { id: linkedin, label: LinkedIn, url: "https://www.linkedin.com/in/Mehdi-Zafari" }
+  - { id: youtube, label: YouTube, url: "https://www.youtube.com/@MehdiZD97" }

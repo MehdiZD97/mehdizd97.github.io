@@ -1,0 +1,37 @@
+{%- comment -%}
+  One publication from the legacy collection (temporary: Stage 6 rebuilds
+  publications on the new content model). Parameters: pub, level (heading
+  level, default 3). Link buttons follow the D7 order.
+{%- endcomment -%}
+{%- assign p = include.pub -%}
+{%- assign h = include.level | default: 3 -%}
+{%- assign authors = p.authors | replace: "Mehdi Zafari", "<strong>Mehdi Zafari</strong>" | replace: "M. Zafari", "<strong>M. Zafari</strong>" -%}
+{%- capture links -%}
+  {%- if p.pdf %}<li><a class="linkbtn" href="{{ p.pdf | relative_url }}">{% include icon.html name="pdf" %}<span>PDF</span></a></li>{% endif -%}
+  {%- if p.arxiv %}<li><a class="linkbtn" href="{{ p.arxiv }}" target="_blank" rel="noopener">{% include icon.html name="arxiv" %}<span>arXiv</span>{% include newtab.html %}</a></li>{% endif -%}
+  {%- if p.doi -%}
+    {%- assign prefix = p.doi | slice: 0, 8 -%}
+    {%- if prefix == "10.1109/" %}{% assign doi_label = "IEEE Xplore" %}{% assign doi_icon = "ieee" %}
+    {%- elsif prefix == "10.21227" %}{% assign doi_label = "IEEE DataPort" %}{% assign doi_icon = "database" %}
+    {%- else %}{% assign doi_label = "DOI" %}{% assign doi_icon = "link" %}{% endif -%}
+    <li><a class="linkbtn" href="https://doi.org/{{ p.doi }}" target="_blank" rel="noopener">{% include icon.html name=doi_icon %}<span>{{ doi_label }}</span>{% include newtab.html %}</a></li>
+  {%- elsif p.paperurl -%}
+    <li><a class="linkbtn" href="{{ p.paperurl }}" target="_blank" rel="noopener">{% include icon.html name="paper" %}<span>Paper</span>{% include newtab.html %}</a></li>
+  {%- endif -%}
+  {%- if p.code %}<li><a class="linkbtn" href="{{ p.code }}" target="_blank" rel="noopener">{% include icon.html name="code" %}<span>Code</span>{% include newtab.html %}</a></li>{% endif -%}
+{%- endcapture -%}
+<article class="pub">
+  <div class="pub-meta"><span class="pub-year">{{ p.date | date: "%Y" }}</span></div>
+  <div class="pub-body">
+    <h{{ h }} class="pub-title"><a href="{{ p.url | relative_url }}">{{ p.title }}</a></h{{ h }}>
+    {%- if p.authors %}
+    <p class="pub-authors">{{ authors }}</p>
+    {%- endif %}
+    {%- if p.venue %}
+    <p class="pub-venue">{{ p.venue }}</p>
+    {%- endif %}
+    {%- if links != "" %}
+    <ul class="linkbtns">{{ links }}</ul>
+    {%- endif %}
+  </div>
+</article>

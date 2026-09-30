@@ -1,35 +1,24 @@
-# The following is the order of the links in the header of the website.
-#
-# Changing the order here will adjust the order and you can also add additional
-# links. Removing a link prevents it from showing in the header, but does not
-# prevent it from being included in the site.
+# Main menu (PLAN D3), in display order. On a page whose front matter lists
+# `sections` (Home, the style guide), items whose `section` is listed scroll
+# to it (Home scrolls to the top); elsewhere every item links to its `url`.
+# `match`: URL prefixes that mark the item as the current page.
 
-main:
-
-  - title: "Publications"
-    url: /publications/
-
-  - title: "My CV"
-    url: /cv/
-
-  - title: "Talks & Conferences"
-    url: /talks/
-
-#  - title: "Awards"
-#    url: /awards/
-
-
-#  - title: "TA Experience"
-#    url: /teaching/
-    
-#  - title: "Portfolio"
-#    url: /portfolio/
-        
-  - title: "News & Posts"
-    url: /year-archive/
-
-  - title: "Contact Me"
-    url: /contact/
-    
-#  - title: "Guide"
-#    url: /markdown/
+- label: Home
+  url: /
+  section: top
+- label: News
+  url: /year-archive/          # Stage 7 moves the news page to /news/
+  section: news
+  match: [/year-archive/, /news/, /posts/]
+- label: Publications
+  url: /publications/
+  section: publications
+  match: [/publications/, /publication/]
+- label: CV
+  url: /cv/
+  section: cv
+  match: [/cv/, /talks/]
+- label: Videos
+  url: /videos/
+  section: videos
+  match: [/videos/]

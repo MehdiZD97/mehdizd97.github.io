@@ -1,0 +1,17 @@
+---
+layout: default
+---
+{%- comment -%}
+  Home: the hero on its own band, then the page's sections (Stage 5 builds
+  the full home page; until then the content is the temporary version).
+{%- endcomment %}
+<main id="main">
+  <section class="hero" aria-labelledby="hero-name">
+    <div class="hero__inner hero__inner--text">
+      {% include hero-text.html %}
+    </div>
+  </section>
+  <div class="site-main">
+    {{ content }}
+  </div>
+</main>
