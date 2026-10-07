@@ -1,17 +1,73 @@
 ---
 layout: default
 ---
-{%- comment -%} Story (post): title, date, and the write-up. Stage 7 polishes stories. {%- endcomment %}
-{%- assign news = site.data.navigation | where: "section", "news" | first %}
+{%- comment -%}
+  One story (post), PLAN 7.2: breadcrumb, title, date, the write-up (photos
+  open in the lightbox; see GUIDE.md), a Related block, the older and newer
+  stories, and a Back button (back-link.html). Related gathers the papers in
+  the front matter's `pubs`, the talks whose `story` is this page (with their
+  papers), the awards for those talks and papers, and the front matter's
+  `links` (label, url, and an optional note such as "on the RENEW website").
+{%- endcomment %}
+{%- assign news = site.data.navigation | where: "section", "news" | first -%}
+{%- assign news_url = news.url | relative_url -%}
+{%- assign st_talks = site.data.talks | where: "story", page.url -%}
+{%- assign st_slugs = "" | split: "" -%}
+{%- for st_slug in page.pubs %}{% assign st_slugs = st_slugs | push: st_slug %}{% endfor -%}
+{%- for st_talk in st_talks %}{% if st_talk.pub %}{% assign st_slugs = st_slugs | push: st_talk.pub %}{% endif %}{% endfor -%}
+{%- assign st_slugs = st_slugs | uniq -%}
+{%- assign st_awards = "" | split: "" -%}
+{%- for st_talk in st_talks %}{% assign st_found = site.data.awards | where: "talk", st_talk.id %}{% for st_award in st_found %}{% assign st_awards = st_awards | push: st_award %}{% endfor %}{% endfor -%}
+{%- for st_slug in st_slugs %}{% assign st_found = site.data.awards | where: "pub", st_slug %}{% for st_award in st_found %}{% assign st_awards = st_awards | push: st_award %}{% endfor %}{% endfor -%}
+{%- assign st_awards = st_awards | uniq -%}
+{%- assign st_link_count = page.links | size -%}
+{%- assign st_total = st_slugs.size | plus: st_talks.size | plus: st_awards.size | plus: st_link_count %}
 <main class="site-main" id="main">
   <article class="post">
     <header class="page-header">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="{{ news_url }}">News</a></li>
+          <li><a href="{{ news_url }}#stories">Stories</a></li>
+        </ol>
+      </nav>
       <h1 class="page-title">{{ page.title }}</h1>
       <p class="page-meta"><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time></p>
     </header>
     <div class="page-content prose">
       {{ content }}
+      {%- if st_total > 0 %}
+      <h2>Related</h2>
+      <ul class="related">
+        {%- for st_slug in st_slugs %}
+        {%- assign st_pub = site.publications | where_exp: "doc", "doc.slug == st_slug" | first %}
+        {%- if st_pub %}
+        {%- case st_pub.type %}{% when "dataset" %}{% assign st_kind = "Dataset" %}{% when "software" %}{% assign st_kind = "Software" %}{% else %}{% assign st_kind = "Paper" %}{% endcase %}
+        <li><span class="related__kind">{{ st_kind }}</span> <span><a href="{{ st_pub.url | relative_url }}">{{ st_pub.title }}</a>, {{ st_pub.venue_short | default: st_pub.venue }}</span></li>
+        {%- endif %}
+        {%- endfor %}
+        {%- for st_talk in st_talks %}
+        <li><span class="related__kind">Talk</span> <span><a href="{{ '/cv/' | relative_url }}#{{ st_talk.id }}">{{ st_talk.title }}</a>, {{ st_talk.event }}, {{ st_talk.date | date: "%B %Y" }}</span></li>
+        {%- endfor %}
+        {%- for st_award in st_awards %}
+        <li><span class="related__kind">Award</span> <span>{{ st_award.title }}, {{ st_award.years | default: st_award.year }}</span></li>
+        {%- endfor %}
+        {%- for st_link in page.links %}
+        <li><span class="related__kind">Link</span> <span><a href="{{ st_link.url | escape }}" target="_blank" rel="noopener">{{ st_link.label }}{% include newtab.html %}</a>{% if st_link.note %} {{ st_link.note }}{% endif %}</span></li>
+        {%- endfor %}
+      </ul>
+      {%- endif %}
     </div>
-    <p class="more-link"><a href="{{ news.url | relative_url }}">All news and stories</a></p>
+    {%- if page.previous or page.next %}
+    <nav class="story-nav" aria-label="More stories">
+      {%- if page.previous %}
+      <a class="story-nav__link story-nav__link--older" href="{{ page.previous.url | relative_url }}" rel="prev"><span class="story-nav__label">Older story</span> <span class="story-nav__title">{{ page.previous.title }}</span></a>
+      {%- endif %}
+      {%- if page.next %}
+      <a class="story-nav__link story-nav__link--newer" href="{{ page.next.url | relative_url }}" rel="next"><span class="story-nav__label">Newer story</span> <span class="story-nav__title">{{ page.next.title }}</span></a>
+      {%- endif %}
+    </nav>
+    {%- endif %}
+    {% include back-link.html url="/news/#stories" label="All stories" %}
   </article>
 </main>

@@ -5,7 +5,8 @@ layout: default
   Standard page: title, optional lead, then the content. Markdown content is
   set as prose unless the page sets `prose: false` (pages built from
   components). `print_identity: true` adds the name and contact block that
-  replaces the header in print (the CV).
+  replaces the header in print (the CV). `actions` adds buttons under the
+  lead: a list of label, url (an in-page "#id" or a site path), and icon.
 {%- endcomment %}
 <main class="site-main" id="main">
   {%- if page.print_identity %}
@@ -15,6 +16,14 @@ layout: default
     <h1 class="page-title">{{ page.title }}</h1>
     {%- if page.lead %}
     <p class="page-lead">{{ page.lead }}</p>
+    {%- endif %}
+    {%- if page.actions %}
+    <p class="actions page-actions">
+      {%- for pa in page.actions %}
+      {%- assign pa_first = pa.url | slice: 0 %}
+      <a class="btn btn--secondary" href="{% if pa_first == '#' %}{{ pa.url }}{% else %}{{ pa.url | relative_url }}{% endif %}">{% if pa.icon %}{% include icon.html name=pa.icon %}{% endif %}{{ pa.label }}</a>
+      {%- endfor %}
+    </p>
     {%- endif %}
   </header>
   <div class="page-content {% if page.prose == false %}page-flow{% else %}prose{% endif %}">

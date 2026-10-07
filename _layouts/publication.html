@@ -6,8 +6,9 @@ layout: default
   award, link buttons, topics (each opens the filtered list), an optional
   zoomable figure (`figure`, `figure_alt`, `figure_caption`), the abstract,
   BibTeX with a Copy button, and a Related block gathered from the data:
-  talks, awards, videos, and news that name this slug, their stories, and
-  other entries with the same code. The head adds Google Scholar meta tags
+  talks, awards, videos, and news that name this slug, their stories (and
+  stories that list the slug under `pubs`), and other entries with the same
+  code. At the end, a Back button (back-link.html). The head adds Google Scholar meta tags
   and structured data.
 {%- endcomment %}
 {%- case page.status -%}
@@ -35,6 +36,8 @@ layout: default
 {%- assign rel_stories = "" | split: "" -%}
 {%- for item in rel_talks %}{% if item.story %}{% assign rel_stories = rel_stories | push: item.story %}{% endif %}{% endfor -%}
 {%- for item in rel_news %}{% if item.story %}{% assign rel_stories = rel_stories | push: item.story %}{% endif %}{% endfor -%}
+{%- assign rel_story_posts = site.posts | where_exp: "post", "post.pubs contains page.slug" -%}
+{%- for post in rel_story_posts %}{% assign rel_stories = rel_stories | push: post.url %}{% endfor -%}
 {%- assign rel_stories = rel_stories | uniq -%}
 {%- assign rel_total = rel_talks.size | plus: rel_awards.size | plus: rel_videos.size | plus: rel_news.size | plus: rel_code.size | plus: rel_stories.size %}
 <main class="site-main" id="main">
@@ -114,6 +117,6 @@ layout: default
       </ul>
       {%- endif %}
     </div>
-    <p class="more-link"><a href="{{ publications_url }}">All publications</a></p>
+    {% include back-link.html url="/publications/" label="All publications" %}
   </article>
 </main>

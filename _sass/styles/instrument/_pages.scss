@@ -8,7 +8,7 @@
 .page-header .linkbtns { margin-top: var(--space-2); }
 .page-content { padding-top: var(--space-5); }
 .page-content > .section:first-child { padding-top: var(--space-4); }
-.page-content + .more-link { margin-top: var(--space-7); }
+.page-actions { margin-top: var(--space-1); }
 // Pages built from components (prose: false): blocks after an intro line or a
 // button row get room; the subsection rhythm rules are more specific and win.
 .page-flow > * + * { margin-top: var(--space-6); }
@@ -82,3 +82,15 @@
   .related li { grid-template-columns: 5.5rem minmax(0, 1fr); column-gap: var(--space-4); align-items: baseline; }
 }
 .figure figcaption { margin-top: var(--space-2); color: var(--slate); font-size: var(--text-small); }
+
+// Story pages: older and newer stories, then the Back button (also on
+// publication pages)
+.page-content + .story-nav { margin-top: var(--space-7); }
+.story-nav__link { padding: var(--space-3) var(--space-4); border: 1px solid var(--grid); border-radius: var(--radius); background: var(--panel); color: var(--ink); }
+.story-nav__label { font: 500 var(--text-mono)/1.5 var(--font-mono); color: var(--slate); }
+.story-nav__title { font-weight: 600; line-height: 1.35; }
+@media (hover: hover) and (pointer: fine) {
+  .story-nav__link:hover { border-color: var(--signal-bright); }
+}
+.page-content + .back-link { margin-top: var(--space-7); }
+.story-nav + .back-link { margin-top: var(--space-5); }

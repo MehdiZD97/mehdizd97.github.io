@@ -10,9 +10,8 @@ scripts: [/assets/js/publications.js]
   filters (hidden without JavaScript, so the full list always shows).
 {%- endcomment -%}
 {%- assign pf_scholar = site.data.profile.links | where: "id", "google-scholar" | first %}
-{%- assign pf_orcid = site.data.profile.links | where: "id", "orcid" | first %}
 {%- assign pf_total = site.publications.size %}
-<p class="page-lead">Papers, datasets, and software, newest first. They are also on <a href="{{ pf_scholar.url }}" target="_blank" rel="noopener">Google Scholar{% include newtab.html %}</a> and <a href="{{ pf_orcid.url }}" target="_blank" rel="noopener">ORCID{% include newtab.html %}</a>.</p>
+<p class="page-lead">Papers, datasets, and software, newest first. They are also on <a href="{{ pf_scholar.url }}" target="_blank" rel="noopener">Google Scholar{% include newtab.html %}</a>.</p>
 
 <form class="pub-filters js-only" role="search" aria-label="Filter publications" data-pub-filters>
   <label class="pub-search">

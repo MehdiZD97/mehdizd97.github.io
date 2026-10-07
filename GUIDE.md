@@ -157,7 +157,8 @@ Each publication is one file in `_publications/`. Its file name is its **slug**,
 
    The link buttons always appear in the same order (PDF, arXiv, IEEE Xplore or DOI, Code, Slides, Video, Poster, Dataset, BibTeX), and only for the fields you fill in.
 
-   The publication's page also lists what refers to it, without any extra work: talks, awards, videos, and news items whose `pub` is this slug, their stories, and other entries with the same `code` link (a paper and its software find each other). Its topics link to the Publications page filtered by that topic.
+   The publication's page also lists what refers to it, without any extra work: talks, awards, videos, and news items whose `pub` is this slug, their stories, stories that list the slug under `pubs` (section 13), and other entries with the same `code` link (a paper and its software find each other). Its topics link to the Publications page filtered by that topic.
+   At the bottom of the page, a Back button returns visitors to exactly where they were (for example, their place in the list, filters included). Visitors who arrived from elsewhere (a search engine, an old address, a new tab) see "All publications" there instead.
 
 4. Getting the BibTeX:
    - Published paper with a DOI: run `curl -LH "Accept: application/x-bibtex" https://doi.org/<doi>` in a terminal and paste the result. Tidy it the way the other files do (one field per line, page ranges written `100--110`).
@@ -366,34 +367,36 @@ Stories are longer write-ups with photos, linked from news items and talks.
    title: Lecture presentation at Example 2027
    date: 2027-03-15
    permalink: /posts/2027/03/my-event/
-   description: "One sentence of 140 to 160 characters that summarizes the story for search results and link previews; count the characters before you save it."
+   description: "One sentence of 140 to 160 characters that summarizes the story for search results, link previews, and the list of stories on /news/; count the characters before you save it."
    image: /assets/img/stories/my-event-2027-1200.jpg
    image_alt: What the photo shows
+   pubs: [my-paper-slug]
+   links:
+     - label: Example 2027
+       url: https://example.org/2027/
+       note: on the conference website
    ---
 
    The first paragraph.
 
-   <figure>
-     {% include responsive-image.html name="stories/my-event-2027" alt="What the photo shows" sizes="(min-width: 48rem) 42rem, calc(100vw - 2rem)" %}
-   </figure>
+   {% include figure.html name="stories/my-event-2027" alt="What the photo shows" caption="An optional caption." sizes="(min-width: 48rem) 42rem, calc(100vw - 2rem)" %}
 
    More text. One sentence per line is fine.
-
-   ## Related links
-
-   - Conference paper: [Paper title](/publications/<slug>/)
    ```
+
+   Every photo opens larger on click. With several photos on a page, visitors step through them with Previous and Next, the arrow keys, or a swipe, and see the caption under each. Leave out `caption=` for a photo without one.
 
    For two photos side by side (a portrait and a landscape):
 
    ```html
    <div class="figure-row">
-     {% include responsive-image.html name="stories/photo-portrait" alt="..." sizes="(min-width: 48rem) 15rem, 36vw" %}
-     {% include responsive-image.html name="stories/photo-landscape" alt="..." sizes="(min-width: 48rem) 27rem, 64vw" %}
+     {% include zoom-image.html name="stories/photo-portrait" alt="..." sizes="(min-width: 48rem) 15rem, 36vw" %}
+     {% include zoom-image.html name="stories/photo-landscape" alt="..." sizes="(min-width: 48rem) 27rem, 64vw" %}
    </div>
    ```
 
-5. Link it: add `story: /posts/2027/03/my-event/` to the matching news item or talk. Every story is also listed under "Stories" at the end of `/news/`.
+5. **Related** (at the end of the story) builds itself: the publications in `pubs` (their slugs), the talks whose `story` is this story's address (with their papers), the awards for those talks and papers, and the `links` (each with a `label`, a `url`, and an optional `note` shown after the link). Both `pubs` and `links` are optional, and the publications in `pubs` list the story in their own Related block too. Do not add a "Related links" section by hand.
+6. Link it: add `story: /posts/2027/03/my-event/` to the matching news item or talk. Every story is also listed under "Stories" at the end of `/news/` (the Stories button at the top of that page scrolls there), and each story links to the older and newer ones. Its Back button works like the one on publication pages (section 4); visitors who arrived from elsewhere see "All stories".
 
 ---
 

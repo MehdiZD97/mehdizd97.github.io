@@ -1,0 +1,13 @@
+{%- comment -%}
+  A responsive image that links to its largest version; site.js opens it in
+  the lightbox (with Previous and Next across the page's zoomable images).
+  Without JavaScript the link opens the image itself. Parameters: name (key
+  in _data/images.yml), alt, sizes.
+{%- endcomment -%}
+{%- assign zi = site.data.images[include.name] -%}
+{%- if zi -%}
+{%- assign zi_largest = zi.variants | last -%}
+{%- assign zi_format = zi.formats | last -%}
+{%- capture zi_href %}/assets/img/{{ include.name }}-{{ zi_largest.size }}.{{ zi_format }}{% endcapture -%}
+<a class="zoom" href="{{ zi_href | relative_url }}" data-zoom>{% include responsive-image.html name=include.name alt=include.alt sizes=include.sizes %}<span class="visually-hidden"> (view larger)</span></a>
+{%- endif -%}

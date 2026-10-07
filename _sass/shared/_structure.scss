@@ -65,8 +65,8 @@ html:not(.js) .js-only { display: none !important; }
 @keyframes pub-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 .pub.is-entering { animation: pub-in 200ms cubic-bezier(0.2, 0.7, 0.2, 1); }
 
-// Zoomable figures (_includes/figure.html): the image grows a little on hover
-// and opens larger in a dialog on click (site.js).
+// Zoomable images (_includes/zoom-image.html and figure.html): the image
+// grows a little on hover and opens larger in a dialog on click (site.js).
 .zoom { display: block; position: relative; overflow: hidden; border-radius: var(--radius); }
 .zoom picture { display: block; }
 .zoom img { width: 100%; transition: transform 200ms cubic-bezier(0.2, 0.7, 0.2, 1); }
@@ -75,14 +75,41 @@ html:not(.js) .js-only { display: none !important; }
   .zoom { cursor: zoom-in; }
   .zoom:hover img { transform: scale(1.04); }
 }
-.lightbox { max-width: min(94vw, 80rem); max-height: 94vh; padding: 0; border: 0; background: transparent; overflow: visible; }
+// The lightbox: a bar with the count ("2 of 4") and Close, the image with
+// Previous and Next over its edges (pages with several images), the caption.
+.lightbox { max-width: min(94vw, 80rem); max-height: 94vh; padding: 0; border: 0; background: transparent; color: #fff; overflow: visible; }
 .lightbox::backdrop { background: rgb(0 0 0 / 0.82); }
-.lightbox img { display: block; max-width: 100%; max-height: 84vh; width: auto; height: auto; margin: 0 auto; border-radius: 6px; }
+.lightbox__bar { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.75rem; }
+.lightbox__count { font-size: 0.9375rem; font-weight: 600; font-variant-numeric: tabular-nums; }
 .lightbox__close {
-  display: block; margin: 0 0 0.75rem auto; min-height: 2.5rem; padding: 0 1rem;
+  margin-inline-start: auto; min-height: 2.5rem; padding: 0 1rem;
   border: 1.5px solid rgb(255 255 255 / 0.7); border-radius: 999px; background: transparent; color: #fff; font-weight: 600;
 }
-.lightbox__close:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+.lightbox__stage { position: relative; touch-action: pan-y pinch-zoom; }
+.lightbox img { display: block; max-width: 100%; max-height: calc(94vh - 7rem); width: auto; height: auto; margin: 0 auto; border-radius: 6px; }
+.lightbox__step {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  display: grid; place-items: center; width: 2.75rem; height: 2.75rem; padding: 0;
+  border: 0; border-radius: 999px; background: rgb(0 0 0 / 0.6); color: #fff;
+}
+.lightbox__step svg { width: 1.5rem; height: 1.5rem; }
+.lightbox__step--prev { left: 0.5rem; }
+.lightbox__step--next { right: 0.5rem; }
+.lightbox__caption { margin-top: 0.75rem; text-align: center; font-size: 0.9375rem; }
+.lightbox__close:focus-visible, .lightbox__step:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+@media (hover: hover) and (pointer: fine) {
+  .lightbox__close:hover { border-color: #fff; }
+  .lightbox__step:hover { background: rgb(0 0 0 / 0.85); }
+}
+
+// Older and newer stories (post layout): side by side on wider screens,
+// the newer one always on the right.
+.story-nav { display: grid; gap: var(--space-3); max-width: var(--measure); }   // as wide as the text
+.story-nav__link { display: grid; gap: 0.25rem; align-content: start; text-decoration: none; }
+@media (min-width: 40rem) {
+  .story-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .story-nav__link--newer { grid-column: 2; text-align: end; }
+}
 
 // Embedded players keep a 16:9 frame.
 .embed { position: relative; aspect-ratio: 16 / 9; }
