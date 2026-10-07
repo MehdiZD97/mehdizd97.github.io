@@ -1,0 +1,67 @@
+{%- comment -%}
+  Head tags for a publication page (PLAN 4.8 and 6.4): Google Scholar's
+  citation tags and schema.org data (ScholarlyArticle for papers, Dataset,
+  SoftwareSourceCode). Stage 9 validates and finishes the structured data.
+{%- endcomment -%}
+{%- assign pm = page -%}
+{%- assign pm_paper = false -%}
+{%- if pm.type == "journal" or pm.type == "magazine" or pm.type == "conference" %}{% assign pm_paper = true %}{% endif -%}
+{%- if pm_paper %}
+<meta name="citation_title" content="{{ pm.title | escape }}">
+{%- for author in pm.authors %}
+<meta name="citation_author" content="{{ author | escape }}">
+{%- endfor %}
+<meta name="citation_publication_date" content="{{ pm.date | date: '%Y/%m/%d' }}">
+{%- if pm.type == "conference" %}
+<meta name="citation_conference_title" content="{{ pm.venue | escape }}">
+{%- else %}
+<meta name="citation_journal_title" content="{{ pm.venue | escape }}">
+{%- endif %}
+{%- if pm.doi %}
+<meta name="citation_doi" content="{{ pm.doi }}">
+{%- endif %}
+{%- if pm.pdf %}
+<meta name="citation_pdf_url" content="{{ pm.pdf | absolute_url }}">
+{%- endif %}
+{%- endif %}
+{%- case pm.type -%}
+  {%- when "dataset" %}{% assign pm_schema = "Dataset" -%}
+  {%- when "software" %}{% assign pm_schema = "SoftwareSourceCode" -%}
+  {%- else %}{% assign pm_schema = "ScholarlyArticle" -%}
+{%- endcase -%}
+{%- capture pm_links -%}
+  {%- if pm.doi %}"https://doi.org/{{ pm.doi }}"{% endif -%}
+  {%- if pm.doi and pm.arxiv %}, {% endif -%}
+  {%- if pm.arxiv %}"https://arxiv.org/abs/{{ pm.arxiv }}"{% endif -%}
+{%- endcapture %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "{{ pm_schema }}",
+  "name": {{ pm.title | jsonify }},
+  {%- if pm_paper %}
+  "headline": {{ pm.title | jsonify }},
+  {%- endif %}
+  "url": {{ pm.url | absolute_url | jsonify }},
+  "datePublished": {{ pm.date | date: "%Y-%m-%d" | jsonify }},
+  "author": [
+    {%- for author in pm.authors %}
+    {%- if site.author_highlight contains author %}
+    { "@type": "Person", "name": {{ site.data.profile.name | jsonify }}, "url": {{ site.url | jsonify }} }{% unless forloop.last %},{% endunless %}
+    {%- else %}
+    { "@type": "Person", "name": {{ author | jsonify }} }{% unless forloop.last %},{% endunless %}
+    {%- endif %}
+    {%- endfor %}
+  ],
+  {%- if pm.venue %}
+  "isPartOf": { "@type": "CreativeWork", "name": {{ pm.venue | jsonify }} },
+  {%- endif %}
+  {%- if pm.code and pm.type == "software" %}
+  "codeRepository": {{ pm.code | jsonify }},
+  {%- endif %}
+  {%- if pm_links != "" %}
+  "sameAs": [{{ pm_links }}],
+  {%- endif %}
+  "description": {{ pm.content | strip_html | normalize_whitespace | truncate: 600 | jsonify }}
+}
+</script>

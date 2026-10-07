@@ -1,0 +1,18 @@
+{%- comment -%}
+  A zoomable figure: the responsive image links to its largest version,
+  which site.js opens in a dialog (without JavaScript the link opens the
+  image itself). Parameters: name (key in _data/images.yml), alt, caption
+  (Markdown, optional), sizes.
+{%- endcomment -%}
+{%- assign fg = site.data.images[include.name] -%}
+{%- if fg -%}
+{%- assign fg_largest = fg.variants | last -%}
+{%- assign fg_format = fg.formats | last -%}
+{%- capture fg_href %}/assets/img/{{ include.name }}-{{ fg_largest.size }}.{{ fg_format }}{% endcapture -%}
+<figure class="figure">
+  <a class="zoom" href="{{ fg_href | relative_url }}" data-zoom>{% include responsive-image.html name=include.name alt=include.alt sizes=include.sizes %}<span class="visually-hidden"> (view larger)</span></a>
+  {%- if include.caption %}
+  <figcaption>{{ include.caption | markdownify | remove: "<p>" | remove: "</p>" | strip }}</figcaption>
+  {%- endif %}
+</figure>
+{%- endif -%}

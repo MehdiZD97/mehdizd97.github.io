@@ -35,6 +35,28 @@
 .prose th, .prose td { padding: 0.5rem 0.75rem 0.5rem 0; border-bottom: 1px solid var(--mist); text-align: start; }
 .embed iframe { border-radius: var(--radius); }
 
+// Publication pages: breadcrumb, topic links, BibTeX in the prose, Related
+.breadcrumb ol { list-style: none; display: flex; flex-wrap: wrap; gap: 0.25rem 0.5rem; font-size: var(--text-small); font-weight: 600; color: var(--slate); }
+.breadcrumb li + li::before { content: "/"; margin-inline-end: 0.5rem; }
+.breadcrumb a { color: var(--link); }
+.topic-list { list-style: none; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.topic-list a {
+  display: inline-flex; align-items: center; min-height: 1.75rem; padding: 0 0.7rem; border-radius: var(--pill);
+  background: var(--mist); color: var(--ink); font: 650 0.8125rem/1 var(--font); text-decoration: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  .topic-list a:hover { box-shadow: inset 0 0 0 1.5px var(--link); }
+}
+.prose .bibtex pre { padding: 0; border: 0; border-radius: 0; background: none; }
+.prose .related { list-style: none; padding: 0; }
+.related li { display: grid; gap: 0.125rem; }
+.related li + li { margin-top: 0.75em; }
+.related__kind { font-size: var(--text-small); font-weight: 650; color: var(--slate); }
+@media (min-width: 40rem) {
+  .related li { grid-template-columns: 5.5rem minmax(0, 1fr); column-gap: var(--space-4); align-items: baseline; }
+}
+.figure figcaption { margin-top: var(--space-2); color: var(--slate); font-size: var(--text-small); }
+
 // Two photos side by side: a 3:4 portrait next to a 4:3 landscape keep one height.
 .figure-row { display: grid; grid-template-columns: 3fr 5.33fr; gap: var(--space-3); align-items: start; }
 .figure-row img { width: 100%; border-radius: var(--radius); }

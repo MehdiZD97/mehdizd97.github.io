@@ -1,29 +1,6 @@
-// Style guide only: BibTeX panels (Stage 6 moves them into the site's
-// publication script) and live contrast ratios for the palette table.
-// The theme toggle, the phone menu, and the header underline come from
-// the site's own script (/assets/js/site.js).
-
-// BibTeX panels with a copy button that reports success or failure.
-document.querySelectorAll("[data-bib-toggle]").forEach((button) => {
-  const panel = document.getElementById(button.getAttribute("aria-controls"));
-  button.addEventListener("click", () => {
-    const open = button.getAttribute("aria-expanded") !== "true";
-    button.setAttribute("aria-expanded", String(open));
-    panel.hidden = !open;
-  });
-});
-document.querySelectorAll("[data-copy]").forEach((button) => {
-  const source = document.getElementById(button.dataset.copy);
-  const status = button.parentElement.querySelector("[data-copy-status]");
-  button.addEventListener("click", async () => {
-    try {
-      await navigator.clipboard.writeText(source.textContent);
-      status.textContent = "Copied";
-    } catch (error) {
-      status.textContent = "Copy failed; select the text instead";
-    }
-  });
-});
+// Style guide only: live contrast ratios for the palette table. The theme
+// toggle, the phone menu, the header underline, the hero, and the BibTeX
+// panels come from the site's own scripts (/assets/js/).
 
 // WCAG 2.x contrast ratios for the palette table.
 const luminance = (hex) => {

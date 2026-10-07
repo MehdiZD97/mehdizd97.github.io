@@ -59,3 +59,26 @@
 .notfound__art .nf-beam { fill: none; stroke: var(--slate); stroke-width: 1.5; stroke-dasharray: 4 5; stroke-linecap: round; }
 .notfound__art .nf-miss { fill: none; stroke: var(--signal); stroke-width: 2; stroke-linecap: round; }
 .notfound .actions { margin-top: var(--space-2); }
+
+// Publication pages: breadcrumb, topic tags, BibTeX in the prose, Related
+.breadcrumb ol { list-style: none; display: flex; flex-wrap: wrap; gap: 0.25rem 0.5rem; font: 500 var(--text-mono)/1.5 var(--font-mono); color: var(--slate); }
+.breadcrumb li + li::before { content: "/"; margin-inline-end: 0.5rem; }
+.breadcrumb a { color: var(--ink); }
+.topic-list { list-style: none; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.topic-list a {
+  display: inline-flex; align-items: center; min-height: 1.75rem; padding: 0 0.45rem;
+  border: 1px solid var(--grid); border-radius: var(--radius); background: var(--panel);
+  color: var(--slate); font: 500 var(--text-mono)/1 var(--font-mono); text-decoration: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  .topic-list a:hover { border-color: var(--signal-bright); color: var(--ink); }
+}
+.prose .bibtex pre { padding: 0; border: 0; border-radius: 0; background: none; }
+.prose .related { list-style: none; padding: 0; }
+.related li { display: grid; gap: 0.125rem; }
+.related li + li { margin-top: 0.75em; }
+.related__kind { font: 500 var(--text-mono)/1.6 var(--font-mono); color: var(--slate); }
+@media (min-width: 40rem) {
+  .related li { grid-template-columns: 5.5rem minmax(0, 1fr); column-gap: var(--space-4); align-items: baseline; }
+}
+.figure figcaption { margin-top: var(--space-2); color: var(--slate); font-size: var(--text-small); }

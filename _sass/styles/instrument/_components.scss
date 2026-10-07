@@ -125,3 +125,24 @@
 @media (min-width: 40rem) {
   .def-list { grid-template-columns: 12rem minmax(0, 1fr); column-gap: var(--space-4); }
 }
+
+// Publications page filters: chips like the link buttons; the chosen one is inked
+.pub-filter__label { font: 500 var(--text-mono)/1.2 var(--font-mono); color: var(--slate); }
+.chip__face {
+  min-height: 2.25rem; padding: 0 0.625rem; border: 1px solid var(--grid); border-radius: var(--radius);
+  background: var(--panel); color: var(--ink); font: 500 var(--text-mono)/1 var(--font-mono);
+}
+.chip__count { color: var(--slate); }
+.chip input:checked + .chip__face { border-color: var(--ink); background: var(--ink); color: var(--paper); }
+.chip input:checked + .chip__face .chip__count { color: var(--paper); }
+.chip input:focus-visible + .chip__face { outline: 2px solid var(--signal); outline-offset: 2px; }
+@media (hover: hover) and (pointer: fine) {
+  .chip input:not(:checked):hover + .chip__face { border-color: var(--signal-bright); }
+}
+.pub-search input {
+  width: 100%; max-width: 30rem; min-height: 2.75rem; padding: 0 0.75rem;
+  border: 1px solid var(--slate); border-radius: var(--radius); background: var(--panel); color: var(--ink);
+}
+.pub-search input:focus-visible { outline: 2px solid var(--signal); outline-offset: 1px; }
+.pub-count { font: 500 var(--text-mono)/1.5 var(--font-mono); color: var(--slate); }
+.pub-empty { color: var(--slate); }

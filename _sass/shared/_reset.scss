@@ -10,8 +10,13 @@ button { cursor: pointer; }
 p, h1, h2, h3, h4, h5, h6, figure, blockquote, dl, dd, pre { margin: 0; }
 ul, ol { margin: 0; padding: 0; }
 
-// Anchored targets stop below the sticky header.
+// Anchored targets stop below the sticky header; in-page links scroll
+// there smoothly (Mehdi, Stage 6), and jump with reduced motion (below).
 [id] { scroll-margin-top: 5rem; }
+html { scroll-behavior: smooth; }
+
+// The hidden attribute always wins over a component's display value.
+[hidden] { display: none !important; }
 
 .visually-hidden {
   position: absolute;

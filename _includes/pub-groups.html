@@ -20,7 +20,7 @@
 {%- assign pg_key = include.prefix | append: pg_types.first %}
 {%- assign pg_items = pg_pubs | where_exp: "item", "pg_types contains item.type" %}
 {%- if pg_items.size > 0 %}
-<section class="subsection subsection--entries" id="{{ pg_key }}" aria-labelledby="{{ pg_key }}-title">
+<section class="subsection subsection--entries" id="{{ pg_key }}" aria-labelledby="{{ pg_key }}-title" data-pub-group>
   <h{{ pg_h }} class="subsection__title" id="{{ pg_key }}-title">{{ pg_group | split: ":" | last }}</h{{ pg_h }}>
   {%- for pub in pg_items %}
   {% include pub-item.html pub=pub level=pg_entry_h %}

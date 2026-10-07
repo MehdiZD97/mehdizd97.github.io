@@ -2,12 +2,53 @@
 title: Publications
 permalink: /publications/
 prose: false
+scripts: [/assets/js/publications.js]
 ---
 {%- comment -%}
-  Temporary publications page (Stages 3 and 4): every item in
-  _publications/, grouped by type, newest first. Stage 6 adds filters,
-  search, and BibTeX panels.
+  Publications (PLAN 6.1): every item in _publications/, grouped by type and
+  newest first. publications.js adds the search box and the type and topic
+  filters (hidden without JavaScript, so the full list always shows).
 {%- endcomment -%}
-{%- assign scholar = site.data.profile.links | where: "id", "google-scholar" | first %}
-<p class="page-lead">You can also find my papers on my <a href="{{ scholar.url }}" target="_blank" rel="noopener">Google Scholar profile{% include newtab.html %}</a>.</p>
+{%- assign pf_scholar = site.data.profile.links | where: "id", "google-scholar" | first %}
+{%- assign pf_orcid = site.data.profile.links | where: "id", "orcid" | first %}
+{%- assign pf_total = site.publications.size %}
+<p class="page-lead">Papers, datasets, and software, newest first. They are also on <a href="{{ pf_scholar.url }}" target="_blank" rel="noopener">Google Scholar{% include newtab.html %}</a> and <a href="{{ pf_orcid.url }}" target="_blank" rel="noopener">ORCID{% include newtab.html %}</a>.</p>
+
+<form class="pub-filters js-only" role="search" aria-label="Filter publications" data-pub-filters>
+  <label class="pub-search">
+    <span class="pub-filter__label">Search</span>
+    <input type="search" name="q" autocomplete="off" placeholder="Title, author, or venue" data-pub-search>
+  </label>
+  <div class="pub-filter" role="radiogroup" aria-labelledby="pub-kind-label">
+    <span class="pub-filter__label" id="pub-kind-label">Type</span>
+    <div class="pub-filter__options">
+      {%- assign pf_kinds = "all:All|journal:Journal|magazine:Magazine|conference:Conference|under-review:Under review|dataset:Datasets|software:Software" | split: "|" %}
+      {%- for pf_kind in pf_kinds %}
+      {%- assign pf_value = pf_kind | split: ":" | first %}
+      {%- case pf_value %}
+        {%- when "all" %}{% assign pf_n = pf_total %}
+        {%- when "under-review" %}{% assign pf_n = site.publications | where: "status", "under-review" | size %}
+        {%- else %}{% assign pf_n = site.publications | where: "type", pf_value | size %}
+      {%- endcase %}
+      {%- if pf_n > 0 %}
+      <label class="chip"><input type="radio" name="kind" value="{% unless pf_value == 'all' %}{{ pf_value }}{% endunless %}"{% if pf_value == "all" %} checked{% endif %}><span class="chip__face">{{ pf_kind | split: ":" | last }} <span class="chip__count">{{ pf_n }}</span></span></label>
+      {%- endif %}
+      {%- endfor %}
+    </div>
+  </div>
+  <div class="pub-filter" role="radiogroup" aria-labelledby="pub-topic-label">
+    <span class="pub-filter__label" id="pub-topic-label">Topic</span>
+    <div class="pub-filter__options">
+      <label class="chip"><input type="radio" name="topic" value="" checked><span class="chip__face">All</span></label>
+      {%- for pf_topic in site.data.topics %}
+      {%- assign pf_n = site.publications | where_exp: "item", "item.topics contains pf_topic.id" | size %}
+      {%- if pf_n > 0 %}
+      <label class="chip"><input type="radio" name="topic" value="{{ pf_topic.id }}"><span class="chip__face">{{ pf_topic.label }} <span class="chip__count">{{ pf_n }}</span></span></label>
+      {%- endif %}
+      {%- endfor %}
+    </div>
+  </div>
+  <p class="pub-count" role="status" data-pub-count>{{ pf_total }} publications</p>
+</form>
+<p class="pub-empty" data-pub-empty hidden>No publications match. <button class="btn btn--text" type="button" data-pub-reset>Clear the filters</button></p>
 {% include pub-groups.html pubs=site.publications groups="journal,magazine:Journal and magazine papers|conference:Conference papers|dataset:Datasets|software:Software" level=2 %}

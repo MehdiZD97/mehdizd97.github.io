@@ -31,10 +31,58 @@
 .js .hv-panel.is-hidden { opacity: 0; visibility: hidden; transition: opacity 280ms cubic-bezier(0.2, 0.7, 0.2, 1), visibility 0s linear 280ms; }
 html:not(.js) .hv-tabs, html:not(.js) .hv-panel.is-hidden { display: none; }
 
-// BibTeX panels
-.bibtex[hidden] { display: none; }
-.bibtex pre { overflow-x: auto; margin: 0; }
+// Controls that need JavaScript (filters, BibTeX buttons, Copy) show only
+// when it runs; the head script sets .js before the first paint.
+html:not(.js) .js-only { display: none !important; }
+
+// BibTeX panels (site.js)
+.bibtex pre { overflow-x: auto; margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
 .bibtex__status:empty { display: none; }
+
+// Publications page filters (publications.js): radio chips in labeled rows.
+.pub-filters { display: grid; gap: var(--space-4); }
+.pub-filter, .pub-search { display: grid; gap: var(--space-2); min-width: 0; }
+.pub-filter__options { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+@media (min-width: 40rem) {
+  .pub-filter, .pub-search { grid-template-columns: 5.5rem minmax(0, 1fr); align-items: center; column-gap: var(--space-4); }
+  .pub-filter { align-items: start; }
+  .pub-filter .pub-filter__label { padding-top: 0.55rem; }
+}
+// On phones each row of chips scrolls sideways, edge to edge, instead of
+// stacking; arrow keys still move the choice and bring it into view.
+@media (max-width: 39.99rem) {
+  .pub-filter__options {
+    flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none;
+    margin: -4px calc(-1 * var(--gutter)); padding: 4px var(--gutter);
+  }
+  .pub-filter__options::-webkit-scrollbar { display: none; }
+  .chip { flex: none; }
+}
+.chip { position: relative; display: inline-flex; }
+.chip input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.chip__face { display: inline-flex; align-items: center; gap: 0.4rem; pointer-events: none; }
+// Entries that come back into view fade in (off with reduced motion).
+@keyframes pub-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.pub.is-entering { animation: pub-in 200ms cubic-bezier(0.2, 0.7, 0.2, 1); }
+
+// Zoomable figures (_includes/figure.html): the image grows a little on hover
+// and opens larger in a dialog on click (site.js).
+.zoom { display: block; position: relative; overflow: hidden; border-radius: var(--radius); }
+.zoom picture { display: block; }
+.zoom img { width: 100%; transition: transform 200ms cubic-bezier(0.2, 0.7, 0.2, 1); }
+.zoom:focus-visible img { transform: scale(1.04); }
+@media (hover: hover) and (pointer: fine) {
+  .zoom { cursor: zoom-in; }
+  .zoom:hover img { transform: scale(1.04); }
+}
+.lightbox { max-width: min(94vw, 80rem); max-height: 94vh; padding: 0; border: 0; background: transparent; overflow: visible; }
+.lightbox::backdrop { background: rgb(0 0 0 / 0.82); }
+.lightbox img { display: block; max-width: 100%; max-height: 84vh; width: auto; height: auto; margin: 0 auto; border-radius: 6px; }
+.lightbox__close {
+  display: block; margin: 0 0 0.75rem auto; min-height: 2.5rem; padding: 0 1rem;
+  border: 1.5px solid rgb(255 255 255 / 0.7); border-radius: 999px; background: transparent; color: #fff; font-weight: 600;
+}
+.lightbox__close:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
 
 // Embedded players keep a 16:9 frame.
 .embed { position: relative; aspect-ratio: 16 / 9; }

@@ -2,8 +2,13 @@
 layout: default
 ---
 {%- comment -%}
-  One publication (PLAN 4.4 schema). Stage 6 adds the breadcrumb, figure,
-  BibTeX copy panel, related items, and Google Scholar meta tags.
+  One publication (PLAN 6.4): breadcrumb, title, authors, venue, date, status,
+  award, link buttons, topics (each opens the filtered list), an optional
+  zoomable figure (`figure`, `figure_alt`, `figure_caption`), the abstract,
+  BibTeX with a Copy button, and a Related block gathered from the data:
+  talks, awards, videos, and news that name this slug, their stories, and
+  other entries with the same code. The head adds Google Scholar meta tags
+  and structured data.
 {%- endcomment %}
 {%- case page.status -%}
   {%- when "accepted" %}{% assign status_label = "Accepted" -%}
@@ -11,10 +16,36 @@ layout: default
   {%- when "preprint" %}{% assign status_label = "Preprint" -%}
   {%- else %}{% assign status_label = "" -%}
 {%- endcase -%}
-{%- if page.type == "dataset" or page.type == "software" %}{% assign body_title = "Description" %}{% else %}{% assign body_title = "Abstract" %}{% endif %}
+{%- case page.type -%}
+  {%- when "journal", "magazine" %}{% assign group_key = "journal" %}{% assign group_label = "Journal and magazine papers" -%}
+  {%- when "conference" %}{% assign group_key = "conference" %}{% assign group_label = "Conference papers" -%}
+  {%- when "dataset" %}{% assign group_key = "dataset" %}{% assign group_label = "Datasets" -%}
+  {%- else %}{% assign group_key = "software" %}{% assign group_label = "Software" -%}
+{%- endcase -%}
+{%- if page.type == "dataset" or page.type == "software" %}{% assign body_title = "Description" %}{% else %}{% assign body_title = "Abstract" %}{% endif -%}
+{%- assign publications_url = '/publications/' | relative_url -%}
+
+{%- comment -%} Related items {%- endcomment -%}
+{%- assign rel_talks = site.data.talks | where: "pub", page.slug -%}
+{%- assign rel_awards = site.data.awards | where: "pub", page.slug -%}
+{%- assign rel_videos = site.data.videos.videos | where: "pub", page.slug -%}
+{%- assign rel_news = site.data.news | where: "pub", page.slug -%}
+{%- assign rel_code = "" | split: "" -%}
+{%- if page.code %}{% assign rel_code = site.publications | where: "code", page.code | where_exp: "doc", "doc.slug != page.slug" %}{% endif -%}
+{%- assign rel_stories = "" | split: "" -%}
+{%- for item in rel_talks %}{% if item.story %}{% assign rel_stories = rel_stories | push: item.story %}{% endif %}{% endfor -%}
+{%- for item in rel_news %}{% if item.story %}{% assign rel_stories = rel_stories | push: item.story %}{% endif %}{% endfor -%}
+{%- assign rel_stories = rel_stories | uniq -%}
+{%- assign rel_total = rel_talks.size | plus: rel_awards.size | plus: rel_videos.size | plus: rel_news.size | plus: rel_code.size | plus: rel_stories.size %}
 <main class="site-main" id="main">
   <article class="publication">
     <header class="page-header">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="{{ publications_url }}">Publications</a></li>
+          <li><a href="{{ publications_url }}#{{ group_key }}">{{ group_label }}</a></li>
+        </ol>
+      </nav>
       <h1 class="page-title page-title--long">{{ page.title }}</h1>
       <p class="page-authors">{% include authors.html list=page.authors %}</p>
       <p class="page-meta">
@@ -28,8 +59,21 @@ layout: default
       </p>
       {%- endif %}
       {% include pub-links.html pub=page %}
+      {%- if page.topics.size > 0 %}
+      <ul class="topic-list" aria-label="Topics">
+        {%- for topic_id in page.topics %}
+        {%- assign topic = site.data.topics | where: "id", topic_id | first %}
+        {%- if topic %}
+        <li><a href="{{ publications_url }}?topic={{ topic.id }}">{{ topic.label }}</a></li>
+        {%- endif %}
+        {%- endfor %}
+      </ul>
+      {%- endif %}
     </header>
     <div class="page-content prose">
+      {%- if page.figure %}
+      {% include figure.html name=page.figure alt=page.figure_alt caption=page.figure_caption sizes="(min-width: 48rem) 42rem, calc(100vw - 2rem)" %}
+      {%- endif %}
       {%- assign body = content | strip %}
       {%- if body != "" %}
       <h2>{{ body_title }}</h2>
@@ -37,9 +81,39 @@ layout: default
       {%- endif %}
       {%- if page.bibtex %}
       <h2>BibTeX</h2>
-      <pre><code>{{ page.bibtex | strip | escape }}</code></pre>
+      <div class="bibtex">
+        <pre id="bib-{{ page.slug }}-text">{{ page.bibtex | strip | escape }}</pre>
+        <p class="bibtex__actions js-only"><button class="btn btn--secondary btn--small" type="button" data-copy="bib-{{ page.slug }}-text">{% include icon.html name="copy" %}Copy</button> <span class="bibtex__status" role="status" data-copy-status></span></p>
+      </div>
+      {%- endif %}
+      {%- if rel_total > 0 %}
+      <h2>Related</h2>
+      <ul class="related">
+        {%- for doc in rel_code %}
+        {%- case doc.type %}{% when "dataset" %}{% assign rel_kind = "Dataset" %}{% when "software" %}{% assign rel_kind = "Software" %}{% else %}{% assign rel_kind = "Paper" %}{% endcase %}
+        <li><span class="related__kind">{{ rel_kind }}</span> <span><a href="{{ doc.url | relative_url }}">{{ doc.title }}</a></span></li>
+        {%- endfor %}
+        {%- for talk in rel_talks %}
+        <li><span class="related__kind">Talk</span> <span><a href="{{ '/cv/' | relative_url }}#{{ talk.id }}">{{ talk.title }}</a>, {{ talk.event }}, {{ talk.date | date: "%B %Y" }}</span></li>
+        {%- endfor %}
+        {%- for award in rel_awards %}
+        <li><span class="related__kind">Award</span> <span>{{ award.title }}, {{ award.years | default: award.year }}</span></li>
+        {%- endfor %}
+        {%- for video in rel_videos %}
+        <li><span class="related__kind">Video</span> <span><a href="https://www.youtube.com/watch?v={{ video.id }}" target="_blank" rel="noopener">{{ video.title }}{% include newtab.html %}</a></span></li>
+        {%- endfor %}
+        {%- for story_url in rel_stories %}
+        {%- assign story = site.posts | where: "url", story_url | first %}
+        {%- if story %}
+        <li><span class="related__kind">Story</span> <span><a href="{{ story.url | relative_url }}">{{ story.title }}</a>, {{ story.date | date: "%B %Y" }}</span></li>
+        {%- endif %}
+        {%- endfor %}
+        {%- for item in rel_news %}
+        <li><span class="related__kind">News</span> <span>{{ item.date | date: "%B %Y" }}: {{ item.text | markdownify | remove: "<p>" | remove: "</p>" | strip }}</span></li>
+        {%- endfor %}
+      </ul>
       {%- endif %}
     </div>
-    <p class="more-link"><a href="{{ '/publications/' | relative_url }}">All publications</a></p>
+    <p class="more-link"><a href="{{ publications_url }}">All publications</a></p>
   </article>
 </main>

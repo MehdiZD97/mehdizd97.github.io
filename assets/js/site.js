@@ -1,6 +1,7 @@
-// Site shell behavior (PLAN 3.2 and 3.5): the theme toggle, the phone menu,
-// and, on pages with in-page sections, the header underline that follows
-// the section in view. Loaded as a module on every page.
+// Site behavior (PLAN 3.2, 3.5, and 6.3): the theme toggle, the phone menu,
+// the header underline that follows the section in view (pages with in-page
+// sections), BibTeX panels with a Copy button, and the lightbox for zoomable
+// figures. Loaded as a module on every page.
 
 const root = document.documentElement;
 
@@ -67,4 +68,55 @@ if (spyLinks.length) {
   window.addEventListener("scroll", queue, { passive: true });
   window.addEventListener("resize", queue);
   update();
+}
+
+// BibTeX panels: the BibTeX button opens its panel; Copy puts the entry on
+// the clipboard and says whether that worked.
+document.querySelectorAll("[data-bib-toggle]").forEach((button) => {
+  const panel = document.getElementById(button.getAttribute("aria-controls"));
+  if (!panel) return;
+  button.addEventListener("click", () => {
+    const open = button.getAttribute("aria-expanded") !== "true";
+    button.setAttribute("aria-expanded", String(open));
+    panel.hidden = !open;
+  });
+});
+document.querySelectorAll("[data-copy]").forEach((button) => {
+  const source = document.getElementById(button.dataset.copy);
+  const status = button.parentElement.querySelector("[data-copy-status]");
+  button.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(source.textContent);
+      status.textContent = "Copied";
+    } catch (error) {
+      status.textContent = "Copy failed; select the text instead";
+    }
+  });
+});
+
+// Zoomable figures: a link marked data-zoom opens its image in a dialog.
+// Escape, the Close button, or a click outside the image closes it, and
+// focus returns to the link. Without a dialog element the link just opens
+// the image.
+const zoomLinks = document.querySelectorAll("a[data-zoom]");
+if (zoomLinks.length && typeof HTMLDialogElement === "function") {
+  const dialog = document.createElement("dialog");
+  dialog.className = "lightbox";
+  dialog.setAttribute("aria-label", "Enlarged image");
+  dialog.innerHTML = '<button class="lightbox__close" type="button">Close</button><img alt="">';
+  document.body.append(dialog);
+  const image = dialog.querySelector("img");
+  dialog.querySelector(".lightbox__close").addEventListener("click", () => dialog.close());
+  dialog.addEventListener("click", (event) => {
+    if (event.target === dialog) dialog.close();
+  });
+  dialog.addEventListener("close", () => image.removeAttribute("src"));
+  zoomLinks.forEach((link) => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      image.alt = link.querySelector("img")?.alt ?? "";
+      image.src = link.href;
+      dialog.showModal();
+    });
+  });
 }

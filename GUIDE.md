@@ -152,15 +152,20 @@ Each publication is one file in `_publications/`. Its file name is its **slug**,
    | `award` | Optional, for example `Best Paper Award Finalist`. Shows a badge. |
    | `featured` | `true` shows the paper in Home's "Selected publications". |
    | `topics` | Ids from `_data/topics.yml`. To add a topic, add an `id` and `label` there. |
-   | `bibtex` | The citation. Indent every line of it by two spaces under `bibtex: |`. |
+   | `bibtex` | The citation. Indent every line of it by two spaces under `bibtex: |`. It appears on the publication's page and behind a "BibTeX" button (with Copy) in every list. |
+   | `figure`, `figure_alt`, `figure_caption` | Optional: a figure at the top of the publication's page that visitors can enlarge. Add the image like a story photo (section 13, steps 1 to 3, with a name such as `publications/<slug>`), then set `figure: publications/<slug>`, a description in `figure_alt`, and an optional `figure_caption`. It also becomes the page's preview image on social media. |
 
-   The link buttons always appear in the same order (PDF, arXiv, IEEE Xplore or DOI, Code, Slides, Video, Poster, Dataset), and only for the fields you fill in.
+   The link buttons always appear in the same order (PDF, arXiv, IEEE Xplore or DOI, Code, Slides, Video, Poster, Dataset, BibTeX), and only for the fields you fill in.
+
+   The publication's page also lists what refers to it, without any extra work: talks, awards, videos, and news items whose `pub` is this slug, their stories, and other entries with the same `code` link (a paper and its software find each other). Its topics link to the Publications page filtered by that topic.
 
 4. Getting the BibTeX:
    - Published paper with a DOI: run `curl -LH "Accept: application/x-bibtex" https://doi.org/<doi>` in a terminal and paste the result. Tidy it the way the other files do (one field per line, page ranges written `100--110`).
    - Preprint: arXiv's "Export BibTeX citation" link on the paper's page gives an entry like the one in the template.
 5. Write the abstract below the second `---` line.
 6. Optional: add a news item for it (section 3) with `pub: <slug>`.
+
+   Filtered views of the Publications page have their own addresses, handy for sharing: `/publications/?kind=journal`, `?kind=under-review`, `?topic=cell-free-isac`, or `?q=admm` (they combine with `&`).
 7. Save, then check `/publications/`, the new page `/publications/<slug>/`, and Home if it is featured.
 
 ---

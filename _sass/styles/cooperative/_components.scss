@@ -8,7 +8,8 @@
 .pub-authors strong { font-weight: 750; }
 .pub-venue-short { order: 3; align-self: center; padding: 0.3rem 0.7rem; border-radius: var(--pill); background: var(--field); color: var(--on-field); font-size: 0.8125rem; font-weight: 700; white-space: nowrap; }
 .pub-venue { order: 3; align-self: center; color: var(--slate); }
-.pub-badges { grid-column: 1 / -1; order: 4; display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.pub-badges { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.pub .pub-badges { grid-column: 1 / -1; order: 4; }
 .pub .linkbtns { grid-column: 1 / -1; order: 5; margin-top: var(--space-2); }
 .pub .bibtex { grid-column: 1 / -1; order: 6; }
 @media (hover: hover) and (pointer: fine) {
@@ -25,6 +26,29 @@
 .bibtex { display: grid; gap: var(--space-3); padding: var(--space-4); border-radius: var(--radius); background: var(--mist); }
 .bibtex pre { font: 400 0.8125rem/1.55 var(--font-mono); }
 .bibtex__actions { display: flex; align-items: center; gap: var(--space-3); color: var(--slate); font-size: var(--text-small); }
+
+// Publications page filters: chips like the link buttons; the chosen one is filled
+.pub-filter__label { font: 650 var(--text-small)/1.2 var(--font); color: var(--slate); }
+.chip__face {
+  min-height: 2.25rem; padding: 0 0.875rem; border-radius: var(--pill);
+  background: var(--mist); color: var(--ink); font: 650 var(--text-small)/1 var(--font);
+  transition: background-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+.chip__count { color: var(--slate); font-weight: 600; }
+.chip input:checked + .chip__face { background: var(--field); color: var(--on-field); }
+.chip input:checked + .chip__face .chip__count { color: var(--on-field); }
+.chip input:focus-visible + .chip__face { outline: 3px solid var(--link); outline-offset: 2px; }
+@media (hover: hover) and (pointer: fine) {
+  .chip input:not(:checked):hover + .chip__face { box-shadow: inset 0 0 0 1.5px var(--link); }
+}
+.pub-search input {
+  width: 100%; max-width: 30rem; min-height: 2.75rem; padding: 0 1rem;
+  border: 1.5px solid color-mix(in srgb, var(--slate) 55%, transparent); border-radius: var(--pill);
+  background: var(--paper); color: var(--ink);
+}
+.pub-search input:focus-visible { outline: 3px solid var(--link); outline-offset: 1px; border-color: var(--link); }
+.pub-count { color: var(--slate); font-size: var(--text-ui); font-weight: 600; }
+.pub-empty { color: var(--slate); }
 
 // News: a timeline of nodes
 .news-list { list-style: none; display: grid; }

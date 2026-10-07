@@ -28,11 +28,23 @@
 <meta property="og:title" content="{{ page_title | escape }}">
 <meta property="og:description" content="{{ description | escape }}">
 <meta property="og:url" content="{{ page.url | absolute_url }}">
-<meta property="og:image" content="{{ page.image | default: profile.photo | absolute_url }}">
-{%- if page.image and page.image_alt %}
-<meta property="og:image:alt" content="{{ page.image_alt | escape }}">
+{%- assign og_image = page.image | default: profile.photo -%}
+{%- assign og_image_alt = page.image_alt -%}
+{%- if page.figure and site.data.images[page.figure] -%}
+  {%- assign og_figure = site.data.images[page.figure] -%}
+  {%- assign og_largest = og_figure.variants | last -%}
+  {%- assign og_format = og_figure.formats | last -%}
+  {%- capture og_image %}/assets/img/{{ page.figure }}-{{ og_largest.size }}.{{ og_format }}{% endcapture -%}
+  {%- assign og_image_alt = page.figure_alt -%}
+{%- endif %}
+<meta property="og:image" content="{{ og_image | absolute_url }}">
+{%- if og_image_alt %}
+<meta property="og:image:alt" content="{{ og_image_alt | escape }}">
 {%- endif %}
 <meta name="twitter:card" content="summary">
+{%- if page.collection == "publications" %}
+{% include publication-meta.html %}
+{%- endif %}
 {% include theme-script.html %}
 {%- for font in d.preload %}
 <link rel="preload" href="{{ '/assets/fonts/' | append: font | relative_url }}" as="font" type="font/woff2" crossorigin>
