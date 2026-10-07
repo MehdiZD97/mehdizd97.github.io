@@ -1,6 +1,7 @@
-{%- comment -%} Profile links from _data/profile.yml: an icon plus a label (each style decides whether the label shows). {%- endcomment -%}
+{%- comment -%} Profile links from _data/profile.yml for the hero: an icon plus a label (each style decides whether the label shows). Links marked footer_only appear only in the footer. {%- endcomment -%}
 <ul class="profile-links" aria-label="Profiles">
   {%- for link in site.data.profile.links %}
+  {%- if link.footer_only %}{% continue %}{% endif %}
   <li><a href="{{ link.url }}" target="_blank" rel="noopener">{% include icon.html name=link.id %}<span class="profile-links__label">{{ link.label }}</span>{% include newtab.html %}</a></li>
   {%- endfor %}
 </ul>

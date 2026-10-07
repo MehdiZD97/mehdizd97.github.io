@@ -4,16 +4,15 @@
 # /cv/#talks). Kinds: Lecture, Poster, Invited talk, Workshop talk,
 # Competition talk, Project presentation, Demo.
 
-# TODO(mehdi): add the TiamiTwin talk at the IEEE MILCOM 2026 workshop once the date, location, and presenter are known (open input 4)
+# Drafts for Mehdi to finish (uncomment and fill in; see GUIDE.md):
 # - id: milcom-2026
 #   date:
 #   title: "TiamiTwin: A Digital Twin for Bistatic ISAC Drone Sensing, Validated Against Measurements"
 #   kind: Workshop talk
-#   event: IEEE MILCOM 2026 Workshop
+#   event: IEEE MILCOM 2026 Workshop on Integrated Sensing and Communication for Critical Infrastructure Protection (ISAC4CIP)
 #   location:
 #   pub: tiamitwin
 
-# TODO(mehdi): was ASSENT presented at IEEE ICC 2026? If so: date, city, and kind (open input 4)
 # - id: icc-2026
 #   date:
 #   title: "ASSENT: Learning-Based Association Optimization for Distributed Cell-Free ISAC"
@@ -22,9 +21,8 @@
 #   location:
 #   pub: assent
 
-# TODO(mehdi): the 2026 UCI EECS Annual Technology Showcase (1st place): month, what you presented, and any photos or link (open inputs 2 and 4)
 # - id: eecs-showcase-2026
-#   date:
+#   date: 2026-06-01
 #   title:
 #   kind: Demo
 #   event: UCI EECS Annual Technology Showcase

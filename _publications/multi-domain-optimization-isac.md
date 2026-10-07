@@ -5,7 +5,7 @@ type: magazine
 status: published
 venue: IEEE Wireless Communications
 venue_short: IEEE WCM
-date: 2025-12-01              # CV: December 2025. TODO(mehdi): the print issue is October 2026 (vol. 33, no. 5), so the BibTeX says 2026 while the site shows 2025. Change the CV and the site to 2026?
+date: 2026-01-01              # January 2026 (Mehdi); the print issue is October 2026 (vol. 33, no. 5)
 doi: 10.1109/MWC.2025.3646980
 arxiv: 2506.16011
 featured: true

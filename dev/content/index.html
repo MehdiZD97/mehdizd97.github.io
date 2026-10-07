@@ -71,16 +71,15 @@ lead: "Every fact on the site, read from _data/, _publications/, and _posts/, so
         <tr><th scope="row">title</th><td>{{ pr.title }}</td></tr>
         <tr><th scope="row">department</th><td>{{ pr.department }}</td></tr>
         <tr><th scope="row">affiliation</th><td>{{ pr.affiliation }} ({{ pr.affiliation_short }})</td></tr>
-        <tr class="is-todo"><th scope="row">advisor</th><td>{{ pr.advisor.name }}, <a href="{{ pr.advisor.url }}">{{ pr.advisor.url }}</a></td></tr>
+        <tr><th scope="row">advisor</th><td>{{ pr.advisor.name }}, <a href="{{ pr.advisor.url }}">{{ pr.advisor.url }}</a></td></tr>
         <tr><th scope="row">headline</th><td>{{ pr.headline }}</td></tr>
         <tr><th scope="row">location</th><td>{{ pr.location }}</td></tr>
         <tr><th scope="row">email</th><td>{{ pr.email }}</td></tr>
         <tr><th scope="row">photo</th><td><code>{{ pr.photo }}</code>, variants <code>{{ pr.photo_image }}</code></td></tr>
         {%- assign cv_file = site.static_files | where: "path", pr.cv_pdf | first %}
         <tr{% unless cv_file %} class="is-todo"{% endunless %}><th scope="row">cv_pdf</th><td><code>{{ pr.cv_pdf }}</code>{% unless cv_file %} (file missing){% endunless %}</td></tr>
-        <tr><th scope="row">cv_updated</th><td>{{ pr.cv_updated | date: "%B %Y" }}</td></tr>
-        <tr class="is-todo"><th scope="row">intro (draft)</th><td>{{ pr.intro }}</td></tr>
-        <tr class="is-todo"><th scope="row">bio (draft)</th><td>{{ pr.bio | markdownify }}</td></tr>
+        <tr><th scope="row">intro</th><td>{{ pr.intro }}</td></tr>
+        <tr><th scope="row">bio</th><td>{{ pr.bio | markdownify }}</td></tr>
         <tr><th scope="row">interests</th><td>{% for g in pr.interests %}<strong>{{ g.group }}:</strong> {{ g.items | join: ", " }}{% unless forloop.last %}<br>{% endunless %}{% endfor %}</td></tr>
         <tr><th scope="row">links</th><td>{% for l in pr.links %}{{ l.label }}: <a href="{{ l.url }}">{{ l.url }}</a>{% unless forloop.last %}<br>{% endunless %}{% endfor %}</td></tr>
       </tbody>
@@ -147,14 +146,14 @@ lead: "Every fact on the site, read from _data/, _publications/, and _posts/, so
   <h2 id="awards-title">Honors and awards <code>_data/awards.yml</code></h2>
   <div class="review-table-wrap">
     <table class="review-table">
-      <thead><tr><th scope="col">Year</th><th scope="col">Title</th><th scope="col">Organization</th><th scope="col">On CV</th><th scope="col">Detail and links</th></tr></thead>
+      <thead><tr><th scope="col">Year</th><th scope="col">Title</th><th scope="col">Organization</th><th scope="col">On Home</th><th scope="col">Detail and links</th></tr></thead>
       <tbody>
         {%- for a in site.data.awards %}
         <tr>
           <td>{{ a.years | default: a.year }}{% if a.date %}<br>{{ a.date | date: "%b %Y" }}{% endif %}</td>
           <td>{{ a.title }}</td>
           <td>{{ a.org }}</td>
-          <td>{% if a.on_cv %}yes{% else %}no (site only){% endif %}</td>
+          <td>{% if a.home %}yes{% else %}no (full CV only){% endif %}</td>
           <td>{{ a.detail }}{% if a.pub %} pub <code>{{ a.pub }}</code>{% endif %}{% if a.talk %} talk <code>{{ a.talk }}</code>{% endif %}{% if a.url %} <a href="{{ a.url }}">link</a>{% endif %}</td>
         </tr>
         {%- endfor %}
@@ -269,14 +268,14 @@ lead: "Every fact on the site, read from _data/, _publications/, and _posts/, so
   <h2 id="education-title">Education <code>_data/cv/education.yml</code></h2>
   <div class="review-table-wrap">
     <table class="review-table">
-      <thead><tr><th scope="col">Degree</th><th scope="col">School</th><th scope="col">Dates</th><th scope="col">GPA (not shown)</th><th scope="col">Advisor or thesis</th></tr></thead>
+      <thead><tr><th scope="col">Degree</th><th scope="col">School</th><th scope="col">Dates</th><th scope="col">GPA</th><th scope="col">Advisor or thesis</th></tr></thead>
       <tbody>
         {%- for e in site.data.cv.education %}
         <tr>
           <td>{{ e.degree }} in {{ e.field }}</td>
           <td>{{ e.school }} ({{ e.school_short }}), {{ e.location }}</td>
           <td>{% include date-range.html start=e.start end=e.end format="long" expected=e.expected %}</td>
-          <td class="is-todo">{{ e.gpa }}</td>
+          <td>{{ e.gpa }}</td>
           <td>{% if e.advisor %}Advisor: {{ e.advisor }}{% endif %}{% if e.thesis %}Thesis: {{ e.thesis }}{% endif %}</td>
         </tr>
         {%- endfor %}
@@ -289,13 +288,13 @@ lead: "Every fact on the site, read from _data/, _publications/, and _posts/, so
   <h2 id="experience-title">Experience <code>_data/cv/experience.yml</code></h2>
   <div class="review-table-wrap">
     <table class="review-table">
-      <thead><tr><th scope="col">Dates</th><th scope="col">Role</th><th scope="col">Home summary (draft)</th><th scope="col">CV bullets, then site-only bullets</th></tr></thead>
+      <thead><tr><th scope="col">Dates</th><th scope="col">Role</th><th scope="col">Home summary</th><th scope="col">CV bullets, then site-only bullets</th></tr></thead>
       <tbody>
         {%- for x in site.data.cv.experience %}
         <tr>
           <td>{% include date-range.html start=x.start end=x.end %}</td>
-          <td><strong>{{ x.title }}</strong><br>{% if x.unit %}{{ x.unit }}, {% endif %}{{ x.org }}, {{ x.location }}<br>short: {{ x.where }}{% if x.supervisor %}<br>Supervisor: {{ x.supervisor }}{% endif %}<br>{% if x.on_cv %}on the CV{% else %}site only{% endif %}</td>
-          <td class="is-todo">{{ x.summary }}</td>
+          <td><strong>{{ x.title }}</strong><br>{% if x.unit %}{{ x.unit }}, {% endif %}{{ x.org }}, {{ x.location }}<br>short: {{ x.where }}{% if x.supervisor %}<br>Supervisor: {{ x.supervisor }}{% endif %}</td>
+          <td>{{ x.summary | default: "(full CV only)" }}</td>
           <td><ul>{% for b in x.bullets %}<li>{{ b | markdownify | remove: "<p>" | remove: "</p>" }}</li>{% endfor %}{% for b in x.extra %}<li class="review-extra">{{ b | markdownify | remove: "<p>" | remove: "</p>" }} (site only)</li>{% endfor %}</ul></td>
         </tr>
         {%- endfor %}

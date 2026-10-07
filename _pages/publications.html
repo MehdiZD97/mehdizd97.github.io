@@ -10,18 +10,4 @@ prose: false
 {%- endcomment -%}
 {%- assign scholar = site.data.profile.links | where: "id", "google-scholar" | first %}
 <p class="page-lead">You can also find my papers on my <a href="{{ scholar.url }}" target="_blank" rel="noopener">Google Scholar profile{% include newtab.html %}</a>.</p>
-{%- assign groups = "journal,magazine:Journal and magazine papers|conference:Conference papers|dataset:Datasets|software:Software" | split: "|" %}
-{%- for group in groups %}
-{%- assign types = group | split: ":" | first | split: "," %}
-{%- assign label = group | split: ":" | last %}
-{%- assign key = types | first %}
-{%- assign items = site.publications | where_exp: "item", "types contains item.type" | sort: "date" | reverse %}
-{%- if items.size > 0 %}
-<section class="subsection subsection--entries" id="{{ key }}" aria-labelledby="{{ key }}-title">
-  <h2 class="subsection__title" id="{{ key }}-title">{{ label }}</h2>
-  {%- for pub in items %}
-  {% include pub-item.html pub=pub level=3 %}
-  {%- endfor %}
-</section>
-{%- endif %}
-{%- endfor %}
+{% include pub-groups.html pubs=site.publications groups="journal,magazine:Journal and magazine papers|conference:Conference papers|dataset:Datasets|software:Software" level=2 %}

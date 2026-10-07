@@ -6,7 +6,7 @@ sitemap: false
 direction: cooperative
 letter: B
 signature: "the shared hero with two switchable views, cell-free beams (first) and the steerable array, drawn in white, orange, and cyan on the blue field."
-hero_script: /dev/styleguide/assets/hero.js
+hero_script: /assets/js/hero.js
 sections: [news, publications, cv, videos]   # the menu scrolls to these (site header)
 principles:
   - name: Many nodes, one beam
@@ -28,6 +28,11 @@ type_scale:
 ---
 {% include styleguide/bar.html %}
 {% include header.html %}
-{% include styleguide/hero.html %}
-{% include styleguide/sections.html %}
+<main id="main">
+  {% include hero.html %}
+  <div class="site-main">
+    {% include home-sections.html %}
+    {% include styleguide/sections.html %}
+  </div>
+</main>
 {% include footer.html %}

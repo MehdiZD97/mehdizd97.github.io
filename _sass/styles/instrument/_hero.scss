@@ -6,7 +6,6 @@
 }
 @media (min-width: 56.25rem) {
   .hero__inner { grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); align-items: center; gap: var(--space-7); padding-block: var(--space-7) var(--space-5); }
-  .hero__inner--text { grid-template-columns: minmax(0, 46rem); }
 }
 .hero__text { display: grid; gap: var(--space-4); align-content: start; }
 .hero__name { font-size: var(--text-hero); font-weight: 600; line-height: 1.02; letter-spacing: -0.025em; }

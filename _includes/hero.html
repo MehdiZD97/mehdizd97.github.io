@@ -1,12 +1,13 @@
 {%- comment -%}
-  Hero shared by both directions: text and portrait, plus two switchable
-  illustrations with no box around them (cell-free beams first, then the
-  steerable array). Each direction's stylesheet colors them. Without
-  JavaScript only the cell-free view shows.
+  The hero (PLAN 5.1), shared by Home and the style guide: the text and
+  portrait from _data/profile.yml, plus two switchable illustrations with no
+  box around them (cell-free beams first, then the steerable array). Each
+  style's stylesheet colors them; assets/js/hero.js animates them. Without
+  JavaScript only the cell-free view shows, in its static state.
 {%- endcomment -%}
 <section class="hero" aria-labelledby="hero-name" data-hero>
   <div class="hero__inner">
-    {% include styleguide/hero-text.html %}
+    {% include hero-text.html %}
     <div class="hv">
       <div class="hv-tabs" role="tablist" aria-label="Illustration">
         <button class="hv-tab" type="button" role="tab" id="hv-tab-cellfree" aria-selected="true" aria-controls="hv-panel-cellfree">Cell-free</button>
@@ -14,7 +15,7 @@
       </div>
       <div class="hv-stage">
         <div class="hv-panel" id="hv-panel-cellfree" role="tabpanel" aria-labelledby="hv-tab-cellfree" data-view="cellfree">
-          {% include styleguide/svg-hero-cellfree.html %}
+          {% include hero/svg-cellfree.html %}
           <dl class="hv-readout hv-readout--az">
             <div><dt>AP1</dt><dd><span data-out="az1">345</span>&deg;</dd></div>
             <div><dt>AP2</dt><dd><span data-out="az2">290</span>&deg;</dd></div>
@@ -25,7 +26,7 @@
           <p class="hv-caption">Beam azimuth of each access point toward the target (0&deg; points east).</p>
         </div>
         <div class="hv-panel is-hidden" id="hv-panel-array" role="tabpanel" aria-labelledby="hv-tab-array" data-view="array">
-          {% include styleguide/svg-hero-array.html %}
+          {% include hero/svg-array.html %}
           <dl class="hv-readout">
             <div><dt>Steering angle</dt><dd><span data-out="theta">115</span>&deg;</dd></div>
             <div><dt>Beamwidth</dt><dd><span data-out="beamwidth">7.0</span>&deg;</dd></div>

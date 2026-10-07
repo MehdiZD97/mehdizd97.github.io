@@ -2,17 +2,19 @@
 title: Curriculum vitae
 permalink: /cv/
 prose: false
+print_identity: true    # name and contacts at the top of the printed CV (scripts/make_cv_pdf.py)
 redirect_from:
   - /resume
   - /awards/
 ---
 {%- comment -%}
-  Temporary CV page (Stage 4): every section from _data/ in CV order.
-  Stage 8 adds the contents list, the "Last updated" line, print styles,
-  and the redirect stubs for /talks/ and /teaching/.
+  The full CV: every section from _data/ in CV order. scripts/make_cv_pdf.py
+  prints this page to files/Mehdi_Zafari_CV.pdf (the print styles hide the
+  site's header, footer, buttons, and the bio). Stage 8 adds the contents
+  list and the redirect stubs for /talks/ and /teaching/.
 {%- endcomment -%}
 {%- capture cv_button %}{% include cv-pdf.html class="btn btn--primary" %}{% endcapture %}
-<div class="prose">{{ site.data.profile.bio | markdownify }}</div>
+<div class="prose no-print">{{ site.data.profile.bio | markdownify }}</div>
 {%- if cv_button != "" %}
 <p class="actions">{{ cv_button }}</p>
 {%- endif %}
@@ -20,7 +22,7 @@ redirect_from:
 <section class="section" id="education" aria-labelledby="education-title">
   <h2 class="section__title" id="education-title">Education</h2>
   <div class="section__body">
-    {% include cv/education.html level=3 %}
+    {% include cv/education.html level=3 gpa=true %}
   </div>
 </section>
 
@@ -39,15 +41,9 @@ redirect_from:
 </section>
 
 <section class="section" id="publications" aria-labelledby="publications-title">
-  <h2 class="section__title" id="publications-title">Selected publications</h2>
+  <h2 class="section__title" id="publications-title">Publications</h2>
   <div class="section__body">
-    <div class="subsection subsection--entries">
-      {%- assign featured = site.publications | where: "featured", true | sort: "date" | reverse %}
-      {%- for pub in featured %}
-      {% include pub-item.html pub=pub level=3 %}
-      {%- endfor %}
-    </div>
-    <p class="more-link"><a href="{{ '/publications/' | relative_url }}">All publications, datasets, and software</a></p>
+    {% include pub-groups.html pubs=site.publications level=3 prefix="cv-" %}
   </div>
 </section>
 

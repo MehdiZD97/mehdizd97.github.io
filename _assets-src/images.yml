@@ -14,10 +14,7 @@
 #   formats:  default [avif, webp, jpg]; use [webp, png] to keep transparency
 #   quality:  optional, overrides the lossy quality (AVIF 60, WebP 80, JPEG 82)
 #
-# Originals kept but not used on the site: images/my_images/IMG_5422.jpg,
-# IMG_5422_full.jpg, IMG_6100.jpg, IMG_6133.jpg (screenshots of the Danesh
-# Academy tutorial thumbnails) and Google_Scholar_logo.png (the site draws its
-# icons from Simple Icons). TODO(mehdi): keep or delete them? (open input 9)
+# How to add a photo: GUIDE.md.
 
 profile/mehdi-zafari:
   src: images/profile4.jpeg          # TODO(mehdi): a higher-resolution original, if you have one (open input 9)

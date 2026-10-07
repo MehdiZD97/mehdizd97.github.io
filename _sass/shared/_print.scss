@@ -1,0 +1,47 @@
+// Print, shared by both styles: the CV PDF (scripts/make_cv_pdf.py) and any
+// page a visitor prints. The site's chrome and buttons are hidden, spacing
+// and type are compact, and entries stay whole across page breaks. Pages
+// with `print_identity: true` print a name and contact block
+// (_includes/print-identity.html) in place of their page header.
+.print-only { display: none; }
+
+@media print {
+  :root {
+    --space-5: 0.9rem;
+    --space-6: 1.1rem;
+    --space-7: 1.4rem;
+    --space-8: 1.6rem;
+    --text-h1: 1.75rem;
+    --text-h2: 1.375rem;
+    --text-h3: 1.0625rem;
+    --text-h4: 1rem;
+  }
+  html { font-size: 11.5px; }
+  body { background: #fff; }
+  .skip-link, .site-header, .site-footer, .no-print, .actions, .linkbtns, .more-link { display: none !important; }
+  .print-only { display: block; }
+  .site-main { max-width: none; padding: 0; }
+  .section { padding-top: var(--space-6); }
+  .section__title { position: static; }
+  .page-header { padding: 0 0 var(--space-4); }
+  .print-identity + .page-header { display: none; }
+  // Block flow paginates better than grid: a heading stays with what follows.
+  .section, .section__body, .subsection, .row-list, .edu-list { display: block; }
+  .section__title { margin-bottom: var(--space-4); }
+  .section__body > * + *, .subsection > * + * { margin-top: var(--space-4); }
+  .subsection + .subsection { margin-top: var(--space-6); }
+  .subsection--entries > * + * { margin-top: 1rem; }
+  .row-list > * + *, .edu-list > * + * { margin-top: 0.7rem; }
+  .row-what { font-size: 1.0625rem; }
+  a { text-decoration: none; }
+  .pub, .talk, .row-item, .edu, .news, figure, img { break-inside: avoid; }
+  h1, h2, h3, h4 { break-after: avoid; }
+
+  .print-identity { display: grid; gap: 0.15rem; margin-bottom: var(--space-3); }
+  .print-identity__name { font-size: 2rem; font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; color: var(--ink); }
+  .print-identity__title { font-size: 1.0625rem; font-weight: 600; }
+  .print-identity__headline { font-size: 1.0625rem; color: var(--slate); }
+  .print-identity__contact { list-style: none; display: flex; flex-wrap: wrap; gap: 0.15rem 1.1rem; margin-top: 0.4rem; font-size: 0.9375rem; }
+  .print-identity__contact a { color: var(--ink); }
+  .print-identity__updated { font-size: 0.875rem; color: var(--slate); }
+}

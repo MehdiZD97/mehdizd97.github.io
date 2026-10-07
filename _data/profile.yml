@@ -1,5 +1,5 @@
-# Identity, links, and files shown across the site (PLAN 4.4). Facts follow the
-# CV in _local/cv/ (CV_2026-09); see _local/plan/CONTENT-AUDIT.md section 1.
+# Identity, links, and files shown across the site (PLAN 4.4). With _data/cv/,
+# this file is the source of the CV page (/cv/) and the PDF printed from it.
 
 name: Mehdi Zafari
 title: Ph.D. Candidate
@@ -8,23 +8,22 @@ affiliation: University of California, Irvine
 affiliation_short: UC Irvine
 advisor:
   name: Prof. A. Lee Swindlehurst
-  url: https://scholar.google.com/citations?user=ibAcKWwAAAAJ   # TODO(mehdi): keep this Google Scholar link or use a UCI faculty page? (open input 7)
+  url: https://scholar.google.com/citations?user=ibAcKWwAAAAJ
 headline: Signal processing and AI/ML for next-generation (5G/6G) wireless systems
 location: Irvine, California
 email: mzafarid@uci.edu
 photo: /assets/img/profile/mehdi-zafari-480.jpg   # one file, for structured data and social previews
 photo_image: profile/mehdi-zafari                 # the responsive variants (key in _data/images.yml)
-cv_pdf: /files/Mehdi_Zafari_CV.pdf   # TODO(mehdi): add the public CV PDF (open input 5); links appear once the file exists
-cv_updated: 2026-09-01               # the CV in _local/cv/ is CV_2026-09
+cv_pdf: /files/Mehdi_Zafari_CV.pdf   # printed from /cv/ by scripts/make_cv_pdf.py; links appear once the file exists
 
-# TODO(mehdi): approve or rewrite the intro (first person, for the hero; built only from CV facts)
+# First person, for the hero (approved 2026-10-07)
 intro: I design distributed algorithms and learning methods for cell-free MIMO and integrated sensing and communication, and test them with over-the-air experiments and RF digital twins.
 
-# TODO(mehdi): approve or rewrite the bio (third person, for the CV page and structured data; built only from CV facts)
+# Third person, for the CV page and structured data (Mehdi's text, 2026-10-07)
 bio: |-
-  Mehdi Zafari is a Ph.D. candidate in Electrical Engineering and Computer Science at the University of California, Irvine, advised by Prof. A. Lee Swindlehurst. His research develops signal processing and AI/ML methods for next-generation (5G/6G) wireless systems, with a focus on cell-free MIMO and integrated sensing and communication (ISAC): distributed optimization (ADMM and consensus) for beamforming and resource allocation, and reinforcement learning and graph neural networks for cooperative ISAC networks.
+  Mehdi Zafari is a Ph.D. candidate in Electrical Engineering and Computer Science at the University of California, Irvine, advised by Prof. A. Lee Swindlehurst. His research develops signal processing and AI algorithms for next-generation wireless communication systems (5G/6G), with a focus on cell-free MIMO and integrated sensing and communication (ISAC).
 
-  He also builds and measures real systems. At Rice University, where he earned his M.S. in Electrical and Computer Engineering, he ran over-the-air experiments on the RENEW massive MIMO testbed and released over 200 datasets. As a Wireless AI Engineering Intern at Tiami Networks in 2026, he built high-fidelity RF digital twins with NVIDIA Sionna. His honors include the Pia Gratton Endowed Graduate Student Award, the Wireless History Foundation Scholarship Award, and a Best Paper Award finalist selection at the 2025 Asilomar Conference.
+  He earned his M.S. degree in Electrical and Computer Engineering from Rice University and his B.S. degree from the University of Tehran. At Rice University, he conducted over-the-air channel sounding experiments on the RENEW massive MIMO testbed and released more than 200 datasets. As a Wireless AI Engineering Intern at Tiami Networks in 2026, he built high-fidelity RF digital twins with NVIDIA Sionna. His honors include the Wireless History Foundation Scholarship Award, the Pia Gratton Endowed Graduate Student Award, 3rd place at the UCI Grad Slam 2026, 1st place at the UCI EECS Annual Technology Showcase, and finalist selection for the Best Paper Award at the 2025 Asilomar Conference.
 
 interests:       # CV: Research interests
   - group: Wireless communications
@@ -32,10 +31,11 @@ interests:       # CV: Research interests
   - group: ML and optimization
     items: [AI/ML for Wireless, Distributed Optimization, Generative AI for Sensing and Wildfire Prediction]
 
-links:           # display order; each entry renders an icon plus an accessible label
+links:           # display order; each entry renders an icon plus an accessible label;
+                 # footer_only: true keeps a link out of the hero and the printed CV
   - { id: google-scholar, label: Google Scholar, url: "https://scholar.google.com/citations?user=lKiB9vIAAAAJ" }
   - { id: orcid, label: ORCID, url: "https://orcid.org/0000-0001-8894-8709" }
   - { id: github, label: GitHub, url: "https://github.com/MehdiZD97" }
   - { id: linkedin, label: LinkedIn, url: "https://www.linkedin.com/in/Mehdi-Zafari" }
+  - { id: researchgate, label: ResearchGate, url: "https://www.researchgate.net/profile/Mehdi-Zafari", footer_only: true }
   - { id: youtube, label: YouTube, url: "https://www.youtube.com/@MehdiZD97" }
-  # TODO(mehdi): add ResearchGate (https://www.researchgate.net/profile/Mehdi-Zafari)? (open input 7)

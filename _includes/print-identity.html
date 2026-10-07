@@ -1,0 +1,22 @@
+{%- comment -%}
+  Name, title, and contact details for printed pages, such as the CV PDF
+  (scripts/make_cv_pdf.py). Shown only in print, where it replaces the page
+  header; a page asks for it with `print_identity: true`. No phone number
+  (PLAN D12).
+{%- endcomment -%}
+{%- assign pi = site.data.profile -%}
+<div class="print-identity print-only">
+  <p class="print-identity__name">{{ pi.name }}</p>
+  <p class="print-identity__title">{{ pi.title }}, {{ pi.affiliation_short }}</p>
+  <p class="print-identity__headline">{{ pi.headline }}</p>
+  <ul class="print-identity__contact">
+    <li>{{ pi.location }}</li>
+    <li><a href="mailto:{{ pi.email }}">{{ pi.email }}</a></li>
+    <li><a href="{{ site.url }}">{{ site.url | remove: "https://" }}</a></li>
+    {%- for link in pi.links %}
+    {%- if link.footer_only %}{% continue %}{% endif %}
+    <li><a href="{{ link.url }}">{{ link.url | remove: "https://" | remove: "www." }}</a></li>
+    {%- endfor %}
+  </ul>
+  <p class="print-identity__updated">Updated {{ site.time | date: "%B %Y" }}</p>
+</div>

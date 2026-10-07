@@ -1,6 +1,5 @@
-# Teaching (PLAN 4.4), newest first (CONTENT-AUDIT section 10; not on the
-# PDF CV). Mentoring appears under the Research Fellow role in experience.yml.
-# TODO(mehdi): include courses you taught as the instructor, such as the online Python course (title, dates, audience, public link)? (open input 8)
+# Teaching (PLAN 4.4), newest first. Mentoring appears under the Research
+# Fellow role in experience.yml. See GUIDE.md.
 
 - course: Introduction to Control Systems + Lab
   code: EECS 160A/LA

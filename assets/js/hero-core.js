@@ -1,6 +1,6 @@
-// Temporary (Stage 2 style guide): shared behavior for the hero prototypes.
-// Pointer and touch input, easing toward the target, reduced motion, and
-// pausing while the hero is off screen or the tab is hidden.
+// Shared behavior for the hero's views: pointer and touch input, easing
+// toward the target, reduced motion, and pausing while the hero is off
+// screen or the tab is hidden.
 
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 

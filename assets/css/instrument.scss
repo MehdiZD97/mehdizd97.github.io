@@ -6,6 +6,7 @@
 ---
 @use "shared";
 @use "styles/instrument";
+@use "shared/print";   // last, so print rules win over the style's own
 {%- assign d = site.data.design.directions | where: "id", "instrument" | first %}
 
 :root {

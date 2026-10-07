@@ -1,6 +1,6 @@
 # Education (PLAN 4.4), as in the CV; newest first. `logo` names the files in
-# assets/img/logos/ (logo-<logo>-72.png and its variants).
-# TODO(mehdi): show GPAs on the web CV? They are stored here but not displayed (open input 6)
+# assets/img/logos/ (logo-<logo>-72.png and its variants). GPAs show on the
+# full CV. See GUIDE.md.
 
 - degree: Ph.D.
   field: Electrical Engineering and Computer Science

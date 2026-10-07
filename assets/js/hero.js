@@ -1,4 +1,4 @@
-// Style guide hero, shared by both directions: two views and tabs.
+// The hero's two views and tabs (Home and the style guide; both styles).
 // View 1 (default): cell-free beams; five access points steer onto the pointer.
 // View 2: a 16-element uniform linear array (half-wavelength spacing) whose
 // beam pattern, from 0 to -30 dB, steers toward the pointer.

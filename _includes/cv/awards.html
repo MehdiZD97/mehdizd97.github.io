@@ -1,11 +1,11 @@
 {%- comment -%}
   Honors and awards from _data/awards.yml, in file order (newest first).
   The title links to the related publication, the event page, or the talk.
-  Parameter: cv_only (true: only the awards listed in the PDF CV).
+  Parameter: home_only (true: only the awards marked `home: true`).
 {%- endcomment -%}
 <ul class="row-list">
   {%- for a in site.data.awards %}
-  {%- if include.cv_only and a.on_cv != true %}{% continue %}{% endif %}
+  {%- if include.home_only and a.home != true %}{% continue %}{% endif %}
   {%- assign ca_href = nil %}{% assign ca_external = false %}
   {%- if a.pub %}
     {%- assign ca_pub = site.publications | where_exp: "doc", "doc.slug == a.pub" | first %}

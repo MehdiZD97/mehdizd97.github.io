@@ -7,9 +7,9 @@
   url: /
   section: top
 - label: News
-  url: /year-archive/          # Stage 7 moves the news page to /news/
+  url: /news/
   section: news
-  match: [/year-archive/, /news/, /posts/]
+  match: [/news/, /posts/]
 - label: Publications
   url: /publications/
   section: publications

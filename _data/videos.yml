@@ -8,13 +8,13 @@
 # duration: ISO 8601, as YouTube lists it
 # note: short line under the title on the card
 # source_title: title of the longer video that a `start` points into
-# TODO(mehdi): which @MehdiZD97 videos to feature on Home, and the one-line descriptions (open input 1)
+# Home shows the newest `home.videos` (in _config.yml); /videos/ shows all. See GUIDE.md.
 
 channel:
   name: Mehdi Zafari
   handle: "@MehdiZD97"
   url: https://www.youtube.com/@MehdiZD97
-  description:           # TODO(mehdi): one sentence about the channel (Stage 8)
+  description: Tutorials and talks.
 
 videos:
   - id: 16-DP_fDdp4

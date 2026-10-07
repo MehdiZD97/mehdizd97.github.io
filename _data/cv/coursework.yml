@@ -1,29 +1,10 @@
-# Relevant coursework (PLAN 4.4), as in the CV; newest first.
-# TODO(mehdi): the four site-only courses below are cut by default for a tighter CV page; restore any you want (open input 6)
+# Relevant coursework (PLAN 4.4), newest first. See GUIDE.md.
 
-- term: Fall 2025
-  course: Deep Generative Models
-  grade: A
-  institution: UC Irvine
-  on_cv: true
-- term: Fall 2024
-  course: Machine Learning for Signal Processing
-  grade: A+
-  institution: UC Irvine
-  on_cv: true
-- term: Spring 2024
-  course: "Optimization: Algorithms, Complexity, & Approximations"
-  grade: A
-  institution: Rice University
-  on_cv: true
-- term: Spring 2023
-  course: Distributed Methods for Optimization and Machine Learning
-  grade: A+
-  institution: Rice University
-  on_cv: true
-
-# Site-only (v1 CV page), cut by default:
-# - { term: Fall 2022, course: "Machine Learning (Introduction to Deep Learning)", grade: A, institution: Rice University, on_cv: false }
-# - { term: Spring 2022, course: Advanced Wireless Networks, grade: A, institution: Rice University, on_cv: false }
-# - { term: Fall 2021, course: "Modern Communication: Theory and Practice", grade: A, institution: Rice University, on_cv: false }
-# - { term: Fall 2017, course: Advanced Object-Oriented Programming, grade: A, institution: University of Tehran, on_cv: false }
+- { term: Fall 2025, course: Deep Generative Models, grade: A, institution: UC Irvine }
+- { term: Fall 2024, course: Machine Learning for Signal Processing, grade: A+, institution: UC Irvine }
+- { term: Spring 2024, course: "Optimization: Algorithms, Complexity, & Approximations", grade: A, institution: Rice University }
+- { term: Spring 2023, course: Distributed Methods for Optimization and Machine Learning, grade: A+, institution: Rice University }
+- { term: Fall 2022, course: "Machine Learning (Introduction to Deep Learning)", grade: A, institution: Rice University }
+- { term: Spring 2022, course: Advanced Wireless Networks, grade: A, institution: Rice University }
+- { term: Fall 2021, course: "Modern Communication: Theory and Practice", grade: A, institution: Rice University }
+- { term: Fall 2017, course: Advanced Object-Oriented Programming, grade: A, institution: University of Tehran }

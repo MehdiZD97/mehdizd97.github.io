@@ -41,9 +41,12 @@ doi_labels:
   - { prefix: "10.21227/", label: IEEE DataPort, icon: database }
 doi_default: { label: DOI, icon: link }
 
-# Home page: how many news items the News section shows.
+# Home page: how many news items (plus any with `pin: true`), talks, and
+# videos its sections show, newest first.
 home:
-  news: 8
+  news: 5
+  talks: 3
+  videos: 6
 
 # Stories (posts) set their own permalinks: /posts/YYYY/MM/blog-post-N/.
 permalink: /:categories/:title/
@@ -74,7 +77,7 @@ include:
 exclude:
   - CLAUDE.md
   - README.md
-  - UPDATING.md
+  - GUIDE.md
   - LICENSE
   - scripts/
   - Gemfile

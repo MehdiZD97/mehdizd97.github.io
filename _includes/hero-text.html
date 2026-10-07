@@ -7,7 +7,7 @@
 <div class="hero__text">
   <div class="hero__id">
     {%- capture photo_alt %}Portrait of {{ profile.name }}{% endcapture %}
-    {% include responsive-image.html name=profile.photo_image alt=photo_alt class="hero__photo" sizes="(min-width: 56.25rem) 8.5rem, 6rem" priority=true %}
+    {% include responsive-image.html name=profile.photo_image alt=photo_alt class="hero__photo" sizes="(min-width: 56.25rem) 9.5rem, 6rem" priority=true %}
     <div class="hero__id-text">
       <h1 class="hero__name" id="hero-name">{{ profile.name }}</h1>
       <p class="hero__title">{{ profile.title }}, {{ profile.affiliation_short }}</p>
@@ -16,7 +16,7 @@
   <p class="hero__headline">{{ profile.headline }}</p>
   <p class="hero__intro">{{ profile.intro | default: site.description }}</p>
   <p class="hero__actions">
-    <a class="btn btn--primary" href="{{ '/publications/' | relative_url }}">View publications</a>
+    <a class="btn btn--primary" href="#publications">View publications</a>
     {% include cv-pdf.html %}
     <a class="btn btn--text" href="{{ '/contact/' | relative_url }}">Contact</a>
   </p>

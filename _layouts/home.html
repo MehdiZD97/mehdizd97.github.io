@@ -2,15 +2,12 @@
 layout: default
 ---
 {%- comment -%}
-  Home: the hero on its own band, then the page's sections (Stage 5 builds
-  the full home page; until then the content is the temporary version).
+  Home (PLAN 5.1): the hero with its two switchable views, then the page's
+  sections. The page lists its sections in `sections`, so the menu scrolls
+  to them and the underline follows the one in view.
 {%- endcomment %}
 <main id="main">
-  <section class="hero" aria-labelledby="hero-name">
-    <div class="hero__inner hero__inner--text">
-      {% include hero-text.html %}
-    </div>
-  </section>
+  {% include hero.html %}
   <div class="site-main">
     {{ content }}
   </div>

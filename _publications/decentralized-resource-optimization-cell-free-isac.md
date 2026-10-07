@@ -2,11 +2,11 @@
 title: "Coordinated Decentralized Resource Optimization for Cell-Free ISAC Systems"
 authors: ["M. Zafari", "R. Liu", "A. L. Swindlehurst"]
 type: conference
-status: published             # TODO(mehdi): the CV says "accepted to"; the paper is in the IEEE proceedings (DOI below), so the site shows it as published. Update the CV, or keep "accepted"?
+status: published
 venue: 59th Asilomar Conference on Signals, Systems, and Computers
 venue_short: Asilomar 2025
 date: 2025-10-26              # conference date in the IEEE record (the CV gives the year only)
-doi: 10.1109/ieeeconf67917.2025.11443385   # TODO(mehdi): confirm this DOI (found on Crossref on 2026-09-30; title and authors match)
+doi: 10.1109/ieeeconf67917.2025.11443385
 arxiv: 2508.01044
 code: https://github.com/MehdiZD97/distributed-cellfree-isac
 award: Best Paper Award Finalist

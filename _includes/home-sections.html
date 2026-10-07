@@ -1,0 +1,88 @@
+{%- comment -%}
+  The home page's sections (PLAN 5.2), in Mehdi's order: News, Publications,
+  Curriculum vitae, Videos. Everything comes from _data/ and _publications/;
+  how many news items, talks, and videos show is set under `home` in
+  _config.yml. The style guide includes this file too, so the two pages
+  always match.
+{%- endcomment -%}
+{%- assign hs_news_page = site.data.navigation | where: "section", "news" | first -%}
+
+<section class="section" id="news" aria-labelledby="news-title">
+  <h2 class="section__title" id="news-title">Latest news</h2>
+  <div class="section__body">
+    <ul class="news-list">
+      {%- for item in site.data.news %}
+      {%- if forloop.index <= site.home.news or item.pin %}
+      {% include news-item.html item=item %}
+      {%- endif %}
+      {%- endfor %}
+    </ul>
+    <p class="more-link"><a href="{{ hs_news_page.url | relative_url }}">All news</a></p>
+  </div>
+</section>
+
+<section class="section" id="publications" aria-labelledby="publications-title">
+  <h2 class="section__title" id="publications-title">Selected publications</h2>
+  <div class="section__body">
+    <p class="actions">
+      <a class="btn btn--secondary" href="{{ '/publications/' | relative_url }}">Full list of publications</a>
+    </p>
+    {%- assign hs_featured = site.publications | where: "featured", true %}
+    {% include pub-groups.html pubs=hs_featured level=3 prefix="pubs-" %}
+    <p class="more-link"><a href="{{ '/publications/' | relative_url }}">All publications, datasets, and software</a></p>
+  </div>
+</section>
+
+<section class="section" id="cv" aria-labelledby="cv-title">
+  <h2 class="section__title" id="cv-title">Curriculum vitae</h2>
+  <div class="section__body">
+    <p class="actions">
+      {% include cv-pdf.html class="btn btn--primary" %}
+      <a class="btn btn--secondary" href="{{ '/cv/' | relative_url }}">Full CV</a>
+    </p>
+
+    <section class="subsection" id="education" aria-labelledby="education-title">
+      <h3 class="subsection__title" id="education-title">Education</h3>
+      {% include cv/education.html level=4 %}
+    </section>
+
+    <section class="subsection" id="experience" aria-labelledby="experience-title">
+      <h3 class="subsection__title" id="experience-title">Experience</h3>
+      {% include cv/experience.html summary=true %}
+    </section>
+
+    <section class="subsection" id="honors" aria-labelledby="honors-title">
+      <h3 class="subsection__title" id="honors-title">Honors and awards</h3>
+      {% include cv/awards.html home_only=true %}
+    </section>
+
+    <section class="subsection" id="teaching" aria-labelledby="teaching-title">
+      <h3 class="subsection__title" id="teaching-title">Teaching</h3>
+      {% include cv/teaching.html %}
+    </section>
+
+    <section class="subsection subsection--entries" id="talks" aria-labelledby="talks-title">
+      <h3 class="subsection__title" id="talks-title">Talks</h3>
+      {%- for talk in site.data.talks limit: site.home.talks %}
+      {% include talk-item.html talk=talk level=4 %}
+      {%- endfor %}
+    </section>
+  </div>
+</section>
+
+<section class="section" id="videos" aria-labelledby="videos-title">
+  <h2 class="section__title" id="videos-title">Videos</h2>
+  <div class="section__body">
+    {%- assign hs_channel = site.data.videos.channel %}
+    <p class="actions channel">
+      <span>{{ hs_channel.description }} New videos come to my YouTube channel, <a href="{{ hs_channel.url }}" target="_blank" rel="noopener">{{ hs_channel.handle }}{% include newtab.html %}</a>.</span>
+      <a class="btn btn--secondary btn--small" href="{{ hs_channel.url }}?sub_confirmation=1" target="_blank" rel="noopener">{% include icon.html name="youtube" %}Subscribe{% include newtab.html %}</a>
+    </p>
+    <div class="videos">
+      {%- for video in site.data.videos.videos limit: site.home.videos %}
+      {% include video-card.html video=video level=3 %}
+      {%- endfor %}
+    </div>
+    <p class="more-link"><a href="{{ '/videos/' | relative_url }}">All videos</a></p>
+  </div>
+</section>

@@ -3,11 +3,11 @@ title: "TiamiTwin: A Digital Twin for Bistatic ISAC Drone Sensing, Validated Aga
 authors: ["M. Zafari", "S. Enayati", "A. L. Swindlehurst", "A. Mukherjee"]
 type: conference
 status: accepted
-venue: IEEE MILCOM Workshop   # TODO(mehdi): use the full name from the arXiv comment, "IEEE MILCOM 2026 Workshop on Integrated Sensing and Communication for Critical Infrastructure Protection (ISAC4CIP)"?
+venue: IEEE MILCOM 2026 Workshop on Integrated Sensing and Communication for Critical Infrastructure Protection (ISAC4CIP)
 venue_short: MILCOM 2026 Workshop
 date: 2026-07-01              # CV: accepted July 2026
-arxiv: 2609.22709             # TODO(mehdi): confirm this preprint (found on arXiv on 2026-09-30, posted 2026-09-19)
-featured: true                # TODO(mehdi): confirm the featured list (Stage 4 proposal: the seven papers shown in the style guide)
+arxiv: 2609.22709
+featured: true
 topics: [digital-twin, experimental, isac]
 bibtex: |
   @misc{zafari2026tiamitwin,

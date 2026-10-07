@@ -12,6 +12,7 @@
 // (16 px rows; 24 px education and experience; 40 px entries; Stage 2 rule).
 .subsection { display: grid; gap: var(--space-4); }
 .subsection__title + .edu-list, .subsection__title + .row-list--notes { margin-top: var(--space-2); }
+.subsection__title + .news-list { margin-top: calc(-1 * var(--space-1)); }   // news items carry 12 px of padding (the /news/ year groups)
 .subsection--entries { gap: 2.5rem; }
 .subsection + .subsection { margin-top: var(--space-7); }
 .subsection + .more-link { margin-top: var(--space-5); }

@@ -1,6 +1,5 @@
 # Publication topics (PLAN 4.4). Publications list topic ids in `topics`; the
 # topic filters on /publications/ (Stage 6) use these labels, in this order.
-# TODO(mehdi): review the topic names and which papers carry them (proposed in Stage 4)
 
 - id: cell-free-isac
   label: Cell-free ISAC

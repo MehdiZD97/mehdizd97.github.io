@@ -1,7 +1,8 @@
 {%- comment -%}
   Education from _data/cv/education.yml, with the university logos.
   Parameters: level (heading level of each degree, default 3), short (true:
-  the short school name and no advisor or thesis lines).
+  the short school name and no advisor or thesis lines), gpa (true: show
+  the GPA, as on the full CV).
 {%- endcomment -%}
 {%- assign ce_h = include.level | default: 3 -%}
 <ul class="edu-list">
@@ -15,6 +16,9 @@
       <p class="edu-school">{{ e.school_short | escape }}</p>
       {%- else %}
       <p class="edu-school">{{ e.school | escape }}, {{ e.location | escape }}</p>
+      {%- if include.gpa and e.gpa %}
+      <p class="edu-note">GPA: {{ e.gpa }}</p>
+      {%- endif %}
       {%- if e.advisor %}
       <p class="edu-note">Advisor: {{ e.advisor | escape }}</p>
       {%- endif %}

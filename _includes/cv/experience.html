@@ -1,12 +1,11 @@
 {%- comment -%}
-  Experience from _data/cv/experience.yml, in file order. Parameters:
-  summary (true: the one-line summary for Home; otherwise the CV bullets,
-  the site-only bullets, and the supervisor), cv_only (true: only roles on
-  the PDF CV).
+  Experience from _data/cv/experience.yml, in file order. Parameter:
+  summary (true: the one-line summaries for Home, skipping roles without one;
+  otherwise the CV bullets, the site-only bullets, and the supervisor).
 {%- endcomment -%}
 <ul class="row-list row-list--notes">
   {%- for x in site.data.cv.experience %}
-  {%- if include.cv_only and x.on_cv != true %}{% continue %}{% endif %}
+  {%- if include.summary and x.summary == nil %}{% continue %}{% endif %}
   <li class="row-item">
     <span class="row-when">{% include date-range.html start=x.start end=x.end %}</span>
     <span class="row-what">{{ x.title | escape }}</span>

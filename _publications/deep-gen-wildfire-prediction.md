@@ -10,5 +10,6 @@ code: https://github.com/LS-Wireless/Deep-Gen-Project
 topics: [generative-ai, machine-learning]
 redirect_from:
   - /publications/2025-12-R-3/
-# TODO(mehdi): add one or two sentences about this repository as the body (the v1 page had none)
 ---
+Course project for CS 274E: Deep Generative Models at UC Irvine (2025).
+It compares generative approaches to predicting the next day's active fire mask from a history of fire observations: a conditional VAE for fast, stochastic forecasts with uncertainty, symbolic regression for interpretable equations of fire spread, and diffusion models for fine-grained spread synthesis, on a subset of the WildfireSpreadTS benchmark.

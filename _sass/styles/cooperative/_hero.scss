@@ -11,7 +11,6 @@
 }
 @media (min-width: 56.25rem) {
   .hero__inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); align-items: center; gap: var(--space-6); padding-block: var(--space-7) var(--space-8); }
-  .hero__inner--text { grid-template-columns: minmax(0, 46rem); }
 }
 .hero__text { display: grid; gap: var(--space-4); align-content: start; }
 .hero__id { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-4); }
@@ -22,7 +21,11 @@
   .hero__id { flex-direction: row; align-items: center; gap: var(--space-5); }
 }
 @media (min-width: 56.25rem) {
-  .hero__photo { width: 8rem; }
+  // The name sets in two lines here, and the portrait is exactly as tall as their
+  // ink (Mehdi, 2026-10-07): 1.65em of the hero size, from 0.07em below the
+  // top of the name's box (measured in Chrome at 900 and 1280 px).
+  .hero__id { align-items: flex-start; }
+  .hero__photo { width: calc(var(--text-hero) * 1.65); margin-top: calc(var(--text-hero) * 0.07); }
 }
 .hero__name { font-size: var(--text-hero); font-weight: 780; line-height: 0.92; letter-spacing: -0.035em; }
 .hero__title { font-size: 1.125rem; font-weight: 600; color: var(--on-field-muted); }

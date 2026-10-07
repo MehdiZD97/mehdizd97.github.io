@@ -1,51 +1,14 @@
 ---
 layout: home
 permalink: /
+sections: [news, publications, cv, videos]   # the menu scrolls to these
+scripts: [/assets/js/hero.js]
 redirect_from:
   - /about/
   - /about.html
 ---
 {%- comment -%}
-  Temporary home page (Stages 3 and 4): the Stage 3 sections, now built
-  from _data/ and _publications/. Stage 5 replaces it with the final home
-  (News, Publications, CV, Videos).
+  Home (PLAN Stage 5): the sections come from _includes/home-sections.html,
+  which the style guide shares, so /dev/styleguide/ previews this page.
 {%- endcomment -%}
-<section class="section" id="about" aria-labelledby="about-title">
-  <h2 class="section__title" id="about-title">About</h2>
-  <div class="section__body">
-    <div class="prose">{{ site.data.profile.bio | markdownify }}</div>
-    <section class="subsection" aria-labelledby="interests-title">
-      <h3 class="subsection__title" id="interests-title">Research interests</h3>
-      {% include cv/lists.html list="interests" %}
-    </section>
-    <section class="subsection" aria-labelledby="education-title">
-      <h3 class="subsection__title" id="education-title">Education</h3>
-      {% include cv/education.html level=4 short=true %}
-    </section>
-  </div>
-</section>
-
-<section class="section" id="recent-publications" aria-labelledby="recent-publications-title">
-  <h2 class="section__title" id="recent-publications-title">Selected publications</h2>
-  <div class="section__body">
-    <div class="subsection subsection--entries">
-      {%- assign featured = site.publications | where: "featured", true | sort: "date" | reverse %}
-      {%- for pub in featured %}
-      {% include pub-item.html pub=pub level=3 %}
-      {%- endfor %}
-    </div>
-    <p class="more-link"><a href="{{ '/publications/' | relative_url }}">All publications</a></p>
-  </div>
-</section>
-
-<section class="section" id="recent-news" aria-labelledby="recent-news-title">
-  <h2 class="section__title" id="recent-news-title">Recent news</h2>
-  <div class="section__body">
-    <ul class="news-list">
-      {%- for item in site.data.news limit: site.home.news %}
-      {% include news-item.html item=item %}
-      {%- endfor %}
-    </ul>
-    <p class="more-link"><a href="{{ '/year-archive/' | relative_url }}">All news and posts</a></p>
-  </div>
-</section>
+{% include home-sections.html %}

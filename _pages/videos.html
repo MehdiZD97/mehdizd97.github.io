@@ -10,7 +10,7 @@ prose: false
 {%- endcomment -%}
 {%- assign channel = site.data.videos.channel %}
 <p class="actions channel">
-  <span>Tutorials and talks. New videos come to my YouTube channel, <a href="{{ channel.url }}" target="_blank" rel="noopener">{{ channel.handle }}{% include newtab.html %}</a>.</span>
+  <span>{{ channel.description }} New videos come to my YouTube channel, <a href="{{ channel.url }}" target="_blank" rel="noopener">{{ channel.handle }}{% include newtab.html %}</a>.</span>
   <a class="btn btn--secondary btn--small" href="{{ channel.url }}?sub_confirmation=1" target="_blank" rel="noopener">{% include icon.html name="youtube" %}Subscribe{% include newtab.html %}</a>
 </p>
 <div class="videos">
