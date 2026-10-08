@@ -1,0 +1,35 @@
+{%- comment -%}
+  A YouTube video that loads only when played (PLAN 8.1). The thumbnail
+  (from i.ytimg.com) links to the video on YouTube; with JavaScript, site.js
+  turns it into a Play button that swaps in the player from
+  youtube-nocookie.com, so nothing loads from YouTube before a click.
+  Parameters: id (the YouTube ID); title, start (seconds), and lang default
+  to the video's entry in _data/videos.yml; badge (corner text, such as the
+  duration; defaults to the entry's duration or start time). The thumbnail
+  is YouTube's 480 px `hqdefault` (no srcset: html-proofer 5.2 crashes on
+  external srcset URLs and would skip the page). priority: true for a
+  thumbnail at the top of a page (loaded at once, with high priority).
+{%- endcomment -%}
+{%- assign vp = site.data.videos.videos | where: "id", include.id | first -%}
+{%- assign vp_title = include.title | default: vp.title | default: "YouTube video" -%}
+{%- assign vp_start = include.start | default: vp.start -%}
+{%- assign vp_lang = include.lang | default: vp.language -%}
+{%- capture vp_badge -%}
+  {%- if include.badge -%}{{ include.badge }}
+  {%- elsif vp_start -%}from {% include timecode.html seconds=vp_start %}
+  {%- elsif vp.duration -%}{% include timecode.html iso=vp.duration %}
+  {%- endif -%}
+{%- endcapture -%}
+{%- assign vp_badge = vp_badge | strip -%}
+{%- assign vp_url = "https://www.youtube.com/watch?v=" | append: include.id -%}
+{%- if vp_start %}{% assign vp_url = vp_url | append: "&t=" | append: vp_start | append: "s" %}{% endif -%}
+<div class="player">
+  <a class="player__start" href="{{ vp_url | escape }}" data-video="{{ include.id }}"{% if vp_start %} data-start="{{ vp_start }}"{% endif %} data-title="{{ vp_title | escape }}">
+    <img class="player__thumb" src="https://i.ytimg.com/vi/{{ include.id }}/hqdefault.jpg" width="480" height="270" alt=""{% if include.priority %} fetchpriority="high"{% else %} loading="lazy"{% endif %} decoding="async">
+    <span class="player__icon">{% include icon.html name="play" %}</span>
+    <span class="visually-hidden">Play the video: {% if vp_lang and vp_lang != "en" %}<span lang="{{ vp_lang }}"{% if vp_lang == "fa" %} dir="rtl"{% endif %}>{{ vp_title }}</span>{% else %}{{ vp_title }}{% endif %}</span>
+  </a>
+  {%- if vp_badge != "" %}
+  <span class="player__badge" aria-hidden="true">{{ vp_badge }}</span>
+  {%- endif %}
+</div>

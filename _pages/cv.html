@@ -3,21 +3,31 @@ title: Curriculum vitae
 permalink: /cv/
 prose: false
 print_identity: true    # name and contacts at the top of the printed CV (scripts/make_cv_pdf.py)
+header_include: cv-actions.html   # the Download CV (PDF) button and the date it was printed
 redirect_from:
   - /resume
   - /awards/
 ---
 {%- comment -%}
-  The full CV: every section from _data/ in CV order. scripts/make_cv_pdf.py
-  prints this page to files/Mehdi_Zafari_CV.pdf (the print styles hide the
-  site's header, footer, buttons, and the bio). Stage 8 adds the contents
-  list and the redirect stubs for /talks/ and /teaching/.
+  The full CV (PLAN 8.3): every section from _data/ in CV order, with a
+  sticky contents list beside it on wide screens (site.js marks the section
+  in view). scripts/make_cv_pdf.py prints this page to
+  files/Mehdi_Zafari_CV.pdf (the print styles hide the site's header,
+  footer, buttons, contents list, and bio). The old /talks/ and /teaching/
+  addresses redirect to #talks and #teaching (_data/redirects.yml).
 {%- endcomment -%}
-{%- capture cv_button %}{% include cv-pdf.html class="btn btn--primary" %}{% endcapture %}
+{%- assign cv_toc = "education:Education|interests:Research interests|experience:Experience|publications:Publications|talks:Talks|honors:Honors and awards|service:Service|teaching:Teaching|skills:Skills|coursework:Coursework|conferences:Conferences" | split: "|" %}
+<div class="cv-layout">
+<nav class="toc no-print" aria-labelledby="toc-title" data-toc>
+  <p class="toc__title" id="toc-title">Contents</p>
+  <ol>
+    {%- for cv_item in cv_toc %}
+    <li><a href="#{{ cv_item | split: ':' | first }}">{{ cv_item | split: ':' | last }}</a></li>
+    {%- endfor %}
+  </ol>
+</nav>
+<div class="cv-body page-flow">
 <div class="prose no-print">{{ site.data.profile.bio | markdownify }}</div>
-{%- if cv_button != "" %}
-<p class="actions">{{ cv_button }}</p>
-{%- endif %}
 
 <section class="section" id="education" aria-labelledby="education-title">
   <h2 class="section__title" id="education-title">Education</h2>
@@ -99,3 +109,5 @@ redirect_from:
     {% include cv/lists.html list="conferences" %}
   </div>
 </section>
+</div>
+</div>

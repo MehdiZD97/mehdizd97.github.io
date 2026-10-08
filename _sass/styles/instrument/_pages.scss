@@ -25,7 +25,7 @@
 .prose li + li { margin-top: 0.35em; }
 .prose li::marker { color: var(--signal); }
 .prose img { border: 1px solid var(--grid); border-radius: var(--radius); }
-.prose figure, .prose .figure-row, .prose .embed { margin-block: 1.75em; }
+.prose figure, .prose .figure-row, .prose .embed, .prose .player { margin-block: 1.75em; }
 .prose figcaption { margin-top: var(--space-2); font: 400 var(--text-mono)/1.5 var(--font-mono); color: var(--slate); }
 .prose blockquote { padding-inline-start: var(--space-4); border-inline-start: 2px solid var(--signal-bright); color: var(--slate); }
 .prose hr { border: 0; border-top: 1px solid var(--grid); margin-block: 2em; }
@@ -50,6 +50,13 @@
 .field textarea { min-height: 10rem; resize: vertical; }
 .field input:focus-visible, .field textarea:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
 .form .btn { justify-self: start; }
+.field__error { font: 500 var(--text-mono)/1.5 var(--font-mono); color: var(--signal); }
+.field input[aria-invalid="true"], .field textarea[aria-invalid="true"] { border-color: var(--signal); }
+.form__status { padding: var(--space-3) var(--space-4); border: 1px solid var(--grid); border-left: 3px solid var(--slate); border-radius: var(--radius); background: var(--panel); }
+.form__status[data-state="success"] { border-left-color: var(--ink); }
+.form__status[data-state="error"] { border-left-color: var(--signal); }
+.contact-list__icon { display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border: 1px solid var(--grid); border-radius: var(--radius); background: var(--panel); color: var(--signal); }
+.contact-list__label { font: 500 var(--text-mono)/1.5 var(--font-mono); color: var(--slate); }
 
 // Not found
 .notfound { display: grid; gap: var(--space-5); padding: var(--space-8) 0 var(--space-6); max-width: 40rem; }
@@ -94,3 +101,17 @@
 }
 .page-content + .back-link { margin-top: var(--space-7); }
 .story-nav + .back-link { margin-top: var(--space-5); }
+
+// The CV's contents list. Beside it, the CV's sections set their titles
+// inline (the list takes the place of the label column).
+.toc__title { margin-bottom: var(--space-2); font: 500 var(--text-mono)/1.5 var(--font-mono); color: var(--slate); }
+.toc ol { gap: 0; }
+.toc a { padding: 0.3rem 0 0.3rem 0.75rem; border-left: 2px solid var(--grid); color: var(--slate); font-size: var(--text-small); line-height: 1.35; }
+.toc a[aria-current] { border-left-color: var(--signal); color: var(--ink); }
+@media (hover: hover) and (pointer: fine) {
+  .toc a:hover { color: var(--ink); }
+}
+@media (min-width: 64rem) {
+  .cv-body .section { grid-template-columns: minmax(0, 1fr); }
+  .cv-body .section__title { position: static; }
+}

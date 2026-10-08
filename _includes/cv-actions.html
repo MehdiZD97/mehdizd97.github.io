@@ -1,0 +1,9 @@
+{%- comment -%}
+  The CV page's header row (cv.html sets header_include: cv-actions.html):
+  the Download CV (PDF) button and the month the PDF was last printed, which
+  scripts/make_cv_pdf.py records in _data/cv_pdf.yml.
+{%- endcomment -%}
+{%- capture ca_button %}{% include cv-pdf.html class="btn btn--primary" %}{% endcapture -%}
+{%- if ca_button != "" %}
+<p class="actions page-actions">{{ ca_button }}{% if site.data.cv_pdf.updated %} <span class="note">Updated <time datetime="{{ site.data.cv_pdf.updated | date: '%Y-%m' }}">{{ site.data.cv_pdf.updated | date: "%B %Y" }}</time></span>{% endif %}</p>
+{%- endif %}

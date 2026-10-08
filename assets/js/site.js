@@ -1,9 +1,9 @@
-// Site behavior (PLAN 3.2, 3.5, 6.3, and 7.2): the theme toggle, smooth
-// scrolling for in-page links, the phone menu, the header underline that
-// follows the section in view (pages with in-page sections), BibTeX panels
-// with a Copy button, the lightbox for zoomable images, and the Back button
-// on publication and story pages.
-// Loaded as a module on every page.
+// Site behavior (PLAN 3.2, 3.5, 6.3, 7.2, and 8.1): the theme toggle, smooth
+// scrolling for in-page links, the phone menu, the underline that follows
+// the section in view (the header menu on Home, the contents list on the
+// CV), the BibTeX window and Copy buttons, the lightbox for zoomable
+// figures, click-to-play videos, and the Back button on publication and
+// story pages. Loaded as a module on every page.
 
 const root = document.documentElement;
 
@@ -52,23 +52,32 @@ if (menuButton && menu) {
   menu.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => setOpen(false)));
 }
 
-// On pages with in-page sections, the last section whose top has passed a
-// reading line 35% down the window is current; the first item (Home) is
-// current above the first section.
-const spyLinks = [...document.querySelectorAll(".site-nav a[href^='#']")];
-if (spyLinks.length) {
-  const targets = spyLinks.map((link) => document.getElementById(link.hash.slice(1)));
+// The underline that follows the section in view, in the header menu on
+// pages with in-page sections (Home) and in the CV's contents list: the last
+// section whose top has passed a reading line 35% down the window is current
+// (the last one once the page is scrolled to the end); above the first
+// section, the first item is.
+const spyGroups = [
+  [...document.querySelectorAll(".site-nav a[href^='#']")],
+  [...document.querySelectorAll("[data-toc] a[href^='#']")],
+].filter((links) => links.length);
+if (spyGroups.length) {
   let queued = false;
   const update = () => {
     queued = false;
     const line = window.innerHeight * 0.35;
-    let current = 0;
-    targets.forEach((section, i) => {
-      if (section && section.getBoundingClientRect().top <= line) current = i;
-    });
-    spyLinks.forEach((link, i) => {
-      if (i === current) link.setAttribute("aria-current", "true");
-      else link.removeAttribute("aria-current");
+    const atEnd = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+    spyGroups.forEach((links) => {
+      let current = 0;
+      links.forEach((link, i) => {
+        const section = document.getElementById(link.hash.slice(1));
+        if (section && section.getBoundingClientRect().top <= line) current = i;
+      });
+      if (atEnd && window.scrollY > 0) current = links.length - 1;
+      links.forEach((link, i) => {
+        if (i === current) link.setAttribute("aria-current", "true");
+        else link.removeAttribute("aria-current");
+      });
     });
   };
   const queue = () => {
@@ -82,108 +91,136 @@ if (spyLinks.length) {
   update();
 }
 
-// BibTeX panels: the BibTeX button opens its panel; Copy puts the entry on
-// the clipboard and says whether that worked.
-document.querySelectorAll("[data-bib-toggle]").forEach((button) => {
-  const panel = document.getElementById(button.getAttribute("aria-controls"));
-  if (!panel) return;
-  button.addEventListener("click", () => {
-    const open = button.getAttribute("aria-expanded") !== "true";
-    button.setAttribute("aria-expanded", String(open));
-    panel.hidden = !open;
-  });
-});
-document.querySelectorAll("[data-copy]").forEach((button) => {
-  const source = document.getElementById(button.dataset.copy);
-  const status = button.parentElement.querySelector("[data-copy-status]");
-  button.addEventListener("click", async () => {
-    try {
-      await navigator.clipboard.writeText(source.textContent);
-      status.textContent = "Copied";
-    } catch (error) {
-      status.textContent = "Copy failed; select the text instead";
-    }
-  });
-});
+// Copying: puts text on the clipboard and says whether that worked; if it
+// did not, the text is selected so the visitor can copy it by hand.
+const copyText = async (text, status, selectable) => {
+  try {
+    await navigator.clipboard.writeText(text);
+    status.textContent = "Copied";
+  } catch (error) {
+    if (selectable) getSelection().selectAllChildren(selectable);
+    status.textContent = "Could not copy: the text is selected, so press Ctrl+C (Cmd+C on a Mac)";
+  }
+};
 
-// Zoomable images: a link marked data-zoom opens its image in a dialog.
-// With several on a page, Previous and Next (also the arrow keys and a
-// swipe) step through them. Escape, Close, or a click outside the image
-// closes the dialog, and focus returns to the link of the image last shown.
-// Without a dialog element the link just opens the image.
-const zoomLinks = [...document.querySelectorAll("a[data-zoom]")];
-if (zoomLinks.length && typeof HTMLDialogElement === "function") {
-  const chevron = (d) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="${d}" /></svg>`;
+// BibTeX (Mehdi, Stage 8): the BibTeX button on a publication entry opens a
+// small window with the entry and a Copy button. Escape, Close, or a click
+// outside closes it, and focus returns to the button.
+const bibButtons = document.querySelectorAll("[data-bibtex]");
+if (bibButtons.length && typeof HTMLDialogElement === "function") {
   const dialog = document.createElement("dialog");
-  dialog.className = "lightbox";
-  dialog.setAttribute("aria-label", "Enlarged image");
+  dialog.className = "bib-dialog";
+  dialog.setAttribute("aria-labelledby", "bib-dialog-title");
+  dialog.setAttribute("aria-describedby", "bib-dialog-paper");
   dialog.innerHTML = `
-    <div class="lightbox__bar">
-      <p class="lightbox__count" role="status"></p>
-      <button class="lightbox__close" type="button">Close</button>
-    </div>
-    <div class="lightbox__stage">
-      <img alt="">
-      <button class="lightbox__step lightbox__step--prev" type="button" aria-label="Previous image" data-step="-1">${chevron("m15 18-6-6 6-6")}</button>
-      <button class="lightbox__step lightbox__step--next" type="button" aria-label="Next image" data-step="1">${chevron("m9 18 6-6-6-6")}</button>
-    </div>
-    <p class="lightbox__caption"></p>`;
+    <div class="bib-dialog__body">
+      <div class="bib-dialog__head">
+        <h2 class="bib-dialog__title" id="bib-dialog-title">BibTeX</h2>
+        <button class="btn btn--secondary btn--small bib-dialog__close" type="button">Close</button>
+      </div>
+      <p class="bib-dialog__paper" id="bib-dialog-paper"></p>
+      <pre class="bib-dialog__text"></pre>
+      <p class="bib-dialog__actions">
+        <button class="btn btn--primary btn--small" type="button" autofocus data-bib-copy><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg>Copy</button>
+        <span class="bib-dialog__status" role="status"></span>
+      </p>
+    </div>`;
   document.body.append(dialog);
-  const image = dialog.querySelector("img");
-  const count = dialog.querySelector(".lightbox__count");
-  const caption = dialog.querySelector(".lightbox__caption");
-  const steps = dialog.querySelectorAll("[data-step]");
-  const many = zoomLinks.length > 1;
-  steps.forEach((button) => { button.hidden = !many; });
-  count.hidden = !many;
-  let current = 0;
-
-  const show = (index) => {
-    current = (index + zoomLinks.length) % zoomLinks.length;
-    const link = zoomLinks[current];
-    image.alt = link.querySelector("img")?.alt ?? "";
-    image.src = link.href;
-    const text = link.closest("figure")?.querySelector("figcaption")?.textContent.trim() ?? "";
-    caption.textContent = text;
-    caption.hidden = !text;
-    if (many) count.textContent = `${current + 1} of ${zoomLinks.length}`;
-  };
-
-  dialog.querySelector(".lightbox__close").addEventListener("click", () => dialog.close());
-  steps.forEach((button) => button.addEventListener("click", () => show(current + Number(button.dataset.step))));
+  const paper = dialog.querySelector(".bib-dialog__paper");
+  const text = dialog.querySelector(".bib-dialog__text");
+  const status = dialog.querySelector(".bib-dialog__status");
+  let opener = null;
+  dialog.querySelector(".bib-dialog__close").addEventListener("click", () => dialog.close());
+  dialog.querySelector("[data-bib-copy]").addEventListener("click", () => copyText(text.textContent, status, text));
   dialog.addEventListener("click", (event) => {
     if (event.target === dialog) dialog.close();
   });
-  dialog.addEventListener("keydown", (event) => {
-    if (!many || event.altKey || event.ctrlKey || event.metaKey) return;
-    if (event.key === "ArrowLeft") show(current - 1);
-    else if (event.key === "ArrowRight") show(current + 1);
-    else return;
-    event.preventDefault();
-  });
-  // A horizontal swipe on a touch screen steps through the images.
-  let swipeX = null;
-  dialog.addEventListener("pointerdown", (event) => {
-    swipeX = many && event.pointerType === "touch" ? event.clientX : null;
-  });
-  dialog.addEventListener("pointerup", (event) => {
-    if (swipeX === null) return;
-    const dx = event.clientX - swipeX;
-    swipeX = null;
-    if (Math.abs(dx) > 48) show(current + (dx < 0 ? 1 : -1));
-  });
-  dialog.addEventListener("close", () => {
-    image.removeAttribute("src");
-    zoomLinks[current].focus();
-  });
-  zoomLinks.forEach((link, index) => {
-    link.addEventListener("click", (event) => {
-      event.preventDefault();
-      show(index);
+  dialog.addEventListener("close", () => opener?.focus());
+  bibButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      opener = button;
+      paper.textContent = button.dataset.bibtexTitle ?? "";
+      text.textContent = button.dataset.bibtex;
+      status.textContent = "";
       dialog.showModal();
     });
   });
 }
+
+// Inline Copy buttons (the BibTeX on a publication's own page).
+document.querySelectorAll("[data-copy]").forEach((button) => {
+  const source = document.getElementById(button.dataset.copy);
+  const status = button.parentElement.querySelector("[data-copy-status]");
+  button.addEventListener("click", () => copyText(source.textContent, status, source));
+});
+
+// Zoomable figures (publication pages): a link marked data-zoom opens its
+// image in a dialog with the figure's caption. Escape, Close, or a click
+// outside the image closes it, and focus returns to the link. Without a
+// dialog element the link just opens the image. Story photos do not zoom
+// (Mehdi, Stage 8).
+const zoomLinks = document.querySelectorAll("a[data-zoom]");
+if (zoomLinks.length && typeof HTMLDialogElement === "function") {
+  const dialog = document.createElement("dialog");
+  dialog.className = "lightbox";
+  dialog.setAttribute("aria-label", "Enlarged image");
+  dialog.innerHTML = '<div class="lightbox__bar"><button class="lightbox__close" type="button">Close</button></div><img alt=""><p class="lightbox__caption"></p>';
+  document.body.append(dialog);
+  const image = dialog.querySelector("img");
+  const caption = dialog.querySelector(".lightbox__caption");
+  let opener = null;
+  dialog.querySelector(".lightbox__close").addEventListener("click", () => dialog.close());
+  dialog.addEventListener("click", (event) => {
+    if (event.target === dialog) dialog.close();
+  });
+  dialog.addEventListener("close", () => {
+    image.removeAttribute("src");
+    opener?.focus();
+  });
+  zoomLinks.forEach((link) => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      opener = link;
+      image.alt = link.querySelector("img")?.alt ?? "";
+      image.src = link.href;
+      const text = link.closest("figure")?.querySelector("figcaption")?.textContent.trim() ?? "";
+      caption.textContent = text;
+      caption.hidden = !text;
+      dialog.showModal();
+    });
+  });
+}
+
+// Videos (PLAN 8.1): each thumbnail links to its video on YouTube. With
+// JavaScript it becomes a Play button that swaps in the player from
+// youtube-nocookie.com (at data-start seconds, if set), so nothing loads
+// from YouTube until the visitor asks; starting a video pauses the others.
+const playing = [];
+document.querySelectorAll("a[data-video]").forEach((link) => {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = link.className;
+  button.append(...link.childNodes);
+  link.replaceWith(button);
+  button.addEventListener("click", () => {
+    const params = new URLSearchParams({ autoplay: "1", rel: "0", enablejsapi: "1", origin: location.origin });
+    if (link.dataset.start) params.set("start", link.dataset.start);
+    const frame = document.createElement("iframe");
+    frame.className = "player__frame";
+    frame.src = `https://www.youtube-nocookie.com/embed/${link.dataset.video}?${params}`;
+    frame.title = link.dataset.title || "YouTube video";
+    frame.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+    frame.allowFullscreen = true;
+    frame.referrerPolicy = "strict-origin-when-cross-origin";
+    playing.forEach((other) => {
+      other.contentWindow?.postMessage(JSON.stringify({ event: "command", func: "pauseVideo", args: [] }), "https://www.youtube-nocookie.com");
+    });
+    playing.push(frame);
+    button.closest(".player")?.classList.add("is-playing");
+    button.replaceWith(frame);
+    frame.focus();
+  });
+});
 
 // Back button (publication and story pages; Mehdi, Stage 7): after a visit
 // from another page of this site it works like the browser's Back button, so

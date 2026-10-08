@@ -2,36 +2,65 @@
 title: Contact
 permalink: /contact/
 prose: false
+lead: I would love to hear from you. Whether you have a question, an idea, or just want to connect, send me a message, email me, or reach out on LinkedIn. I’ll get back to you as soon as I can.
+scripts: [/assets/js/contact.js]
 ---
 {%- comment -%}
-  Contact page (Stage 3 port). The form posts to the Formspree endpoint in
-  _config.yml and works without JavaScript. Stage 8 adds a honeypot, a
-  subject line, validation, and inline success and error messages.
+  Contact (PLAN 8.4): email, LinkedIn, and the department office, then the
+  form. The form posts to the Formspree endpoint in _config.yml (formspree)
+  and works without JavaScript (Formspree shows its own thank-you page);
+  contact.js adds inline checks and sends it in the background with
+  `Accept: application/json`, then says whether it worked. `_gotcha` is a
+  hidden honeypot field for spam bots; `_subject` sets the email's subject.
+{%- endcomment -%}
+{%- comment -%}
+  TODO(mehdi): name the topics you are open to discussing (for example research collaborations, internships, or invited talks) if you want them in the lead.
 {%- endcomment -%}
 {%- assign profile = site.data.profile %}
 {%- assign linkedin = profile.links | where: "id", "linkedin" | first %}
-<div class="prose">
-  <p>I would love to hear from you! Whether you have questions, ideas, or just want to connect, feel free to reach out. Connect with me on <a href="{{ linkedin.url }}" target="_blank" rel="noopener">LinkedIn{% include newtab.html %}</a> and send me a message there, or use the form below to send me a direct message. I’ll get back to you as soon as possible!</p>
+<div class="contact">
+  <section class="subsection contact-details" aria-labelledby="details-title">
+    <h2 class="subsection__title" id="details-title">Contact details</h2>
+    <ul class="contact-list">
+      <li>
+        <span class="contact-list__icon">{% include icon.html name="mail" %}</span>
+        <span><span class="contact-list__label">Email</span> <a href="mailto:{{ profile.email }}">{{ profile.email }}</a></span>
+      </li>
+      <li>
+        <span class="contact-list__icon">{% include icon.html name="linkedin" %}</span>
+        <span><span class="contact-list__label">LinkedIn</span> <a href="{{ linkedin.url }}" target="_blank" rel="noopener">{{ profile.name }}{% include newtab.html %}</a></span>
+      </li>
+      <li>
+        <span class="contact-list__icon">{% include icon.html name="location" %}</span>
+        <span><span class="contact-list__label">Office</span> {{ profile.department }}<br>{{ profile.affiliation }}<br>{{ profile.location }}</span>
+      </li>
+    </ul>
+  </section>
+  <section class="subsection contact-form" aria-labelledby="message-title">
+    <h2 class="subsection__title" id="message-title">Send me a message</h2>
+    <form class="form" action="{{ site.formspree }}" method="POST" data-contact-form data-email="{{ profile.email }}">
+      <input type="hidden" name="_subject" value="Message from mehdizd97.github.io">
+      <div class="field">
+        <label for="contact-name">Your name</label>
+        <input type="text" id="contact-name" name="name" autocomplete="name" required aria-describedby="contact-name-error">
+        <p class="field__error" id="contact-name-error" hidden></p>
+      </div>
+      <div class="field">
+        <label for="contact-email">Your email</label>
+        <input type="email" id="contact-email" name="email" autocomplete="email" required aria-describedby="contact-email-error">
+        <p class="field__error" id="contact-email-error" hidden></p>
+      </div>
+      <div class="field">
+        <label for="contact-message">Your message</label>
+        <textarea id="contact-message" name="message" rows="6" required minlength="10" aria-describedby="contact-message-error"></textarea>
+        <p class="field__error" id="contact-message-error" hidden></p>
+      </div>
+      <div class="field" hidden>
+        <label for="contact-gotcha">Leave this field empty</label>
+        <input type="text" id="contact-gotcha" name="_gotcha" tabindex="-1" autocomplete="off">
+      </div>
+      <p class="form__actions"><button class="btn btn--primary" type="submit">{% include icon.html name="message" %}Send message</button></p>
+      <p class="form__status" role="status" data-form-status></p>
+    </form>
+  </section>
 </div>
-<ul class="linkbtns contact-links">
-  <li><a class="linkbtn" href="mailto:{{ profile.email }}">{% include icon.html name="mail" %}<span>{{ profile.email }}</span></a></li>
-  <li><a class="linkbtn" href="{{ linkedin.url }}" target="_blank" rel="noopener">{% include icon.html name="linkedin" %}<span>Connect on LinkedIn</span>{% include newtab.html %}</a></li>
-</ul>
-<section class="subsection contact-form" aria-labelledby="message-title">
-  <h2 class="subsection__title" id="message-title">Send me a message</h2>
-  <form class="form" action="{{ site.formspree }}" method="POST">
-    <div class="field">
-      <label for="contact-name">Your name</label>
-      <input type="text" id="contact-name" name="name" autocomplete="name" required>
-    </div>
-    <div class="field">
-      <label for="contact-email">Your email</label>
-      <input type="email" id="contact-email" name="email" autocomplete="email" required>
-    </div>
-    <div class="field">
-      <label for="contact-message">Your message</label>
-      <textarea id="contact-message" name="message" rows="6" required></textarea>
-    </div>
-    <button class="btn btn--primary" type="submit">Send message</button>
-  </form>
-</section>

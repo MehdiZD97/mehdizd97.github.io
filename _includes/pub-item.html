@@ -39,11 +39,5 @@
     </p>
     {%- endif %}
     {% include pub-links.html pub=p bibtex=true %}
-    {%- if p.bibtex %}
-    <div class="bibtex" id="bib-{{ p.slug }}" hidden>
-      <pre id="bib-{{ p.slug }}-text">{{ p.bibtex | strip | escape }}</pre>
-      <p class="bibtex__actions"><button class="btn btn--secondary btn--small" type="button" data-copy="bib-{{ p.slug }}-text">{% include icon.html name="copy" %}Copy</button> <span class="bibtex__status" role="status" data-copy-status></span></p>
-    </div>
-    {%- endif %}
   </div>
 </article>

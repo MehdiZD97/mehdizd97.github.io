@@ -1,7 +1,8 @@
 {%- comment -%}
   Document head: title, description, canonical, basic Open Graph, the theme
   script, fonts, the stylesheet of the style set in _config.yml (`design`),
-  icons, and the feed. Stage 9 completes SEO and structured data.
+  icons, and the feeds (news and stories). Stage 9 completes SEO and
+  structured data.
 {%- endcomment -%}
 {%- assign style = site.design | default: "cooperative" -%}
 {%- assign d = site.data.design.directions | where: "id", style | first -%}
@@ -29,6 +30,7 @@
 <meta property="og:description" content="{{ description | escape }}">
 <meta property="og:url" content="{{ page.url | absolute_url }}">
 {%- assign og_image = page.image | default: profile.photo -%}
+{%- if page.video and page.image == nil %}{% capture og_image %}https://i.ytimg.com/vi/{{ page.video }}/hqdefault.jpg{% endcapture %}{% endif -%}
 {%- assign og_image_alt = page.image_alt -%}
 {%- if page.figure and site.data.images[page.figure] -%}
   {%- assign og_figure = site.data.images[page.figure] -%}
@@ -45,6 +47,9 @@
 {%- if page.collection == "publications" %}
 {% include publication-meta.html %}
 {%- endif %}
+{%- if page.head_include %}
+{% include {{ page.head_include }} %}
+{%- endif %}
 {% include theme-script.html %}
 {%- for font in d.preload %}
 <link rel="preload" href="{{ '/assets/fonts/' | append: font | relative_url }}" as="font" type="font/woff2" crossorigin>
@@ -57,4 +62,5 @@
 <link rel="icon" href="{{ '/assets/icons/' | append: style | append: '/favicon.svg' | relative_url }}" type="image/svg+xml">
 <link rel="apple-touch-icon" href="{{ '/assets/icons/' | append: style | append: '/apple-touch-icon.png' | relative_url }}">
 <link rel="manifest" href="{{ '/site.webmanifest' | relative_url }}">
+<link rel="alternate" type="application/atom+xml" title="{{ site.title }}: News" href="{{ '/news.xml' | absolute_url }}">
 {% feed_meta %}

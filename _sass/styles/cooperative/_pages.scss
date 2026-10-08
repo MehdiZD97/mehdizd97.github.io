@@ -24,7 +24,7 @@
 .prose li + li { margin-top: 0.35em; }
 .prose li::marker { color: var(--beam); }
 .prose img { border-radius: var(--radius); }
-.prose figure, .prose .figure-row, .prose .embed { margin-block: 1.75em; }
+.prose figure, .prose .figure-row, .prose .embed, .prose .player { margin-block: 1.75em; }
 .prose figcaption { margin-top: var(--space-2); color: var(--slate); font-size: var(--text-small); }
 .prose blockquote { padding-inline-start: var(--space-4); border-inline-start: 4px solid var(--beam-bright); color: var(--slate); }
 .prose hr { border: 0; border-top: 2px solid var(--mist); margin-block: 2em; }
@@ -84,6 +84,16 @@
 .field textarea { min-height: 10rem; resize: vertical; }
 .field input:focus-visible, .field textarea:focus-visible { outline: 3px solid var(--link); outline-offset: 1px; border-color: var(--link); }
 .form .btn { justify-self: start; }
+.field__error { color: var(--beam); font-size: var(--text-small); font-weight: 650; }
+.field input[aria-invalid="true"], .field textarea[aria-invalid="true"] { border-color: var(--beam); }
+.form__status { padding: var(--space-3) var(--space-4); border-radius: var(--radius); background: var(--mist); font-weight: 600; }
+.form__status[data-state="success"] { box-shadow: inset 4px 0 0 var(--echo); }
+.form__status[data-state="error"] { box-shadow: inset 4px 0 0 var(--beam); }
+.form__status a { color: var(--link); }
+.contact-list { gap: var(--space-5); }   // the subsection's heading gap (rhythm rule)
+.contact-list__icon { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border-radius: 50%; background: var(--mist); color: var(--link); }
+.contact-list__label { color: var(--slate); font-size: var(--text-small); font-weight: 650; }
+.contact-list a { color: var(--link); font-weight: 600; }
 
 // Not found
 .notfound { display: grid; gap: var(--space-5); padding: var(--space-8) 0 var(--space-6); max-width: 40rem; }
@@ -93,3 +103,11 @@
 .notfound__art .nf-beam { fill: none; stroke: var(--slate); stroke-width: 1.5; stroke-dasharray: 4 5; stroke-linecap: round; }
 .notfound__art .nf-miss { fill: none; stroke: var(--echo); stroke-width: 2; stroke-linecap: round; }
 .notfound .actions { margin-top: var(--space-2); }
+
+// The CV's contents list
+.toc__title { margin: 0 0 var(--space-2) 0.75rem; color: var(--slate); font-size: var(--text-small); font-weight: 650; }
+.toc a { padding: 0.35rem 0.75rem; border-radius: var(--pill); color: var(--slate); font-size: var(--text-ui); font-weight: 600; line-height: 1.3; }
+.toc a[aria-current] { background: var(--mist); color: var(--link); }
+@media (hover: hover) and (pointer: fine) {
+  .toc a:hover { color: var(--ink); }
+}

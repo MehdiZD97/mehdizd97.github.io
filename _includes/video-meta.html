@@ -1,0 +1,39 @@
+{%- comment -%}
+  Structured data for the Videos page (PLAN 8.1): one schema.org VideoObject
+  per video in _data/videos.yml, with a Clip for videos whose part starts
+  inside a longer recording (`start`). The head includes it when a page sets
+  `head_include: video-meta.html`.
+{%- endcomment -%}
+{%- assign vm_videos = site.data.videos.videos -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {%- for vm in vm_videos %}
+    {
+      "@type": "VideoObject",
+      "name": {{ vm.source_title | default: vm.title | jsonify }},
+      "description": {{ vm.description | default: vm.note | default: vm.title | jsonify }},
+      "thumbnailUrl": ["https://i.ytimg.com/vi/{{ vm.id }}/hqdefault.jpg", "https://i.ytimg.com/vi/{{ vm.id }}/mqdefault.jpg"],
+      "uploadDate": {{ vm.date | date_to_xmlschema | jsonify }},
+      {%- if vm.duration %}
+      "duration": {{ vm.duration | jsonify }},
+      {%- endif %}
+      {%- if vm.language %}
+      "inLanguage": {{ vm.language | jsonify }},
+      {%- endif %}
+      "embedUrl": "https://www.youtube-nocookie.com/embed/{{ vm.id }}",
+      "url": "https://www.youtube.com/watch?v={{ vm.id }}"
+      {%- if vm.start %},
+      "hasPart": {
+        "@type": "Clip",
+        "name": {{ vm.title | jsonify }},
+        "startOffset": {{ vm.start }},
+        "url": "https://www.youtube.com/watch?v={{ vm.id }}&t={{ vm.start }}s"
+      }
+      {%- endif %}
+    }{% unless forloop.last %},{% endunless %}
+    {%- endfor %}
+  ]
+}
+</script>

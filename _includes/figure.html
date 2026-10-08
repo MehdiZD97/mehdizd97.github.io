@@ -1,11 +1,12 @@
 {%- comment -%}
-  A zoomable figure with an optional caption (zoom-image.html inside
-  <figure>). Parameters: name (key in _data/images.yml), alt, caption
-  (Markdown, optional), sizes.
+  A figure with an optional caption. Parameters: name (key in
+  _data/images.yml), alt, caption (Markdown, optional), sizes, and zoom
+  (true: the image opens larger on click, through zoom-image.html; used for
+  publication figures; story photos do not zoom, Mehdi, Stage 8).
 {%- endcomment -%}
 {%- if site.data.images[include.name] -%}
 <figure class="figure">
-  {% include zoom-image.html name=include.name alt=include.alt sizes=include.sizes %}
+  {% if include.zoom %}{% include zoom-image.html name=include.name alt=include.alt sizes=include.sizes %}{% else %}{% include responsive-image.html name=include.name alt=include.alt sizes=include.sizes %}{% endif %}
   {%- if include.caption %}
   <figcaption>{{ include.caption | markdownify | remove: "<p>" | remove: "</p>" | strip }}</figcaption>
   {%- endif %}

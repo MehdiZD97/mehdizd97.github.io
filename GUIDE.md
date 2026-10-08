@@ -43,6 +43,7 @@ This file itself is not published.
 | Stories (posts with photos) | `_posts/YYYY-MM-DD-<name>.md` | Their own pages, listed at the end of `/news/` and linked from news and talks |
 | Original photos | `_assets-src/images/` and `_assets-src/images.yml` | Turned into web images by a script |
 | The CV PDF | `files/Mehdi_Zafari_CV.pdf` | The "Download CV (PDF)" buttons |
+| Old addresses that lead into a page section | `_data/redirects.yml` | Redirects (for example the v1 talk pages to their talks on the CV) |
 | Menu | `_data/navigation.yml` | The header |
 | Site settings (how many items Home shows, style) | `_config.yml` | |
 
@@ -96,7 +97,7 @@ If the preview stops updating or shows an error in the terminal, the message usu
    - `url: https://...` and `url_label: Watch the video`: any other link.
    - `talk: <talk id>`: used only when there is no other link; it points to the talk in the CV.
 5. Optional: `pin: true` keeps the item on Home even after newer items push it down.
-6. Save and check Home (it shows the newest 5 items) and `/news/` (it shows all of them, grouped by year).
+6. Save and check Home (it shows the newest 5 items) and `/news/` (it shows all of them, grouped by year). The news feed, `/news.xml` (the footer's RSS link), updates on its own, so people who follow it in a feed reader see the new item.
 
 ---
 
@@ -148,11 +149,11 @@ Each publication is one file in `_publications/`. Its file name is its **slug**,
    | `doi` | Optional. The DOI only, for example `10.1109/TVT.2026.3656108`. The button label comes from the DOI: IEEE DOIs show "IEEE Xplore", IEEE DataPort DOIs show "IEEE DataPort", any other shows "DOI". |
    | `arxiv` | Optional. The arXiv ID only, for example `2609.12195`. |
    | `code`, `pdf`, `slides`, `poster`, `dataset` | Optional links. `pdf`, `slides`, and `poster` can be files you put in `files/` (for example `/files/slides/example.pdf`) or full URLs. |
-   | `video` | Optional. A YouTube video ID (the part after `watch?v=`). |
+   | `video` | Optional. A YouTube video ID (the part after `watch?v=`). It adds a Video button and a player on the publication's page that loads only when played. |
    | `award` | Optional, for example `Best Paper Award Finalist`. Shows a badge. |
    | `featured` | `true` shows the paper in Home's "Selected publications". |
    | `topics` | Ids from `_data/topics.yml`. To add a topic, add an `id` and `label` there. |
-   | `bibtex` | The citation. Indent every line of it by two spaces under `bibtex: |`. It appears on the publication's page and behind a "BibTeX" button (with Copy) in every list. |
+   | `bibtex` | The citation. Indent every line of it by two spaces under `bibtex: |`. It appears on the publication's page, and the "BibTeX" button in every list opens it in a small window with a Copy button. |
    | `figure`, `figure_alt`, `figure_caption` | Optional: a figure at the top of the publication's page that visitors can enlarge. Add the image like a story photo (section 13, steps 1 to 3, with a name such as `publications/<slug>`), then set `figure: publications/<slug>`, a description in `figure_alt`, and an optional `figure_caption`. It also becomes the page's preview image on social media. |
 
    The link buttons always appear in the same order (PDF, arXiv, IEEE Xplore or DOI, Code, Slides, Video, Poster, Dataset, BibTeX), and only for the fields you fill in.
@@ -254,7 +255,7 @@ A `bibtex` field is optional for software.
    - `note`: the short line under the title on the card.
    - Optional: `language: fa` for a video not in English; `host: { name: Danesh Academy, url: "https://www.youtube.com/@Daaneshacademy" }` when the video is on someone else's channel (the card says "published on ..."); `start: 3727` when your part starts later in a longer video (in seconds), with `source_title` set to that video's title.
 4. Optional: add a news item (`type: video`, `url: /videos/`).
-5. Home shows the newest 6 videos; the Videos page shows all.
+5. Home shows the newest 6 videos; the Videos page shows all, under your channel's Subscribe button. A video plays right on the page when visitors click its thumbnail: nothing loads from YouTube before that click (the thumbnail comes from YouTube's image server). The title still links to YouTube.
 
 ---
 
@@ -321,7 +322,7 @@ The "Download CV (PDF)" buttons link to `files/Mehdi_Zafari_CV.pdf`, which is th
 .venv/bin/python scripts/make_cv_pdf.py
 ```
 
-The script builds the site, prints `/cv/` in Chrome (US Letter, with page numbers, without the site's menu, buttons, and bio, and with your name and contacts on top), and replaces the PDF. Open it to check it, then commit it with your other changes.
+The script builds the site, prints `/cv/` in Chrome (US Letter, with page numbers, without the site's menu, buttons, contents list, and bio, and with your name and contacts on top), and replaces the PDF. It also writes today's date to `_data/cv_pdf.yml`, which the CV page shows next to the Download button ("Updated October 2026"). Open the PDF to check it, then commit both files with your other changes.
 
 The scripts need the Python environment in `.venv/` (already set up on your Mac). On a new computer: `python3 -m venv .venv`, then `.venv/bin/pip install pillow pyyaml playwright`. Google Chrome must be installed.
 
@@ -371,6 +372,7 @@ Stories are longer write-ups with photos, linked from news items and talks.
    image: /assets/img/stories/my-event-2027-1200.jpg
    image_alt: What the photo shows
    pubs: [my-paper-slug]
+   video: AbCdEfGhIjK      # only for a story about a video: its YouTube ID
    links:
      - label: Example 2027
        url: https://example.org/2027/
@@ -384,14 +386,22 @@ Stories are longer write-ups with photos, linked from news items and talks.
    More text. One sentence per line is fine.
    ```
 
-   Every photo opens larger on click. With several photos on a page, visitors step through them with Previous and Next, the arrow keys, or a swipe, and see the caption under each. Leave out `caption=` for a photo without one.
+   Leave out `caption=` for a photo without one. The list of stories on `/news/` shows the photo in `image` as the story's thumbnail.
+
+   For a story about a video, put the player in the text and the video's ID in `video` (the list then shows the video's thumbnail, and link previews use it too):
+
+   ```markdown
+   {% include video-player.html id="AbCdEfGhIjK" %}
+   ```
+
+   The player loads only when played. Its title and start time come from the video's entry in `_data/videos.yml` when it has one.
 
    For two photos side by side (a portrait and a landscape):
 
    ```html
    <div class="figure-row">
-     {% include zoom-image.html name="stories/photo-portrait" alt="..." sizes="(min-width: 48rem) 15rem, 36vw" %}
-     {% include zoom-image.html name="stories/photo-landscape" alt="..." sizes="(min-width: 48rem) 27rem, 64vw" %}
+     {% include responsive-image.html name="stories/photo-portrait" alt="..." sizes="(min-width: 48rem) 15rem, 36vw" %}
+     {% include responsive-image.html name="stories/photo-landscape" alt="..." sizes="(min-width: 48rem) 27rem, 64vw" %}
    </div>
    ```
 

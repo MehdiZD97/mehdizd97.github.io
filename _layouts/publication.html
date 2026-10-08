@@ -75,12 +75,16 @@ layout: default
     </header>
     <div class="page-content prose">
       {%- if page.figure %}
-      {% include figure.html name=page.figure alt=page.figure_alt caption=page.figure_caption sizes="(min-width: 48rem) 42rem, calc(100vw - 2rem)" %}
+      {% include figure.html name=page.figure alt=page.figure_alt caption=page.figure_caption sizes="(min-width: 48rem) 42rem, calc(100vw - 2rem)" zoom=true %}
       {%- endif %}
       {%- assign body = content | strip %}
       {%- if body != "" %}
       <h2>{{ body_title }}</h2>
       {{ content }}
+      {%- endif %}
+      {%- if page.video %}
+      <h2>Video</h2>
+      {% include video-player.html id=page.video %}
       {%- endif %}
       {%- if page.bibtex %}
       <h2>BibTeX</h2>

@@ -2,19 +2,28 @@
 title: Videos
 permalink: /videos/
 prose: false
+lead: Tutorials and talks, newest first.
+head_include: video-meta.html   # VideoObject structured data
 ---
 {%- comment -%}
-  Temporary videos page (Stage 3, so the Videos menu item has a page):
-  every video in _data/videos.yml, newest first, linking to YouTube.
-  Stage 8 adds the channel spotlight and click-to-load embeds.
+  The Videos page (PLAN 8.1): the channel spotlight with a Subscribe button,
+  then every video in _data/videos.yml, newest first by upload date, as
+  cards whose player loads only when played (video-card.html). Home shows
+  the newest few with the same card.
 {%- endcomment -%}
 {%- assign channel = site.data.videos.channel %}
-<p class="actions channel">
-  <span>{{ channel.description }} New videos come to my YouTube channel, <a href="{{ channel.url }}" target="_blank" rel="noopener">{{ channel.handle }}{% include newtab.html %}</a>.</span>
-  <a class="btn btn--secondary btn--small" href="{{ channel.url }}?sub_confirmation=1" target="_blank" rel="noopener">{% include icon.html name="youtube" %}Subscribe{% include newtab.html %}</a>
-</p>
+<section class="channel-card" aria-labelledby="channel-title">
+  <span class="channel-card__logo" aria-hidden="true">{% include icon.html name="youtube" %}</span>
+  <div class="channel-card__text">
+    <p class="channel-card__kicker">YouTube channel</p>
+    <h2 class="channel-card__name" id="channel-title">{{ channel.name }}</h2>
+    <p class="channel-card__desc">New videos come to my channel, <a href="{{ channel.url }}" target="_blank" rel="noopener">{{ channel.handle }}{% include newtab.html %}</a>.</p>
+  </div>
+  <p class="channel-card__actions"><a class="btn btn--primary" href="{{ channel.url }}?sub_confirmation=1" target="_blank" rel="noopener">{% include icon.html name="youtube" %}Subscribe{% include newtab.html %}</a></p>
+</section>
+{%- assign vids = site.data.videos.videos | sort: "date" | reverse %}
 <div class="videos">
-  {%- for video in site.data.videos.videos %}
-  {% include video-card.html video=video level=2 %}
+  {%- for video in vids %}
+  {% include video-card.html video=video level=2 priority=forloop.first %}
   {%- endfor %}
 </div>

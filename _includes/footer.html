@@ -1,4 +1,4 @@
-{%- comment -%} Site footer (PLAN 3.6): email and profile links on one row; News, RSS, and Contact on the next; copyright and the last update. {%- endcomment -%}
+{%- comment -%} Site footer (PLAN 3.6): email and profile links on one row; News, RSS (the news feed, /news.xml), and Contact on the next; copyright and the last update. {%- endcomment -%}
 {%- assign profile = site.data.profile -%}
 {%- assign news = site.data.navigation | where: "section", "news" | first -%}
 <footer class="site-footer">
@@ -12,7 +12,7 @@
     </ul>
     <ul class="site-footer__links" aria-label="Site">
       <li><a href="{{ news.url | relative_url }}">{% include icon.html name="newspaper" %}News</a></li>
-      <li><a href="{{ '/feed.xml' | relative_url }}">{% include icon.html name="rss" %}RSS</a></li>
+      <li><a href="{{ '/news.xml' | relative_url }}">{% include icon.html name="rss" %}RSS</a></li>
       <li><a href="{{ '/contact/' | relative_url }}">{% include icon.html name="message" %}Contact</a></li>
     </ul>
     <p class="site-footer__meta">&copy; {{ site.time | date: "%Y" }} {{ profile.name }}. Last updated {{ site.time | date: "%B %Y" }}.</p>

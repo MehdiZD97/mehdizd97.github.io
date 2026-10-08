@@ -78,8 +78,9 @@
       <span>{{ hs_channel.description }} New videos come to my YouTube channel, <a href="{{ hs_channel.url }}" target="_blank" rel="noopener">{{ hs_channel.handle }}{% include newtab.html %}</a>.</span>
       <a class="btn btn--secondary btn--small" href="{{ hs_channel.url }}?sub_confirmation=1" target="_blank" rel="noopener">{% include icon.html name="youtube" %}Subscribe{% include newtab.html %}</a>
     </p>
+    {%- assign hs_videos = site.data.videos.videos | sort: "date" | reverse %}
     <div class="videos">
-      {%- for video in site.data.videos.videos limit: site.home.videos %}
+      {%- for video in hs_videos limit: site.home.videos %}
       {% include video-card.html video=video level=3 %}
       {%- endfor %}
     </div>

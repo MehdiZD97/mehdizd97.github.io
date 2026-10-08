@@ -13,11 +13,13 @@ the site's header, footer, buttons, and bio, and put the name and contact
 block (_includes/print-identity.html) on top.
 
 Run it after changing anything the CV shows (_data/profile.yml, _data/cv/,
-awards, talks, publications), then commit the new PDF. A running
-`jekyll serve` picks the file up on its own.
+awards, talks, publications), then commit the new PDF. It also records the
+date in _data/cv_pdf.yml, which the CV page shows next to the Download
+button. A running `jekyll serve` picks both files up on its own.
 Requires Playwright and PyYAML in .venv, Bundler, and the installed Chrome.
 """
 
+import datetime
 import functools
 import http.server
 import os
@@ -35,6 +37,13 @@ FOOTER = (
     '<div style="width: 100%; margin: 0 0.6in; display: flex; justify-content: space-between; '
     "font: 8px -apple-system, 'Helvetica Neue', Arial, sans-serif; color: #5a6478;\">"
     '<span>{name}, CV</span><span>Page <span class="pageNumber"></span> of <span class="totalPages"></span></span></div>'
+)
+
+
+STAMP = (
+    "# Written by scripts/make_cv_pdf.py each time it prints the CV PDF; the CV\n"
+    "# page shows this month next to the Download button (\"Updated October 2026\").\n"
+    "updated: {date}\n"
 )
 
 
@@ -79,7 +88,9 @@ def main() -> int:
         finally:
             server.shutdown()
 
-    print(f"wrote {out.relative_to(ROOT)} ({out.stat().st_size / 1024:.0f} KB)")
+    stamp = ROOT / "_data" / "cv_pdf.yml"
+    stamp.write_text(STAMP.format(date=datetime.date.today().isoformat()), encoding="utf-8")
+    print(f"wrote {out.relative_to(ROOT)} ({out.stat().st_size / 1024:.0f} KB) and {stamp.relative_to(ROOT)}")
     return 0
 
 

@@ -1,7 +1,36 @@
-{%- comment -%} One story (post) in a list: date, linked title, and its description (or, without one, the first paragraph). {%- endcomment -%}
-{%- assign p = include.post -%}
-<li class="row-item">
-  <time class="row-when" datetime="{{ p.date | date: '%Y-%m-%d' }}">{{ p.date | date: "%b %-d, %Y" }}</time>
-  <span class="row-what"><a href="{{ p.url | relative_url }}">{{ p.title }}</a></span>
-  <p class="row-note">{{ p.description | default: p.excerpt | strip_html | normalize_whitespace | truncatewords: 32 }}</p>
+{%- comment -%}
+  One story in the list on /news/ (Stage 8): a thumbnail, the date, the
+  title, and the description (or, without one, the first paragraph); the
+  whole row is the title's link. The thumbnail is the story's photo (the
+  file in `image`, matched to its entry in _data/images.yml), else the
+  thumbnail of its video (`video`, a YouTube ID), else a book symbol.
+  Parameter: post.
+{%- endcomment -%}
+{%- assign si = include.post -%}
+{%- assign si_photo = "" -%}
+{%- if si.image -%}
+  {%- for si_entry in site.data.images -%}
+    {%- capture si_prefix %}/assets/img/{{ si_entry[0] }}-{% endcapture -%}
+    {%- assign si_head = si.image | slice: 0, si_prefix.size -%}
+    {%- if si_head != si_prefix %}{% continue %}{% endif -%}
+    {%- assign si_size = si.image | remove_first: si_prefix | split: "." | first -%}
+    {%- assign si_sizes = si_entry[1].variants | map: "size" | join: "," | split: "," -%}
+    {%- if si_sizes contains si_size %}{% assign si_photo = si_entry[0] %}{% break %}{% endif -%}
+  {%- endfor -%}
+{%- endif -%}
+<li class="story-item">
+  <div class="story-thumb">
+    {%- if si_photo != "" %}
+    {% include responsive-image.html name=si_photo alt="" sizes="(min-width: 40rem) 10rem, 7rem" %}
+    {%- elsif si.video %}
+    <img src="https://i.ytimg.com/vi/{{ si.video }}/mqdefault.jpg" width="320" height="180" alt="" loading="lazy" decoding="async">
+    {%- else %}
+    {% include icon.html name="story" %}
+    {%- endif %}
+  </div>
+  <div class="story-text">
+    <time class="story-date" datetime="{{ si.date | date: '%Y-%m-%d' }}">{{ si.date | date: "%b %-d, %Y" }}</time>
+    <h3 class="story-title"><a href="{{ si.url | relative_url }}">{{ si.title }}</a></h3>
+    <p class="story-note">{{ si.description | default: si.excerpt | strip_html | normalize_whitespace | truncatewords: 32 }}</p>
+  </div>
 </li>

@@ -1,8 +1,8 @@
 {%- comment -%}
   A responsive image that links to its largest version; site.js opens it in
-  the lightbox (with Previous and Next across the page's zoomable images).
-  Without JavaScript the link opens the image itself. Parameters: name (key
-  in _data/images.yml), alt, sizes.
+  the lightbox. Without JavaScript the link opens the image itself. Used by
+  figure.html with zoom=true (publication figures). Parameters: name (key in
+  _data/images.yml), alt, sizes.
 {%- endcomment -%}
 {%- assign zi = site.data.images[include.name] -%}
 {%- if zi -%}

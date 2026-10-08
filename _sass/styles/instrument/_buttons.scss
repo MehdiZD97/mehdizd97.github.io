@@ -39,8 +39,6 @@
   border: 1px solid var(--signal-bright); border-radius: inherit;
   opacity: 0; transition: opacity var(--dur-fast) var(--ease-out);
 }
-.linkbtn[aria-expanded="true"]::after { opacity: 1; }
-.linkbtn[aria-expanded="true"] .icon { color: var(--signal); }
 @media (hover: hover) and (pointer: fine) {
   .linkbtn:hover { color: var(--ink); }
   .linkbtn:hover::after { opacity: 1; }

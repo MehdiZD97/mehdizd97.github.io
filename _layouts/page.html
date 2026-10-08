@@ -7,6 +7,8 @@ layout: default
   components). `print_identity: true` adds the name and contact block that
   replaces the header in print (the CV). `actions` adds buttons under the
   lead: a list of label, url (an in-page "#id" or a site path), and icon.
+  `header_include` adds an include at the end of the header (the CV's
+  Download button and date).
 {%- endcomment %}
 <main class="site-main" id="main">
   {%- if page.print_identity %}
@@ -24,6 +26,9 @@ layout: default
       <a class="btn btn--secondary" href="{% if pa_first == '#' %}{{ pa.url }}{% else %}{{ pa.url | relative_url }}{% endif %}">{% if pa.icon %}{% include icon.html name=pa.icon %}{% endif %}{{ pa.label }}</a>
       {%- endfor %}
     </p>
+    {%- endif %}
+    {%- if page.header_include %}
+    {% include {{ page.header_include }} %}
     {%- endif %}
   </header>
   <div class="page-content {% if page.prose == false %}page-flow{% else %}prose{% endif %}">
