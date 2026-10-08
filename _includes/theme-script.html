@@ -1,12 +1,30 @@
 <script>
-  /* Before the first paint: mark JavaScript as available and apply a stored
-     theme. The site is light unless the visitor chose dark (PLAN D9). */
+  /* Before the first paint: mark JavaScript as available, apply a stored
+     theme (the site is light unless the visitor chose dark, PLAN D9) and
+     its browser bar color, and, when the page is reloaded or reached with
+     Back or Forward, hold smooth scrolling (CSS) until the page has loaded,
+     so the browser puts back the old scroll position at once instead of
+     gliding down from the top. Smooth scrolling itself is CSS, always on
+     (Mehdi, Stages 6 and 9). */
   (function () {
     var root = document.documentElement;
     root.classList.add("js");
     try {
       var theme = localStorage.getItem("theme");
       if (theme === "light" || theme === "dark") root.setAttribute("data-theme", theme);
+      var bar = document.querySelector("meta[name='theme-color'][data-dark]");
+      if (bar && theme === "dark") bar.setAttribute("content", bar.getAttribute("data-dark"));
+    } catch (e) {}
+    try {
+      var visit = performance.getEntriesByType("navigation")[0];
+      if (visit && (visit.type === "reload" || visit.type === "back_forward")) {
+        root.classList.add("no-smooth");
+        var smooth = function () { root.classList.remove("no-smooth"); };
+        addEventListener("load", function () { setTimeout(smooth, 300); });
+        ["pointerdown", "keydown", "wheel", "touchstart"].forEach(function (type) {
+          addEventListener(type, smooth, { once: true, passive: true });
+        });
+      }
     } catch (e) {}
   })();
 </script>

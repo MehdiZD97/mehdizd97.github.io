@@ -154,6 +154,7 @@ Each publication is one file in `_publications/`. Its file name is its **slug**,
    | `featured` | `true` shows the paper in Home's "Selected publications". |
    | `topics` | Ids from `_data/topics.yml`. To add a topic, add an `id` and `label` there. |
    | `bibtex` | The citation. Indent every line of it by two spaces under `bibtex: |`. It appears on the publication's page, and the "BibTeX" button in every list opens it in a small window with a Copy button. |
+   | `description` | Optional: the text search engines show under the page's title (140 to 160 characters). Without it, the site writes one from the venue, date, authors, and the start of the abstract. |
    | `figure`, `figure_alt`, `figure_caption` | Optional: a figure at the top of the publication's page that visitors can enlarge. Add the image like a story photo (section 13, steps 1 to 3, with a name such as `publications/<slug>`), then set `figure: publications/<slug>`, a description in `figure_alt`, and an optional `figure_caption`. It also becomes the page's preview image on social media. |
 
    The link buttons always appear in the same order (PDF, arXiv, IEEE Xplore or DOI, Code, Slides, Video, Poster, Dataset, BibTeX), and only for the fields you fill in.
@@ -336,6 +337,13 @@ Open `_data/profile.yml`:
 - `interests`: the research interests groups on the CV.
 - `links`: the profile icons in the hero and footer, in this order. Each has an `id` (it picks the icon: `google-scholar`, `orcid`, `github`, `linkedin`, `researchgate`, `youtube`), a `label`, and a `url`. Add `footer_only: true` to show a link only in the footer (ResearchGate has it), not in the hero or on the printed CV.
 - To change the portrait: put the new original in `_assets-src/images/` (at least 1200 px on the short side), point `profile/mehdi-zafari` in `_assets-src/images.yml` to it with `src:`, and run the image script (section 13, step 3).
+- **The social card** (`assets/img/social-card.jpg`, the image shown when someone shares a page of the site) uses your name, title, affiliation, headline, and portrait. After changing any of them, make it again:
+
+  ```bash
+  .venv/bin/python scripts/make_social_card.py
+  ```
+
+  Its design is `_assets-src/social-card.svg`. Stories show their own photo instead, and video stories their video's thumbnail.
 
 ---
 
@@ -431,4 +439,4 @@ Stories are longer write-ups with photos, linked from news items and talks.
    ```
 
    It should finish without errors or warnings.
-3. Commit your changes (for example `chore: add ICC 2027 paper and news`) on your working branch, then merge into `master`. GitHub Actions builds the site from `master` and publishes it in a few minutes; the Actions tab on GitHub shows the progress and any error.
+3. Commit your changes (for example `chore: add ICC 2027 paper and news`) on your working branch, then merge into `master`. GitHub Actions builds the site from `master` and publishes it in a few minutes; the Actions tab on GitHub shows the progress and any error. Every build also checks the site's links, images, and scripts (html-proofer); if the "Check links" step fails, its log names the page and the broken link.

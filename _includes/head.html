@@ -1,21 +1,78 @@
 {%- comment -%}
-  Document head: title, description, canonical, basic Open Graph, the theme
-  script, fonts, the stylesheet of the style set in _config.yml (`design`),
-  icons, and the feeds (news and stories). Stage 9 completes SEO and
-  structured data.
+  Document head (PLAN 4.8 and Stage 9): title, description, canonical,
+  Open Graph and Twitter cards, structured data, the browser bar color, the
+  theme script, fonts, the stylesheet of the style set in _config.yml
+  (`design`), icons, and the feeds (news and stories).
+  - Titles end with " | Mehdi Zafari" unless that makes them longer than 60
+    characters (a long paper title then stands alone).
+  - Descriptions come from `description` in the front matter; a publication
+    without one gets its venue, date, authors, and the start of its abstract,
+    cut at a word to 160 characters at most.
+  - The preview image is the page's `image` (stories), its figure
+    (publications), its video's thumbnail, or else the social card.
+  - CSS and scripts carry ?v=<build time>, so a new build never runs with a
+    copy the browser kept from an older one.
 {%- endcomment -%}
 {%- assign style = site.design | default: "cooperative" -%}
 {%- assign d = site.data.design.directions | where: "id", style | first -%}
 {%- assign profile = site.data.profile -%}
+{%- assign asset_v = site.time | date: "%s" -%}
+
+{%- comment -%} Title {%- endcomment -%}
 {%- if page.url == "/" -%}
   {%- capture page_title -%}{{ site.title }} | {{ profile.title }}, {{ profile.affiliation_short }}{%- endcapture -%}
 {%- elsif page.title -%}
   {%- capture page_title -%}{{ page.title }} | {{ site.title }}{%- endcapture -%}
+  {%- assign hd_plain = page_title | strip_html | normalize_whitespace -%}
+  {%- if hd_plain.size > 60 %}{% assign page_title = page.title %}{% endif -%}
 {%- else -%}
   {%- assign page_title = site.title -%}
 {%- endif -%}
 {%- assign page_title = page_title | strip_html | normalize_whitespace -%}
-{%- assign description = page.description | default: site.description | strip_html | normalize_whitespace -%}
+
+{%- comment -%} Description {%- endcomment -%}
+{%- if page.description -%}
+  {%- assign description = page.description -%}
+{%- elsif page.collection == "publications" -%}
+  {%- capture hd_authors %}{% include authors.html list=page.authors %}{% endcapture -%}
+  {%- capture hd_when %}{% if page.status == "published" %}{{ page.date | date: "%Y" }}{% else %}{{ page.date | date: "%B %Y" }}{% endif %}{% endcapture -%}
+  {%- assign hd_venue = page.venue_short | default: page.venue -%}
+  {%- assign hd_year = page.date | date: "%Y" -%}
+  {%- capture hd_text -%}
+    {%- if page.status == "under-review" %}Submitted to {% endif %}{{ hd_venue }}{% unless hd_venue contains hd_year %} ({{ hd_when }}){% endunless %}, by {{ hd_authors | strip_html | normalize_whitespace }}. {{ page.content | strip_html | normalize_whitespace }}
+  {%- endcapture -%}
+  {%- assign hd_text = hd_text | strip -%}
+  {%- if hd_text.size > 160 -%}
+    {%- assign hd_cut = hd_text | slice: 0, 157 | split: " " | pop | join: " " -%}
+    {%- assign hd_last = hd_cut | slice: -1 -%}
+    {%- if hd_last == "," or hd_last == ";" or hd_last == ":" or hd_last == "." %}{% assign hd_keep = hd_cut.size | minus: 1 %}{% assign hd_cut = hd_cut | slice: 0, hd_keep %}{% endif -%}
+    {%- assign description = hd_cut | append: "…" -%}
+  {%- else -%}
+    {%- assign description = hd_text -%}
+  {%- endif -%}
+{%- else -%}
+  {%- assign description = site.description -%}
+{%- endif -%}
+{%- assign description = description | strip_html | normalize_whitespace -%}
+
+{%- comment -%} Preview image {%- endcomment -%}
+{%- assign og_image = profile.social_card -%}
+{%- assign og_image_alt = profile.social_card_alt -%}
+{%- assign og_size = "1200x630" -%}
+{%- if page.image -%}
+  {%- assign og_image = page.image %}{% assign og_image_alt = page.image_alt %}{% assign og_size = "" -%}
+{%- elsif page.figure and site.data.images[page.figure] -%}
+  {%- assign og_figure = site.data.images[page.figure] -%}
+  {%- assign og_largest = og_figure.variants | last -%}
+  {%- assign og_format = og_figure.formats | last -%}
+  {%- capture og_image %}/assets/img/{{ page.figure }}-{{ og_largest.size }}.{{ og_format }}{% endcapture -%}
+  {%- assign og_image_alt = page.figure_alt %}{% assign og_size = "" -%}
+{%- elsif page.video -%}
+  {%- capture og_image %}https://i.ytimg.com/vi/{{ page.video }}/hqdefault.jpg{% endcapture -%}
+  {%- assign hd_video = site.data.videos.videos | where: "id", page.video | first -%}
+  {%- capture og_image_alt %}Thumbnail of the video “{{ hd_video.title | default: page.title }}”{% endcapture -%}
+  {%- assign og_size = "" -%}
+{%- endif %}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{ page_title | escape }}</title>
@@ -24,39 +81,48 @@
 {%- if page.noindex %}
 <meta name="robots" content="noindex">
 {%- endif %}
-<meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+<meta property="og:type" content="{% if page.layout == 'post' or page.collection == 'publications' %}article{% else %}website{% endif %}">
 <meta property="og:site_name" content="{{ site.title }}">
+<meta property="og:locale" content="en_US">
 <meta property="og:title" content="{{ page_title | escape }}">
 <meta property="og:description" content="{{ description | escape }}">
 <meta property="og:url" content="{{ page.url | absolute_url }}">
-{%- assign og_image = page.image | default: profile.photo -%}
-{%- if page.video and page.image == nil %}{% capture og_image %}https://i.ytimg.com/vi/{{ page.video }}/hqdefault.jpg{% endcapture %}{% endif -%}
-{%- assign og_image_alt = page.image_alt -%}
-{%- if page.figure and site.data.images[page.figure] -%}
-  {%- assign og_figure = site.data.images[page.figure] -%}
-  {%- assign og_largest = og_figure.variants | last -%}
-  {%- assign og_format = og_figure.formats | last -%}
-  {%- capture og_image %}/assets/img/{{ page.figure }}-{{ og_largest.size }}.{{ og_format }}{% endcapture -%}
-  {%- assign og_image_alt = page.figure_alt -%}
-{%- endif %}
 <meta property="og:image" content="{{ og_image | absolute_url }}">
+{%- if og_size != "" %}
+<meta property="og:image:width" content="{{ og_size | split: 'x' | first }}">
+<meta property="og:image:height" content="{{ og_size | split: 'x' | last }}">
+{%- endif %}
 {%- if og_image_alt %}
 <meta property="og:image:alt" content="{{ og_image_alt | escape }}">
 {%- endif %}
-<meta name="twitter:card" content="summary">
+{%- if page.layout == "post" %}
+<meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+{%- endif %}
+<meta name="twitter:card" content="summary_large_image">
+{%- if page.url == "/" %}
+{% include person-meta.html %}
+{%- endif %}
 {%- if page.collection == "publications" %}
 {% include publication-meta.html %}
 {%- endif %}
+{%- if page.layout == "post" %}
+{% include post-meta.html %}
+{%- endif %}
 {%- if page.head_include %}
 {% include {{ page.head_include }} %}
+{%- endif %}
+{%- assign bar = d.colors | where: "id", d.bar | first %}
+{%- unless bar %}{% assign bar = d.tokens | where: "id", d.bar | first %}{% endunless %}
+{%- if bar %}
+<meta name="theme-color" content="{{ bar.light }}" data-light="{{ bar.light }}" data-dark="{{ bar.dark }}">
 {%- endif %}
 {% include theme-script.html %}
 {%- for font in d.preload %}
 <link rel="preload" href="{{ '/assets/fonts/' | append: font | relative_url }}" as="font" type="font/woff2" crossorigin>
 {%- endfor %}
-<link rel="stylesheet" href="{{ '/assets/css/' | append: style | append: '.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/' | append: style | append: '.css' | relative_url }}?v={{ asset_v }}">
 {%- for sheet in page.styles %}
-<link rel="stylesheet" href="{{ sheet | relative_url }}">
+<link rel="stylesheet" href="{{ sheet | relative_url }}?v={{ asset_v }}">
 {%- endfor %}
 <link rel="icon" href="{{ '/assets/icons/' | append: style | append: '/favicon.ico' | relative_url }}" sizes="48x48">
 <link rel="icon" href="{{ '/assets/icons/' | append: style | append: '/favicon.svg' | relative_url }}" type="image/svg+xml">

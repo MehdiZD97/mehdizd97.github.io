@@ -2,8 +2,8 @@
   A publication's link buttons in the D7 order (PDF, arXiv, the DOI label from
   _config.yml, Code, Slides, Video, Poster, Dataset, BibTeX), each only when
   present. Parameters: pub; bibtex (true: add the BibTeX button, which opens
-  a small window with the entry and a Copy button; it needs JavaScript, so
-  it shows only when JavaScript runs).
+  the entry's BibTeX window in pub-item.html with the browser's own popover,
+  so it works without a script; browsers without popovers hide it).
 {%- endcomment -%}
 {%- assign pl = include.pub -%}
 {%- capture pl_items -%}
@@ -24,7 +24,7 @@
   {%- if pl.poster %}{% include linkbtn.html url=pl.poster label="Poster" icon="paper" %}{% endif -%}
   {%- if pl.dataset %}{% include linkbtn.html url=pl.dataset label="Dataset" icon="database" %}{% endif -%}
   {%- if include.bibtex and pl.bibtex -%}
-  <li class="js-only"><button class="linkbtn" type="button" aria-haspopup="dialog" data-bibtex="{{ pl.bibtex | strip | escape }}" data-bibtex-title="{{ pl.title | escape }}">{% include icon.html name="bibtex" %}<span>BibTeX</span></button></li>
+  <li class="needs-popover"><button class="linkbtn" type="button" popovertarget="bib-{{ pl.slug }}">{% include icon.html name="bibtex" %}<span>BibTeX</span></button></li>
   {%- endif -%}
 {%- endcapture -%}
 {%- assign pl_items = pl_items | strip -%}

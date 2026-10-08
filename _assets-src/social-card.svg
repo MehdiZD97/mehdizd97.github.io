@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <!--
+    The default social card (PLAN 9.4): the preview image when a page is
+    shared. scripts/make_social_card.py fills the {{...}} fields from
+    _data/profile.yml and _config.yml, embeds the portrait, and renders
+    assets/img/social-card.jpg (1200 by 630) with the site's font.
+    Colors: style B (Cooperative), light.
+  -->
+  <defs>
+    <clipPath id="portrait-clip"><circle cx="172" cy="172" r="100" /></clipPath>
+    <linearGradient id="beam" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FF9A2E" stop-opacity="0.9" />
+      <stop offset="1" stop-color="#FF9A2E" stop-opacity="0.45" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#1B3BC8" />
+
+  <!-- The motif: three access points steering beams to one user, with sensing echoes -->
+  <g transform="translate(0 0)">
+    <polygon points="842,118 940,392 1004,452" fill="url(#beam)" />
+    <polygon points="1008,92 950,412 1022,416" fill="url(#beam)" />
+    <polygon points="1132,176 960,384 1016,446" fill="url(#beam)" />
+    <g fill="none" stroke="#5CDCF5" stroke-width="3">
+      <circle cx="984" cy="414" r="34" stroke-opacity="0.9" />
+      <circle cx="984" cy="414" r="62" stroke-opacity="0.55" />
+      <circle cx="984" cy="414" r="90" stroke-opacity="0.25" />
+    </g>
+    <circle cx="984" cy="414" r="11" fill="#FFFFFF" />
+    <g stroke="#FFFFFF" stroke-width="5" stroke-linecap="round">
+      <line x1="842" y1="118" x2="842" y2="170" />
+      <line x1="1008" y1="92" x2="1008" y2="144" />
+      <line x1="1132" y1="176" x2="1132" y2="228" />
+      <line x1="826" y1="170" x2="858" y2="170" />
+      <line x1="992" y1="144" x2="1024" y2="144" />
+      <line x1="1116" y1="228" x2="1148" y2="228" />
+    </g>
+    <g fill="#FFFFFF">
+      <circle cx="842" cy="118" r="10" />
+      <circle cx="1008" cy="92" r="10" />
+      <circle cx="1132" cy="176" r="10" />
+    </g>
+  </g>
+
+  <!-- Portrait -->
+  <circle cx="172" cy="172" r="106" fill="#FFFFFF" />
+  <image href="{{PORTRAIT}}" x="72" y="72" width="200" height="200" clip-path="url(#portrait-clip)" preserveAspectRatio="xMidYMid slice" />
+
+  <!-- Text -->
+  <g font-family="Bricolage Grotesque, sans-serif" fill="#FFFFFF">
+    <text x="72" y="372" font-size="78" font-weight="800" letter-spacing="-2">{{NAME}}</text>
+    <text x="74" y="424" font-size="34" font-weight="600" fill="#D3DBFF">{{TITLE}}</text>
+    <text x="74" y="494" font-size="31" font-weight="500">{{HEADLINE_1}}</text>
+    <text x="74" y="536" font-size="31" font-weight="500">{{HEADLINE_2}}</text>
+    <text x="74" y="590" font-size="27" font-weight="700" fill="#FF9A2E">{{URL}}</text>
+  </g>
+</svg>

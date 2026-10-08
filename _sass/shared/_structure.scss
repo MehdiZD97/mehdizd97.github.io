@@ -35,16 +35,22 @@ html:not(.js) .hv-tabs, html:not(.js) .hv-panel.is-hidden { display: none; }
 // when it runs; the head script sets .js before the first paint.
 html:not(.js) .js-only { display: none !important; }
 
-// BibTeX: the block on a publication's page, and the BibTeX window that the
-// BibTeX buttons open (site.js). Long lines wrap; the copied text is exact.
-.bibtex pre, .bib-dialog__text { overflow-x: auto; margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
-.bibtex__status:empty, .bib-dialog__status:empty { display: none; }
-.bib-dialog { width: min(42rem, calc(100vw - 2rem)); max-height: calc(100vh - 2rem); padding: 0; border: 0; overflow: auto; }
-.bib-dialog::backdrop { background: rgb(0 0 0 / 0.55); }
-.bib-dialog__body { display: grid; gap: var(--space-3); padding: var(--space-5); }
-.bib-dialog__head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); }
-.bib-dialog__text { max-height: 50vh; overflow-y: auto; }
-.bib-dialog__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); }
+// BibTeX: the block on a publication's page, and the BibTeX windows that
+// the BibTeX buttons open (popovers, pub-item.html; Mehdi, Stage 9). A
+// popover opens without any script; browsers without popovers hide the
+// button. Long lines wrap; the copied text is exact.
+.bibtex pre, .bib-pop__text { overflow-x: auto; margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.bibtex__status:empty { display: none; }
+.needs-popover { display: none; }
+@supports selector(:popover-open) {
+  .needs-popover { display: block; }
+}
+.bib-pop { width: min(42rem, calc(100vw - 2rem)); max-height: calc(100vh - 2rem); padding: 0; border: 0; overflow: auto; }
+.bib-pop::backdrop { background: rgb(0 0 0 / 0.55); }
+.bib-pop__body { display: grid; gap: var(--space-3); padding: var(--space-5); }
+.bib-pop__head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); }
+.bib-pop__text { max-height: 50vh; overflow-y: auto; }
+.bib-pop__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); }
 
 // Publications page filters (publications.js): radio chips in labeled rows.
 .pub-filters { display: grid; gap: var(--space-4); }
@@ -161,6 +167,11 @@ html:not(.js) .js-only { display: none !important; }
 // Page frame: the footer stays at the bottom on short pages.
 body { min-height: 100vh; display: flex; flex-direction: column; }
 #main { flex: 1 0 auto; }
+
+// Targets of at least 24 by 24 px (WCAG 2.2, 2.5.8) for links that stand
+// alone rather than inside a sentence.
+.site-nav a { min-width: 1.5rem; text-align: center; }
+.more-link a, .breadcrumb a, .contact-list a { display: inline-flex; align-items: center; min-height: 1.5rem; }
 
 // Rows of buttons and link buttons
 .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; }

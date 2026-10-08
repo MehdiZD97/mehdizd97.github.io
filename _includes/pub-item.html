@@ -1,5 +1,6 @@
 {%- comment -%}
-  One publication entry (PLAN 6.2), shared by Home, Publications, and the CV.
+  One publication entry (PLAN 6.2), shared by Home, Publications, and the CV,
+  with its BibTeX window (a popover that the BibTeX button opens).
   Parameters: pub (a document in site.publications), level (heading level,
   default 3). Published items show the year; accepted, under-review, and
   preprint items show the month and year (PLAN 4.4).
@@ -39,5 +40,18 @@
     </p>
     {%- endif %}
     {% include pub-links.html pub=p bibtex=true %}
+    {%- if p.bibtex %}
+    <div class="bib-pop" id="bib-{{ p.slug }}" popover role="dialog" aria-labelledby="bib-{{ p.slug }}-label">
+      <div class="bib-pop__body">
+        <div class="bib-pop__head">
+          <p class="bib-pop__title" id="bib-{{ p.slug }}-label">BibTeX</p>
+          <button class="btn btn--secondary btn--small" type="button" popovertarget="bib-{{ p.slug }}" popovertargetaction="hide">Close</button>
+        </div>
+        <p class="bib-pop__paper">{{ p.title }}</p>
+        <pre class="bib-pop__text" id="bib-{{ p.slug }}-text">{{ p.bibtex | strip | escape }}</pre>
+        <p class="bib-pop__actions js-only"><button class="btn btn--primary btn--small" type="button" data-copy="bib-{{ p.slug }}-text">{% include icon.html name="copy" %}Copy</button> <span class="bibtex__status" role="status" data-copy-status></span></p>
+      </div>
+    </div>
+    {%- endif %}
   </div>
 </article>

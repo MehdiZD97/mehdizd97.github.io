@@ -10,13 +10,15 @@ button { cursor: pointer; }
 p, h1, h2, h3, h4, h5, h6, figure, blockquote, dl, dd, pre { margin: 0; }
 ul, ol { margin: 0; padding: 0; }
 
-// Anchored targets stop below the sticky header; in-page links scroll
-// there smoothly (Mehdi, Stage 6), and jump with reduced motion (below).
-// With JavaScript, site.js turns smooth scrolling on just before an in-page
-// link moves the page, so the browser's own scroll restoration (Back,
-// reload) stays instant instead of gliding down from the top.
+// Anchored targets stop below the sticky header, and links to a section
+// always scroll there smoothly (Mehdi, Stages 6 and 9); with reduced motion
+// they jump (below). This is CSS on purpose, so it never depends on a script.
+// On a reload or a Back or Forward visit, the head script sets .no-smooth
+// until the page has loaded, so the browser restores the old position at
+// once instead of gliding down from the top.
 [id] { scroll-margin-top: 5rem; }
-html:not(.js), html.smooth-scroll { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; }
+html.no-smooth { scroll-behavior: auto; }
 
 // The hidden attribute always wins over a component's display value.
 [hidden] { display: none !important; }

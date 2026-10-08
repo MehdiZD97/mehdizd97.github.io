@@ -7,7 +7,8 @@
 # derived tokens, and the text pairings that must pass WCAG 2.2 AA.
 # `letter`: the direction's fixed label (A, B). `role`: main or alternate.
 # `preload`: font files (in assets/fonts/) preloaded because they render
-# above the fold. The site starts light for every visitor; dark comes only
+# above the fold. `bar`: the color id of the header, which the browser bar
+# matches (theme-color). The site starts light for every visitor; dark comes only
 # from the theme toggle (D9).
 # contrast.py checks every pairing; kind "text" needs 4.5, "large" and "mark"
 # (non-text: focus rings, beams, icons) need 3.0.
@@ -18,6 +19,7 @@ directions:
     letter: A
     role: alternate
     preload: [ibm-plex-sans-latin-wght-normal.woff2]
+    bar: paper
     summary: Precise, calm, instrument-like. Navy ink, one amber signal, and a monospaced data layer.
     fonts: IBM Plex Sans and IBM Plex Mono
     colors:
@@ -43,7 +45,8 @@ directions:
     name: Cooperative
     letter: B
     role: main
-    preload: [bricolage-grotesque-latin-standard-normal.woff2]
+    preload: [bricolage-grotesque-latin-opsz-normal.woff2]
+    bar: field
     summary: Continuity with the YouTube channel. A royal-blue field, warm orange beams, a cyan echo, and calm white pages.
     fonts: Bricolage Grotesque
     colors:

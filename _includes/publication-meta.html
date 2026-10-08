@@ -1,7 +1,9 @@
 {%- comment -%}
   Head tags for a publication page (PLAN 4.8 and 6.4): Google Scholar's
   citation tags and schema.org data (ScholarlyArticle for papers, Dataset,
-  SoftwareSourceCode). Stage 9 validates and finishes the structured data.
+  SoftwareSourceCode), with the BreadcrumbList that matches the visible
+  breadcrumb (Publications / group). Checked by
+  _local/tools/structured_data_check.py.
 {%- endcomment -%}
 {%- assign pm = page -%}
 {%- assign pm_paper = false -%}
@@ -25,6 +27,12 @@
 {%- endif %}
 {%- endif %}
 {%- case pm.type -%}
+  {%- when "journal", "magazine" %}{% assign pm_group_key = "journal" %}{% assign pm_group = "Journal and magazine papers" -%}
+  {%- when "conference" %}{% assign pm_group_key = "conference" %}{% assign pm_group = "Conference papers" -%}
+  {%- when "dataset" %}{% assign pm_group_key = "dataset" %}{% assign pm_group = "Datasets" -%}
+  {%- else %}{% assign pm_group_key = "software" %}{% assign pm_group = "Software" -%}
+{%- endcase -%}
+{%- case pm.type -%}
   {%- when "dataset" %}{% assign pm_schema = "Dataset" -%}
   {%- when "software" %}{% assign pm_schema = "SoftwareSourceCode" -%}
   {%- else %}{% assign pm_schema = "ScholarlyArticle" -%}
@@ -34,6 +42,18 @@
   {%- if pm.doi and pm.arxiv %}, {% endif -%}
   {%- if pm.arxiv %}"https://arxiv.org/abs/{{ pm.arxiv }}"{% endif -%}
 {%- endcapture %}
+{%- assign pm_list = '/publications/' | absolute_url %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Publications", "item": {{ pm_list | jsonify }} },
+    { "@type": "ListItem", "position": 2, "name": {{ pm_group | jsonify }}, "item": {{ pm_list | append: '#' | append: pm_group_key | jsonify }} },
+    { "@type": "ListItem", "position": 3, "name": {{ pm.title | jsonify }} }
+  ]
+}
+</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -44,7 +64,7 @@
   {%- endif %}
   "url": {{ pm.url | absolute_url | jsonify }},
   "datePublished": {{ pm.date | date: "%Y-%m-%d" | jsonify }},
-  "author": [
+  "{% if pm_schema == 'Dataset' %}creator{% else %}author{% endif %}": [
     {%- for author in pm.authors %}
     {%- if site.author_highlight contains author %}
     { "@type": "Person", "name": {{ site.data.profile.name | jsonify }}, "url": {{ site.url | jsonify }} }{% unless forloop.last %},{% endunless %}

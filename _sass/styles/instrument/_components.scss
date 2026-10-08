@@ -43,12 +43,12 @@
 .bibtex pre { font: 400 var(--text-mono)/1.55 var(--font-mono); }
 .bibtex__actions { display: flex; align-items: center; gap: var(--space-3); font: 400 var(--text-mono)/1 var(--font-mono); color: var(--slate); }
 
-// The BibTeX window (site.js)
-.bib-dialog { border: 1px solid var(--grid); border-radius: var(--radius); background: var(--panel); color: var(--ink); box-shadow: 0 1.5rem 4rem rgb(0 0 0 / 0.25); }
-.bib-dialog__title { font-size: 1.125rem; font-weight: 600; }
-.bib-dialog__paper { font: 400 var(--text-mono)/1.5 var(--font-mono); color: var(--slate); }
-.bib-dialog__text { padding: var(--space-3) var(--space-4); border: 1px solid var(--grid); border-radius: var(--radius); background: var(--paper); font: 400 var(--text-mono)/1.55 var(--font-mono); }
-.bib-dialog__status { font: 400 var(--text-mono)/1 var(--font-mono); color: var(--slate); }
+// The BibTeX windows (popovers)
+.bib-pop { border: 1px solid var(--grid); border-radius: var(--radius); background: var(--panel); color: var(--ink); box-shadow: 0 1.5rem 4rem rgb(0 0 0 / 0.25); }
+.bib-pop__title { font-size: 1.125rem; font-weight: 600; }
+.bib-pop__paper { font: 400 var(--text-mono)/1.5 var(--font-mono); color: var(--slate); }
+.bib-pop__text { padding: var(--space-3) var(--space-4); border: 1px solid var(--grid); border-radius: var(--radius); background: var(--paper); font: 400 var(--text-mono)/1.55 var(--font-mono); }
+.bib-pop .bibtex__status { font: 400 var(--text-mono)/1 var(--font-mono); color: var(--slate); }
 
 // News
 .news-list { list-style: none; display: grid; }

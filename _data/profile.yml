@@ -15,6 +15,8 @@ email: mzafarid@uci.edu
 photo: /assets/img/profile/mehdi-zafari-480.jpg   # one file, for structured data and social previews
 photo_image: profile/mehdi-zafari                 # the responsive variants (key in _data/images.yml)
 cv_pdf: /files/Mehdi_Zafari_CV.pdf   # printed from /cv/ by scripts/make_cv_pdf.py; links appear once the file exists
+social_card: /assets/img/social-card.jpg   # the preview image when a page is shared (1200 by 630; scripts/make_social_card.py)
+social_card_alt: "Mehdi Zafari, Ph.D. Candidate, UC Irvine: signal processing and AI/ML for next-generation (5G/6G) wireless systems"
 
 # First person, for the hero (approved 2026-10-07)
 intro: I design distributed algorithms and learning methods for cell-free MIMO and integrated sensing and communication, and test them with over-the-air experiments and RF digital twins.

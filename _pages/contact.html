@@ -1,9 +1,11 @@
 ---
 title: Contact
+description: "Contact Mehdi Zafari, Ph.D. candidate in Electrical Engineering and Computer Science at UC Irvine, by email, on LinkedIn, or with the form on this page."
 permalink: /contact/
 prose: false
 lead: I would love to hear from you. Whether you have a question, an idea, or just want to connect, send me a message, email me, or reach out on LinkedIn. I’ll get back to you as soon as I can.
 scripts: [/assets/js/contact.js]
+last_modified_from: [_data/profile.yml]   # the sitemap date follows these files (_plugins/last_modified.rb)
 ---
 {%- comment -%}
   Contact (PLAN 8.4): email, LinkedIn, and the department office, then the
@@ -12,9 +14,6 @@ scripts: [/assets/js/contact.js]
   contact.js adds inline checks and sends it in the background with
   `Accept: application/json`, then says whether it worked. `_gotcha` is a
   hidden honeypot field for spam bots; `_subject` sets the email's subject.
-{%- endcomment -%}
-{%- comment -%}
-  TODO(mehdi): name the topics you are open to discussing (for example research collaborations, internships, or invited talks) if you want them in the lead.
 {%- endcomment -%}
 {%- assign profile = site.data.profile %}
 {%- assign linkedin = profile.links | where: "id", "linkedin" | first %}

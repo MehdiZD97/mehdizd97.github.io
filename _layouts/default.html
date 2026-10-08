@@ -2,7 +2,8 @@
 {%- comment -%}
   Base layout (PLAN 3.4): skip link, header, the page's main content, footer,
   and scripts. Child layouts provide <main id="main">. Pages can add module
-  scripts with `scripts: [/assets/js/...]` in their front matter.
+  scripts with `scripts: [/assets/js/...]` in their front matter. Script
+  addresses carry ?v=<build time> (see head.html).
 {%- endcomment %}
 <html lang="{{ site.lang | default: 'en-US' }}">
 <head>
@@ -13,9 +14,10 @@
   {% include header.html %}
   {{ content }}
   {% include footer.html %}
-  <script type="module" src="{{ '/assets/js/site.js' | relative_url }}"></script>
+  {%- assign asset_v = site.time | date: "%s" %}
+  <script type="module" src="{{ '/assets/js/site.js' | relative_url }}?v={{ asset_v }}"></script>
   {%- for script in page.scripts %}
-  <script type="module" src="{{ script | relative_url }}"></script>
+  <script type="module" src="{{ script | relative_url }}?v={{ asset_v }}"></script>
   {%- endfor %}
 </body>
 </html>

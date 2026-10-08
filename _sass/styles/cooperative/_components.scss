@@ -26,12 +26,12 @@
 .bibtex pre { font: 400 0.8125rem/1.55 var(--font-mono); }
 .bibtex__actions { display: flex; align-items: center; gap: var(--space-3); color: var(--slate); font-size: var(--text-small); }
 
-// The BibTeX window (site.js)
-.bib-dialog { border-radius: 20px; background: var(--paper); color: var(--ink); box-shadow: 0 1.5rem 4rem rgb(0 0 0 / 0.28); }
-.bib-dialog__title { font-size: var(--text-h4); font-weight: 750; line-height: 1.2; letter-spacing: -0.01em; }
-.bib-dialog__paper { color: var(--slate); font-size: var(--text-small); font-weight: 600; }
-.bib-dialog__text { padding: var(--space-4); border-radius: var(--radius); background: var(--mist); font: 400 0.8125rem/1.55 var(--font-mono); }
-.bib-dialog__status { color: var(--slate); font-size: var(--text-small); font-weight: 600; }
+// The BibTeX windows (popovers)
+.bib-pop { border-radius: 20px; background: var(--paper); color: var(--ink); box-shadow: 0 1.5rem 4rem rgb(0 0 0 / 0.28); }
+.bib-pop__title { font-size: var(--text-h4); font-weight: 750; line-height: 1.2; letter-spacing: -0.01em; }
+.bib-pop__paper { color: var(--slate); font-size: var(--text-small); font-weight: 600; }
+.bib-pop__text { padding: var(--space-4); border-radius: var(--radius); background: var(--mist); font: 400 0.8125rem/1.55 var(--font-mono); }
+.bib-pop .bibtex__status { color: var(--slate); font-size: var(--text-small); font-weight: 600; }
 
 // Publications page filters: chips like the link buttons; the chosen one is filled
 .pub-filter__label { font: 650 var(--text-small)/1.2 var(--font); color: var(--slate); }

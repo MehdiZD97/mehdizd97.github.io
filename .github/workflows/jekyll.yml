@@ -21,6 +21,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0            # full history: _plugins/last_modified.rb dates pages from Git
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true       # Ruby version comes from .ruby-version
@@ -30,7 +32,14 @@ jobs:
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
-      # Stage 9 adds an html-proofer step here.
+      - name: Check links, images, and scripts (html-proofer)
+        shell: bash                 # pipefail, so a failing check fails the step
+        env:
+          LC_ALL: C.UTF-8           # without a UTF-8 locale html-proofer skips pages with non-ASCII text
+        run: |
+          bundle exec htmlproofer ./_site --disable-external --swap-urls '^https\://mehdizd97\.github\.io:' 2>&1 | tee proofer.log
+          # html-proofer can crash on a page and still report success; treat that as a failure.
+          if grep -q "unhandled exception" proofer.log; then echo "html-proofer crashed on a page (see above)"; exit 1; fi
       - if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v5
 

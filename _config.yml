@@ -30,6 +30,9 @@ defaults:
     values: { layout: post }
   - scope: { path: "", type: publications }
     values: { layout: publication }
+  # The Search Console verification files stay at the root but out of the sitemap.
+  - scope: { path: "google*.html" }
+    values: { sitemap: false }
 
 # Author names shown in bold in publication lists.
 author_highlight: ["M. Zafari", "Mehdi Zafari"]
