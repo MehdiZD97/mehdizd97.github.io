@@ -7,7 +7,7 @@ venue: IEEE Transactions on Vehicular Technology
 venue_short: IEEE TVT
 date: 2026-01-01              # CV: January 2026 (the print issue is July 2026, vol. 75, no. 7)
 doi: 10.1109/TVT.2026.3656108
-arxiv: 2508.08506
+arxiv: "2508.08506"
 featured: true
 topics: [experimental, distributed-beamforming]
 bibtex: |

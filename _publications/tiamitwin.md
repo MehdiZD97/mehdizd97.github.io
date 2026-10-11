@@ -6,7 +6,7 @@ status: accepted
 venue: IEEE MILCOM 2026 Workshop on Integrated Sensing and Communication for Critical Infrastructure Protection (ISAC4CIP)
 venue_short: MILCOM 2026 Workshop
 date: 2026-07-01              # CV: accepted July 2026
-arxiv: 2609.22709
+arxiv: "2609.22709"
 featured: true
 topics: [digital-twin, experimental, isac]
 bibtex: |

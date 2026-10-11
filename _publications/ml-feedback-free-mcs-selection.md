@@ -7,7 +7,7 @@ venue: 57th Asilomar Conference on Signals, Systems, and Computers
 venue_short: Asilomar 2023
 date: 2023-10-29              # conference date in the IEEE record (the CV gives the year only)
 doi: 10.1109/IEEECONF59524.2023.10476866
-arxiv: 2310.13830
+arxiv: "2310.13830"
 topics: [machine-learning, experimental]
 bibtex: |
   @inproceedings{an2023mlbased,

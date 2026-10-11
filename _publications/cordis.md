@@ -6,7 +6,7 @@ status: under-review
 venue: IEEE Transactions on Wireless Communications
 venue_short: IEEE TWC
 date: 2026-07-01              # CV: submitted July 2026
-arxiv: 2609.12195
+arxiv: "2609.12195"
 code: https://github.com/LS-Wireless/CORDIS
 featured: true
 topics: [cell-free-isac, distributed-optimization]

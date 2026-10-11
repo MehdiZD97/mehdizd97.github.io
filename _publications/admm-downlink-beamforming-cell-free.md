@@ -7,7 +7,7 @@ venue: 58th Asilomar Conference on Signals, Systems, and Computers
 venue_short: Asilomar 2024
 date: 2024-10-27              # conference date in the IEEE record (the CV gives the year only)
 doi: 10.1109/IEEECONF60004.2024.10943106
-arxiv: 2409.06106
+arxiv: "2409.06106"
 topics: [distributed-optimization, cell-free]
 bibtex: |
   @inproceedings{zafari2024admm,

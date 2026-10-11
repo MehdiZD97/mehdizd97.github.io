@@ -23,6 +23,7 @@ This file itself is not published.
 13. [Add a story with photos](#13-add-a-story-with-photos)
 14. [Change what the home page shows](#14-change-what-the-home-page-shows)
 15. [Check your change and publish it](#15-check-your-change-and-publish-it)
+16. [When the build stops](#16-when-the-build-stops)
 
 ---
 
@@ -69,6 +70,7 @@ The page http://localhost:4000/dev/content/ shows every data file and every publ
 - Indent with **two spaces**, never tabs. Items of a list start with `- `.
 - Dates are written `YYYY-MM-DD`. When you know only the month, use day `01` (for example `2026-10-01`); the site shows month and year.
 - Put text in double quotes when it contains a colon followed by a space (`title: "CORDIS: A Scalable ..."`) or starts with a special character such as `@`, `*`, `[`, or `{`.
+- Put arXiv IDs in double quotes (`arxiv: "2310.13830"`): without them YAML reads a number, drops a final 0, and the link points to another paper.
 - A line that starts with `#` is a comment: the site ignores it. Comments are a good place for notes to yourself.
 - In news text and in experience bullets you can use Markdown: `**bold**`, `*italic*`, and links `[text](https://...)`.
 - Internal links start with `/` (for example `/publications/assent/`); external links start with `https://`.
@@ -105,6 +107,24 @@ If the preview stops updating or shows an error in the terminal, the message usu
 
 Each publication is one file in `_publications/`. Its file name is its **slug**, which becomes its address: `_publications/cordis.md` is shown at `/publications/cordis/`.
 
+### The quick way: let the script start the file
+
+From the repository folder, with the paper's arXiv ID or DOI:
+
+```bash
+python3 scripts/new_publication.py --arxiv 2610.12345
+```
+
+```bash
+python3 scripts/new_publication.py --doi 10.1109/TWC.2027.1234567
+```
+
+It reads the title, authors, date, abstract, and BibTeX from arXiv or from the publisher's record and writes `_publications/<slug>.md` with every field below, authors in CV style. Add `--dry-run` to see the file without writing it, and `--slug my-name` to choose the file name (by default it comes from the title, such as `cordis` for "CORDIS: ...").
+
+Then open the new file and answer its `TODO(mehdi)` notes (the type and status of a preprint, the short venue label, the topics), and check the BibTeX and the abstract. Your preview builds with the notes in place; the live site does not publish until they are all answered (section 16). When the paper is published, run the script again with the DOI and `--dry-run` to copy the publisher's details into the existing file (section 5).
+
+### By hand
+
 1. Pick a slug: short, lowercase, words joined by hyphens, for example `cordis` or `robust-wildfire-forecasting`. For a paper under review, leave the venue out of the slug (the venue may change). Do not rename a published slug later; if you ever must, add the old address under `redirect_from` (see step 4).
 2. Create `_publications/<slug>.md` by copying an existing file of the same kind (for example `cordis.md` for a journal paper under review, `assent.md` for a published conference paper), or start from this template:
 
@@ -117,7 +137,7 @@ Each publication is one file in `_publications/`. Its file name is its **slug**,
    venue: IEEE Transactions on Wireless Communications
    venue_short: IEEE TWC
    date: 2026-10-01
-   arxiv: 2610.12345
+   arxiv: "2610.12345"
    code: https://github.com/LS-Wireless/Example
    featured: true
    topics: [cell-free-isac, distributed-optimization]
@@ -147,7 +167,7 @@ Each publication is one file in `_publications/`. Its file name is its **slug**,
    | `venue_short` | A short label for the chip, for example `ICC 2027` or `IEEE TWC`. |
    | `date` | Used for sorting. Published items show the year only; the others show the month and year. |
    | `doi` | Optional. The DOI only, for example `10.1109/TVT.2026.3656108`. The button label comes from the DOI: IEEE DOIs show "IEEE Xplore", IEEE DataPort DOIs show "IEEE DataPort", any other shows "DOI". |
-   | `arxiv` | Optional. The arXiv ID only, for example `2609.12195`. |
+   | `arxiv` | Optional. The arXiv ID only, in quotes, for example `"2609.12195"` (without quotes, an ID ending in 0 loses that 0 and the link breaks). |
    | `code`, `pdf`, `slides`, `poster`, `dataset` | Optional links. `pdf`, `slides`, and `poster` can be files you put in `files/` (for example `/files/slides/example.pdf`) or full URLs. |
    | `video` | Optional. A YouTube video ID (the part after `watch?v=`). It adds a Video button and a player on the publication's page that loads only when played. |
    | `award` | Optional, for example `Best Paper Award Finalist`. Shows a badge. |
@@ -178,7 +198,7 @@ Each publication is one file in `_publications/`. Its file name is its **slug**,
 Open the publication's file in `_publications/` and change only what changed:
 
 - **Accepted:** set `status: accepted`, update `venue` and `venue_short`, and set `date` to the acceptance month.
-- **Published:** set `status: published`, add the `doi`, update `venue`, `venue_short`, and `date`, and replace the `bibtex` with the publisher's (section 4, step 4).
+- **Published:** set `status: published`, add the `doi`, update `venue`, `venue_short`, and `date`, and replace the `bibtex` with the publisher's. The script prints all of them without changing anything: `python3 scripts/new_publication.py --doi <the DOI> --dry-run`; copy what you need into the file.
 - **New link** (code, slides, video): add the field.
 - **Award:** add `award: Best Paper Award` (and add it to `_data/awards.yml` too, section 9).
 - **Stop featuring it on Home:** set `featured: false` or delete the line.
@@ -440,3 +460,33 @@ Stories are longer write-ups with photos, linked from news items and talks.
 
    It should finish without errors or warnings.
 3. Commit your changes (for example `chore: add ICC 2027 paper and news`) on your working branch, then merge into `master`. GitHub Actions builds the site from `master` and publishes it in a few minutes; the Actions tab on GitHub shows the progress and any error. Every build also checks the site's links, images, and scripts (html-proofer); if the "Check links" step fails, its log names the page and the broken link.
+
+---
+
+## 16. When the build stops
+
+The site checks your content every time it builds, in the preview and on GitHub. A mistake stops the build with a message that names the file and the entry. Read it in the terminal where the preview runs (or, on GitHub, in the failed step of the Actions log), fix the line, and save: the preview continues by itself.
+
+Common messages and fixes:
+
+| Message (shortened) | Fix |
+|---|---|
+| `type` is "papr"; use one of: paper, award, ... | A typo in a value: use one of the listed words. |
+| `date` must be a date written YYYY-MM-DD | Write the date as `2027-03-01` (day `01` when you know only the month). |
+| `pub` names no publication | The slug must match a file in `_publications/` (without `.md`). |
+| `talk` names no talk / `story` is not the address of a story | Copy the talk's `id` from `_data/talks.yml`, or the story's address (`/posts/2027/03/my-event/`). |
+| `topics` names topics that are not in _data/topics.yml | Use an `id` from `_data/topics.yml`, or add the new topic there first. |
+| `arxiv` must be in quotes | Write `arxiv: "2610.12345"`. |
+| `id` must be a YouTube video ID | The 11 characters after `watch?v=` in the video's address. |
+| `id` ... is used 2 times | Two talks (or videos, or topics) share an id; make each one unique. |
+| `image` needs an `image_alt` | Add a one-line description of the photo. |
+| TODO(mehdi) marker; answer it before publishing | Only on GitHub (and in production builds): answer the note and delete the `TODO(mehdi)` text. Your preview never stops for these. |
+
+Warnings (in yellow) do not stop anything: an unknown field such as `storry` (usually a typo, so the site ignores that line), entries out of date order, or a description outside 140 to 160 characters.
+
+Other problems:
+
+- **The preview shows an old page or a YAML error.** YAML errors name the file and line: look for a tab instead of spaces, a missing space after a colon, or text with `: ` that needs quotes (section 2).
+- **A change to `_config.yml` or to `_plugins/` does not show.** Stop the preview (Ctrl+C) and start it again; the server reads those only when it starts.
+- **`bundle exec` complains about Ruby or missing gems.** In the repository folder, `ruby -v` must say 3.4.8 (rbenv reads `.ruby-version`). If it does not, run `rbenv install 3.4.8`; then `bundle install`.
+- **GitHub shows a red cross on a commit.** Open the Actions tab, then the failed run: the "Build" step lists content errors, and the "Check links" step names any page with a broken link or image.

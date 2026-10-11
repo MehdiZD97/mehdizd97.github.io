@@ -17,7 +17,7 @@
 # How to add a photo: GUIDE.md.
 
 profile/mehdi-zafari:
-  src: images/profile4.jpeg          # TODO(mehdi): a higher-resolution original, if you have one (open input 9)
+  src: images/profile4.jpeg          # a higher-resolution original would sharpen it (PROGRESS, open input 9)
   crop: square
   widths: [160, 320, 480]
   fallback: 320

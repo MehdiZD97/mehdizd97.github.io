@@ -7,7 +7,7 @@ venue: 59th Asilomar Conference on Signals, Systems, and Computers
 venue_short: Asilomar 2025
 date: 2025-10-26              # conference date in the IEEE record (the CV gives the year only)
 doi: 10.1109/ieeeconf67917.2025.11443385
-arxiv: 2508.01044
+arxiv: "2508.01044"
 code: https://github.com/MehdiZD97/distributed-cellfree-isac
 award: Best Paper Award Finalist
 featured: true

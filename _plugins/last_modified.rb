@@ -35,7 +35,7 @@ module LastModified
     private
 
     def git(*args)
-      out, status = Open3.capture2("git", "-C", @source, *args)
+      out, _err, status = Open3.capture3("git", "-C", @source, *args)
       status.success? ? out : nil
     rescue SystemCallError
       nil

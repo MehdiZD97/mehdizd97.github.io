@@ -7,7 +7,7 @@ venue: IEEE International Conference on Communications (ICC)
 venue_short: ICC 2026
 date: 2026-01-01              # CV: January 2026 (the IEEE record dates the conference May 24, 2026)
 doi: 10.1109/icc59461.2026.11588026
-arxiv: 2511.09992
+arxiv: "2511.09992"
 code: https://github.com/LS-Wireless/ASSENT-CellFree-ISAC
 featured: true
 topics: [cell-free-isac, machine-learning]

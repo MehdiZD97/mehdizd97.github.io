@@ -6,7 +6,7 @@ status: under-review
 venue: IEEE Transactions on Geoscience and Remote Sensing
 venue_short: IEEE TGRS
 date: 2026-03-01              # CV: submitted March 2026
-arxiv: 2603.09042
+arxiv: "2603.09042"
 code: https://github.com/LS-Wireless/Robust-Wildfire-Forecasting
 featured: true
 topics: [generative-ai, machine-learning]
