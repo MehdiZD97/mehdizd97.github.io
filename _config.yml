@@ -82,6 +82,7 @@ exclude:
   - README.md
   - GUIDE.md
   - LICENSE
+  - THIRD-PARTY-NOTICES.md
   - scripts/
   - Gemfile
   - Gemfile.lock

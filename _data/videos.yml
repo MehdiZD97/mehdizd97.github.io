@@ -1,6 +1,5 @@
 # Videos (PLAN 4.4 and D8), newest first by upload date. Facts checked on
-# YouTube 2026-09-29 (CONTENT-AUDIT section 13). Home shows the newest few;
-# /videos/ shows all (the full page, with click-to-load embeds, comes in Stage 8).
+# YouTube 2026-09-29 (CONTENT-AUDIT section 13).
 #
 # description: one or two sentences (the two YouTube posts' text moved here in Stage 4)
 # host: only for videos published on someone else's channel (credited to Mehdi)
@@ -9,12 +8,25 @@
 # note: short line under the title on the card
 # source_title: title of the longer video that a `start` points into
 # Home shows the newest `home.videos` (in _config.yml); /videos/ shows all. See GUIDE.md.
+#
+# New uploads also show by themselves (PLAN 10.3): before every GitHub build,
+# and once a week, scripts/fetch_videos.py reads the channel's public feed
+# (its 15 newest uploads) into _data/youtube.yml, which Git does not track.
+# An entry below wins over the feed's (add one to give an upload a note or a
+# start time, or to keep it once it leaves the feed); `skip:` hides uploads.
 
 channel:
   name: Mehdi Zafari
   handle: "@MehdiZD97"
   url: https://www.youtube.com/@MehdiZD97
+  id: UCdyrrjJvt7YEbuTNs30x6EA     # the channel's ID, which addresses its feed
   description: Tutorials and talks.
+
+# Uploads that never show by themselves (a Short, an old video): replace []
+# with one line per video, like this:
+#   skip:
+#     - AbCdEfGhIjK    # the reason
+skip: []
 
 videos:
   - id: 16-DP_fDdp4

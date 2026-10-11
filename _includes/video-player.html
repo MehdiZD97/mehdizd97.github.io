@@ -4,13 +4,15 @@
   turns it into a Play button that swaps in the player from
   youtube-nocookie.com, so nothing loads from YouTube before a click.
   Parameters: id (the YouTube ID); title, start (seconds), and lang default
-  to the video's entry in _data/videos.yml; badge (corner text, such as the
+  to the video's entry in _data/videos.yml (or, for an upload found only in
+  the channel's feed, in _data/youtube.yml); badge (corner text, such as the
   duration; defaults to the entry's duration or start time). The thumbnail
   is YouTube's 480 px `hqdefault` (no srcset: html-proofer 5.2 crashes on
   external srcset URLs and would skip the page). priority: true for a
   thumbnail at the top of a page (loaded at once, with high priority).
 {%- endcomment -%}
 {%- assign vp = site.data.videos.videos | where: "id", include.id | first -%}
+{%- unless vp %}{% assign vp = site.data.youtube.videos | where: "id", include.id | first %}{% endunless -%}
 {%- assign vp_title = include.title | default: vp.title | default: "YouTube video" -%}
 {%- assign vp_start = include.start | default: vp.start -%}
 {%- assign vp_lang = include.lang | default: vp.language -%}

@@ -10,7 +10,10 @@ require "time"
 # jekyll-sitemap turns it into <lastmod>, and stories use it as their
 # dateModified (PLAN 4.8 and 9.5). Files with uncommitted changes count as
 # changed now. Skipped without Git or in a shallow clone (CI checks out the
-# full history for this).
+# full history for this). Pages built from _data/videos.yml also show the
+# channel's newest uploads (_data/youtube.yml, written at build time by
+# scripts/fetch_videos.py and not tracked by Git), so the newest upload's
+# date counts for them too.
 module LastModified
   class Generator < Jekyll::Generator
     safe true
@@ -22,12 +25,14 @@ module LastModified
       return if @dates.empty?
 
       @dirty = changed_files
+      upload = newest_upload(site)
       items = site.pages + site.collections.values.flat_map(&:docs)
       items.each do |item|
         next if item.data.key?("last_modified_at") || item.data["redirect_to"]
 
         paths = [item.relative_path] + Array(item.data["last_modified_from"]).flat_map { |glob| expand(glob) }
         times = paths.map { |path| @dirty.include?(path) ? Time.now : @dates[path] }.compact
+        times << upload if upload && paths.include?("_data/videos.yml")
         item.data["last_modified_at"] = times.max unless times.empty?
       end
     end
@@ -58,6 +63,15 @@ module LastModified
         end
       end
       dates
+    end
+
+    def newest_upload(site)
+      skip = Array(site.data.dig("videos", "skip")).map(&:to_s)
+      uploads = site.data["youtube"].is_a?(Hash) ? Array(site.data["youtube"]["videos"]) : []
+      uploads.filter_map do |video|
+        date = video["date"] if video.is_a?(Hash) && !skip.include?(video["id"].to_s)
+        date.to_time if date.respond_to?(:to_time)
+      end.max
     end
 
     def changed_files

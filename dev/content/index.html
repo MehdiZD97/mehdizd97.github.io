@@ -242,6 +242,8 @@ lead: "Every fact on the site, read from _data/, _publications/, and _posts/, so
       <tbody>
         <tr><th scope="row">channel</th><td>{{ ch.name }} ({{ ch.handle }}), <a href="{{ ch.url }}">{{ ch.url }}</a></td></tr>
         <tr{% unless ch.description %} class="is-todo"{% endunless %}><th scope="row">channel description</th><td>{{ ch.description | default: "(missing)" }}</td></tr>
+        <tr><th scope="row">channel id</th><td>{% if ch.id %}<code>{{ ch.id }}</code> (its feed brings new uploads){% else %}none, so no uploads show by themselves{% endif %}</td></tr>
+        <tr><th scope="row">skip</th><td>{% for id in site.data.videos.skip %}<code>{{ id }}</code>{% unless forloop.last %}, {% endunless %}{% else %}none{% endfor %}</td></tr>
       </tbody>
     </table>
   </div>
@@ -262,6 +264,32 @@ lead: "Every fact on the site, read from _data/, _publications/, and _posts/, so
       </tbody>
     </table>
   </div>
+  {%- assign yt = site.data.youtube %}
+  <h3>From the channel's feed <code>_data/youtube.yml</code></h3>
+  {%- if yt %}
+  <p class="note">Fetched {{ yt.fetched | date: "%Y-%m-%d" }} by <code>scripts/fetch_videos.py</code> (GitHub runs it before every build). Uploads not in the table above show by themselves unless listed under <code>skip</code>.</p>
+  {%- assign yt_ids = site.data.videos.videos | map: "id" %}
+  <div class="review-table-wrap">
+    <table class="review-table">
+      <thead><tr><th scope="col">Date</th><th scope="col">Id</th><th scope="col">Title</th><th scope="col">On the site</th><th scope="col">Description</th></tr></thead>
+      <tbody>
+        {%- for v in yt.videos %}
+        <tr>
+          <td>{{ v.date | date: "%Y-%m-%d" }}</td>
+          <td><a href="https://www.youtube.com/watch?v={{ v.id }}"><code>{{ v.id }}</code></a></td>
+          <td{% if v.language %} lang="{{ v.language }}"{% if v.language == "fa" %} dir="rtl"{% endif %}{% endif %}>{{ v.title }}</td>
+          <td>{% if yt_ids contains v.id %}as its entry above{% elsif site.data.videos.skip contains v.id %}no (skipped){% else %}yes, from the feed{% endif %}</td>
+          <td{% if v.language %} lang="{{ v.language }}"{% if v.language == "fa" %} dir="rtl"{% endif %}{% endif %}>{{ v.description }}</td>
+        </tr>
+        {%- else %}
+        <tr><td colspan="5">The feed lists no uploads.</td></tr>
+        {%- endfor %}
+      </tbody>
+    </table>
+  </div>
+  {%- else %}
+  <p class="note">Not fetched in this build. To preview the channel's newest uploads, run <code>python3 scripts/fetch_videos.py</code>.</p>
+  {%- endif %}
 </section>
 
 <section class="review" id="education" aria-labelledby="education-title">

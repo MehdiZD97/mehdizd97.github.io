@@ -1,8 +1,9 @@
 {%- comment -%}
-  One video from _data/videos.yml (PLAN 8.1 and 8.2), on Home and the
+  One video (PLAN 8.1 and 8.2; from video-list.html), on Home and the
   Videos page: the player, which loads only when played (video-player.html),
   the title linking to the video on YouTube, and a line with the note, the
-  start time inside a longer video, and the channel it was published on.
+  start time inside a longer video, and the channel it was published on
+  (left out when empty, as for an upload found only in the channel's feed).
   Parameters: video, level (heading level, default 3), priority (true for
   the first card at the top of a page; see video-player.html).
 {%- endcomment -%}
@@ -15,5 +16,8 @@
 <article class="video">
   {% include video-player.html id=vc.id priority=include.priority %}
   <h{{ vc_h }} class="video-title"{% if vc.language and vc.language != "en" %} lang="{{ vc.language }}"{% if vc.language == "fa" %} dir="rtl"{% endif %}{% endif %}><a href="{{ vc_url | escape }}" target="_blank" rel="noopener">{{ vc.title }}<span class="visually-hidden" lang="en" dir="ltr"> (on YouTube, opens in a new tab)</span></a></h{{ vc_h }}>
-  <p class="video-meta">{{ vc.note }}{% if vc.start %}. Starts at {{ vc_start }} in “{{ vc.source_title }},” published on {{ vc_host }}{% elsif vc.host %}, published on {{ vc_host }}{% endif %}</p>
+  {%- capture vc_meta %}{{ vc.note }}{% if vc.start %}. Starts at {{ vc_start }} in “{{ vc.source_title }},” published on {{ vc_host }}{% elsif vc.host %}, published on {{ vc_host }}{% endif %}{% endcapture %}
+  {%- if vc_meta != "" %}
+  <p class="video-meta">{{ vc_meta }}</p>
+  {%- endif %}
 </article>

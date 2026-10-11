@@ -34,7 +34,7 @@ This file itself is not published.
 | News | `_data/news.yml` | Home (newest 5) and the News page, `/news/` (all, by year) |
 | Publications, datasets, software | `_publications/<slug>.md` (one file each) | Home's "Selected publications" (featured ones), Publications, the CV, and a page for each |
 | Talks | `_data/talks.yml` | Home (newest 3) and the CV |
-| Videos | `_data/videos.yml` | Home (newest 6) and the Videos page |
+| Videos | `_data/videos.yml`, plus new uploads read from your channel (section 8) | Home (newest 6) and the Videos page |
 | Honors and awards | `_data/awards.yml` | Home (those with `home: true`) and the CV |
 | Name, title, intro, bio, links | `_data/profile.yml` | Everywhere (hero, footer, CV) |
 | Education | `_data/cv/education.yml` | Home and the CV |
@@ -257,6 +257,28 @@ A `bibtex` field is optional for software.
 
 ## 8. Add a video
 
+New uploads on your YouTube channel show on the site by themselves. Add a video to `_data/videos.yml` by hand only to give it more (the line under its title, a start time), to keep it for good, or to list a video from another channel.
+
+### New uploads, automatically
+
+Before every build on GitHub, and every Monday morning, `scripts/fetch_videos.py` reads your channel's public feed (its 15 newest uploads). The site adds the ones that are not in `_data/videos.yml` to Home and the Videos page, newest first, with their title and thumbnail. So a new upload reaches the live site within a week. To add it at once: on GitHub, open Actions, then "Build and deploy site", then "Run workflow" on `master`.
+
+- Shorts are left out, and titles in Persian read right to left.
+- An automatic card shows the title only. For the line under it (`note`), the duration on the thumbnail, or a start time, add the video by hand (below): your entry wins over the feed's.
+- The feed lists the 15 newest uploads only, so an older upload leaves the site when newer ones push it out of the feed, unless it has an entry in `_data/videos.yml`.
+- To hide an upload, list its id under `skip:` in `_data/videos.yml`:
+
+  ```yaml
+  skip:
+    - AbCdEfGhIjK    # the reason
+  ```
+
+- If the feed cannot be read, the build goes on with the videos in `_data/videos.yml` only, and the Actions run shows a warning.
+- Your preview does not read the feed. To see what it would add, run `python3 scripts/fetch_videos.py`: it writes `_data/youtube.yml` (Git ignores it), and http://localhost:4000/dev/content/ lists the uploads under Videos. Delete the file to go back.
+- GitHub pauses the Monday run after 60 days without a commit to the repository; the Actions tab then offers to turn it back on.
+
+### Add a video by hand
+
 1. Open `_data/videos.yml`.
 2. Add an entry at the top of `videos:` (newest first, by upload date). Note the indentation: entries under `videos:` are indented by two spaces.
 
@@ -459,7 +481,7 @@ Stories are longer write-ups with photos, linked from news items and talks.
    ```
 
    It should finish without errors or warnings.
-3. Commit your changes (for example `chore: add ICC 2027 paper and news`) on your working branch, then merge into `master`. GitHub Actions builds the site from `master` and publishes it in a few minutes; the Actions tab on GitHub shows the progress and any error. Every build also checks the site's links, images, and scripts (html-proofer); if the "Check links" step fails, its log names the page and the broken link.
+3. Commit your changes (for example `chore: add ICC 2027 paper and news`) on your working branch, then merge into `master`. GitHub Actions builds the site from `master` and publishes it in a few minutes; the Actions tab on GitHub shows the progress and any error. Every build also checks the site's links, images, and scripts (html-proofer); if the "Check links" step fails, its log names the page and the broken link. Every Monday, GitHub also rebuilds `master` by itself to add new YouTube uploads (section 8).
 
 ---
 
@@ -477,7 +499,8 @@ Common messages and fixes:
 | `talk` names no talk / `story` is not the address of a story | Copy the talk's `id` from `_data/talks.yml`, or the story's address (`/posts/2027/03/my-event/`). |
 | `topics` names topics that are not in _data/topics.yml | Use an `id` from `_data/topics.yml`, or add the new topic there first. |
 | `arxiv` must be in quotes | Write `arxiv: "2610.12345"`. |
-| `id` must be a YouTube video ID | The 11 characters after `watch?v=` in the video's address. |
+| `id` must be a YouTube video ID | The 11 characters after `watch?v=` in the video's address (also for the ids under `skip:`). |
+| `id` must be the channel's ID | Under `channel:` in `_data/videos.yml`: the 24 characters starting with `UC` (on YouTube: the channel's About panel, Share channel, Copy channel ID). |
 | `id` ... is used 2 times | Two talks (or videos, or topics) share an id; make each one unique. |
 | `image` needs an `image_alt` | Add a one-line description of the photo. |
 | TODO(mehdi) marker; answer it before publishing | Only on GitHub (and in production builds): answer the note and delete the `TODO(mehdi)` text. Your preview never stops for these. |

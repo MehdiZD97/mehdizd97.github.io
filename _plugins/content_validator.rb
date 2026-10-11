@@ -238,7 +238,19 @@ module ContentValidator
       data = @site.data["videos"]
       return @errors << "#{file}: missing" unless data.is_a?(Hash)
 
-      entry("#{file}, channel", data["channel"], required: { "name" => :text, "url" => :url }, optional: { "handle" => :text, "description" => :text })
+      entry("#{file}, channel", data["channel"], required: { "name" => :text, "url" => :url },
+            optional: { "handle" => :text, "description" => :text,
+                        "id" => ->(v) { "must be the channel's ID: 24 characters starting with UC (on YouTube: the channel's About panel, Share channel, Copy channel ID)" unless v.is_a?(String) && v.match?(/\AUC[A-Za-z0-9_-]{22}\z/) } })
+      (data.keys - %w[channel skip videos]).each { |key| @warnings << "#{file}: unknown field `#{key}` (a typo?); the site ignores it" }
+      skip = data["skip"]
+      if !skip.nil? && !skip.is_a?(Array)
+        @errors << "#{file}: `skip` must be a list of YouTube video IDs, one per line starting with \"- \" (or [] for none)"
+      else
+        Array(skip).each_with_index do |id, i|
+          issue = problem(:youtube, id)
+          @errors << "#{file}, skip, entry #{i + 1}: #{issue}" if issue
+        end
+      end
       items = list(file, data["videos"], ->(v) { v["id"] },
                    required: { "id" => :youtube, "title" => :text, "date" => :date },
                    optional: { "description" => :text, "language" => ->(v) { "must be a language code such as fa" unless v.to_s.match?(/\A[a-z]{2}(-[A-Z]{2})?\z/) },
@@ -247,6 +259,7 @@ module ContentValidator
       unique(file, items, "id")
       items.each_with_index do |item, i|
         @warnings << "#{file}, entry #{i + 1} (#{item['id']}): `start` without `source_title` (the longer video's title)" if item.is_a?(Hash) && item["start"] && !item["source_title"]
+        @warnings << "#{file}, entry #{i + 1} (#{item['id']}): also under `skip`, which only hides uploads found in the channel's feed; this entry still shows" if item.is_a?(Hash) && Array(skip).include?(item["id"])
       end
       newest_first(file, items, "date", "videos")
     end

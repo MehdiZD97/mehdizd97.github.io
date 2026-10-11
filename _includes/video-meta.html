@@ -1,10 +1,11 @@
 {%- comment -%}
   Structured data for the Videos page (PLAN 8.1): one schema.org VideoObject
-  per video in _data/videos.yml, with a Clip for videos whose part starts
-  inside a longer recording (`start`). The head includes it when a page sets
-  `head_include: video-meta.html`.
+  per video it shows (video-list.html), with a Clip for videos whose part
+  starts inside a longer recording (`start`). The head includes it when a
+  page sets `head_include: video-meta.html`.
 {%- endcomment -%}
-{%- assign vm_videos = site.data.videos.videos -%}
+{%- include video-list.html -%}
+{%- assign vm_videos = video_list -%}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",

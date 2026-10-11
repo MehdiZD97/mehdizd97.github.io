@@ -70,6 +70,7 @@
 {%- elsif page.video -%}
   {%- capture og_image %}https://i.ytimg.com/vi/{{ page.video }}/hqdefault.jpg{% endcapture -%}
   {%- assign hd_video = site.data.videos.videos | where: "id", page.video | first -%}
+  {%- unless hd_video %}{% assign hd_video = site.data.youtube.videos | where: "id", page.video | first %}{% endunless -%}
   {%- capture og_image_alt %}Thumbnail of the video “{{ hd_video.title | default: page.title }}”{% endcapture -%}
   {%- assign og_size = "" -%}
 {%- endif %}

@@ -8,6 +8,10 @@ _site/
 .bundle/
 vendor/
 
+# The channel's newest uploads, written at build time by scripts/fetch_videos.py
+_data/youtube.yml
+_data/.youtube.yml.tmp
+
 # Ignore the directory for local files during development
 _local/
 .claude/
