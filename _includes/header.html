@@ -1,0 +1,50 @@
+{%- comment -%}
+  Site header (PLAN 3.5): monogram and name, the menu from
+  _data/navigation.yml, the Contact button, and the theme toggle. On pages
+  whose front matter lists `sections` (Home, the style guide), items scroll
+  to those sections and site.js moves the underline as you read; elsewhere
+  items link to their pages and the current one is marked.
+{%- endcomment -%}
+{%- assign style = page.direction | default: site.design | default: "cooperative" -%}
+{%- assign monogram = "monogram/" | append: style | append: ".svg" -%}
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="{% if page.sections %}#top{% else %}{{ '/' | relative_url }}{% endif %}">
+      {%- include {{ monogram }} class="brand__mark" -%}
+      <span class="brand__name">{{ site.data.profile.name }}</span>
+    </a>
+    <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-menu" data-menu-button>
+      {% include icon.html name="menu" %}<span class="menu-button__label">Menu</span>
+    </button>
+    <div class="site-menu" id="site-menu" data-menu>
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          {%- for item in site.data.navigation %}
+          {%- assign href = item.url | relative_url -%}
+          {%- assign current = false -%}
+          {%- if page.sections -%}
+            {%- if item.section == "top" or page.sections contains item.section -%}
+              {%- assign href = "#" | append: item.section -%}
+            {%- endif -%}
+            {%- if item.section == "top" %}{% assign current = true %}{% endif -%}
+          {%- elsif item.url == "/" -%}
+            {%- if page.url == "/" %}{% assign current = true %}{% endif -%}
+          {%- else -%}
+            {%- for prefix in item.match -%}
+              {%- assign head = page.url | slice: 0, prefix.size -%}
+              {%- if head == prefix %}{% assign current = true %}{% endif -%}
+            {%- endfor -%}
+          {%- endif %}
+          <li><a href="{{ href }}"{% if current %} aria-current="{% if page.sections %}true{% else %}page{% endif %}"{% endif %}>{{ item.label }}</a></li>
+          {%- endfor %}
+        </ul>
+      </nav>
+      <a class="btn btn--primary site-header__contact" href="{{ '/contact/' | relative_url }}"{% if page.url == "/contact/" %} aria-current="page"{% endif %}>Contact</a>
+    </div>
+    <button class="theme-toggle" type="button" aria-pressed="false" data-theme-toggle>
+      <span class="theme-toggle__icon theme-toggle__icon--sun">{% include icon.html name="sun" %}</span>
+      <span class="theme-toggle__icon theme-toggle__icon--moon">{% include icon.html name="moon" %}</span>
+      <span class="visually-hidden">Dark theme</span>
+    </button>
+  </div>
+</header>

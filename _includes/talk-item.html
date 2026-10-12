@@ -1,0 +1,39 @@
+{%- comment -%}
+  One entry from _data/talks.yml: date, kind, title, event and place, note,
+  and link buttons (Paper, Slides, Video, Event, Story). The article carries
+  the talk's id, so news items can link to it. Parameters: talk, level
+  (heading level, default 3).
+{%- endcomment -%}
+{%- assign t = include.talk -%}
+{%- assign t_h = include.level | default: 3 -%}
+{%- capture t_links -%}
+  {%- if t.pub -%}
+    {%- assign t_pub = site.publications | where_exp: "doc", "doc.slug == t.pub" | first -%}
+    {%- if t_pub %}{% include linkbtn.html url=t_pub.url label="Paper" icon="paper" %}{% endif -%}
+  {%- endif -%}
+  {%- if t.slides %}{% include linkbtn.html url=t.slides label="Slides" icon="slides" %}{% endif -%}
+  {%- if t.video -%}
+    {%- assign t_url = "https://www.youtube.com/watch?v=" | append: t.video -%}
+    {%- if t.video_start %}{% assign t_url = t_url | append: "&t=" | append: t.video_start | append: "s" %}{% endif -%}
+    {% include linkbtn.html url=t_url label="Video" icon="video" %}
+  {%- endif -%}
+  {%- if t.event_url %}{% include linkbtn.html url=t.event_url label="Event" icon="event" %}{% endif -%}
+  {%- if t.story %}{% include linkbtn.html url=t.story label="Story" icon="story" %}{% endif -%}
+{%- endcapture -%}
+{%- assign t_links = t_links | strip -%}
+<article class="talk" id="{{ t.id }}">
+  <div class="talk-meta">
+    <time class="talk-date" datetime="{{ t.date | date: '%Y-%m-%d' }}">{{ t.date | date: "%b %Y" }}</time>
+    <span class="talk-kind">{{ t.kind }}</span>
+  </div>
+  <div class="talk-body">
+    <h{{ t_h }} class="talk-title">{{ t.title }}</h{{ t_h }}>
+    <p class="talk-event">{{ t.event }}{% if t.location %}, {{ t.location }}{% endif %}</p>
+    {%- if t.note %}
+    <p class="talk-note">{{ t.note }}</p>
+    {%- endif %}
+    {%- if t_links != "" %}
+    <ul class="linkbtns">{{ t_links }}</ul>
+    {%- endif %}
+  </div>
+</article>

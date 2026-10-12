@@ -1,0 +1,10 @@
+// Footer: the field color closes the page.
+.site-footer { background: var(--field); color: var(--on-field); }
+.site-footer a { color: var(--on-field); }
+.site-footer__inner { max-width: var(--wrap); margin: 0 auto; padding: var(--space-7) var(--gutter); display: grid; gap: var(--space-4); }
+.site-footer__name { font-size: 1.375rem; font-weight: 750; letter-spacing: -0.02em; }
+.site-footer__name span { display: block; font-size: var(--text-ui); font-weight: 500; color: var(--on-field-muted); letter-spacing: 0; }
+.site-footer__links { list-style: none; display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); }
+.site-footer__links a { display: inline-flex; align-items: center; gap: 0.45rem; min-height: 2.25rem; font-weight: 600; text-decoration: none; }
+.site-footer__links .icon { width: 1.05rem; height: 1.05rem; }
+.site-footer__meta { color: var(--on-field-muted); font-size: var(--text-small); }

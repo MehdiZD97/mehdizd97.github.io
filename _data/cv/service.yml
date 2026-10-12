@@ -1,0 +1,12 @@
+# Service (PLAN 4.4), as in the CV ("Peer review service").
+
+- role: Peer reviewer
+  years: 2024–2026
+  venues:
+    - { name: IEEE Transactions on Wireless Communications, short: TWC }
+    - { name: IEEE Transactions on Vehicular Technology, short: TVT }
+    - { name: IEEE Transactions on Geoscience and Remote Sensing, short: TGRS }
+    - { name: IEEE Transactions on Aerospace and Electronic Systems, short: TAES }
+    - { name: IEEE Wireless Communications Letters, short: WCL }
+    - { name: IEEE Signal Processing Letters, short: SPL }
+    - { name: IEEE Communications Magazine }

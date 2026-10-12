@@ -1,71 +1,55 @@
 ---
-layout: archive
-title: "Publications"
+title: Publications
+description: "Papers, datasets, and software by Mehdi Zafari on cell-free MIMO, integrated sensing and communication (ISAC), distributed optimization, and AI for wireless."
 permalink: /publications/
-author_profile: true
+prose: false
+scripts: [/assets/js/publications.js]
+last_modified_from: [_publications/*.md, _data/topics.yml]   # the sitemap date follows these files (_plugins/last_modified.rb)
 ---
+{%- comment -%}
+  Publications (PLAN 6.1): every item in _publications/, grouped by type and
+  newest first. publications.js adds the search box and the type and topic
+  filters (hidden without JavaScript, so the full list always shows).
+{%- endcomment -%}
+{%- assign pf_scholar = site.data.profile.links | where: "id", "google-scholar" | first %}
+{%- assign pf_total = site.publications.size %}
+<p class="page-lead">Papers, datasets, and software, newest first. They are also on <a href="{{ pf_scholar.url }}" target="_blank" rel="noopener">Google Scholar{% include newtab.html %}</a>.</p>
 
-<style>
-.pub-item { margin: 0 0 18px 0; }
-.pub-citation { margin: 0; line-height: 1.6; text-align: justify; }
-.pub-citation em a { text-decoration: none; }
-.pub-citation em a:hover { text-decoration: underline; }
-.pub-award { font-weight: 600; color: #b45309; }
-.pub-links { margin-top: 6px; }
-.pub-badge {
-  display: inline-block;
-  font-size: 0.9em;
-  padding: 2px 8px;
-  margin-right: 6px;
-  border: 1px solid #d0d7de;
-  border-radius: 999px;
-  text-decoration: none;
-  color: #0b5295;
-}
-.pub-badge:hover { background: #eef6ff; }
-</style>
-
-{% if site.author.googlescholar %}
-  <div class="wordwrap">You can also find my papers on <a href="{{site.author.googlescholar}}">my Google Scholar profile</a>.</div>
-{% endif %}
-
-{% include base_path %}
-
-<!-- New style rendering if publication categories are defined -->
-{% if site.publication_category %}
-  {% for category in site.publication_category  %}
-    {% assign title_shown = false %}
-    {% for post in site.publications reversed %}
-      {% if post.category != category[0] %}
-        {% continue %}
-      {% endif %}
-      {% unless title_shown %}
-<!--        <h2 style="font-size: 28px">{{ category[1].title }}</h2><hr />-->
-            <h2 style="
-              font-size: 28px;
-              font-family: 'Georgia', serif;
-              color: #006d77;
-              font-weight: 600;
-              margin-top: 24px;
-              margin-bottom: 24px;
-              border-bottom: 2px solid #006d77;
-              display: inline-block;
-              padding-bottom: 4px;
-            ">
-              {{ category[1].title }}
-            </h2>
-        {% assign title_shown = true %}
-      {% endunless %}
-      {% include archive-single-pub.html %}
-    {% endfor %}
-  {% endfor %}
-{% else %}
-  {% for post in site.publications reversed %}
-    {% include archive-single.html %}
-  {% endfor %}
-{% endif %}
-
-
-
-
-
+<form class="pub-filters js-only" role="search" aria-label="Filter publications" data-pub-filters>
+  <label class="pub-search">
+    <span class="pub-filter__label">Search</span>
+    <input type="search" name="q" autocomplete="off" placeholder="Title, author, or venue" data-pub-search>
+  </label>
+  <div class="pub-filter" role="radiogroup" aria-labelledby="pub-kind-label">
+    <span class="pub-filter__label" id="pub-kind-label">Type</span>
+    <div class="pub-filter__options">
+      {%- assign pf_kinds = "all:All|journal:Journal|magazine:Magazine|conference:Conference|under-review:Under review|dataset:Datasets|software:Software" | split: "|" %}
+      {%- for pf_kind in pf_kinds %}
+      {%- assign pf_value = pf_kind | split: ":" | first %}
+      {%- case pf_value %}
+        {%- when "all" %}{% assign pf_n = pf_total %}
+        {%- when "under-review" %}{% assign pf_n = site.publications | where: "status", "under-review" | size %}
+        {%- else %}{% assign pf_n = site.publications | where: "type", pf_value | size %}
+      {%- endcase %}
+      {%- if pf_n > 0 %}
+      <label class="chip"><input type="radio" name="kind" value="{% unless pf_value == 'all' %}{{ pf_value }}{% endunless %}"{% if pf_value == "all" %} checked{% endif %}><span class="chip__face">{{ pf_kind | split: ":" | last }} <span class="chip__count">{{ pf_n }}</span></span></label>
+      {%- endif %}
+      {%- endfor %}
+    </div>
+  </div>
+  <div class="pub-filter" role="radiogroup" aria-labelledby="pub-topic-label">
+    <span class="pub-filter__label" id="pub-topic-label">Topic</span>
+    <div class="pub-filter__options">
+      <label class="chip"><input type="radio" name="topic" value="" checked><span class="chip__face">All</span></label>
+      {%- for pf_topic in site.data.topics %}
+      {%- assign pf_n = site.publications | where_exp: "item", "item.topics contains pf_topic.id" | size %}
+      {%- if pf_n > 0 %}
+      <label class="chip"><input type="radio" name="topic" value="{{ pf_topic.id }}"><span class="chip__face">{{ pf_topic.label }} <span class="chip__count">{{ pf_n }}</span></span></label>
+      {%- endif %}
+      {%- endfor %}
+    </div>
+  </div>
+  <p class="pub-count" role="status" data-pub-count>{{ pf_total }} publications</p>
+</form>
+<p class="pub-empty" data-pub-empty hidden>No publications match. <button class="btn btn--text" type="button" data-pub-reset>Clear the filters</button></p>
+{% include pub-groups.html pubs=site.publications groups="journal,magazine:Journal and magazine papers|conference:Conference papers|dataset:Datasets|software:Software" level=2 %}

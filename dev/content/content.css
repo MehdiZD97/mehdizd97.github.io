@@ -1,0 +1,24 @@
+/* Content review page (/dev/content/, development builds only). Plain,
+   readable tables in either style: the cooperative tokens (mist, beam-bright)
+   fall back to the instrument ones (grid, signal-bright). */
+
+.review-summary { display: grid; gap: 0.25rem; }
+.review-count { font-size: 1.5rem; }
+.review-toc ul { list-style: none; display: flex; flex-wrap: wrap; gap: 0.375rem 1rem; padding: 0; font-size: 0.9375rem; }
+.review { display: grid; gap: 0.75rem; }
+.review h2 { font-size: 1.5rem; font-weight: 700; }
+.review h2 code { font-size: 0.8125rem; font-weight: 500; color: var(--slate); }
+.review-item { margin-top: 1rem; font-size: 1.0625rem; font-weight: 700; }
+.review-table-wrap { overflow-x: auto; }
+.review-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; line-height: 1.45; }
+.review-table th, .review-table td { padding: 0.45rem 0.6rem; border-bottom: 1px solid var(--mist, var(--grid)); text-align: start; vertical-align: top; }
+.review-table thead th { font-weight: 700; white-space: nowrap; }
+.review-table--fields th { width: 12rem; font-weight: 650; color: var(--slate); }
+.review-table ul { margin: 0; padding-inline-start: 1.1em; }
+.review-table p { margin: 0; }
+.review-table p + p { margin-top: 0.5em; }
+.review-table code { font-size: 0.8125rem; word-break: break-word; }
+.review-table .is-todo, .review-table tr.is-todo > * { background: color-mix(in srgb, var(--beam-bright, var(--signal-bright)) 24%, var(--paper)); }
+.review-extra { color: var(--slate); }
+.review-bib { margin: 0; white-space: pre-wrap; font: 0.75rem/1.45 var(--font-mono); }
+.review-thumb img { width: 6rem; height: auto; }

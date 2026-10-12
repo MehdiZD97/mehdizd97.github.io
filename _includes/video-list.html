@@ -1,0 +1,18 @@
+{%- comment -%}
+  The videos the site shows (PLAN 8.1 and 10.3), newest first by upload
+  date: every entry in _data/videos.yml, plus the channel's newest uploads
+  that scripts/fetch_videos.py found (_data/youtube.yml, written before each
+  GitHub build and not committed), except those already in videos.yml (its
+  entry wins) and those listed under `skip:` there. Without youtube.yml (a
+  failed fetch, or a preview where the script has not run) the list is
+  videos.yml alone. Sets `video_list` for the page that includes it.
+{%- endcomment -%}
+{%- assign video_list = site.data.videos.videos -%}
+{%- assign vl_ids = video_list | map: "id" -%}
+{%- assign vl_skip = site.data.videos.skip -%}
+{%- for vl in site.data.youtube.videos -%}
+  {%- unless vl_ids contains vl.id or vl_skip contains vl.id -%}
+    {%- assign video_list = video_list | push: vl -%}
+  {%- endunless -%}
+{%- endfor -%}
+{%- assign video_list = video_list | sort: "date" | reverse -%}

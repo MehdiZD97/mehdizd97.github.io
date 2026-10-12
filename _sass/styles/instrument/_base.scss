@@ -1,0 +1,14 @@
+html { background: var(--paper); color: var(--ink); }
+body { font: 400 var(--text-body)/1.6 var(--font-sans); -webkit-font-smoothing: antialiased; }
+a {
+  color: inherit;
+  text-decoration-color: var(--signal);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.22em;
+}
+:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; }
+code { font-family: var(--font-mono); }
+@media (hover: hover) and (pointer: fine) {
+  a:hover { color: var(--signal); }
+}
+.skip-link { border-radius: var(--radius); }

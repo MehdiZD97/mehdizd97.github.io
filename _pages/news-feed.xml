@@ -1,0 +1,49 @@
+---
+permalink: /news.xml
+layout: null
+sitemap: false
+---
+{%- comment -%}
+  The news feed (PLAN 7.3, built in Stage 8): every item in _data/news.yml as
+  an Atom entry, newest first, so visitors can follow the news in a feed
+  reader. The footer's RSS link and the head point here; /feed.xml
+  (jekyll-feed) keeps the stories. An entry links to its publication, story,
+  other URL, or talk, in that order, else to its year on /news/.
+{%- endcomment -%}
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+  <title>{{ site.title | xml_escape }}: News</title>
+  <subtitle>Papers, talks, awards, and other milestones.</subtitle>
+  <link href="{{ page.url | absolute_url }}" rel="self" type="application/atom+xml"/>
+  <link href="{{ '/news/' | absolute_url }}" rel="alternate" type="text/html"/>
+  <id>{{ page.url | absolute_url }}</id>
+  <updated>{{ site.time | date_to_xmlschema }}</updated>
+  <author>
+    <name>{{ site.data.profile.name | xml_escape }}</name>
+    <uri>{{ '/' | absolute_url }}</uri>
+  </author>
+  {%- assign nf_host = site.url | remove: "https://" | remove: "http://" | split: ":" | first %}
+  {%- for nf in site.data.news %}
+  {%- assign nf_plain = nf.text | markdownify | strip_html | normalize_whitespace | strip %}
+  {%- assign nf_link = "" %}
+  {%- if nf.pub %}
+    {%- assign nf_pub = site.publications | where_exp: "doc", "doc.slug == nf.pub" | first %}
+    {%- if nf_pub %}{% assign nf_link = nf_pub.url | absolute_url %}{% endif %}
+  {%- endif %}
+  {%- if nf_link == "" and nf.story %}{% assign nf_link = nf.story | absolute_url %}{% endif %}
+  {%- if nf_link == "" and nf.url %}
+    {%- assign nf_first = nf.url | slice: 0 %}
+    {%- if nf_first == "/" %}{% assign nf_link = nf.url | absolute_url %}{% else %}{% assign nf_link = nf.url %}{% endif %}
+  {%- endif %}
+  {%- if nf_link == "" and nf.talk %}{% capture nf_link %}{{ '/cv/' | absolute_url }}#{{ nf.talk }}{% endcapture %}{% endif %}
+  {%- if nf_link == "" %}{% capture nf_link %}{{ '/news/' | absolute_url }}#year-{{ nf.date | date: "%Y" }}{% endcapture %}{% endif %}
+  <entry>
+    <title type="text">{{ nf_plain | xml_escape }}</title>
+    <link href="{{ nf_link | xml_escape }}" rel="alternate" type="text/html"/>
+    <id>tag:{{ nf_host }},{{ nf.date | date: "%Y-%m-%d" }}:news/{{ nf.type }}/{{ nf_plain | slugify | truncate: 60, "" }}</id>
+    <updated>{{ nf.date | date_to_xmlschema }}</updated>
+    <category term="{{ nf.type | xml_escape }}"/>
+    <content type="html">{{ nf.text | markdownify | strip | xml_escape }}</content>
+  </entry>
+  {%- endfor %}
+</feed>

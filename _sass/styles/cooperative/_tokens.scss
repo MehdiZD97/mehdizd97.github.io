@@ -1,0 +1,24 @@
+// Type, space, shape, and motion (colors come from _data/design.yml).
+:root {
+  --font: "Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
+  --text-small: 0.875rem;
+  --text-ui: 0.9375rem;
+  --text-body: 1.0625rem;
+  --text-h4: clamp(1.1875rem, 1.135rem + 0.225vw, 1.3125rem);
+  --text-h3: clamp(1.375rem, 1.265rem + 0.449vw, 1.625rem);
+  --text-h2: clamp(1.75rem, 1.421rem + 1.348vw, 2.5rem);
+  --text-h1: clamp(2.25rem, 1.812rem + 1.798vw, 3.25rem);
+  --text-hero: clamp(3rem, 1.905rem + 4.494vw, 5.5rem);
+  --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem;
+  --space-5: 1.5rem; --space-6: 2rem; --space-7: 3rem; --space-8: 4.5rem;
+  --gutter: clamp(1rem, 0.34rem + 2.7vw, 2.5rem);
+  --wrap: 72rem;
+  --measure: 68ch;
+  --radius: 14px;
+  --pill: 999px;
+  --scrim: rgb(0 0 0 / 0.72);      // over photos, same in both themes
+  --vignette: rgb(0 0 0 / 0.22);   // darkens the hero field toward its edges
+  --dur-fast: 170ms;
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+}

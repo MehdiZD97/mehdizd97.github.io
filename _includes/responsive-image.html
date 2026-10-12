@@ -1,0 +1,29 @@
+{%- comment -%}
+  A responsive <picture> for an image made by scripts/optimize_images.py
+  (sizes and formats come from _data/images.yml). Parameters:
+    name      key in _data/images.yml, e.g. "stories/asilomar-2024-lecture"
+    alt       alternative text; pass alt="" for decorative images
+    sizes     the displayed width, for width-based images (default 100vw)
+    class     class on <picture>; img_class: class on <img>
+    priority  true for the one image above the fold: fetchpriority="high"
+              instead of lazy loading
+{%- endcomment -%}
+{%- assign ri = site.data.images[include.name] -%}
+{%- if ri -%}
+{%- assign ri_base = '/assets/img/' | append: include.name | relative_url -%}
+{%- assign ri_last = ri.formats | last -%}
+{%- assign ri_img = ri.variants | where: "size", ri.fallback | first -%}
+{%- assign ri_sizes = include.sizes | default: "100vw" -%}
+<picture{% if include.class %} class="{{ include.class }}"{% endif %}>
+{%- for ri_format in ri.formats -%}
+  {%- capture ri_srcset -%}
+    {%- for v in ri.variants -%}{{ ri_base }}-{{ v.size }}.{{ ri_format }} {% if ri.descriptor == "x" %}{{ v.x }}x{% else %}{{ v.w }}w{% endif %}{% unless forloop.last %}, {% endunless %}{%- endfor -%}
+  {%- endcapture -%}
+  {%- if forloop.last %}
+  <img src="{{ ri_base }}-{{ ri.fallback }}.{{ ri_format }}" srcset="{{ ri_srcset }}"{% if ri.descriptor == "w" %} sizes="{{ ri_sizes }}"{% endif %} width="{{ ri_img.w }}" height="{{ ri_img.h }}" alt="{{ include.alt | escape }}"{% if include.img_class %} class="{{ include.img_class }}"{% endif %}{% if include.priority %} fetchpriority="high"{% else %} loading="lazy"{% endif %} decoding="async">
+  {%- else %}
+  <source type="image/{{ ri_format }}" srcset="{{ ri_srcset }}"{% if ri.descriptor == "w" %} sizes="{{ ri_sizes }}"{% endif %}>
+  {%- endif -%}
+{%- endfor %}
+</picture>
+{%- endif -%}

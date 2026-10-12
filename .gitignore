@@ -1,17 +1,31 @@
 # Ignore the contents of the _site directory and other cache directories
 _site/
 .sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+
+# Ignore local Bundler settings and gems installed into the project
+.bundle/
+vendor/
+
+# The channel's newest uploads, written at build time by scripts/fetch_videos.py
+_data/youtube.yml
+_data/.youtube.yml.tmp
 
 # Ignore the directory for local files during development
 _local/
 .claude/
 .kronk/
+.idea/
+.DS_Store
 CLAUDE.md
 
-
-# Ignore the Gemfile that is generated
-Gemfile.lock
-
-# Ingore files created by npm
+# Ignore files created by npm
 node_modules
 package-lock.json
+
+# Ignore the Python virtual environment and caches
+.venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/

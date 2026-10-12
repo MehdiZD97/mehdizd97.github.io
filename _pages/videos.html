@@ -1,0 +1,32 @@
+---
+title: Videos
+description: "Videos by Mehdi Zafari: tutorials on beamforming, antenna parameters, and linear arrays, a Python course in Persian, and his UCI Grad Slam finals pitch."
+permalink: /videos/
+prose: false
+lead: Tutorials and talks, newest first.
+head_include: video-meta.html   # VideoObject structured data
+last_modified_from: [_data/videos.yml]   # the sitemap date follows these files (_plugins/last_modified.rb)
+---
+{%- comment -%}
+  The Videos page (PLAN 8.1): the channel spotlight with a Subscribe button,
+  then every video, newest first by upload date (_data/videos.yml and the
+  channel's newest uploads; see video-list.html), as cards whose player
+  loads only when played (video-card.html). Home shows the newest few with
+  the same card.
+{%- endcomment -%}
+{%- assign channel = site.data.videos.channel %}
+<section class="channel-card" aria-labelledby="channel-title">
+  <span class="channel-card__logo" aria-hidden="true">{% include icon.html name="youtube" %}</span>
+  <div class="channel-card__text">
+    <p class="channel-card__kicker">YouTube channel</p>
+    <h2 class="channel-card__name" id="channel-title">{{ channel.name }}</h2>
+    <p class="channel-card__desc">New videos come to my channel, <a href="{{ channel.url }}" target="_blank" rel="noopener">{{ channel.handle }}{% include newtab.html %}</a>.</p>
+  </div>
+  <p class="channel-card__actions"><a class="btn btn--primary" href="{{ channel.url }}?sub_confirmation=1" target="_blank" rel="noopener">{% include icon.html name="youtube" %}Subscribe{% include newtab.html %}</a></p>
+</section>
+{%- include video-list.html %}
+<div class="videos">
+  {%- for video in video_list %}
+  {% include video-card.html video=video level=2 priority=forloop.first %}
+  {%- endfor %}
+</div>

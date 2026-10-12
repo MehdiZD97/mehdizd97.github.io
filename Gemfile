@@ -1,19 +1,14 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
+
+gem "jekyll", "~> 4.3"
+gem "webrick", "~> 1.8"          # needed by `jekyll serve` on Ruby 3+
 
 group :jekyll_plugins do
-  gem 'jekyll'
-  gem 'jekyll-feed'
-  gem 'jekyll-sitemap'
-  gem 'jekyll-redirect-from'
-  gem 'jemoji'
-  gem 'webrick', '~> 1.8'
-  gem 'jekyll-archives'
+  gem "jekyll-feed"
+  gem "jekyll-sitemap"
+  gem "jekyll-redirect-from"
 end
 
-gem 'github-pages'
-
-# source "https://rubygems.org"
-#
-# gem "github-pages", group: :jekyll_plugins
-# gem "jekyll-include-cache", group: :jekyll_plugins
-
+group :test do
+  gem "html-proofer", "~> 5.0"
+end

@@ -1,0 +1,57 @@
+{%- comment -%}
+  One publication entry (PLAN 6.2), shared by Home, Publications, and the CV,
+  with its BibTeX window (a popover that the BibTeX button opens).
+  Parameters: pub (a document in site.publications), level (heading level,
+  default 3). Published items show the year; accepted, under-review, and
+  preprint items show the month and year (PLAN 4.4).
+{%- endcomment -%}
+{%- assign p = include.pub -%}
+{%- assign h = include.level | default: 3 -%}
+{%- case p.type -%}
+  {%- when "journal" %}{% assign p_type = "Journal" -%}
+  {%- when "magazine" %}{% assign p_type = "Magazine" -%}
+  {%- when "conference" %}{% assign p_type = "Conference" -%}
+  {%- when "dataset" %}{% assign p_type = "Dataset" -%}
+  {%- when "software" %}{% assign p_type = "Software" -%}
+  {%- else %}{% assign p_type = p.type -%}
+{%- endcase -%}
+{%- case p.status -%}
+  {%- when "accepted" %}{% assign p_status = "Accepted" -%}
+  {%- when "under-review" %}{% assign p_status = "Under review" -%}
+  {%- when "preprint" %}{% assign p_status = "Preprint" -%}
+  {%- else %}{% assign p_status = "" -%}
+{%- endcase -%}
+<article class="pub" data-type="{{ p.type }}" data-status="{{ p.status }}" data-topics="{{ p.topics | join: ' ' }}">
+  <div class="pub-meta">
+    <span class="pub-year"><time datetime="{{ p.date | date: '%Y-%m' }}">{% if p.status == "published" %}{{ p.date | date: "%Y" }}{% else %}{{ p.date | date: "%b %Y" }}{% endif %}</time></span>
+    {%- if p.venue_short %}
+    <span class="pub-venue-short">{{ p.venue_short }}</span>
+    {%- endif %}
+    <span class="pub-type">{{ p_type }}</span>
+  </div>
+  <div class="pub-body">
+    <h{{ h }} class="pub-title"><a href="{{ p.url | relative_url }}">{{ p.title }}</a></h{{ h }}>
+    <p class="pub-authors">{% include authors.html list=p.authors %}</p>
+    <p class="pub-venue">{% if p.status == "under-review" %}Submitted to {% endif %}{{ p.venue }}{% if p.type == "magazine" %} (magazine){% endif %}</p>
+    {%- if p_status != "" or p.award %}
+    <p class="pub-badges">
+      {%- if p_status != "" %}<span class="badge badge--status">{{ p_status }}</span>{% endif -%}
+      {%- if p.award %}<span class="badge badge--award">{% include icon.html name="award" %}{{ p.award }}</span>{% endif -%}
+    </p>
+    {%- endif %}
+    {% include pub-links.html pub=p bibtex=true %}
+    {%- if p.bibtex %}
+    <div class="bib-pop" id="bib-{{ p.slug }}" popover role="dialog" aria-labelledby="bib-{{ p.slug }}-label">
+      <div class="bib-pop__body">
+        <div class="bib-pop__head">
+          <p class="bib-pop__title" id="bib-{{ p.slug }}-label">BibTeX</p>
+          <button class="btn btn--secondary btn--small" type="button" popovertarget="bib-{{ p.slug }}" popovertargetaction="hide">Close</button>
+        </div>
+        <p class="bib-pop__paper">{{ p.title }}</p>
+        <pre class="bib-pop__text" id="bib-{{ p.slug }}-text">{{ p.bibtex | strip | escape }}</pre>
+        <p class="bib-pop__actions js-only"><button class="btn btn--primary btn--small" type="button" data-copy="bib-{{ p.slug }}-text">{% include icon.html name="copy" %}Copy</button> <span class="bibtex__status" role="status" data-copy-status></span></p>
+      </div>
+    </div>
+    {%- endif %}
+  </div>
+</article>

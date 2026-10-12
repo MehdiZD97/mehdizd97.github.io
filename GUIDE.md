@@ -1,0 +1,541 @@
+# Updating the website: a step-by-step guide
+
+This guide explains how to add or change anything on the site: a publication, a news item, a talk, a video, an award, the CV, a story with photos, and the CV PDF.
+
+The site is built by Jekyll from plain text files.
+You never edit the page templates to add content: every fact lives in a data file (YAML) or a Markdown file, and the pages are built from them.
+This file itself is not published.
+
+## Contents
+
+1. [Where things live](#1-where-things-live)
+2. [Before you start: preview and the rules of YAML](#2-before-you-start-preview-and-the-rules-of-yaml)
+3. [Add a news item](#3-add-a-news-item)
+4. [Add a publication](#4-add-a-publication)
+5. [Update a publication (accepted, published, new links)](#5-update-a-publication-accepted-published-new-links)
+6. [Add a dataset or a software release](#6-add-a-dataset-or-a-software-release)
+7. [Add a talk](#7-add-a-talk)
+8. [Add a video](#8-add-a-video)
+9. [Add an award](#9-add-an-award)
+10. [Update the CV](#10-update-the-cv)
+11. [Update the CV PDF](#11-update-the-cv-pdf)
+12. [Update your profile, links, and photo](#12-update-your-profile-links-and-photo)
+13. [Add a story with photos](#13-add-a-story-with-photos)
+14. [Change what the home page shows](#14-change-what-the-home-page-shows)
+15. [Check your change and publish it](#15-check-your-change-and-publish-it)
+16. [When the build stops](#16-when-the-build-stops)
+17. [Visitor counts](#17-visitor-counts)
+
+---
+
+## 1. Where things live
+
+| What | File | Shown on |
+|---|---|---|
+| News | `_data/news.yml` | Home (newest 5) and the News page, `/news/` (all, by year) |
+| Publications, datasets, software | `_publications/<slug>.md` (one file each) | Home's "Selected publications" (featured ones), Publications, the CV, and a page for each |
+| Talks | `_data/talks.yml` | Home (newest 3) and the CV |
+| Videos | `_data/videos.yml`, plus new uploads read from your channel (section 8) | Home (newest 6) and the Videos page |
+| Honors and awards | `_data/awards.yml` | Home (those with `home: true`) and the CV |
+| Name, title, intro, bio, links | `_data/profile.yml` | Everywhere (hero, footer, CV) |
+| Education | `_data/cv/education.yml` | Home and the CV |
+| Experience | `_data/cv/experience.yml` | Home (the one-line summaries) and the CV (all bullets) |
+| Skills, service, teaching, coursework, conferences | `_data/cv/skills.yml`, `service.yml`, `teaching.yml`, `coursework.yml`, `conferences.yml` | The CV (teaching also on Home) |
+| Publication topics | `_data/topics.yml` | Publications (topic filters) |
+| Stories (posts with photos) | `_posts/YYYY-MM-DD-<name>.md` | Their own pages, listed at the end of `/news/` and linked from news and talks |
+| Original photos | `_assets-src/images/` and `_assets-src/images.yml` | Turned into web images by a script |
+| The CV PDF | `files/Mehdi_Zafari_CV.pdf` | The "Download CV (PDF)" buttons |
+| Old addresses that lead into a page section | `_data/redirects.yml` | Redirects (for example the v1 talk pages to their talks on the CV) |
+| Menu | `_data/navigation.yml` | The header |
+| Site settings (how many items Home shows, style) | `_config.yml` | |
+
+---
+
+## 2. Before you start: preview and the rules of YAML
+
+### Preview while you edit
+
+In a terminal, from the repository folder:
+
+```bash
+bundle exec jekyll serve --livereload
+```
+
+Then open http://localhost:4000. Pages refresh by themselves when you save a file.
+Stop the server with Ctrl+C. Restart it after you change `_config.yml` or anything in `_plugins/`.
+
+The page http://localhost:4000/dev/content/ shows every data file and every publication field in tables, which is handy for checking your edits. It exists only on your computer, never on the live site.
+
+### The rules of YAML (the `.yml` files and the top of each `.md` file)
+
+- Indent with **two spaces**, never tabs. Items of a list start with `- `.
+- Dates are written `YYYY-MM-DD`. When you know only the month, use day `01` (for example `2026-10-01`); the site shows month and year.
+- Put text in double quotes when it contains a colon followed by a space (`title: "CORDIS: A Scalable ..."`) or starts with a special character such as `@`, `*`, `[`, or `{`.
+- Put arXiv IDs in double quotes (`arxiv: "2310.13830"`): without them YAML reads a number, drops a final 0, and the link points to another paper.
+- A line that starts with `#` is a comment: the site ignores it. Comments are a good place for notes to yourself.
+- In news text and in experience bullets you can use Markdown: `**bold**`, `*italic*`, and links `[text](https://...)`.
+- Internal links start with `/` (for example `/publications/assent/`); external links start with `https://`.
+- Lists are shown in the order of the file, newest first. Add new entries **at the top** (right below the header comments).
+
+If the preview stops updating or shows an error in the terminal, the message usually names the file and line with the problem (often a missing space after a colon, a tab, or a missing quote).
+
+---
+
+## 3. Add a news item
+
+1. Open `_data/news.yml`.
+2. Add a new entry at the top of the list (below the comments), newest first:
+
+   ```yaml
+   - date: 2026-10-01
+     type: paper
+     text: Our paper **Example** was accepted to IEEE ICC 2027.
+     pub: example-slug
+   ```
+
+3. Choose the `type`; it sets the icon: `paper`, `award`, `talk`, `career`, `video`, `release`, `service`, or `milestone`.
+4. Optional links (the site adds a short link after the text):
+   - `pub: <slug>`: the publication's page ("Read the paper"). The slug is the publication's file name without `.md`.
+   - `story: /posts/2026/10/my-story/`: a story ("Read the story").
+   - `url: https://...` and `url_label: Watch the video`: any other link.
+   - `talk: <talk id>`: used only when there is no other link; it points to the talk in the CV.
+5. Optional: `pin: true` keeps the item on Home even after newer items push it down.
+6. Save and check Home (it shows the newest 5 items) and `/news/` (it shows all of them, grouped by year). The news feed, `/news.xml` (the footer's RSS link), updates on its own, so people who follow it in a feed reader see the new item.
+
+---
+
+## 4. Add a publication
+
+Each publication is one file in `_publications/`. Its file name is its **slug**, which becomes its address: `_publications/cordis.md` is shown at `/publications/cordis/`.
+
+### The quick way: let the script start the file
+
+From the repository folder, with the paper's arXiv ID or DOI:
+
+```bash
+python3 scripts/new_publication.py --arxiv 2610.12345
+```
+
+```bash
+python3 scripts/new_publication.py --doi 10.1109/TWC.2027.1234567
+```
+
+It reads the title, authors, date, abstract, and BibTeX from arXiv or from the publisher's record and writes `_publications/<slug>.md` with every field below, authors in CV style. Add `--dry-run` to see the file without writing it, and `--slug my-name` to choose the file name (by default it comes from the title, such as `cordis` for "CORDIS: ...").
+
+Then open the new file and answer its `TODO(mehdi)` notes (the type and status of a preprint, the short venue label, the topics), and check the BibTeX and the abstract. Your preview builds with the notes in place; the live site does not publish until they are all answered (section 16). When the paper is published, run the script again with the DOI and `--dry-run` to copy the publisher's details into the existing file (section 5).
+
+### By hand
+
+1. Pick a slug: short, lowercase, words joined by hyphens, for example `cordis` or `robust-wildfire-forecasting`. For a paper under review, leave the venue out of the slug (the venue may change). Do not rename a published slug later; if you ever must, add the old address under `redirect_from` (see step 4).
+2. Create `_publications/<slug>.md` by copying an existing file of the same kind (for example `cordis.md` for a journal paper under review, `assent.md` for a published conference paper), or start from this template:
+
+   ```yaml
+   ---
+   title: "Paper Title in Its Published Case"
+   authors: ["M. Zafari", "B. Ottersten", "A. L. Swindlehurst"]
+   type: journal
+   status: under-review
+   venue: IEEE Transactions on Wireless Communications
+   venue_short: IEEE TWC
+   date: 2026-10-01
+   arxiv: "2610.12345"
+   code: https://github.com/LS-Wireless/Example
+   featured: true
+   topics: [cell-free-isac, distributed-optimization]
+   bibtex: |
+     @misc{zafari2026example,
+       author        = {Zafari, Mehdi and Ottersten, Bj{\"o}rn and Swindlehurst, A. Lee},
+       title         = {Paper Title in Its Published Case},
+       year          = {2026},
+       eprint        = {2610.12345},
+       archivePrefix = {arXiv},
+       primaryClass  = {eess.SP},
+       url           = {https://arxiv.org/abs/2610.12345}
+     }
+   ---
+   The abstract, in Markdown. One sentence per line makes later edits easy.
+   ```
+
+3. Fill in the fields:
+
+   | Field | What to write |
+   |---|---|
+   | `title` | The title exactly as published (keep its capitalization), in double quotes. |
+   | `authors` | A list in CV style: initials, then the last name. Your name (`M. Zafari`) is set in bold automatically. |
+   | `type` | `journal`, `magazine`, `conference`, `dataset`, or `software`. This decides the group it appears in. |
+   | `status` | `published`, `accepted`, `under-review`, or `preprint`. Under review shows "Submitted to (venue)" and an "Under review" badge; accepted shows an "Accepted" badge. |
+   | `venue` | The full venue name, for example `IEEE International Conference on Communications (ICC)`. |
+   | `venue_short` | A short label for the chip, for example `ICC 2027` or `IEEE TWC`. |
+   | `date` | Used for sorting. Published items show the year only; the others show the month and year. |
+   | `doi` | Optional. The DOI only, for example `10.1109/TVT.2026.3656108`. The button label comes from the DOI: IEEE DOIs show "IEEE Xplore", IEEE DataPort DOIs show "IEEE DataPort", any other shows "DOI". |
+   | `arxiv` | Optional. The arXiv ID only, in quotes, for example `"2609.12195"` (without quotes, an ID ending in 0 loses that 0 and the link breaks). |
+   | `code`, `pdf`, `slides`, `poster`, `dataset` | Optional links. `pdf`, `slides`, and `poster` can be files you put in `files/` (for example `/files/slides/example.pdf`) or full URLs. |
+   | `video` | Optional. A YouTube video ID (the part after `watch?v=`). It adds a Video button and a player on the publication's page that loads only when played. |
+   | `award` | Optional, for example `Best Paper Award Finalist`. Shows a badge. |
+   | `featured` | `true` shows the paper in Home's "Selected publications". |
+   | `topics` | Ids from `_data/topics.yml`. To add a topic, add an `id` and `label` there. |
+   | `bibtex` | The citation. Indent every line of it by two spaces under `bibtex: |`. It appears on the publication's page, and the "BibTeX" button in every list opens it in a small window with a Copy button. |
+   | `description` | Optional: the text search engines show under the page's title (140 to 160 characters). Without it, the site writes one from the venue, date, authors, and the start of the abstract. |
+   | `figure`, `figure_alt`, `figure_caption` | Optional: a figure at the top of the publication's page that visitors can enlarge. Add the image like a story photo (section 13, steps 1 to 3, with a name such as `publications/<slug>`), then set `figure: publications/<slug>`, a description in `figure_alt`, and an optional `figure_caption`. It also becomes the page's preview image on social media. |
+
+   The link buttons always appear in the same order (PDF, arXiv, IEEE Xplore or DOI, Code, Slides, Video, Poster, Dataset, BibTeX), and only for the fields you fill in.
+
+   The publication's page also lists what refers to it, without any extra work: talks, awards, videos, and news items whose `pub` is this slug, their stories, stories that list the slug under `pubs` (section 13), and other entries with the same `code` link (a paper and its software find each other). Its topics link to the Publications page filtered by that topic.
+   At the bottom of the page, a Back button returns visitors to exactly where they were (for example, their place in the list, filters included). Visitors who arrived from elsewhere (a search engine, an old address, a new tab) see "All publications" there instead.
+
+4. Getting the BibTeX:
+   - Published paper with a DOI: run `curl -LH "Accept: application/x-bibtex" https://doi.org/<doi>` in a terminal and paste the result. Tidy it the way the other files do (one field per line, page ranges written `100--110`).
+   - Preprint: arXiv's "Export BibTeX citation" link on the paper's page gives an entry like the one in the template.
+5. Write the abstract below the second `---` line.
+6. Optional: add a news item for it (section 3) with `pub: <slug>`.
+
+   Filtered views of the Publications page have their own addresses, handy for sharing: `/publications/?kind=journal`, `?kind=under-review`, `?topic=cell-free-isac`, or `?q=admm` (they combine with `&`).
+7. Save, then check `/publications/`, the new page `/publications/<slug>/`, and Home if it is featured.
+
+---
+
+## 5. Update a publication (accepted, published, new links)
+
+Open the publication's file in `_publications/` and change only what changed:
+
+- **Accepted:** set `status: accepted`, update `venue` and `venue_short`, and set `date` to the acceptance month.
+- **Published:** set `status: published`, add the `doi`, update `venue`, `venue_short`, and `date`, and replace the `bibtex` with the publisher's. The script prints all of them without changing anything: `python3 scripts/new_publication.py --doi <the DOI> --dry-run`; copy what you need into the file.
+- **New link** (code, slides, video): add the field.
+- **Award:** add `award: Best Paper Award` (and add it to `_data/awards.yml` too, section 9).
+- **Stop featuring it on Home:** set `featured: false` or delete the line.
+
+Add a news item if the change is news (section 3).
+
+---
+
+## 6. Add a dataset or a software release
+
+Same steps as a publication (section 4), with:
+
+```yaml
+---
+title: "Name of the Dataset or Repository"
+authors: ["M. Zafari"]
+type: software           # or dataset
+status: published
+venue: GitHub repository # or IEEE DataPort
+venue_short: GitHub
+date: 2026-10-01
+code: https://github.com/MehdiZD97/example   # for software; datasets use doi or dataset
+topics: [cell-free-isac]
+---
+One or two sentences about it. You can link its paper: [Paper title](/publications/<slug>/).
+```
+
+A `bibtex` field is optional for software.
+
+---
+
+## 7. Add a talk
+
+1. Open `_data/talks.yml`. (Drafts for your MILCOM 2026, ICC 2026, and Showcase talks are near the top, commented out: remove the `# ` at the start of their lines and fill in the blanks.)
+2. Add an entry at the top of the list, newest first:
+
+   ```yaml
+   - id: icc-2027
+     date: 2027-06-01
+     title: "ASSENT: Learning-Based Association Optimization for Distributed Cell-Free ISAC"
+     kind: Lecture
+     event: IEEE International Conference on Communications (ICC 2027)
+     location: Montreal, Canada
+     event_url: https://...
+     pub: assent
+   ```
+
+3. Fields:
+   - `id`: unique, lowercase with hyphens (it becomes the anchor `/cv/#icc-2027`).
+   - `kind`: `Lecture`, `Poster`, `Invited talk`, `Workshop talk`, `Competition talk`, `Project presentation`, or `Demo`.
+   - Optional: `pub` (publication slug: shows a Paper button), `slides` (`/files/slides/<file>.pdf` or a URL), `video` (YouTube ID) and `video_start` (seconds into the video where your part starts), `story` (a story's address), `note` (one short line, for example "Best Paper Award finalist.").
+4. Only presentations go here. A conference you attended without presenting can be a news item (`type: milestone`) and a line in `_data/cv/conferences.yml`.
+5. Home shows the newest 3 talks; the CV shows all.
+
+---
+
+## 8. Add a video
+
+New uploads on your YouTube channel show on the site by themselves. Add a video to `_data/videos.yml` by hand only to give it more (the line under its title, a start time), to keep it for good, or to list a video from another channel.
+
+### New uploads, automatically
+
+Before every build on GitHub, and every Monday morning, `scripts/fetch_videos.py` reads your channel's public feed (its 15 newest uploads). The site adds the ones that are not in `_data/videos.yml` to Home and the Videos page, newest first, with their title and thumbnail. So a new upload reaches the live site within a week. To add it at once: on GitHub, open Actions, then "Build and deploy site", then "Run workflow" on `master`.
+
+- Shorts are left out, and titles in Persian read right to left.
+- An automatic card shows the title only. For the line under it (`note`), the duration on the thumbnail, or a start time, add the video by hand (below): your entry wins over the feed's.
+- The feed lists the 15 newest uploads only, so an older upload leaves the site when newer ones push it out of the feed, unless it has an entry in `_data/videos.yml`.
+- To hide an upload, list its id under `skip:` in `_data/videos.yml`:
+
+  ```yaml
+  skip:
+    - AbCdEfGhIjK    # the reason
+  ```
+
+- If the feed cannot be read, the build goes on with the videos in `_data/videos.yml` only, and the Actions run shows a warning.
+- Your preview does not read the feed. To see what it would add, run `python3 scripts/fetch_videos.py`: it writes `_data/youtube.yml` (Git ignores it), and http://localhost:4000/dev/content/ lists the uploads under Videos. Delete the file to go back.
+- GitHub pauses the Monday run after 60 days without a commit to the repository; the Actions tab then offers to turn it back on.
+
+### Add a video by hand
+
+1. Open `_data/videos.yml`.
+2. Add an entry at the top of `videos:` (newest first, by upload date). Note the indentation: entries under `videos:` are indented by two spaces.
+
+   ```yaml
+     - id: AbCdEfGhIjK
+       title: "Exact title on YouTube"
+       date: 2026-10-05
+       duration: PT12M34S
+       note: Tutorial
+       description: One or two sentences about the video.
+   ```
+
+3. Fields:
+   - `id`: the part after `watch?v=` in the video's address.
+   - `date`: the upload date YouTube shows.
+   - `duration` (optional): `PT12M34S` means 12 minutes 34 seconds; `PT1H2M41S` means 1 hour 2 minutes 41 seconds. It shows on the thumbnail.
+   - `note`: the short line under the title on the card.
+   - Optional: `language: fa` for a video not in English; `host: { name: Danesh Academy, url: "https://www.youtube.com/@Daaneshacademy" }` when the video is on someone else's channel (the card says "published on ..."); `start: 3727` when your part starts later in a longer video (in seconds), with `source_title` set to that video's title.
+4. Optional: add a news item (`type: video`, `url: /videos/`).
+5. Home shows the newest 6 videos; the Videos page shows all, under your channel's Subscribe button. A video plays right on the page when visitors click its thumbnail: nothing loads from YouTube before that click (the thumbnail comes from YouTube's image server). The title still links to YouTube.
+
+---
+
+## 9. Add an award
+
+1. Open `_data/awards.yml`.
+2. Add an entry in the right place (newest first):
+
+   ```yaml
+   - year: 2027
+     date: 2027-03-01
+     title: Name of the Award
+     org: Who gave it
+     home: true
+   ```
+
+3. Fields:
+   - `home: true` also shows it in the CV section on Home (leave it out to show it only on the full CV).
+   - Optional: `detail` (one line under it), `pub` (a publication slug: the title links to the paper), `talk` (a talk id), `url` (any link), and `years: 2022, 2023` for an award received more than once.
+4. Optional: add a news item (`type: award`).
+
+---
+
+## 10. Update the CV
+
+All CV sections are in `_data/cv/` (and the research interests in `_data/profile.yml`). The full CV page is `/cv/`; Home shows a summary.
+
+- **Education** (`education.yml`): `degree`, `field`, `school`, `school_short`, `location`, `start`, `end`, `expected: true` while in progress, `gpa`, `advisor` or `thesis`, and `logo` (the name of the logo image, for example `uci`).
+- **Experience** (`experience.yml`), in the order you want it shown:
+
+  ```yaml
+  - title: Job Title
+    org: Organization
+    unit: Department or lab (optional)
+    location: City, ST
+    where: Short label, City
+    start: 2027-01-01
+    end:                     # leave empty while it is your current role ("present")
+    summary: One line for Home, in the words of your CV.
+    bullets:
+      - What you did, as on your CV
+      - Another bullet
+    extra:                   # optional bullets shown only on the web CV
+      - A detail
+    supervisor: Prof. Name   # optional
+  ```
+
+  A role without a `summary` appears only on the full CV, not on Home.
+- **Skills** (`skills.yml`): each `group` has a list of `items`.
+- **Service** (`service.yml`): your reviewing; add a venue with `- { name: IEEE ..., short: ... }`.
+- **Teaching** (`teaching.yml`): `course`, optional `code` (for example `EECS 160A/LA`), `term`, `institution`, `role`.
+- **Coursework** (`coursework.yml`): `term`, `course`, `grade`, `institution`.
+- **Conferences attended** (`conferences.yml`): `event`, `dates` (a list), `location`.
+
+After any CV change, refresh the CV PDF (section 11).
+
+---
+
+## 11. Update the CV PDF
+
+The "Download CV (PDF)" buttons link to `files/Mehdi_Zafari_CV.pdf`, which is the `/cv/` page printed to PDF. After you change anything the CV shows (the files in `_data/cv/`, awards, talks, publications, or the profile), make a new PDF:
+
+```bash
+.venv/bin/python scripts/make_cv_pdf.py
+```
+
+The script builds the site, prints `/cv/` in Chrome (US Letter, with page numbers, without the site's menu, buttons, contents list, and bio, and with your name and contacts on top), and replaces the PDF. It also writes today's date to `_data/cv_pdf.yml`, which the CV page shows next to the Download button ("Updated October 2026"). Open the PDF to check it, then commit both files with your other changes.
+
+The scripts need the Python environment in `.venv/` (already set up on your Mac). On a new computer: `python3 -m venv .venv`, then `.venv/bin/pip install pillow pyyaml playwright`. Google Chrome must be installed.
+
+---
+
+## 12. Update your profile, links, and photo
+
+Open `_data/profile.yml`:
+
+- `title`, `affiliation_short`, `headline`, `intro` (the hero sentence, first person), and `bio` (two paragraphs, third person, on the CV page).
+- `interests`: the research interests groups on the CV.
+- `links`: the profile icons in the hero and footer, in this order. Each has an `id` (it picks the icon: `google-scholar`, `orcid`, `github`, `linkedin`, `researchgate`, `youtube`), a `label`, and a `url`. Add `footer_only: true` to show a link only in the footer (ResearchGate has it), not in the hero or on the printed CV.
+- To change the portrait: put the new original in `_assets-src/images/` (never in `assets/img/`, which is published as is), point `profile/mehdi-zafari` in `_assets-src/images.yml` to it with `src:`, and run the image script (section 13, step 3). The script crops it to a square around the center. The site shows the portrait at most 480 px wide, so an original of about 1000 px or more is plenty; the current one, `profile-portrait.png`, is 1083 px.
+- **The social card** (`assets/img/social-card.jpg`, the image shown when someone shares a page of the site) uses your name, title, affiliation, headline, and portrait. After changing any of them, make it again:
+
+  ```bash
+  .venv/bin/python scripts/make_social_card.py
+  ```
+
+  Its design is `_assets-src/social-card.svg`. Stories show their own photo instead, and video stories their video's thumbnail.
+
+---
+
+## 13. Add a story with photos
+
+Stories are longer write-ups with photos, linked from news items and talks.
+
+1. **Photos:** copy the originals into `_assets-src/images/stories/` (create the folder if needed). Originals are never published; the site uses smaller copies.
+2. **Describe each photo** in `_assets-src/images.yml` (at the end of the file):
+
+   ```yaml
+   stories/my-event-2027:
+     src: images/stories/IMG_1234.jpg
+     widths: [480, 800, 1200, 1600]
+     fallback: 800
+   ```
+
+   Use `widths: [320, 480, 640]` and `fallback: 480` for a portrait photo shown next to a landscape one.
+3. **Make the web images:**
+
+   ```bash
+   .venv/bin/python scripts/optimize_images.py
+   ```
+
+   It writes AVIF, WebP, and JPEG copies to `assets/img/stories/` and removes the photo's location data.
+4. **Write the story:** create `_posts/2027-03-15-my-event.md`:
+
+   ```markdown
+   ---
+   title: Lecture presentation at Example 2027
+   date: 2027-03-15
+   permalink: /posts/2027/03/my-event/
+   description: "One sentence of 140 to 160 characters that summarizes the story for search results, link previews, and the list of stories on /news/; count the characters before you save it."
+   image: /assets/img/stories/my-event-2027-1200.jpg
+   image_alt: What the photo shows
+   pubs: [my-paper-slug]
+   video: AbCdEfGhIjK      # only for a story about a video: its YouTube ID
+   links:
+     - label: Example 2027
+       url: https://example.org/2027/
+       note: on the conference website
+   ---
+
+   The first paragraph.
+
+   {% include figure.html name="stories/my-event-2027" alt="What the photo shows" caption="An optional caption." sizes="(min-width: 48rem) 42rem, calc(100vw - 2rem)" %}
+
+   More text. One sentence per line is fine.
+   ```
+
+   Leave out `caption=` for a photo without one. The list of stories on `/news/` shows the photo in `image` as the story's thumbnail.
+
+   For a story about a video, put the player in the text and the video's ID in `video` (the list then shows the video's thumbnail, and link previews use it too):
+
+   ```markdown
+   {% include video-player.html id="AbCdEfGhIjK" %}
+   ```
+
+   The player loads only when played. Its title and start time come from the video's entry in `_data/videos.yml` when it has one.
+
+   For two photos side by side (a portrait and a landscape):
+
+   ```html
+   <div class="figure-row">
+     {% include responsive-image.html name="stories/photo-portrait" alt="..." sizes="(min-width: 48rem) 15rem, 36vw" %}
+     {% include responsive-image.html name="stories/photo-landscape" alt="..." sizes="(min-width: 48rem) 27rem, 64vw" %}
+   </div>
+   ```
+
+5. **Related** (at the end of the story) builds itself: the publications in `pubs` (their slugs), the talks whose `story` is this story's address (with their papers), the awards for those talks and papers, and the `links` (each with a `label`, a `url`, and an optional `note` shown after the link). Both `pubs` and `links` are optional, and the publications in `pubs` list the story in their own Related block too. Do not add a "Related links" section by hand.
+6. Link it: add `story: /posts/2027/03/my-event/` to the matching news item or talk. Every story is also listed under "Stories" at the end of `/news/` (the Stories button at the top of that page scrolls there), and each story links to the older and newer ones. Its Back button works like the one on publication pages (section 4); visitors who arrived from elsewhere see "All stories".
+
+---
+
+## 14. Change what the home page shows
+
+- **How many** news items, talks, and videos: `home:` in `_config.yml` (`news: 5`, `talks: 3`, `videos: 6`). Restart the preview server after editing `_config.yml`.
+- **Which publications** ("Selected publications"): `featured: true` in a publication's file. The "View publications" button in the hero scrolls there; "Full list of publications" opens `/publications/`.
+- **Which awards:** `home: true` in `_data/awards.yml`.
+- **Which roles:** roles with a `summary` in `_data/cv/experience.yml`.
+- **Keep an older news item on Home:** `pin: true` on it.
+- **The site's style:** `design: cooperative` (blue, the current style) or `design: instrument` (navy and amber) in `_config.yml`.
+
+---
+
+## 15. Check your change and publish it
+
+1. Look at the pages you changed in the preview (http://localhost:4000), on a narrow window too. The table page http://localhost:4000/dev/content/ shows every data field.
+2. Optional, a full check of the built site:
+
+   ```bash
+   JEKYLL_ENV=production bundle exec jekyll build
+   ```
+
+   It should finish without errors or warnings.
+3. Commit your changes (for example `chore: add ICC 2027 paper and news`) on your working branch, then merge into `master`. GitHub Actions builds the site from `master` and publishes it in a few minutes; the Actions tab on GitHub shows the progress and any error. Every build also checks the site's links, images, and scripts (html-proofer); if the "Check links" step fails, its log names the page and the broken link. Every Monday, GitHub also rebuilds `master` by itself to add new YouTube uploads (section 8).
+
+---
+
+## 16. When the build stops
+
+The site checks your content every time it builds, in the preview and on GitHub. A mistake stops the build with a message that names the file and the entry. Read it in the terminal where the preview runs (or, on GitHub, in the failed step of the Actions log), fix the line, and save: the preview continues by itself.
+
+Common messages and fixes:
+
+| Message (shortened) | Fix |
+|---|---|
+| `type` is "papr"; use one of: paper, award, ... | A typo in a value: use one of the listed words. |
+| `date` must be a date written YYYY-MM-DD | Write the date as `2027-03-01` (day `01` when you know only the month). |
+| `pub` names no publication | The slug must match a file in `_publications/` (without `.md`). |
+| `talk` names no talk / `story` is not the address of a story | Copy the talk's `id` from `_data/talks.yml`, or the story's address (`/posts/2027/03/my-event/`). |
+| `topics` names topics that are not in _data/topics.yml | Use an `id` from `_data/topics.yml`, or add the new topic there first. |
+| `arxiv` must be in quotes | Write `arxiv: "2610.12345"`. |
+| `id` must be a YouTube video ID | The 11 characters after `watch?v=` in the video's address (also for the ids under `skip:`). |
+| `id` must be the channel's ID | Under `channel:` in `_data/videos.yml`: the 24 characters starting with `UC` (on YouTube: the channel's About panel, Share channel, Copy channel ID). |
+| `id` ... is used 2 times | Two talks (or videos, or topics) share an id; make each one unique. |
+| `image` needs an `image_alt` | Add a one-line description of the photo. |
+| TODO(mehdi) marker; answer it before publishing | Only on GitHub (and in production builds): answer the note and delete the `TODO(mehdi)` text. Your preview never stops for these. |
+
+Warnings (in yellow) do not stop anything: an unknown field such as `storry` (usually a typo, so the site ignores that line), entries out of date order, or a description outside 140 to 160 characters.
+
+Other problems:
+
+- **The preview shows an old page or a YAML error.** YAML errors name the file and line: look for a tab instead of spaces, a missing space after a colon, or text with `: ` that needs quotes (section 2).
+- **A change to `_config.yml` or to `_plugins/` does not show.** Stop the preview (Ctrl+C) and start it again; the server reads those only when it starts.
+- **`bundle exec` complains about Ruby or missing gems.** In the repository folder, `ruby -v` must say 3.4.8 (rbenv reads `.ruby-version`). If it does not, run `rbenv install 3.4.8`; then `bundle install`.
+- **Moving to a newer Ruby later.** Change `.ruby-version`, run `rbenv install <version>` and `bundle install`, and check the preview. GitHub's builds run on Ubuntu 24.04 (`runs-on` in `.github/workflows/jekyll.yml`), because Ruby 3.4.8 has no prebuilt version for Ubuntu 26.04; with Ruby 3.4.9 or newer, both lines can say `ubuntu-latest` again.
+- **GitHub shows a red cross on a commit.** Open the Actions tab, then the failed run: the "Build" step lists content errors, and the "Check links" step names any page with a broken link or image.
+
+---
+
+## 17. Visitor counts
+
+The live site counts visits with [GoatCounter](https://www.goatcounter.com): page views, where visitors come from (Google Scholar, LinkedIn, YouTube, search), and their countries and devices. It sets no cookies and keeps no personal data, so the site needs no consent banner. The script loads only on the live site, never in your preview.
+
+It is on: your code, `mehdizd97`, is in `_config.yml` under `analytics:`, and the dashboard is at https://mehdizd97.goatcounter.com. Visits appear there within a minute.
+
+You never need to paste GoatCounter's snippet into a page: `_includes/analytics.html` adds it to every page, using the same counter address with GoatCounter's fixed version 5 of the script (`count.v5.js`) instead of `count.js`, the one that changes over time.
+
+If you ever make a new GoatCounter site, put its code (only the code) in `_config.yml`:
+
+```yaml
+analytics:
+  goatcounter: mycode
+```
+
+Your own visits:
+
+- GoatCounter never counts visits from your preview (localhost).
+- To leave out your browsing of the live site, open https://mehdizd97.github.io/#toggle-goatcounter once in each browser you use, or add your home network's IP address under Settings, Tracking, "Ignore IPs" in the dashboard.
+
+To stop counting, empty the code again. The script is GoatCounter's fixed version 5, with a fingerprint the browser checks (`_includes/analytics.html`), so a changed copy never runs.

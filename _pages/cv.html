@@ -1,0 +1,115 @@
+---
+title: Curriculum vitae
+description: "Curriculum vitae of Mehdi Zafari, Ph.D. candidate in EECS at UC Irvine: education, research experience, publications, talks, honors, teaching, and skills."
+permalink: /cv/
+prose: false
+print_identity: true    # name and contacts at the top of the printed CV (scripts/make_cv_pdf.py)
+header_include: cv-actions.html   # the Download CV (PDF) button and the date it was printed
+redirect_from:
+  - /resume
+  - /awards/
+last_modified_from: [_data/profile.yml, _data/cv/*.yml, _data/awards.yml, _data/talks.yml, _publications/*.md]   # the sitemap date follows these files (_plugins/last_modified.rb)
+---
+{%- comment -%}
+  The full CV (PLAN 8.3): every section from _data/ in CV order, with a
+  sticky contents list beside it on wide screens (site.js marks the section
+  in view). scripts/make_cv_pdf.py prints this page to
+  files/Mehdi_Zafari_CV.pdf (the print styles hide the site's header,
+  footer, buttons, contents list, and bio). The old /talks/ and /teaching/
+  addresses redirect to #talks and #teaching (_data/redirects.yml).
+{%- endcomment -%}
+{%- assign cv_toc = "education:Education|interests:Research interests|experience:Experience|publications:Publications|talks:Talks|honors:Honors and awards|service:Service|teaching:Teaching|skills:Skills|coursework:Coursework|conferences:Conferences" | split: "|" %}
+<div class="cv-layout">
+<nav class="toc no-print" aria-labelledby="toc-title" data-toc>
+  <p class="toc__title" id="toc-title">Contents</p>
+  <ol>
+    {%- for cv_item in cv_toc %}
+    <li><a href="#{{ cv_item | split: ':' | first }}">{{ cv_item | split: ':' | last }}</a></li>
+    {%- endfor %}
+  </ol>
+</nav>
+<div class="cv-body page-flow">
+<div class="prose no-print">{{ site.data.profile.bio | markdownify }}</div>
+
+<section class="section" id="education" aria-labelledby="education-title">
+  <h2 class="section__title" id="education-title">Education</h2>
+  <div class="section__body">
+    {% include cv/education.html level=3 gpa=true %}
+  </div>
+</section>
+
+<section class="section" id="interests" aria-labelledby="interests-title">
+  <h2 class="section__title" id="interests-title">Research interests</h2>
+  <div class="section__body">
+    {% include cv/lists.html list="interests" %}
+  </div>
+</section>
+
+<section class="section" id="experience" aria-labelledby="experience-title">
+  <h2 class="section__title" id="experience-title">Experience</h2>
+  <div class="section__body">
+    {% include cv/experience.html %}
+  </div>
+</section>
+
+<section class="section" id="publications" aria-labelledby="publications-title">
+  <h2 class="section__title" id="publications-title">Publications</h2>
+  <div class="section__body">
+    {% include pub-groups.html pubs=site.publications level=3 prefix="cv-" %}
+  </div>
+</section>
+
+<section class="section" id="talks" aria-labelledby="talks-title">
+  <h2 class="section__title" id="talks-title">Talks</h2>
+  <div class="section__body">
+    <div class="subsection subsection--entries">
+      {%- for talk in site.data.talks %}
+      {% include talk-item.html talk=talk level=3 %}
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" id="honors" aria-labelledby="honors-title">
+  <h2 class="section__title" id="honors-title">Honors and awards</h2>
+  <div class="section__body">
+    {% include cv/awards.html %}
+  </div>
+</section>
+
+<section class="section" id="service" aria-labelledby="service-title">
+  <h2 class="section__title" id="service-title">Service</h2>
+  <div class="section__body">
+    {% include cv/lists.html list="service" %}
+  </div>
+</section>
+
+<section class="section" id="teaching" aria-labelledby="teaching-title">
+  <h2 class="section__title" id="teaching-title">Teaching</h2>
+  <div class="section__body">
+    {% include cv/teaching.html %}
+  </div>
+</section>
+
+<section class="section" id="skills" aria-labelledby="skills-title">
+  <h2 class="section__title" id="skills-title">Skills</h2>
+  <div class="section__body">
+    {% include cv/lists.html list="skills" %}
+  </div>
+</section>
+
+<section class="section" id="coursework" aria-labelledby="coursework-title">
+  <h2 class="section__title" id="coursework-title">Relevant coursework</h2>
+  <div class="section__body">
+    {% include cv/lists.html list="coursework" %}
+  </div>
+</section>
+
+<section class="section" id="conferences" aria-labelledby="conferences-title">
+  <h2 class="section__title" id="conferences-title">Selected conferences and workshops</h2>
+  <div class="section__body">
+    {% include cv/lists.html list="conferences" %}
+  </div>
+</section>
+</div>
+</div>

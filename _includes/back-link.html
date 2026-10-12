@@ -1,0 +1,8 @@
+{%- comment -%}
+  The button at the end of publication and story pages (Mehdi, Stage 7). When
+  the visitor came from another page of this site, site.js turns it into
+  "Back" and returns there like the browser's back button, scroll position
+  included; otherwise (and without JavaScript) it opens the list page.
+  Parameters: url (the list page), label (its text, e.g. "All publications").
+{%- endcomment -%}
+<p class="back-link"><a class="btn btn--secondary btn--small" href="{{ include.url | relative_url }}" data-back>{% include icon.html name="back" %}<span data-back-label>{{ include.label }}</span></a></p>

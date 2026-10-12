@@ -1,119 +1,50 @@
-# Academic Pages
-**Academic Pages is a Github Pages template for academic websites.**
+# mehdizd97.github.io
 
-![Academic Pages template example](images/homepage.png "Academic Pages template example")
+The academic website of Mehdi Zafari, Ph.D. Candidate, UC Irvine: news, publications, CV, and videos on signal processing and AI/ML for next-generation (5G/6G) wireless systems.
 
-# Getting Started
+Live site: https://mehdizd97.github.io
 
-1. Register a GitHub account if you don't have one and confirm your e-mail (required!)
-1. Click the "Use this template" button in the top right.
-1. On the "New repository" page, enter your repository name as "[your GitHub username].github.io", which will also be your website's URL.
-1. Set site-wide configuration and add your content.
-1. Upload any files (like PDFs, .zip files, etc.) to the `files/` directory. They will appear at https://[your GitHub username].github.io/files/example.pdf.
-1. Check status by going to the repository settings, in the "GitHub pages" section
-1. (Optional) Use the Jupyter notebooks or python scripts in the `markdown_generator` folder to generate markdown files for publications and talks from a TSV file.
+## How it is built
 
-See more info at https://academicpages.github.io/
+- [Jekyll](https://jekyllrb.com/) 4.4 on Ruby 3.4.8 (pinned in `.ruby-version`), with Dart Sass and the plugins jekyll-feed, jekyll-sitemap, and jekyll-redirect-from. Small plugins in `_plugins/` check the content at every build, date the pages from Git for the sitemap, turn `_data/redirects.yml` into redirects, and keep the development pages (`/dev/`) out of the live site.
+- Facts live in data files, never in templates: `_data/` (profile, news, talks, awards, videos, the CV sections), `_publications/` (one file per paper, dataset, or software release), and `_posts/` (stories).
+- Two complete visual styles share all markup: Cooperative (the live one) and Instrument. `design` in `_config.yml` picks one; `/dev/styleguide/` shows both.
+- GitHub Actions builds every push to `master` and `developer`, checks links and images with html-proofer, and deploys `master` to GitHub Pages. Each build first reads the YouTube channel's newest uploads into the Videos list, and a weekly scheduled build keeps them current.
+- Visitor counts come from GoatCounter (no cookies), on the live site only, once its code is set in `_config.yml` (GUIDE.md, section 17).
 
-## Running locally
+## Local development
 
-When you are initially working your website, it is very useful to be able to preview the changes locally before pushing them to GitHub. To work locally you will need to:
+1. Install Ruby 3.4.8 (for example with `rbenv install 3.4.8`) and Bundler.
+2. Install the gems:
 
-1. Clone the repository and made updates as detailed above.
-1. Make sure you have ruby-dev, bundler, and nodejs installed
-    
-    On most Linux distribution and [Windows Subsystem Linux](https://learn.microsoft.com/en-us/windows/wsl/about) the command is:
-    ```bash
-    sudo apt install ruby-dev ruby-bundler nodejs
-    ```
-    On MacOS the commands are:
-    ```bash
-    brew install ruby
-    brew install node
-    gem install bundler
-    ```
-1. Run `bundle install` to install ruby dependencies. If you get errors, delete Gemfile.lock and try again.
-1. Run `jekyll serve -l -H localhost` to generate the HTML and serve it from `localhost:4000` the local server will automatically rebuild and refresh the pages on change.
+   ```bash
+   bundle install
+   ```
 
-If you are running on Linux it may be necessary to install some additional dependencies prior to being able to run locally: `sudo apt install build-essential gcc make`
+3. Start the preview and open http://localhost:4000:
 
-## Using Docker
+   ```bash
+   bundle exec jekyll serve --livereload
+   ```
 
-Working from a different OS, or just want to avoid installing dependencies? You can use the provided `Dockerfile` to build a container that will run the site for you if you have [Docker](https://www.docker.com/) installed.
+The local-only pages `/dev/content/` (every data field in tables) and `/dev/styleguide/` (the design system) help when editing.
 
-Start by build the container:
+## Updating the site
 
-```bash
-docker build -t jekyll-site .
-```
+[GUIDE.md](GUIDE.md) has step-by-step recipes for every kind of update: news, publications, datasets and software, talks, videos, awards, the CV and its PDF, the profile, stories, and what to do when the build stops.
 
-Next, run the container:
-```bash
-docker run -p 4000:4000 --rm -v $(pwd):/usr/src/app jekyll-site
-```
+## Scripts
 
-To run the `docker run` command on Windows, you need to adjust the syntax for the volume mapping (`-v`) as Windows uses different path formats. Here's how to run your command on Windows:
+| Script | What it does |
+|---|---|
+| `scripts/new_publication.py` | Starts a publication file from an arXiv ID or a DOI (standard library only). |
+| `scripts/fetch_videos.py` | Lists the YouTube channel's newest uploads in `_data/youtube.yml`, which Git ignores (standard library only; GitHub runs it before every build). |
+| `scripts/optimize_images.py` | Makes the web images (AVIF, WebP, JPEG, PNG) from the originals in `_assets-src/images/`. |
+| `scripts/make_cv_pdf.py` | Prints `/cv/` to `files/Mehdi_Zafari_CV.pdf`. |
+| `scripts/make_social_card.py` | Renders the preview image shown when a page is shared. |
 
-### Steps for Windows:
-1. **Check Docker Installation**: Ensure Docker is installed and running.
-2. **Adjust Path for Volume Mapping**:
+The other scripts need a Python virtual environment in `.venv/` with Pillow, PyYAML, and Playwright, and Google Chrome (GUIDE.md, section 11).
 
-   - On Windows, replace `$(pwd)` with the full absolute path to your current directory. For example:
+## License
 
-     ```bash
-     -v C:\path\to\your\site:/usr/src/app
-     ```
-
-### Full Command Example:
-```bash
-docker run -p 4000:4000 --rm -v C:\path\to\your\site:/usr/src/app jekyll-site
-```
-
-### Things to Keep in Mind:
-1. **Use PowerShell**:
-   - If you are using PowerShell, you can use `${PWD}` for the current directory:
-     ```bash
-     docker run -p 4000:4000 --rm -v ${PWD}:/usr/src/app jekyll-site
-     ```
-
-2. **Enable Docker File Sharing**:
-   - If your volume doesn't map correctly, ensure Docker has access to the drive where your project resides. To do this:
-     - Open Docker Desktop.
-     - Go to *Settings* → *Resources* → *File Sharing*.
-     - Add your drive (e.g., `C:`).
-
-3. **Run in Command Prompt or PowerShell**:
-   - In *Command Prompt*:
-   
-     ```bash
-     docker run -p 4000:4000 --rm -v C:\path\to\your\site:/usr/src/app jekyll-site
-     ```
-   - In *PowerShell*:
-
-     ```bash
-     docker run -p 4000:4000 --rm -v ${PWD}:/usr/src/app jekyll-site
-     ```
-
-# Maintenance
-
-Bug reports and feature requests to the template should be [submitted via GitHub](https://github.com/academicpages/academicpages.github.io/issues/new/choose). For questions concerning how to style the template, please feel free to start a [new discussion on GitHub](https://github.com/academicpages/academicpages.github.io/discussions).
-
-This repository was forked (then detached) by [Stuart Geiger](https://github.com/staeiou) from the [Minimal Mistakes Jekyll Theme](https://mmistakes.github.io/minimal-mistakes/), which is © 2016 Michael Rose and released under the MIT License (see LICENSE.md). It is currently being maintained by [Robert Zupko](https://github.com/rjzupkoii) and additional maintainers would be welcomed.
-
-## Bugfixes and enhancements
-
-If you have bugfixes and enhancements that you would like to submit as a pull request, you will need to [fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo) this repository as opposed to using it as a template. This will also allow you to [synchronize your copy](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork) of template to your fork as well.
-
-Unfortunately, one logistical issue with a template theme like Academic Pages that makes it a little tricky to get bug fixes and updates to the core theme. If you use this template and customize it, you will probably get merge conflicts if you attempt to synchronize. If you want to save your various .yml configuration files and markdown files, you can delete the repository and fork it again. Or you can manually patch.
-
----
-<div align="center">
-    
-![pages-build-deployment](https://github.com/academicpages/academicpages.github.io/actions/workflows/pages/pages-build-deployment/badge.svg)
-[![GitHub contributors](https://img.shields.io/github/contributors/academicpages/academicpages.github.io.svg)](https://github.com/academicpages/academicpages.github.io/graphs/contributors)
-[![GitHub release](https://img.shields.io/github/v/release/academicpages/academicpages.github.io)](https://github.com/academicpages/academicpages.github.io/releases/latest)
-[![GitHub license](https://img.shields.io/github/license/academicpages/academicpages.github.io?color=blue)](https://github.com/academicpages/academicpages.github.io/blob/master/LICENSE)
-
-[![GitHub stars](https://img.shields.io/github/stars/academicpages/academicpages.github.io)](https://github.com/academicpages/academicpages.github.io)
-[![GitHub forks](https://img.shields.io/github/forks/academicpages/academicpages.github.io)](https://github.com/academicpages/academicpages.github.io/fork)
-</div>
+The code (templates, styles, scripts, plugins, and configuration) is under the MIT License. The content (text, data, publications, the CV, photos, and the monogram) is copyright Mehdi Zafari, all rights reserved. Details in [LICENSE](LICENSE); fonts, icons, and logos from others are listed in [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).

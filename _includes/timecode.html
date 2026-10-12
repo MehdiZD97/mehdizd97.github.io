@@ -1,0 +1,18 @@
+{%- comment -%}
+  Formats seconds (include.seconds) or an ISO 8601 duration in minutes and
+  seconds (include.iso, e.g. PT62M41S, as YouTube lists durations) as
+  h:mm:ss or m:ss. Variables use a tc_ prefix because Liquid assigns inside
+  an include are visible to the page that includes it.
+{%- endcomment -%}
+{%- if include.iso -%}
+  {%- assign tc_raw = include.iso | remove: "PT" -%}
+  {%- assign tc_min = tc_raw | split: "M" | first | plus: 0 -%}
+  {%- assign tc_sec = tc_raw | split: "M" | last | remove: "S" | plus: 0 -%}
+  {%- assign tc_total = tc_min | times: 60 | plus: tc_sec -%}
+{%- else -%}
+  {%- assign tc_total = include.seconds | plus: 0 -%}
+{%- endif -%}
+{%- assign tc_h = tc_total | divided_by: 3600 -%}
+{%- assign tc_m = tc_total | modulo: 3600 | divided_by: 60 -%}
+{%- assign tc_s = tc_total | modulo: 60 -%}
+{%- if tc_h > 0 -%}{{ tc_h }}:{% if tc_m < 10 %}0{% endif %}{{ tc_m }}{%- else -%}{{ tc_m }}{%- endif -%}:{% if tc_s < 10 %}0{% endif %}{{ tc_s }}

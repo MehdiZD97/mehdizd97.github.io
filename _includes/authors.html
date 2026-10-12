@@ -1,0 +1,10 @@
+{%- comment -%}
+  An author list in CV style ("A, B, and C"; "A and B"), with the names in
+  site.author_highlight in bold. Parameter: list.
+{%- endcomment -%}
+{%- for au in include.list -%}
+  {%- unless forloop.first -%}
+    {%- if forloop.last -%}{% if forloop.length > 2 %},{% endif %} and {% else %}, {% endif -%}
+  {%- endunless -%}
+  {%- if site.author_highlight contains au %}<strong>{{ au }}</strong>{% else %}{{ au }}{% endif -%}
+{%- endfor -%}

@@ -1,0 +1,11 @@
+{%- comment -%}
+  One link button, as a list item (D7). Parameters: url, label, icon.
+  Internal URLs (starting with "/") go through relative_url; external ones
+  open in a new tab with an accessible hint.
+{%- endcomment -%}
+{%- assign lb_first = include.url | slice: 0 -%}
+{%- if lb_first == "/" -%}
+<li><a class="linkbtn" href="{{ include.url | relative_url }}">{% include icon.html name=include.icon %}<span>{{ include.label }}</span></a></li>
+{%- else -%}
+<li><a class="linkbtn" href="{{ include.url | escape }}" target="_blank" rel="noopener">{% include icon.html name=include.icon %}<span>{{ include.label }}</span>{% include newtab.html %}</a></li>
+{%- endif -%}

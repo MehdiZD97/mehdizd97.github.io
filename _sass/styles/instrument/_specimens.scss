@@ -1,0 +1,16 @@
+// Type specimens for the style guide (/dev/styleguide/). Each extends the
+// real component it names, so the specimens cannot drift from the site.
+@use "hero";
+@use "sections";
+@use "pages";
+@use "components";
+
+.type-hero { @extend .hero__name; }
+.type-h1 { @extend .page-title; }
+.type-h2 { @extend .section__title; }
+.type-sub { @extend .subsection__title; }
+.type-h3 { @extend .talk-title; }
+.type-body { max-width: 68ch; }
+.type-small { font-size: var(--text-small); line-height: 1.5; color: var(--slate); max-width: 68ch; }
+.type-mono { font: 400 var(--text-mono)/1.5 var(--font-mono); }
+.type-ui { font-size: var(--text-ui); font-weight: 500; }

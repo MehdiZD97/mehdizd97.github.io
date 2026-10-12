@@ -1,0 +1,23 @@
+{%- comment -%}
+  One video (PLAN 8.1 and 8.2; from video-list.html), on Home and the
+  Videos page: the player, which loads only when played (video-player.html),
+  the title linking to the video on YouTube, and a line with the note, the
+  start time inside a longer video, and the channel it was published on
+  (left out when empty, as for an upload found only in the channel's feed).
+  Parameters: video, level (heading level, default 3), priority (true for
+  the first card at the top of a page; see video-player.html).
+{%- endcomment -%}
+{%- assign vc = include.video -%}
+{%- assign vc_h = include.level | default: 3 -%}
+{%- assign vc_url = "https://www.youtube.com/watch?v=" | append: vc.id -%}
+{%- if vc.start %}{% assign vc_url = vc_url | append: "&t=" | append: vc.start | append: "s" %}{% endif -%}
+{%- capture vc_start %}{% if vc.start %}{% include timecode.html seconds=vc.start %}{% endif %}{% endcapture -%}
+{%- capture vc_host %}{% if vc.host %}<a class="video-host" href="{{ vc.host.url }}" target="_blank" rel="noopener">{{ vc.host.name }}{% include newtab.html %}</a>{% endif %}{% endcapture -%}
+<article class="video">
+  {% include video-player.html id=vc.id priority=include.priority %}
+  <h{{ vc_h }} class="video-title"{% if vc.language and vc.language != "en" %} lang="{{ vc.language }}"{% if vc.language == "fa" %} dir="rtl"{% endif %}{% endif %}><a href="{{ vc_url | escape }}" target="_blank" rel="noopener">{{ vc.title }}<span class="visually-hidden" lang="en" dir="ltr"> (on YouTube, opens in a new tab)</span></a></h{{ vc_h }}>
+  {%- capture vc_meta %}{{ vc.note }}{% if vc.start %}. Starts at {{ vc_start }} in “{{ vc.source_title }},” published on {{ vc_host }}{% elsif vc.host %}, published on {{ vc_host }}{% endif %}{% endcapture %}
+  {%- if vc_meta != "" %}
+  <p class="video-meta">{{ vc_meta }}</p>
+  {%- endif %}
+</article>

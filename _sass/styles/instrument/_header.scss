@@ -1,0 +1,40 @@
+// Header
+.site-header { position: sticky; top: 0; z-index: 10; background: var(--paper); border-bottom: 1px solid var(--grid); }
+.site-header__inner { max-width: var(--wrap); margin: 0 auto; padding: 0.625rem var(--gutter); gap: 0.5rem 0.75rem; min-height: 3.75rem; }
+.brand { display: inline-flex; align-items: center; gap: 0.625rem; color: var(--ink); text-decoration: none; }
+.brand__mark { width: 2.125rem; height: 2.125rem; }
+.brand__mark .monogram__bg { fill: none; stroke: var(--ink); stroke-width: 3; }
+.brand__mark .monogram__mz { fill: var(--ink); }
+.brand__mark .monogram__corner { fill: var(--signal-bright); }
+.brand__name { font-weight: 600; font-size: 1.0625rem; letter-spacing: -0.005em; }
+.menu-button, .theme-toggle {
+  min-height: 2.5rem; border: 1px solid var(--grid); border-radius: var(--radius);
+  background: var(--panel); color: var(--ink);
+}
+.menu-button { padding: 0 0.75rem; font: 500 var(--text-mono)/1 var(--font-mono); }
+.theme-toggle { width: 2.5rem; }
+.site-menu { padding: 0.25rem 0 1rem; }
+.site-nav a { position: relative; display: block; padding: 0.625rem 0; font-size: var(--text-ui); font-weight: 500; text-decoration: none; }
+.site-nav a[aria-current] { font-weight: 600; }
+.site-nav a[aria-current]::before {
+  content: ""; display: inline-block; width: 0.5rem; height: 0.5rem;
+  margin-inline-end: 0.5rem; background: var(--signal-bright); vertical-align: 0.1em;
+}
+.site-header__contact { margin-top: 0.5rem; }
+@media (min-width: 56.25rem) {
+  .site-menu { gap: 1.75rem; padding: 0; }
+  .site-nav ul { gap: 1.5rem; }
+  .site-nav a { padding: 0.5rem 0; }
+  .site-nav a[aria-current]::before { content: none; }
+  .site-nav a::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0.125rem; height: 2px;
+    background: var(--signal-bright); transform: scaleX(0); transform-origin: left;
+    transition: transform var(--dur-fast) var(--ease-out);
+  }
+  .site-nav a[aria-current]::after, .site-nav a:focus-visible::after { transform: scaleX(1); }
+  .site-header__contact { margin-top: 0; }
+}
+@media (hover: hover) and (pointer: fine) and (min-width: 56.25rem) {
+  .site-nav a:hover { color: var(--ink); }
+  .site-nav a:hover::after { transform: scaleX(1); }
+}

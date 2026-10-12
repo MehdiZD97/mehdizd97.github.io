@@ -1,0 +1,110 @@
+{%- comment -%}
+  The style guide's reference sections (direction summary, palette with live
+  contrast ratios, type scale, buttons). The page above them is the real home
+  page: the same hero and sections (_includes/hero.html,
+  _includes/home-sections.html), drawn with this style's stylesheet.
+{%- endcomment -%}
+{%- assign d = site.data.design.directions | where: "id", page.direction | first -%}
+<section class="section sg-ref" id="about" aria-labelledby="about-title">
+  <h2 class="section__title" id="about-title">Direction {{ page.letter }}: {{ d.name }}</h2>
+  <div class="section__body">
+    <p class="lead">{{ d.summary }}</p>
+    <ul class="sg-principles">
+      {%- for p in page.principles %}
+      <li><strong>{{ p.name }}.</strong> {{ p.text }}</li>
+      {%- endfor %}
+    </ul>
+    <p class="note">Type: {{ d.fonts }}. Signature: {{ page.signature }}</p>
+  </div>
+</section>
+
+<section class="section sg-ref" id="palette" aria-labelledby="palette-title">
+  <h2 class="section__title" id="palette-title">Palette</h2>
+  <div class="section__body">
+    <ul class="sg-swatches">
+      {%- for c in d.colors %}
+      <li class="sg-swatch">
+        <span class="sg-swatch__chips" aria-hidden="true">
+          <span class="sg-chip" style="background: {{ c.light }}"></span>
+          <span class="sg-chip" style="background: {{ c.dark }}"></span>
+        </span>
+        <span class="sg-swatch__name">{{ c.name }}</span>
+        <span class="sg-swatch__role">{{ c.role }}</span>
+        <span class="sg-swatch__hex">Light <code>{{ c.light }}</code> Dark <code>{{ c.dark }}</code></span>
+      </li>
+      {%- endfor %}
+    </ul>
+    {%- assign all = d.colors | concat: d.tokens %}
+    <table class="sg-contrast">
+      <caption>WCAG contrast of every text and mark pairing (computed live)</caption>
+      <thead><tr><th scope="col">Pairing</th><th scope="col">Needs</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+      <tbody>
+        {%- for pair in d.pairs %}
+        {%- assign fg = all | where: "id", pair[0] | first %}
+        {%- assign bg = all | where: "id", pair[1] | first %}
+        {%- if pair[2] == "text" %}{% assign need = "4.5" %}{% else %}{% assign need = "3.0" %}{% endif %}
+        <tr>
+          <th scope="row">{{ pair[0] }} on {{ pair[1] }} <span class="sg-kind">{{ pair[2] }}</span></th>
+          <td>{{ need }}</td>
+          <td data-contrast="{{ fg.light }},{{ bg.light }}" data-need="{{ need }}"></td>
+          <td data-contrast="{{ fg.dark }},{{ bg.dark }}" data-need="{{ need }}"></td>
+        </tr>
+        {%- endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="section sg-ref" id="type" aria-labelledby="type-title">
+  <h2 class="section__title" id="type-title">Type</h2>
+  <div class="section__body sg-type">
+    {%- for t in page.type_scale %}
+    <div class="sg-type__row">
+      <p class="sg-type__meta">{{ t.label }}</p>
+      {%- case t.class %}
+      {%- when "type-hero" %}<p class="{{ t.class }}">Mehdi Zafari</p>
+      {%- when "type-h1" %}<p class="{{ t.class }}">Publications</p>
+      {%- when "type-h2" %}<p class="{{ t.class }}">Latest news</p>
+      {%- when "type-sub" %}<p class="{{ t.class }}">Conference papers</p>
+      {%- when "type-h3" %}<p class="{{ t.class }}">ADMM for Downlink Beamforming in Cell-Free Massive MIMO Systems</p>
+      {%- when "type-body" %}<p class="{{ t.class }}">In cell-free massive MIMO systems with multiple distributed access points (APs) serving multiple users over the same time-frequency resources, downlink beamforming is done through spatial precoding. Precoding vectors can be optimally designed to use the minimum downlink transmit power while satisfying a quality-of-service requirement for each user.</p>
+      {%- when "type-small" %}<p class="{{ t.class }}">Graduate Student Researcher, Department of Electrical Engineering and Computer Science, University of California, Irvine. July 2024 to present.</p>
+      {%- when "type-mono" %}<p class="{{ t.class }}">arXiv 2511.09992 &nbsp; DOI 10.1109/TVT.2026.3656108 &nbsp; ICC 2026</p>
+      {%- when "type-ui" %}<p class="{{ t.class }}">Home &nbsp; News &nbsp; Publications &nbsp; CV &nbsp; Videos</p>
+      {%- endcase %}
+    </div>
+    {%- endfor %}
+  </div>
+</section>
+
+<section class="section sg-ref" id="buttons" aria-labelledby="buttons-title">
+  <h2 class="section__title" id="buttons-title">Buttons</h2>
+  <div class="section__body">
+    <p class="note">Hover with a mouse, or press Tab to see focus states.</p>
+    <p class="actions">
+      <a class="btn btn--primary" href="#publications">View publications</a>
+      <a class="btn btn--secondary" href="#cv">Download CV (PDF)</a>
+      <a class="btn btn--text" href="#contact">Contact</a>
+    </p>
+    <p class="note">Link buttons, always in this order and only when a link exists:</p>
+    <ul class="linkbtns">
+      <li><a class="linkbtn" href="#publications">{% include icon.html name="pdf" %}<span>PDF</span></a></li>
+      <li><a class="linkbtn" href="#publications">{% include icon.html name="arxiv" %}<span>arXiv</span></a></li>
+      <li><a class="linkbtn" href="#publications">{% include icon.html name="ieee" %}<span>IEEE Xplore</span></a></li>
+      <li><a class="linkbtn" href="#publications">{% include icon.html name="code" %}<span>Code</span></a></li>
+      <li><a class="linkbtn" href="#publications">{% include icon.html name="slides" %}<span>Slides</span></a></li>
+      <li><a class="linkbtn" href="#publications">{% include icon.html name="video" %}<span>Video</span></a></li>
+      <li><a class="linkbtn" href="#publications">{% include icon.html name="bibtex" %}<span>BibTeX</span></a></li>
+    </ul>
+  </div>
+</section>
+
+<section class="section sg-ref" id="figure" aria-labelledby="figure-title">
+  <h2 class="section__title" id="figure-title">Figure</h2>
+  <div class="section__body">
+    <p class="note">Publication figures (zoom=true) grow a little on hover and open larger on click; Escape or a click outside closes the dialog. Story photos do not zoom (Mehdi, Stage 8).</p>
+    <div class="prose">
+      {% include figure.html name="stories/asilomar-2024-lecture" alt="Lecture at the 2024 Asilomar Conference, with the title slide of the ADMM paper" caption="A sample figure: the 2024 Asilomar lecture." sizes="(min-width: 48rem) 42rem, calc(100vw - 2rem)" zoom=true %}
+    </div>
+  </div>
+</section>

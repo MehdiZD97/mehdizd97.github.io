@@ -1,0 +1,31 @@
+// Header: a band of the field color on every page.
+.site-header { position: sticky; top: 0; z-index: 10; background: var(--field); color: var(--on-field); }
+.site-header :focus-visible, .hero :focus-visible, .site-footer :focus-visible { outline-color: var(--on-field); }
+.site-header__inner { max-width: var(--wrap); margin: 0 auto; padding: 0.75rem var(--gutter); gap: 0.5rem 0.75rem; min-height: 4rem; }
+.brand { display: inline-flex; align-items: center; gap: 0.625rem; color: var(--on-field); text-decoration: none; }
+.brand__mark { width: 2.375rem; height: 2.375rem; }
+.brand__mark .monogram__bg { fill: var(--on-field); }
+.brand__mark .monogram__mz { fill: var(--field); }
+.brand__name { font-weight: 700; font-size: 1.1875rem; letter-spacing: -0.015em; }
+.menu-button, .theme-toggle {
+  min-height: 2.5rem; border-radius: var(--pill);
+  border: 1.5px solid color-mix(in srgb, var(--on-field) 55%, transparent);
+  background: transparent; color: var(--on-field); font-weight: 650;
+}
+.menu-button { padding: 0 0.95rem; }
+// Narrow phones: the menu button shows only its icon (the label stays for screen readers), so the bar keeps one row.
+@media (max-width: 24rem) {
+  .menu-button { width: 2.5rem; padding: 0; justify-content: center; }
+  .menu-button__label { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
+.theme-toggle { width: 2.5rem; }
+.site-menu { padding: 0.25rem 0 1rem; }
+.site-nav a { position: relative; display: block; padding: 0.625rem 0; color: var(--on-field); font-weight: 600; text-decoration: none; }
+.site-nav a[aria-current] { text-decoration: underline; text-decoration-thickness: 3px; text-decoration-color: var(--beam-bright); text-underline-offset: 0.45em; }
+.site-header .btn--primary { background: var(--on-field); color: var(--field); margin-top: 0.5rem; }
+@media (min-width: 56.25rem) {
+  .site-menu { gap: 1.25rem; padding: 0; }
+  .site-nav ul { gap: 1.125rem; }
+  .site-nav a { padding: 0.5rem 0; font-size: var(--text-ui); }
+  .site-header .btn--primary { margin-top: 0; }
+}

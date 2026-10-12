@@ -1,0 +1,178 @@
+// Layout behavior shared by both styles.
+
+// Header: brand, menu button, and theme toggle in one row; the menu folds
+// below on phones and opens as a disclosure (site.js).
+.site-header__inner { display: flex; flex-wrap: wrap; align-items: center; }
+.brand { order: 0; }
+.menu-button { order: 1; margin-inline-start: auto; display: inline-flex; align-items: center; gap: 0.375rem; }
+.theme-toggle { order: 2; display: inline-grid; place-items: center; }
+.site-menu { order: 3; flex-basis: 100%; }
+.js .site-menu:not(.is-open) { display: none; }
+// The header is sticky, so an open menu scrolls inside itself on short screens.
+.site-menu.is-open { max-height: calc(100vh - 5rem); max-height: calc(100dvh - 5rem); overflow-y: auto; overscroll-behavior: contain; }
+.site-nav ul { list-style: none; }
+@media (min-width: 56.25rem) {
+  .menu-button { display: none; }
+  .site-menu, .js .site-menu:not(.is-open) {
+    display: flex; align-items: center;
+    order: 1; flex-basis: auto; margin-inline-start: auto;
+  }
+  .site-menu.is-open { max-height: none; overflow: visible; }
+  .site-nav ul { display: flex; }
+  .theme-toggle { order: 2; }
+}
+.theme-toggle[aria-pressed="true"] .theme-toggle__icon--moon,
+.theme-toggle[aria-pressed="false"] .theme-toggle__icon--sun { display: none; }
+
+// Hero: two stacked views that cross-fade; the tabs need JavaScript.
+.hv-stage { display: grid; }
+.hv-panel { grid-area: 1 / 1; min-width: 0; }
+.js .hv-panel { transition: opacity 280ms cubic-bezier(0.2, 0.7, 0.2, 1), visibility 0s linear 0s; }
+.js .hv-panel.is-hidden { opacity: 0; visibility: hidden; transition: opacity 280ms cubic-bezier(0.2, 0.7, 0.2, 1), visibility 0s linear 280ms; }
+html:not(.js) .hv-tabs, html:not(.js) .hv-panel.is-hidden { display: none; }
+
+// Controls that need JavaScript (filters, BibTeX buttons, Copy) show only
+// when it runs; the head script sets .js before the first paint.
+html:not(.js) .js-only { display: none !important; }
+
+// BibTeX: the block on a publication's page, and the BibTeX windows that
+// the BibTeX buttons open (popovers, pub-item.html; Mehdi, Stage 9). A
+// popover opens without any script; browsers without popovers hide the
+// button. Long lines wrap; the copied text is exact.
+.bibtex pre, .bib-pop__text { overflow-x: auto; margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.bibtex__status:empty { display: none; }
+.needs-popover { display: none; }
+@supports selector(:popover-open) {
+  .needs-popover { display: block; }
+}
+.bib-pop { width: min(42rem, calc(100vw - 2rem)); max-height: calc(100vh - 2rem); padding: 0; border: 0; overflow: auto; }
+.bib-pop::backdrop { background: rgb(0 0 0 / 0.55); }
+.bib-pop__body { display: grid; gap: var(--space-3); padding: var(--space-5); }
+.bib-pop__head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); }
+.bib-pop__text { max-height: 50vh; overflow-y: auto; }
+.bib-pop__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); }
+
+// Publications page filters (publications.js): radio chips in labeled rows.
+.pub-filters { display: grid; gap: var(--space-4); }
+.pub-filter, .pub-search { display: grid; gap: var(--space-2); min-width: 0; }
+.pub-filter__options { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+@media (min-width: 40rem) {
+  .pub-filter, .pub-search { grid-template-columns: 5.5rem minmax(0, 1fr); align-items: center; column-gap: var(--space-4); }
+  .pub-filter { align-items: start; }
+  .pub-filter .pub-filter__label { padding-top: 0.55rem; }
+}
+// On phones each row of chips scrolls sideways, edge to edge, instead of
+// stacking; arrow keys still move the choice and bring it into view.
+@media (max-width: 39.99rem) {
+  .pub-filter__options {
+    flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none;
+    margin: -4px calc(-1 * var(--gutter)); padding: 4px var(--gutter);
+  }
+  .pub-filter__options::-webkit-scrollbar { display: none; }
+  .chip { flex: none; }
+}
+.chip { position: relative; display: inline-flex; }
+.chip input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.chip__face { display: inline-flex; align-items: center; gap: 0.4rem; pointer-events: none; }
+// Entries that come back into view fade in (off with reduced motion).
+@keyframes pub-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.pub.is-entering { animation: pub-in 200ms cubic-bezier(0.2, 0.7, 0.2, 1); }
+
+// Zoomable figures (figure.html with zoom=true, through zoom-image.html; the
+// publication figure): the image grows a little on hover and opens larger in
+// a dialog on click (site.js). Story photos do not zoom (Mehdi, Stage 8).
+.zoom { display: block; position: relative; overflow: hidden; border-radius: var(--radius); }
+.zoom picture { display: block; }
+.zoom img { width: 100%; transition: transform 200ms cubic-bezier(0.2, 0.7, 0.2, 1); }
+.zoom:focus-visible img { transform: scale(1.04); }
+@media (hover: hover) and (pointer: fine) {
+  .zoom { cursor: zoom-in; }
+  .zoom:hover img { transform: scale(1.04); }
+}
+// The lightbox: Close above the image, the caption below.
+.lightbox { max-width: min(94vw, 80rem); max-height: 94vh; padding: 0; border: 0; background: transparent; color: #fff; overflow: visible; }
+.lightbox::backdrop { background: rgb(0 0 0 / 0.82); }
+.lightbox__bar { display: flex; justify-content: flex-end; margin-bottom: 0.75rem; }
+.lightbox__close {
+  min-height: 2.5rem; padding: 0 1rem;
+  border: 1.5px solid rgb(255 255 255 / 0.7); border-radius: 999px; background: transparent; color: #fff; font-weight: 600;
+}
+.lightbox img { display: block; max-width: 100%; max-height: calc(94vh - 6rem); width: auto; height: auto; margin: 0 auto; border-radius: 6px; }
+.lightbox__caption { margin-top: 0.75rem; text-align: center; font-size: 0.9375rem; }
+.lightbox__close:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+@media (hover: hover) and (pointer: fine) {
+  .lightbox__close:hover { border-color: #fff; }
+}
+
+// Videos that load when played (video-player.html, site.js): a 16:9 frame
+// with the thumbnail and a Play button, replaced by the player on click.
+.player { position: relative; aspect-ratio: 16 / 9; overflow: hidden; }
+.player__start { position: absolute; inset: 0; display: block; width: 100%; height: 100%; padding: 0; border: 0; background: none; color: inherit; cursor: pointer; }
+.player__thumb { width: 100%; height: 100%; object-fit: cover; }
+.player__frame { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.player__badge { pointer-events: none; }
+.player.is-playing .player__badge { display: none; }
+
+// Contact page: the details beside the form on wide screens; inline field
+// errors and the sending status (contact.js).
+.contact { display: grid; gap: var(--space-7); }
+.contact > .subsection + .subsection { margin-top: 0; }   // the grid gap spaces them
+@media (min-width: 56.25rem) {
+  .contact { grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); align-items: start; }
+}
+.contact-list { list-style: none; display: grid; gap: var(--space-4); }
+.contact-list li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-3); align-items: start; }
+.contact-list li > span:last-child { padding-top: 0.1rem; }
+.contact-list__label { display: block; }
+.contact-list a { overflow-wrap: anywhere; }
+.form__status:empty { display: none; }
+
+// The CV's contents list (cv.html): a sticky sidebar on wide screens,
+// hidden on narrower ones and in print; site.js marks the section in view.
+.toc { display: none; }
+.toc ol { list-style: none; display: grid; gap: 0.125rem; }
+.toc a { display: block; text-decoration: none; }
+@media (min-width: 64rem) {
+  .cv-layout { display: grid; grid-template-columns: 11rem minmax(0, 1fr); column-gap: var(--space-7); align-items: start; }
+  .toc { display: block; position: sticky; top: 6rem; max-height: calc(100vh - 7rem); overflow-y: auto; padding-top: var(--space-1); }
+}
+
+// The list of stories on /news/ (post-item.html): a 16:9 thumbnail, then the
+// date, title, and description; the title's link covers the whole row.
+.story-list { list-style: none; display: grid; }
+.story-item { position: relative; display: grid; grid-template-columns: 7rem minmax(0, 1fr); gap: var(--space-4); align-items: start; }
+.story-thumb { position: relative; display: grid; place-items: center; aspect-ratio: 16 / 9; overflow: hidden; }
+.story-thumb picture, .story-thumb img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+.story-thumb img { object-fit: cover; }
+.story-thumb .icon { width: 1.75rem; height: 1.75rem; }
+.story-text { display: grid; gap: 0.125rem; min-width: 0; }
+.story-title a::after { content: ""; position: absolute; inset: 0; }
+@media (min-width: 40rem) {
+  .story-item { grid-template-columns: 10rem minmax(0, 1fr); gap: var(--space-5); }
+}
+
+// Older and newer stories (post layout): side by side on wider screens,
+// the newer one always on the right.
+.story-nav { display: grid; gap: var(--space-3); max-width: var(--measure); }   // as wide as the text
+.story-nav__link { display: grid; gap: 0.25rem; align-content: start; text-decoration: none; }
+@media (min-width: 40rem) {
+  .story-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .story-nav__link--newer { grid-column: 2; text-align: end; }
+}
+
+// Embedded players keep a 16:9 frame.
+.embed { position: relative; aspect-ratio: 16 / 9; }
+.embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+// Page frame: the footer stays at the bottom on short pages.
+body { min-height: 100vh; display: flex; flex-direction: column; }
+#main { flex: 1 0 auto; }
+
+// Targets of at least 24 by 24 px (WCAG 2.2, 2.5.8) for links that stand
+// alone rather than inside a sentence.
+.site-nav a { min-width: 1.5rem; text-align: center; }
+.more-link a, .breadcrumb a, .contact-list a { display: inline-flex; align-items: center; min-height: 1.5rem; }
+
+// Rows of buttons and link buttons
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; }
+.linkbtns { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem; }

@@ -1,0 +1,20 @@
+{%- comment -%}
+  A date range such as "Jul 2024 – present", "Jan – Apr 2024", or
+  "Aug 2021 – Apr 2024" (with format="long": "August 2021 – April 2024").
+  Parameters: start, end (empty means present), format ("short" or "long"),
+  expected (true adds ", expected").
+{%- endcomment -%}
+{%- if include.format == "long" %}{% assign dr_m = "%B" %}{% else %}{% assign dr_m = "%b" %}{% endif -%}
+{%- assign dr_my = dr_m | append: " %Y" -%}
+{%- if include.end -%}
+  {%- assign dr_y1 = include.start | date: "%Y" -%}
+  {%- assign dr_y2 = include.end | date: "%Y" -%}
+  {%- if dr_y1 == dr_y2 and include.format != "long" -%}
+    {{ include.start | date: dr_m }} – {{ include.end | date: dr_my }}
+  {%- else -%}
+    {{ include.start | date: dr_my }} – {{ include.end | date: dr_my }}
+  {%- endif -%}
+{%- else -%}
+  {{ include.start | date: dr_my }} – present
+{%- endif -%}
+{%- if include.expected %}, expected{% endif -%}

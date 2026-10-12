@@ -1,0 +1,41 @@
+{%- comment -%}
+  Structured data for Home (PLAN 4.8): a schema.org Person built from
+  _data/profile.yml and _data/cv/education.yml (schools with a finished
+  degree are alumniOf), and the WebSite.
+{%- endcomment -%}
+{%- assign pe = site.data.profile -%}
+{%- assign pe_id = '/' | absolute_url | append: '#person' -%}
+{%- assign pe_alumni = site.data.cv.education | where_exp: "e", "e.expected != true" | map: "school" | uniq -%}
+{%- assign pe_topics = "" | split: "" -%}
+{%- for pe_group in pe.interests %}{% assign pe_topics = pe_topics | concat: pe_group.items %}{% endfor -%}
+{%- assign pe_bio = pe.bio | split: "\n\n" | first -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": {{ pe_id | jsonify }},
+      "name": {{ pe.name | jsonify }},
+      "jobTitle": {{ pe.title | jsonify }},
+      "description": {{ pe_bio | strip | jsonify }},
+      "url": {{ '/' | absolute_url | jsonify }},
+      "image": {{ pe.photo | absolute_url | jsonify }},
+      "email": {{ pe.email | prepend: "mailto:" | jsonify }},
+      "affiliation": { "@type": "CollegeOrUniversity", "name": {{ pe.affiliation | jsonify }} },
+      "alumniOf": [{% for school in pe_alumni %}{ "@type": "CollegeOrUniversity", "name": {{ school | jsonify }} }{% unless forloop.last %}, {% endunless %}{% endfor %}],
+      "knowsAbout": {{ pe_topics | jsonify }},
+      "sameAs": [{% for link in pe.links %}{{ link.url | jsonify }}{% unless forloop.last %}, {% endunless %}{% endfor %}]
+    },
+    {
+      "@type": "WebSite",
+      "@id": {{ '/' | absolute_url | append: '#website' | jsonify }},
+      "url": {{ '/' | absolute_url | jsonify }},
+      "name": {{ site.title | jsonify }},
+      "description": {{ site.description | jsonify }},
+      "inLanguage": "en-US",
+      "author": { "@id": {{ pe_id | jsonify }} }
+    }
+  ]
+}
+</script>

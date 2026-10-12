@@ -1,34 +1,62 @@
-name: Build and Deploy Jekyll
+name: Build and deploy site
 
 on:
   push:
-    branches: [ master, main ]
-  workflow_dispatch:
+    branches: [master, developer]
+  pull_request:
+    branches: [master]
+  schedule:
+    - cron: "23 15 * * 1"     # Mondays at 15:23 UTC (morning in California): rebuilds master with new YouTube uploads
+  workflow_dispatch:          # "Run workflow" on GitHub: rebuild now (for example, right after an upload)
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/master' }}
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    # Pinned: Ruby 3.4.8 (.ruby-version) has no prebuilt Ubuntu 26.04 version, and
+    # ubuntu-latest moves to 26.04 from 2026-10-19. Move up together with Ruby.
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0            # full history: _plugins/last_modified.rb dates pages from Git
+      - name: Fetch the latest videos (YouTube feed)
+        run: python3 scripts/fetch_videos.py   # without it, the site shows the videos in _data/videos.yml only
+        continue-on-error: true               # a failed fetch never stops the build
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.2'
-          bundler-cache: true
-      - run: bundle install --path vendor/bundle
-      - run: bundle exec jekyll build --trace
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: _site
+          bundler-cache: true       # Ruby version comes from .ruby-version
+      - id: pages
+        uses: actions/configure-pages@v6
+      - name: Build
+        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+        env:
+          JEKYLL_ENV: production
+      - name: Check links, images, and scripts (html-proofer)
+        shell: bash                 # pipefail, so a failing check fails the step
+        env:
+          LC_ALL: C.UTF-8           # without a UTF-8 locale html-proofer skips pages with non-ASCII text
+        run: |
+          bundle exec htmlproofer ./_site --disable-external --swap-urls '^https\://mehdizd97\.github\.io:' 2>&1 | tee proofer.log
+          # html-proofer can crash on a page and still report success; treat that as a failure.
+          if grep -q "unhandled exception" proofer.log; then echo "html-proofer crashed on a page (see above)"; exit 1; fi
+      - if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v5
 
   deploy:
+    if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
     needs: build
-    permissions:
-      pages: write
-      id-token: write
+    runs-on: ubuntu-24.04
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

@@ -1,0 +1,76 @@
+# Honors and awards (PLAN 4.4), newest first; the order here is the order on
+# the site. The full CV (/cv/) lists every entry; `home: true` also shows it in
+# the CV section on Home. Optional fields: date (YYYY-MM-DD; day 01 when only
+# the month is known), years (display label for an award received more than
+# once), detail, pub (publication slug), talk (id in talks.yml), url. See GUIDE.md.
+
+- year: 2026
+  date: 2026-06-01
+  title: Wireless History Foundation Scholarship Award
+  org: Wireless History Foundation
+  home: true
+
+- year: 2026
+  date: 2026-03-01
+  title: Pia Gratton Endowed Graduate Student Award
+  org: UC Irvine
+  home: true
+
+- year: 2026
+  date: 2026-06-01
+  title: 1st Place, UCI EECS Annual Technology Showcase
+  org: UC Irvine
+  home: true
+
+- year: 2026
+  date: 2026-03-01
+  title: 3rd Place, UCI Grad Slam Competition
+  org: UC Irvine
+  talk: grad-slam-2026
+  home: true
+
+- year: 2025
+  date: 2025-08-01
+  title: Best Paper Award Finalist, 59th Asilomar Conference
+  org: IEEE Asilomar Conference
+  pub: decentralized-resource-optimization-cell-free-isac
+  home: true
+
+- year: 2024
+  date: 2024-09-01
+  title: Graduate Dean’s Recruitment Fellowship Award
+  org: UC Irvine
+  home: true
+
+- year: 2023
+  years: 2022, 2023
+  title: SIAWE Scholarship Award for Distinguished International Students
+  org: Rice University
+  detail: Society of Iranian-American Women for Education (SIAWE).
+  home: true
+
+- year: 2023
+  date: 2023-01-28
+  title: 1st Prize, POWDER-RENEW Mobile and Wireless Week
+  org: University of Utah
+  talk: mww-2023
+
+- year: 2021
+  title: Rice University Graduate Fellowship
+  org: Rice University
+
+- year: 2019
+  title: Exceptional Talent Award
+  org: University of Tehran
+  detail: Top 5% GPA.
+
+- year: 2016
+  title: National Elites Foundation Fellowship
+  org: Iranian National Elites Foundation
+
+- year: 2015
+  date: 2015-09-01
+  title: Ranked 47th, Iranian National University Entrance Exam (Konkoor)
+
+- year: 2013
+  title: Ranked 3rd, Iranian National Mathematics Olympiad

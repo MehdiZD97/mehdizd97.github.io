@@ -1,0 +1,18 @@
+# Old addresses that lead into a section of a page (PLAN 4.5). A page's own
+# `redirect_from` cannot add a #section, so _plugins/redirects.rb turns each
+# entry here into a redirect page (through jekyll-redirect-from).
+#   from: the old address; to: where it leads now
+
+# The v1 Talks page and its talk pages (Stage 8): each talk to its entry on
+# the CV; conferences attended without a talk to the CV's conferences list.
+- { from: /talks/, to: /cv/#talks }
+- { from: /talks/2022-04-conf-1/, to: /cv/#talks }          # ComSoc Student Tech Leadership Conference (cut from the CV)
+- { from: /talks/2023-01-conf-2/, to: /cv/#mww-2023 }
+- { from: /talks/2023-09-conf-3/, to: /cv/#tldr-2023 }
+- { from: /talks/2023-10-conf-4/, to: /cv/#asilomar-2023 }
+- { from: /talks/2024-10-conf-5/, to: /cv/#asilomar-2024 }
+- { from: /talks/2025-10-conf-6/, to: /cv/#conferences }    # IEEE MILCOM 2025, attended
+- { from: /talks/2025-10-conf-7/, to: /cv/#asilomar-2025 }
+
+# The v1 template's Teaching page
+- { from: /teaching/, to: /cv/#teaching }

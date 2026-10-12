@@ -1,0 +1,8 @@
+{%- comment -%}
+  The "Download CV (PDF)" button, shown only once the file in profile.cv_pdf
+  exists. Parameters: class (button classes).
+{%- endcomment -%}
+{%- assign cv_file = site.static_files | where: "path", site.data.profile.cv_pdf | first -%}
+{%- if cv_file -%}
+<a class="{{ include.class | default: 'btn btn--secondary' }}" href="{{ cv_file.path | relative_url }}">{% include icon.html name="pdf" %}Download CV (PDF)</a>
+{%- endif -%}

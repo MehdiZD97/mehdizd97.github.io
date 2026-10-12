@@ -1,0 +1,38 @@
+---
+layout: styleguide
+title: "Direction B: Cooperative (main)"
+permalink: /dev/styleguide/cooperative/
+sitemap: false
+direction: cooperative
+letter: B
+signature: "the shared hero with two switchable views, cell-free beams (first) and the steerable array, drawn in white, orange, and cyan on the blue field."
+hero_script: /assets/js/hero.js
+sections: [news, publications, cv, videos]   # the menu scrolls to these (site header)
+principles:
+  - name: Many nodes, one beam
+    text: Like cooperating access points, every section serves one goal; the hero shows the idea literally.
+  - name: Loud field, quiet page
+    text: Color is concentrated in the hero, the header band, and a few chips; reading areas stay calm and white.
+  - name: Same blue as the channel
+    text: The site and the YouTube channel feel like one brand.
+type_scale:
+  - { class: type-hero, label: "Hero name: Bricolage Grotesque 780, 48 to 88 px (optical size follows the size)" }
+  - { class: type-h1, label: "Page title: 760, 36 to 52 px" }
+  - { class: type-h2, label: "Section heading: 760, 28 to 40 px" }
+  - { class: type-sub, label: "Subsection heading: 750, 22 to 26 px, with an orange bar" }
+  - { class: type-h3, label: "Entry title: 700, 19 to 21 px" }
+  - { class: type-body, label: "Body: 400, 17 px, line height 1.55, about 64 characters per line" }
+  - { class: type-small, label: "Small: 14 px" }
+  - { class: type-mono, label: "Data: system monospace (no second family)" }
+  - { class: type-ui, label: "Navigation and buttons: 600 to 650, 15 px" }
+---
+{% include styleguide/bar.html %}
+{% include header.html %}
+<main id="main">
+  {% include hero.html %}
+  <div class="site-main">
+    {% include home-sections.html %}
+    {% include styleguide/sections.html %}
+  </div>
+</main>
+{% include footer.html %}
