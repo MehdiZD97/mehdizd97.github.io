@@ -54,6 +54,7 @@ class QuietHandler(http.server.SimpleHTTPRequestHandler):
 
 def main() -> int:
     profile = yaml.safe_load((ROOT / "_data" / "profile.yml").read_text(encoding="utf-8"))
+    site_url = yaml.safe_load((ROOT / "_config.yml").read_text(encoding="utf-8"))["url"].rstrip("/")
     out = ROOT / profile["cv_pdf"].lstrip("/")
 
     with tempfile.TemporaryDirectory() as site:
@@ -73,6 +74,15 @@ def main() -> int:
                 page.evaluate("() => document.querySelectorAll('img[loading=\"lazy\"]').forEach((img) => { img.loading = 'eager'; })")
                 page.wait_for_function("() => [...document.images].every((img) => img.complete)")
                 page.evaluate("() => document.fonts.ready.then(() => true)")
+                # Links to the site's other pages (the publication titles) would print as
+                # links to this temporary server; point them at the live site instead.
+                # Links within the CV (an award to its talk) stay jumps inside the PDF.
+                page.evaluate(
+                    "(site) => document.querySelectorAll('a[href]').forEach((a) => {"
+                    " if (a.origin === location.origin && a.pathname !== location.pathname)"
+                    " a.href = site + a.pathname + a.search + a.hash; })",
+                    site_url,
+                )
                 page.emulate_media(media="print")
                 out.parent.mkdir(parents=True, exist_ok=True)
                 page.pdf(

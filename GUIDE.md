@@ -24,6 +24,7 @@ This file itself is not published.
 14. [Change what the home page shows](#14-change-what-the-home-page-shows)
 15. [Check your change and publish it](#15-check-your-change-and-publish-it)
 16. [When the build stops](#16-when-the-build-stops)
+17. [Visitor counts](#17-visitor-counts)
 
 ---
 
@@ -512,4 +513,30 @@ Other problems:
 - **The preview shows an old page or a YAML error.** YAML errors name the file and line: look for a tab instead of spaces, a missing space after a colon, or text with `: ` that needs quotes (section 2).
 - **A change to `_config.yml` or to `_plugins/` does not show.** Stop the preview (Ctrl+C) and start it again; the server reads those only when it starts.
 - **`bundle exec` complains about Ruby or missing gems.** In the repository folder, `ruby -v` must say 3.4.8 (rbenv reads `.ruby-version`). If it does not, run `rbenv install 3.4.8`; then `bundle install`.
+- **Moving to a newer Ruby later.** Change `.ruby-version`, run `rbenv install <version>` and `bundle install`, and check the preview. GitHub's builds run on Ubuntu 24.04 (`runs-on` in `.github/workflows/jekyll.yml`), because Ruby 3.4.8 has no prebuilt version for Ubuntu 26.04; with Ruby 3.4.9 or newer, both lines can say `ubuntu-latest` again.
 - **GitHub shows a red cross on a commit.** Open the Actions tab, then the failed run: the "Build" step lists content errors, and the "Check links" step names any page with a broken link or image.
+
+---
+
+## 17. Visitor counts
+
+The live site counts visits with [GoatCounter](https://www.goatcounter.com): page views, where visitors come from (Google Scholar, LinkedIn, YouTube, search), and their countries and devices. It sets no cookies and keeps no personal data, so the site needs no consent banner. The script loads only on the live site, never in your preview.
+
+To turn it on (once):
+
+1. Sign up at https://www.goatcounter.com (free for reasonable public use; the service is supported by donations) and choose a code: your dashboard will live at `https://<code>.goatcounter.com`.
+2. In `_config.yml`, write the code (only the code) under `analytics:`:
+
+   ```yaml
+   analytics:
+     goatcounter: mycode
+   ```
+
+3. Commit and publish. Visits appear in the dashboard within a minute.
+
+Your own visits:
+
+- GoatCounter never counts visits from your preview (localhost).
+- To leave out your browsing of the live site, open https://mehdizd97.github.io/#toggle-goatcounter once in each browser you use, or add your home network's IP address under Settings, Tracking, "Ignore IPs" in the dashboard.
+
+To stop counting, empty the code again. The script is GoatCounter's fixed version 5, with a fingerprint the browser checks (`_includes/analytics.html`), so a changed copy never runs.

@@ -16,6 +16,12 @@ design: cooperative
 # Contact form endpoint (Formspree). Keep it: the contact page posts here.
 formspree: https://formspree.io/f/mwppwoye
 
+# Visitor counts (PLAN D13): GoatCounter, which sets no cookies. Put your site's
+# code here (MYCODE in MYCODE.goatcounter.com); empty means nothing is counted.
+# Production builds only. See GUIDE.md, "Visitor counts".
+analytics:
+  goatcounter:
+
 # Publications: one file per item in _publications/, named by its slug
 # (PLAN 4.4). Old v1 URLs redirect through each file's redirect_from.
 collections:

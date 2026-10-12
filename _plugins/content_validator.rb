@@ -159,6 +159,7 @@ module ContentValidator
     # ----- the files
 
     def run
+      analytics
       profile
       navigation
       news
@@ -171,6 +172,14 @@ module ContentValidator
       publications
       stories
       self
+    end
+
+    def analytics
+      code = @site.config.dig("analytics", "goatcounter")
+      return if code.nil? || code.to_s.strip.empty?
+      return if code.to_s.strip.match?(/\A[A-Za-z0-9][A-Za-z0-9-]*\z/)
+
+      @errors << "_config.yml: `analytics: goatcounter:` must be your GoatCounter code only, such as mycode for mycode.goatcounter.com (no https:// or .goatcounter.com)"
     end
 
     def profile

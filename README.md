@@ -10,6 +10,7 @@ Live site: https://mehdizd97.github.io
 - Facts live in data files, never in templates: `_data/` (profile, news, talks, awards, videos, the CV sections), `_publications/` (one file per paper, dataset, or software release), and `_posts/` (stories).
 - Two complete visual styles share all markup: Cooperative (the live one) and Instrument. `design` in `_config.yml` picks one; `/dev/styleguide/` shows both.
 - GitHub Actions builds every push to `master` and `developer`, checks links and images with html-proofer, and deploys `master` to GitHub Pages. Each build first reads the YouTube channel's newest uploads into the Videos list, and a weekly scheduled build keeps them current.
+- Visitor counts come from GoatCounter (no cookies), on the live site only, once its code is set in `_config.yml` (GUIDE.md, section 17).
 
 ## Local development
 

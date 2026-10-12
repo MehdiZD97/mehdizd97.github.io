@@ -10,14 +10,16 @@ button { cursor: pointer; }
 p, h1, h2, h3, h4, h5, h6, figure, blockquote, dl, dd, pre { margin: 0; }
 ul, ol { margin: 0; padding: 0; }
 
-// Anchored targets stop below the sticky header, and links to a section
-// always scroll there smoothly (Mehdi, Stages 6 and 9); with reduced motion
-// they jump (below). This is CSS on purpose, so it never depends on a script.
-// On a reload or a Back or Forward visit, the head script sets .no-smooth
-// until the page has loaded, so the browser restores the old position at
-// once instead of gliding down from the top.
-[id] { scroll-margin-top: 5rem; }
-html { scroll-behavior: smooth; }
+// Whatever the browser scrolls into view stops below the sticky header:
+// anchored sections, and every element that gets keyboard focus, so a focused
+// link is never hidden under the header (WCAG 2.4.11; Stage 11 moved this from
+// `scroll-margin-top` on [id] to the page). Links to a section always scroll
+// there smoothly (Mehdi, Stages 6 and 9); with reduced motion they jump
+// (below). This is CSS on purpose, so it never depends on a script. On a
+// reload or a Back or Forward visit, the head script sets .no-smooth until
+// the page has loaded, so the browser restores the old position at once
+// instead of gliding down from the top.
+html { scroll-padding-top: 5rem; scroll-behavior: smooth; }
 html.no-smooth { scroll-behavior: auto; }
 
 // The hidden attribute always wins over a component's display value.

@@ -1,0 +1,13 @@
+{%- comment -%}
+  Visitor counts (PLAN D13, Stage 11): GoatCounter, which sets no cookies and
+  keeps no personal data, so no consent banner is needed. It loads only in
+  production builds, and only once `analytics.goatcounter` in _config.yml
+  holds the site's code. The script is GoatCounter's pinned v5 with its
+  integrity hash (checked against the file on 2026-10-11), so a browser
+  refuses any changed copy. GoatCounter ignores visits from localhost and
+  private networks. GUIDE.md, "Visitor counts", explains the setup.
+{%- endcomment -%}
+{%- assign gc_code = site.analytics.goatcounter | strip -%}
+{%- if jekyll.environment == "production" and gc_code != "" %}
+  <script data-goatcounter="https://{{ gc_code | uri_escape }}.goatcounter.com/count" async src="https://gc.zgo.at/count.v5.js" crossorigin="anonymous" integrity="sha384-atnOLvQb9t+jTSipvd75X2yginT4PjVbqDdlJAmxMm+wYElFmeR6EmLP5bYeoRVQ"></script>
+{%- endif -%}

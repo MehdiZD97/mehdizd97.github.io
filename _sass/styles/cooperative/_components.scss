@@ -1,16 +1,19 @@
-// Publications: open entries with one venue chip
-.pub { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-2) var(--space-3); }
+// Publications: open entries with one venue chip. The venue's name sits
+// beside its chip while at least 14rem is left for it, and otherwise takes
+// its own line (a long chip on a phone, such as "MILCOM 2026 Workshop";
+// Stage 11), so it never shrinks to a column of single words.
+.pub { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-3); }
 .pub-meta, .pub-body { display: contents; }
 .pub-year, .pub-type { display: none; }
-.pub-title { grid-column: 1 / -1; order: 1; }
+.pub-title { flex: 1 1 100%; order: 1; }
 .pub-title a { color: var(--ink); text-decoration: none; }
-.pub-authors { grid-column: 1 / -1; order: 2; }
+.pub-authors { flex: 1 1 100%; order: 2; }
 .pub-authors strong { font-weight: 750; }
-.pub-venue-short { order: 3; align-self: center; padding: 0.3rem 0.7rem; border-radius: var(--pill); background: var(--field); color: var(--on-field); font-size: 0.8125rem; font-weight: 700; white-space: nowrap; }
-.pub-venue { order: 3; align-self: center; color: var(--slate); }
+.pub-venue-short { order: 3; flex: none; padding: 0.3rem 0.7rem; border-radius: var(--pill); background: var(--field); color: var(--on-field); font-size: 0.8125rem; font-weight: 700; white-space: nowrap; }
+.pub-venue { order: 3; flex: 1 1 14rem; min-width: 0; color: var(--slate); }
 .pub-badges { display: flex; flex-wrap: wrap; gap: var(--space-2); }
-.pub .pub-badges { grid-column: 1 / -1; order: 4; }
-.pub .linkbtns { grid-column: 1 / -1; order: 5; margin-top: var(--space-2); }
+.pub .pub-badges { flex: 1 1 100%; order: 4; }
+.pub .linkbtns { flex: 1 1 100%; order: 5; margin-top: var(--space-2); }
 @media (hover: hover) and (pointer: fine) {
   .pub-title a:hover { text-decoration: underline; text-decoration-color: var(--beam-bright); text-decoration-thickness: 3px; }
 }
