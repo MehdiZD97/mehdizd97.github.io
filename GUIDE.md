@@ -379,7 +379,7 @@ Open `_data/profile.yml`:
 - `title`, `affiliation_short`, `headline`, `intro` (the hero sentence, first person), and `bio` (two paragraphs, third person, on the CV page).
 - `interests`: the research interests groups on the CV.
 - `links`: the profile icons in the hero and footer, in this order. Each has an `id` (it picks the icon: `google-scholar`, `orcid`, `github`, `linkedin`, `researchgate`, `youtube`), a `label`, and a `url`. Add `footer_only: true` to show a link only in the footer (ResearchGate has it), not in the hero or on the printed CV.
-- To change the portrait: put the new original in `_assets-src/images/` (at least 1200 px on the short side), point `profile/mehdi-zafari` in `_assets-src/images.yml` to it with `src:`, and run the image script (section 13, step 3).
+- To change the portrait: put the new original in `_assets-src/images/` (never in `assets/img/`, which is published as is), point `profile/mehdi-zafari` in `_assets-src/images.yml` to it with `src:`, and run the image script (section 13, step 3). The script crops it to a square around the center. The site shows the portrait at most 480 px wide, so an original of about 1000 px or more is plenty; the current one, `profile-portrait.png`, is 1083 px.
 - **The social card** (`assets/img/social-card.jpg`, the image shown when someone shares a page of the site) uses your name, title, affiliation, headline, and portrait. After changing any of them, make it again:
 
   ```bash
@@ -522,17 +522,16 @@ Other problems:
 
 The live site counts visits with [GoatCounter](https://www.goatcounter.com): page views, where visitors come from (Google Scholar, LinkedIn, YouTube, search), and their countries and devices. It sets no cookies and keeps no personal data, so the site needs no consent banner. The script loads only on the live site, never in your preview.
 
-To turn it on (once):
+It is on: your code, `mehdizd97`, is in `_config.yml` under `analytics:`, and the dashboard is at https://mehdizd97.goatcounter.com. Visits appear there within a minute.
 
-1. Sign up at https://www.goatcounter.com (free for reasonable public use; the service is supported by donations) and choose a code: your dashboard will live at `https://<code>.goatcounter.com`.
-2. In `_config.yml`, write the code (only the code) under `analytics:`:
+You never need to paste GoatCounter's snippet into a page: `_includes/analytics.html` adds it to every page, using the same counter address with GoatCounter's fixed version 5 of the script (`count.v5.js`) instead of `count.js`, the one that changes over time.
 
-   ```yaml
-   analytics:
-     goatcounter: mycode
-   ```
+If you ever make a new GoatCounter site, put its code (only the code) in `_config.yml`:
 
-3. Commit and publish. Visits appear in the dashboard within a minute.
+```yaml
+analytics:
+  goatcounter: mycode
+```
 
 Your own visits:
 

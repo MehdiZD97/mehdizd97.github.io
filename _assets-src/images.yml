@@ -17,7 +17,7 @@
 # How to add a photo: GUIDE.md.
 
 profile/mehdi-zafari:
-  src: images/profile4.jpeg          # a higher-resolution original would sharpen it (PROGRESS, open input 9)
+  src: images/profile-portrait.png   # lossless 1083 px original (2026-10-11; same photo as profile4.jpeg); the site shows it at most 480 px wide
   crop: square
   widths: [160, 320, 480]
   fallback: 320
