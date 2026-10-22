@@ -167,9 +167,10 @@ Then open the new file and answer its `TODO(mehdi)` notes (the type and status o
    | `venue` | The full venue name, for example `IEEE International Conference on Communications (ICC)`. |
    | `venue_short` | A short label for the chip, for example `ICC 2027` or `IEEE TWC`. |
    | `date` | Used for sorting. Published items show the year only; the others show the month and year. |
-   | `doi` | Optional. The DOI only, for example `10.1109/TVT.2026.3656108`. The button label comes from the DOI: IEEE DOIs show "IEEE Xplore", IEEE DataPort DOIs show "IEEE DataPort", any other shows "DOI". |
+   | `doi` | Optional. The DOI only, for example `10.1109/TVT.2026.3656108`. The button label comes from the DOI: IEEE DOIs show "IEEE Xplore", IEEE DataPort DOIs show "IEEE DataPort", Zenodo DOIs show "Zenodo", any other shows "DOI" (the list is `doi_labels` in `_config.yml`). |
    | `arxiv` | Optional. The arXiv ID only, in quotes, for example `"2609.12195"` (without quotes, an ID ending in 0 loses that 0 and the link breaks). |
    | `code`, `pdf`, `slides`, `poster`, `dataset` | Optional links. `pdf`, `slides`, and `poster` can be files you put in `files/` (for example `/files/slides/example.pdf`) or full URLs. |
+   | `package` | Optional, for software: the package's page, such as `https://pypi.org/project/tr3gpp/`. PyPI links show a "PyPI" button, others a "Package" button. |
    | `video` | Optional. A YouTube video ID (the part after `watch?v=`). It adds a Video button and a player on the publication's page that loads only when played. |
    | `award` | Optional, for example `Best Paper Award Finalist`. Shows a badge. |
    | `featured` | `true` shows the paper in Home's "Selected publications". |
@@ -222,12 +223,13 @@ venue: GitHub repository # or IEEE DataPort
 venue_short: GitHub
 date: 2026-10-01
 code: https://github.com/MehdiZD97/example   # for software; datasets use doi or dataset
+package: https://pypi.org/project/example/    # optional: the package's page (PyPI shows a PyPI button)
 topics: [cell-free-isac]
 ---
 One or two sentences about it. You can link its paper: [Paper title](/publications/<slug>/).
 ```
 
-A `bibtex` field is optional for software.
+A `bibtex` field is optional for software. If the release is archived on Zenodo, start the file with the script and its DOI (`python3 scripts/new_publication.py --doi 10.5281/zenodo.<number>`): it fills the title, date, description, and BibTeX from the record. Use the concept DOI (the one for all versions, shown on the Zenodo page under "Cite all versions"), so the button always opens the newest release.
 
 ---
 

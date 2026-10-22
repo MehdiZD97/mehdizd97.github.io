@@ -305,6 +305,8 @@ def render(meta: dict) -> str:
     if meta["bibtex"]:
         lines.append("bibtex: |")
         lines += [f"  {line}" for line in meta["bibtex"].splitlines()]
+    if "$" in meta["abstract"]:
+        lines.append("# TODO(mehdi): the abstract has LaTeX math ($...$), which the site shows as typed; write it as text or HTML, such as F<sub>1</sub>")
     lines.append("---")
     lines.append(one_sentence_per_line(meta["abstract"]) if meta["abstract"] else "TODO(mehdi): the abstract, in Markdown (one sentence per line).")
     return "\n".join(lines) + "\n"

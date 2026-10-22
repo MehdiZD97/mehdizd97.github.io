@@ -48,6 +48,7 @@ author_highlight: ["M. Zafari", "Mehdi Zafari"]
 doi_labels:
   - { prefix: "10.1109/", label: IEEE Xplore, icon: ieee }
   - { prefix: "10.21227/", label: IEEE DataPort, icon: database }
+  - { prefix: "10.5281/", label: Zenodo, icon: database }
 doi_default: { label: DOI, icon: link }
 
 # Home page: how many news items (plus any with `pin: true`), talks, and

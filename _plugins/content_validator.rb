@@ -320,7 +320,7 @@ module ContentValidator
         data = doc.data
         entry(file, data,
               required: { "title" => :text, "authors" => :texts, "type" => PUB_TYPES, "status" => PUB_STATUSES, "venue" => :text, "date" => :date },
-              optional: { "venue_short" => :text, "doi" => :doi, "arxiv" => :arxiv, "code" => :url, "pdf" => :link, "slides" => :link,
+              optional: { "venue_short" => :text, "doi" => :doi, "arxiv" => :arxiv, "code" => :url, "package" => :url, "pdf" => :link, "slides" => :link,
                           "video" => :youtube, "poster" => :link, "dataset" => :url, "award" => :text, "featured" => :bool, "topics" => :topics,
                           "figure" => :image, "figure_alt" => :text, "figure_caption" => :text, "description" => :text,
                           "bibtex" => ->(v) { "must start with @ (a BibTeX entry such as @article{...})" unless v.to_s.strip.start_with?("@") },

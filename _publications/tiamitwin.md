@@ -8,7 +8,7 @@ venue_short: MILCOM 2026 Workshop
 date: 2026-07-01              # CV: accepted July 2026
 arxiv: "2609.22709"
 featured: true
-topics: [digital-twin, experimental, isac]
+topics: [digital-twin, channel-modeling, experimental, isac]
 bibtex: |
   @misc{zafari2026tiamitwin,
     author        = {Zafari, Mehdi and Enayati, Saeede and Swindlehurst, A. Lee and Mukherjee, Amitav},

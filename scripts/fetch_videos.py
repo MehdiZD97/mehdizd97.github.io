@@ -63,16 +63,22 @@ def site_zone():
         return timezone.utc
 
 
+# YouTube's feed now and then answers 404 for a while (it did at the launch
+# build on 2026-10-12), so the waits between tries cover about a minute.
+WAITS = (5, 15, 40)
+
+
 def download(url: str) -> bytes:
     request = urllib.request.Request(url, headers={"User-Agent": AGENT})
-    for attempt in range(3):
+    for attempt in range(len(WAITS) + 1):
         try:
             with urllib.request.urlopen(request, timeout=20) as response:
                 return response.read()
         except (urllib.error.URLError, TimeoutError, OSError) as error:
             problem = error
-            time.sleep(3 * (attempt + 1) if attempt < 2 else 0)
-    raise RuntimeError(f"could not download it: {problem}")
+            if attempt < len(WAITS):
+                time.sleep(WAITS[attempt])
+    raise RuntimeError(f"could not download it after {len(WAITS) + 1} tries: {problem}")
 
 
 def printable(ch: str) -> bool:

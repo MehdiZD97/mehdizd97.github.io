@@ -15,7 +15,7 @@ The files come from Fontsource (https://fontsource.org).
 
 The interface icons in `_includes/icon.html` come from Lucide 1.48.0 (https://lucide.dev), under the ISC License; some Lucide icons (among those used here: arrow-left, calendar, database, link, moon, rss, x) derive from Feather, under the MIT License. Both notices follow.
 
-The brand icons (Google Scholar, ORCID, GitHub, LinkedIn, ResearchGate, YouTube, arXiv, IEEE) come from Simple Icons 16.33.0 (https://simpleicons.org), dedicated to the public domain under CC0 1.0. The brands themselves are trademarks of their owners.
+The brand icons (Google Scholar, ORCID, GitHub, LinkedIn, ResearchGate, YouTube, arXiv, IEEE, PyPI) come from Simple Icons 16.33.0 (https://simpleicons.org), dedicated to the public domain under CC0 1.0. The brands themselves are trademarks of their owners.
 
 ### Lucide
 

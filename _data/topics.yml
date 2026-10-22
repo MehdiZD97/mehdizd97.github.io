@@ -15,7 +15,11 @@
   label: Machine learning
 - id: generative-ai
   label: Generative AI
+- id: security
+  label: Security
 - id: experimental
   label: Experiments and measurements
 - id: digital-twin
   label: Digital twins
+- id: channel-modeling
+  label: Channel modeling

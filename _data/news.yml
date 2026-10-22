@@ -5,6 +5,28 @@
 #   url and url_label: any other link (internal URLs start with "/");
 #   pin: true keeps an item on Home even when it is older.
 
+- date: 2026-10-30
+  type: talk
+  text: Presenting our paper **Feasible but Not Safe**, on constraint violations and report-channel attacks in learned cell-free ISAC association, at the ACM S3 workshop of MobiCom 2026 in Austin, Texas, on October 30.
+  pub: feasible-but-not-safe
+  talk: s3-2026
+
+- date: 2026-10-27
+  type: talk
+  text: Presenting our new paper **CORDIS-Track**, on tracking-aware coordinated resource allocation for distributed cell-free ISAC, in a lecture at the 60th Asilomar Conference on Signals, Systems, and Computers on October 27.
+  talk: asilomar-2026
+
+- date: 2026-10-15
+  type: talk
+  text: Presented **TiamiTwin**, our digital twin for bistatic ISAC drone sensing and a collaboration with Tiami Networks, at the ISAC4CIP workshop of IEEE MILCOM 2026 near Washington, DC.
+  pub: tiamitwin
+  talk: milcom-2026
+
+- date: 2026-08-04
+  type: release
+  text: Released **3gpp-tr-library**, hand-verified 3GPP channel-model parameters from TR 38.901 and TR 36.777 as queryable tables, with the Python package tr3gpp on PyPI.
+  pub: 3gpp-tr-library
+
 - date: 2026-07-01
   type: paper
   text: Our paper **TiamiTwin**, a digital twin for bistatic ISAC drone sensing validated against measurements, was accepted to the ISAC4CIP workshop at IEEE MILCOM 2026.

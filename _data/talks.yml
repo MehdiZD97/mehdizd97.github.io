@@ -5,14 +5,6 @@
 # Competition talk, Project presentation, Demo.
 
 # Drafts for Mehdi to finish (uncomment and fill in; see GUIDE.md):
-# - id: milcom-2026
-#   date:
-#   title: "TiamiTwin: A Digital Twin for Bistatic ISAC Drone Sensing, Validated Against Measurements"
-#   kind: Workshop talk
-#   event: IEEE MILCOM 2026 Workshop on Integrated Sensing and Communication for Critical Infrastructure Protection (ISAC4CIP)
-#   location:
-#   pub: tiamitwin
-
 # - id: icc-2026
 #   date:
 #   title: "ASSENT: Learning-Based Association Optimization for Distributed Cell-Free ISAC"
@@ -27,6 +19,33 @@
 #   kind: Demo
 #   event: UCI EECS Annual Technology Showcase
 #   location: Irvine, CA
+
+- id: s3-2026
+  date: 2026-10-30
+  title: "Feasible but Not Safe: Constraint Violations and Report-Channel Attacks in Learned Cell-Free ISAC Association"
+  kind: Workshop talk
+  event: 17th ACM Workshop on Wireless of the Students, by the Students, and for the Students (S3 '26) at ACM MobiCom 2026
+  location: Austin, TX
+  event_url: https://s3-workshop.neslab.it/
+  pub: feasible-but-not-safe
+
+- id: asilomar-2026
+  date: 2026-10-27
+  title: "CORDIS-Track: Tracking-Aware Coordinated Resource Allocation for Distributed Cell-Free ISAC"
+  kind: Lecture
+  event: 60th Asilomar Conference on Signals, Systems, and Computers
+  location: Pacific Grove, CA
+  event_url: https://www.asilomarsscconf.org/
+
+- id: milcom-2026
+  date: 2026-10-15
+  title: "TiamiTwin: A Digital Twin for Bistatic ISAC Drone Sensing, Validated Against Measurements"
+  kind: Workshop talk
+  event: IEEE MILCOM 2026 Workshop on Integrated Sensing and Communication for Critical Infrastructure Protection (ISAC4CIP)
+  location: Rockville, MD
+  event_url: https://milcom2026.ieee-milcom.org/
+  pub: tiamitwin
+  note: Joint work with Tiami Networks.
 
 - id: grad-slam-2026
   date: 2026-03-01
