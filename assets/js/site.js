@@ -1,8 +1,9 @@
 // Site behavior (PLAN 3.2, 3.5, 6.3, 7.2, 8.1, and 9): the theme toggle, the
 // phone menu, the underline that follows the section in view (the header
 // menu on Home, the contents list on the CV), Copy buttons and the BibTeX
-// windows, the lightbox for zoomable figures, click-to-play videos, and the
-// Back button on publication and story pages. Loaded as a module on every
+// windows, the lightbox for zoomable figures, click-to-play videos, the
+// Back button on publication and story pages, and the back-to-top button.
+// Loaded as a module on every
 // page. Each feature runs on its own, so a problem in one cannot stop the
 // others. Smooth scrolling needs no script: it is CSS (_sass/shared/_reset),
 // and the BibTeX windows open with the browser's own popovers.
@@ -245,5 +246,27 @@ run("Back button", () => {
     window.addEventListener("popstate", again);
     window.addEventListener("pagehide", () => window.removeEventListener("popstate", again), { once: true });
     history.back();
+  });
+});
+
+// Back to top (Mehdi, 2026-10-22): the button appears once the page has
+// scrolled a screen down. A sentinel one screen tall at the top of the page
+// says when (no scroll listener). The scroll follows the page's CSS: smooth,
+// or at once with reduced motion. After a keyboard press, focus moves to the
+// skip link, so the next Tab starts at the top of the page.
+run("back to top", () => {
+  const button = document.querySelector(".to-top");
+  if (!button || !("IntersectionObserver" in window)) return;
+  const sentinel = document.createElement("div");
+  sentinel.className = "to-top-sentinel";
+  sentinel.setAttribute("aria-hidden", "true");
+  document.body.prepend(sentinel);
+  button.hidden = false;
+  new IntersectionObserver(([entry]) => {
+    button.classList.toggle("is-visible", !entry.isIntersecting && entry.boundingClientRect.top < 0);
+  }).observe(sentinel);
+  button.addEventListener("click", (event) => {
+    window.scrollTo({ top: 0 });
+    if (event.detail === 0) document.querySelector(".skip-link")?.focus({ preventScroll: true });
   });
 });

@@ -1,5 +1,10 @@
-{%- comment -%} Profile links from _data/profile.yml for the hero: an icon plus a label (each style decides whether the label shows). Links marked footer_only appear only in the footer. {%- endcomment -%}
-<ul class="profile-links" aria-label="Profiles">
+{%- comment -%}
+  The hero's links: Email first, then the profile links from
+  _data/profile.yml, each an icon plus a label (each style decides whether
+  the label shows). Links marked footer_only appear only in the footer.
+{%- endcomment -%}
+<ul class="profile-links" aria-label="Email and profiles">
+  <li><a href="mailto:{{ site.data.profile.email }}">{% include icon.html name="mail" %}<span class="profile-links__label">Email</span></a></li>
   {%- for link in site.data.profile.links %}
   {%- if link.footer_only %}{% continue %}{% endif %}
   <li><a href="{{ link.url }}" target="_blank" rel="noopener">{% include icon.html name=link.id %}<span class="profile-links__label">{{ link.label }}</span>{% include newtab.html %}</a></li>

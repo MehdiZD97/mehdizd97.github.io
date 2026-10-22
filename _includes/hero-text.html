@@ -1,7 +1,9 @@
 {%- comment -%}
   Hero text from _data/profile.yml: portrait, name (the page's h1), title,
-  headline, intro, actions, and profile links. Stage 5 adds the signature
-  visual beside it.
+  headline, intro, then the two actions and the links (Email and profiles)
+  in one block, so the links row spans exactly the buttons' width (Mehdi,
+  2026-10-22; the header's Contact button replaced the hero's Contact link).
+  Stage 5 adds the signature visual beside it.
 {%- endcomment -%}
 {%- assign profile = site.data.profile -%}
 <div class="hero__text">
@@ -15,10 +17,11 @@
   </div>
   <p class="hero__headline">{{ profile.headline }}</p>
   <p class="hero__intro">{{ profile.intro | default: site.description }}</p>
-  <p class="hero__actions">
-    <a class="btn btn--primary" href="#publications">View publications</a>
-    {% include cv-pdf.html %}
-    <a class="btn btn--text" href="{{ '/contact/' | relative_url }}">Contact</a>
-  </p>
-  {% include profile-links.html %}
+  <div class="hero__cta">
+    <p class="hero__actions">
+      <a class="btn btn--primary" href="#publications">View publications</a>
+      {% include cv-pdf.html %}
+    </p>
+    {% include profile-links.html %}
+  </div>
 </div>

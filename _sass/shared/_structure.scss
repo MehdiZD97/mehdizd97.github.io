@@ -176,3 +176,28 @@ body { min-height: 100vh; display: flex; flex-direction: column; }
 // Rows of buttons and link buttons
 .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; }
 .linkbtns { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+// Back to top (Mehdi, 2026-10-22): fixed at the bottom right, under the
+// header's layer. site.js adds .is-visible once the page has scrolled past
+// the sentinel, a block one screen tall at the top of the page. Hidden, it
+// takes no clicks and no keyboard focus.
+.to-top-sentinel { position: absolute; top: 0; left: 0; width: 1px; height: 100vh; pointer-events: none; }
+.to-top {
+  position: fixed; z-index: 5;
+  right: max(1rem, env(safe-area-inset-right)); bottom: max(1rem, env(safe-area-inset-bottom));
+  display: grid; place-items: center; width: 3rem; height: 3rem; padding: 0;
+  opacity: 0; visibility: hidden; transform: translateY(0.5rem);
+  transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out), visibility 0s linear var(--dur-fast);
+}
+.to-top.is-visible {
+  opacity: 1; visibility: visible; transform: none;
+  transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out), visibility 0s;
+}
+.to-top .icon { width: 1.375rem; height: 1.375rem; }
+@media (min-width: 48rem) {
+  .to-top { right: max(1.5rem, env(safe-area-inset-right)); bottom: max(1.5rem, env(safe-area-inset-bottom)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .to-top, .to-top.is-visible { transform: none; transition: none; }
+}
+

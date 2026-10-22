@@ -31,3 +31,15 @@
   .linkbtn:hover { transform: translateY(-1px); }
   .linkbtn:hover::after { opacity: 1; }
 }
+
+// Back to top: a paper circle with the link color's arrow, lifted off the page
+// (it also stands out on the blue footer).
+.to-top {
+  border: 1.5px solid color-mix(in srgb, var(--link) 35%, transparent); border-radius: 50%;
+  background: var(--paper); color: var(--link);
+  box-shadow: 0 0.5rem 1.5rem rgb(5 12 60 / 0.22);
+}
+@media (hover: hover) and (pointer: fine) {
+  .to-top.is-visible:hover { transform: translateY(-2px); }
+}
+

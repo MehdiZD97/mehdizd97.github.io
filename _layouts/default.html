@@ -15,6 +15,7 @@
   {% include header.html %}
   {{ content }}
   {% include footer.html %}
+  {% include to-top.html %}
   {%- assign asset_v = site.time | date: "%s" %}
   <script type="module" src="{{ '/assets/js/site.js' | relative_url }}?v={{ asset_v }}"></script>
   {%- for script in page.scripts %}

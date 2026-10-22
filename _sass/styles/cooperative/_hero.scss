@@ -31,19 +31,26 @@
 .hero__title { font-size: 1.125rem; font-weight: 600; color: var(--on-field-muted); }
 .hero__headline { font-size: var(--text-h3); font-weight: 650; line-height: 1.22; max-width: 22ch; letter-spacing: -0.01em; }
 .hero__intro { color: var(--on-field-muted); max-width: 46ch; }
-.hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); margin-top: var(--space-2); }
+// The two actions and the links share one width (Mehdi, 2026-10-22): the
+// buttons split it equally, or stack where two do not fit, and the six
+// link circles spread across it, so both rows end at the same edges.
+.hero__cta { display: grid; gap: var(--space-4); width: min(100%, 27rem); margin-top: var(--space-2); }
+.hero__actions { display: grid; grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr)); gap: var(--space-3); }
+.hero__actions .btn { padding-inline: 1rem; }
 .hero .btn--primary { background: var(--on-field); color: var(--field); }
 .hero .btn--secondary { border-color: color-mix(in srgb, var(--on-field) 60%, transparent); color: var(--on-field); }
-.hero .btn--text { color: var(--on-field); }
 
 // Profile links: icon circles (labels for screen readers only)
-.profile-links { list-style: none; display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.profile-links { list-style: none; display: flex; justify-content: space-between; gap: var(--space-2); }
 .profile-links a {
-  display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border-radius: 50%;
+  display: grid; place-items: center; width: 3rem; height: 3rem; border-radius: 50%;
   border: 1.5px solid color-mix(in srgb, var(--on-field) 45%, transparent); color: var(--on-field);
   transition: transform var(--dur-fast) var(--ease-out);
 }
-.profile-links .icon { width: 1.125rem; height: 1.125rem; }
+.profile-links .icon { width: 1.375rem; height: 1.375rem; }
+@media (min-width: 30rem) {
+  .profile-links a { width: 3.25rem; height: 3.25rem; }
+}
 .profile-links__label { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 @media (hover: hover) and (pointer: fine) {
   .profile-links a:hover { transform: translateY(-2px); }

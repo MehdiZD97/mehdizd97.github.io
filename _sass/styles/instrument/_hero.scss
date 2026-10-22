@@ -12,7 +12,12 @@
 .hero__title { font-size: 1.125rem; font-weight: 500; color: var(--slate); }
 .hero__headline { font-size: var(--text-h3); font-weight: 500; line-height: 1.35; max-width: 30ch; }
 .hero__intro { color: var(--slate); max-width: 52ch; }
-.hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); margin-top: var(--space-2); }
+// The two actions and the links share one width (Mehdi, 2026-10-22): the
+// buttons split it equally, or stack where two do not fit, and the labeled
+// links fill an even grid of the same width (three columns, two on phones).
+.hero__cta { display: grid; gap: var(--space-3); width: min(100%, 27rem); margin-top: var(--space-2); }
+.hero__actions { display: grid; grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr)); gap: var(--space-3); }
+.hero__actions .btn { padding-inline: 1rem; }
 
 // Portrait with the amber status mark of the monogram
 .hero__id { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-4); }
@@ -28,9 +33,9 @@
 }
 
 // Profile links: icon plus a mono label
-.profile-links { list-style: none; display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; font: 400 var(--text-mono)/1 var(--font-mono); }
-.profile-links a { display: inline-flex; align-items: center; gap: 0.4rem; min-height: 2rem; color: var(--slate); text-decoration: none; }
-.profile-links .icon { width: 1rem; height: 1rem; }
+.profile-links { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr)); gap: 0.25rem var(--space-3); font: 400 var(--text-mono)/1 var(--font-mono); }
+.profile-links a { display: inline-flex; align-items: center; gap: 0.5rem; min-height: 2.25rem; color: var(--slate); text-decoration: none; }
+.profile-links .icon { width: 1.125rem; height: 1.125rem; }
 @media (hover: hover) and (pointer: fine) {
   .profile-links a:hover { color: var(--signal); }
 }

@@ -25,6 +25,7 @@
 </head>
 <body>
   {{ content }}
+  {% include to-top.html %}
   {%- if d %}
   <script type="module" src="{{ '/assets/js/site.js' | relative_url }}"></script>
   {%- endif %}

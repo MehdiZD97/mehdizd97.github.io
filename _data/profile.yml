@@ -36,8 +36,8 @@ interests:       # CV: Research interests
 links:           # display order; each entry renders an icon plus an accessible label;
                  # footer_only: true keeps a link out of the hero and the printed CV
   - { id: google-scholar, label: Google Scholar, url: "https://scholar.google.com/citations?user=lKiB9vIAAAAJ" }
-  - { id: orcid, label: ORCID, url: "https://orcid.org/0000-0001-8894-8709" }
-  - { id: github, label: GitHub, url: "https://github.com/MehdiZD97" }
   - { id: linkedin, label: LinkedIn, url: "https://www.linkedin.com/in/Mehdi-Zafari" }
+  - { id: github, label: GitHub, url: "https://github.com/MehdiZD97" }
+  - { id: orcid, label: ORCID, url: "https://orcid.org/0000-0001-8894-8709" }
   - { id: researchgate, label: ResearchGate, url: "https://www.researchgate.net/profile/Mehdi-Zafari", footer_only: true }
   - { id: youtube, label: YouTube, url: "https://www.youtube.com/@MehdiZD97" }

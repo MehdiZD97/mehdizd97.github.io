@@ -44,3 +44,14 @@
   .linkbtn:hover::after { opacity: 1; }
   .linkbtn:hover .icon { color: var(--signal); }
 }
+
+// Back to top: a square panel key with an ink outline, like the buttons.
+.to-top {
+  border: 1.5px solid var(--ink); border-radius: var(--radius);
+  background: var(--panel); color: var(--ink);
+  box-shadow: 0 0.375rem 1rem rgb(13 27 53 / 0.16);
+}
+@media (hover: hover) and (pointer: fine) {
+  .to-top.is-visible:hover { color: var(--signal); border-color: var(--signal); }
+}
+
