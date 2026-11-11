@@ -24,10 +24,11 @@
   date: 2026-10-30
   title: "Feasible but Not Safe: Constraint Violations and Report-Channel Attacks in Learned Cell-Free ISAC Association"
   kind: Workshop talk
-  event: 17th ACM Workshop on Wireless of the Students, by the Students, and for the Students (S3 '26) at ACM MobiCom 2026
+  event: 17th ACM Workshop on Wireless of the Students, by the Students, for the Students (S3 '26) at ACM MobiCom 2026
   location: Austin, TX
   event_url: https://s3-workshop.neslab.it/
   pub: feasible-but-not-safe
+  note: Best Paper Award.
 
 - id: asilomar-2026
   date: 2026-10-27

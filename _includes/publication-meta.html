@@ -82,6 +82,9 @@
   {%- if pm_links != "" %}
   "sameAs": [{{ pm_links }}],
   {%- endif %}
+  {%- if pm.award %}
+  "award": {{ pm.award | jsonify }},
+  {%- endif %}
   "description": {{ pm.content | strip_html | normalize_whitespace | truncate: 600 | jsonify }}
 }
 </script>

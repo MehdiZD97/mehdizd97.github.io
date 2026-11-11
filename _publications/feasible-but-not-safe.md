@@ -2,23 +2,27 @@
 title: "Feasible but Not Safe: Constraint Violations and Report-Channel Attacks in Learned Cell-Free ISAC Association"
 authors: ["M. Zafari", "I. Mohammadi", "A. L. Swindlehurst"]
 type: conference
-status: accepted
-venue: "17th ACM Workshop on Wireless of the Students, by the Students, and for the Students (S3 '26), co-located with ACM MobiCom 2026"
+status: published
+venue: "17th ACM Workshop on Wireless of the Students, by the Students, for the Students (S3 '26), co-located with ACM MobiCom 2026"
 venue_short: MobiCom 2026 S3
-date: 2026-08-20              # acceptance: the S3 '26 notification date (s3-workshop.neslab.it); presented 2026-10-30
+date: 2026-10-26              # the ACM proceedings record's date (the workshop was on 2026-10-30)
+doi: 10.1145/3842433.3843753
 arxiv: "2609.03147"
 code: https://github.com/LS-Wireless/ASSENT-Security-Analysis
 topics: [cell-free-isac, machine-learning, security]
+award: Best Paper Award
 featured: false   # true shows it in Home's Selected publications
 bibtex: |
-  @misc{zafari2026feasible,
-    author        = {Zafari, Mehdi and Mohammadi, Iman and Swindlehurst, A. Lee},
-    title         = {Feasible but Not Safe: Constraint Violations and Report-Channel Attacks in Learned Cell-Free {ISAC} Association},
-    year          = {2026},
-    eprint        = {2609.03147},
-    archivePrefix = {arXiv},
-    primaryClass  = {cs.NI},
-    url           = {https://arxiv.org/abs/2609.03147}
+  @inproceedings{zafari2026feasible,
+    author    = {Zafari, Mehdi and Mohammadi, Iman and Swindlehurst, A. Lee},
+    title     = {Feasible but Not Safe: Constraint Violations and Report-Channel Attacks in Learned Cell-Free {ISAC} Association},
+    booktitle = {Proceedings of the 17th ACM Workshop on Wireless of the Students, by the Students, for the Students},
+    year      = {2026},
+    month     = oct,
+    pages     = {8--11},
+    publisher = {ACM},
+    doi       = {10.1145/3842433.3843753},
+    url       = {https://doi.org/10.1145/3842433.3843753}
   }
 ---
 Learning-based schedulers have been proposed to provide real-time user, target, and access point (AP) association in distributed cell-free integrated sensing and communication systems.

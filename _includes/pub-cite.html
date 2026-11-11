@@ -1,0 +1,9 @@
+{%- comment -%}
+  One publication as a CV-style citation (Mehdi, 2026-11-10): authors, the
+  title linking to its page, the venue in italics, and the year; status in
+  words (submitted to, to appear) and an award as a short note. No buttons,
+  badges, or BibTeX: the Publications page has those. Used by the CV
+  (pub-groups.html with compact=true). Parameter: pub.
+{%- endcomment -%}
+{%- assign pc = include.pub -%}
+<li><span class="pub-cite">{% include authors.html list=pc.authors %}, “<a href="{{ pc.url | relative_url }}">{{ pc.title }}</a>,” {% if pc.status == "under-review" %}submitted to {% endif %}<em>{{ pc.venue }}</em>{% if pc.type == "magazine" %} (magazine){% endif %}, {{ pc.date | date: "%Y" }}{% if pc.status == "accepted" %}, to appear{% endif %}.{% if pc.award %} <span class="pub-cite__award">{% include icon.html name="award" %}{{ pc.award }}.</span>{% endif %}</span></li>

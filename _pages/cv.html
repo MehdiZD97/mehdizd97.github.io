@@ -55,7 +55,10 @@ last_modified_from: [_data/profile.yml, _data/cv/*.yml, _data/awards.yml, _data/
 <section class="section" id="publications" aria-labelledby="publications-title">
   <h2 class="section__title" id="publications-title">Publications</h2>
   <div class="section__body">
-    {% include pub-groups.html pubs=site.publications level=3 prefix="cv-" %}
+    <p class="actions">
+      <a class="btn btn--secondary" href="{{ '/publications/' | relative_url }}">Full list of publications</a>
+    </p>
+    {% include pub-groups.html pubs=site.publications level=3 prefix="cv-" compact=true %}
   </div>
 </section>
 

@@ -6,14 +6,14 @@
 #   pin: true keeps an item on Home even when it is older.
 
 - date: 2026-10-30
-  type: talk
-  text: Presenting our paper **Feasible but Not Safe**, on constraint violations and report-channel attacks in learned cell-free ISAC association, at the ACM S3 workshop of MobiCom 2026 in Austin, Texas, on October 30.
+  type: award
+  text: Our paper **Feasible but Not Safe**, on constraint violations and report-channel attacks in learned cell-free ISAC association, won the Best Paper Award at the ACM S3 workshop of MobiCom 2026 in Austin, Texas, where I presented it on October 30.
   pub: feasible-but-not-safe
   talk: s3-2026
 
 - date: 2026-10-27
   type: talk
-  text: Presenting our new paper **CORDIS-Track**, on tracking-aware coordinated resource allocation for distributed cell-free ISAC, in a lecture at the 60th Asilomar Conference on Signals, Systems, and Computers on October 27.
+  text: Presented our new paper **CORDIS-Track**, on tracking-aware coordinated resource allocation for distributed cell-free ISAC, in a lecture at the 60th Asilomar Conference on Signals, Systems, and Computers.
   talk: asilomar-2026
 
 - date: 2026-10-15

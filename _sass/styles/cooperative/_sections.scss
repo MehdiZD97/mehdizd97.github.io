@@ -11,6 +11,7 @@
 // (24 px; 40 px for publication and talk entries; Mehdi's rule, Stage 2).
 .subsection { display: grid; gap: var(--space-5); }
 .subsection--entries { gap: 2.5rem; }
+.subsection--cites { gap: var(--space-4); }   // citations sit 16 px apart
 .subsection + .subsection { margin-top: var(--space-7); }
 .subsection + .more-link { margin-top: var(--space-5); }
 .videos + .more-link { margin-top: var(--space-4); }

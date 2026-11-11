@@ -5,6 +5,13 @@
 # once), detail, pub (publication slug), talk (id in talks.yml), url. See GUIDE.md.
 
 - year: 2026
+  title: Best Paper Award, 17th ACM S3 Workshop
+  org: ACM MobiCom 2026
+  pub: feasible-but-not-safe
+  talk: s3-2026
+  home: true
+
+- year: 2026
   date: 2026-06-01
   title: Wireless History Foundation Scholarship Award
   org: Wireless History Foundation

@@ -25,6 +25,21 @@
 .badge--award .icon { color: var(--beam); }
 .badge--status { box-shadow: inset 0 0 0 1.5px var(--echo); color: var(--echo); }
 
+// The CV's publications as numbered citations (2026-11-10); the title links
+// to the publication's page, which has the buttons and BibTeX.
+.pub-cites { list-style: decimal; padding-left: 1.75rem; }
+.pub-cites > li { padding-left: 0.3rem; }
+.pub-cites > li + li { margin-top: var(--space-4); }
+.pub-cites > li::marker { color: var(--slate); font-weight: 650; font-variant-numeric: tabular-nums; }
+.pub-cite { display: block; }
+.pub-cite strong { font-weight: 750; }
+.pub-cite a { color: var(--ink); font-weight: 650; text-decoration: none; }
+.pub-cite__award { font-weight: 650; white-space: nowrap; }
+.pub-cite__award .icon { display: inline-block; width: 1em; height: 1em; margin-right: 0.3em; vertical-align: -0.14em; color: var(--beam); }
+@media (hover: hover) and (pointer: fine) {
+  .pub-cite a:hover { text-decoration: underline; text-decoration-color: var(--beam-bright); text-decoration-thickness: 3px; }
+}
+
 .bibtex { display: grid; gap: var(--space-3); padding: var(--space-4); border-radius: var(--radius); background: var(--mist); }
 .bibtex pre { font: 400 0.8125rem/1.55 var(--font-mono); }
 .bibtex__actions { display: flex; align-items: center; gap: var(--space-3); color: var(--slate); font-size: var(--text-small); }

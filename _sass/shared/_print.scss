@@ -32,9 +32,10 @@
   .subsection + .subsection { margin-top: var(--space-6); }
   .subsection--entries > * + * { margin-top: 1rem; }
   .row-list > * + *, .edu-list > * + * { margin-top: 0.7rem; }
+  .pub-cites > li + li { margin-top: 0.55rem; }
   .row-what { font-size: 1.0625rem; }
   a { text-decoration: none; }
-  .pub, .talk, .row-item, .edu, .news, figure, img { break-inside: avoid; }
+  .pub, .pub-cites > li, .talk, .row-item, .edu, .news, figure, img { break-inside: avoid; }
   h1, h2, h3, h4 { break-after: avoid; }
 
   .print-identity { display: grid; gap: 0.15rem; margin-bottom: var(--space-3); }

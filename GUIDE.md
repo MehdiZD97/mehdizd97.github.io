@@ -33,7 +33,7 @@ This file itself is not published.
 | What | File | Shown on |
 |---|---|---|
 | News | `_data/news.yml` | Home (newest 5) and the News page, `/news/` (all, by year) |
-| Publications, datasets, software | `_publications/<slug>.md` (one file each) | Home's "Selected publications" (featured ones), Publications, the CV, and a page for each |
+| Publications, datasets, software | `_publications/<slug>.md` (one file each) | Home's "Selected publications" (featured ones), Publications, the CV (as numbered citations), and a page for each |
 | Talks | `_data/talks.yml` | Home (newest 3) and the CV |
 | Videos | `_data/videos.yml`, plus new uploads read from your channel (section 8) | Home (newest 6) and the Videos page |
 | Honors and awards | `_data/awards.yml` | Home (those with `home: true`) and the CV |
@@ -167,15 +167,15 @@ Then open the new file and answer its `TODO(mehdi)` notes (the type and status o
    | `venue` | The full venue name, for example `IEEE International Conference on Communications (ICC)`. |
    | `venue_short` | A short label for the chip, for example `ICC 2027` or `IEEE TWC`. |
    | `date` | Used for sorting. Published items show the year only; the others show the month and year. |
-   | `doi` | Optional. The DOI only, for example `10.1109/TVT.2026.3656108`. The button label comes from the DOI: IEEE DOIs show "IEEE Xplore", IEEE DataPort DOIs show "IEEE DataPort", Zenodo DOIs show "Zenodo", any other shows "DOI" (the list is `doi_labels` in `_config.yml`). |
+   | `doi` | Optional. The DOI only, for example `10.1109/TVT.2026.3656108`. The button label comes from the DOI: IEEE DOIs show "IEEE Xplore", IEEE DataPort DOIs show "IEEE DataPort", ACM DOIs show "ACM DL", Zenodo DOIs show "Zenodo", any other shows "DOI" (the list is `doi_labels` in `_config.yml`). |
    | `arxiv` | Optional. The arXiv ID only, in quotes, for example `"2609.12195"` (without quotes, an ID ending in 0 loses that 0 and the link breaks). |
    | `code`, `pdf`, `slides`, `poster`, `dataset` | Optional links. `pdf`, `slides`, and `poster` can be files you put in `files/` (for example `/files/slides/example.pdf`) or full URLs. |
    | `package` | Optional, for software: the package's page, such as `https://pypi.org/project/tr3gpp/`. PyPI links show a "PyPI" button, others a "Package" button. |
    | `video` | Optional. A YouTube video ID (the part after `watch?v=`). It adds a Video button and a player on the publication's page that loads only when played. |
-   | `award` | Optional, for example `Best Paper Award Finalist`. Shows a badge. |
+   | `award` | Optional, for example `Best Paper Award Finalist`. Shows a badge (on the CV, a short note after the citation). |
    | `featured` | `true` shows the paper in Home's "Selected publications". |
    | `topics` | Ids from `_data/topics.yml`. To add a topic, add an `id` and `label` there. |
-   | `bibtex` | The citation. Indent every line of it by two spaces under `bibtex: |`. It appears on the publication's page, and the "BibTeX" button in every list opens it in a small window with a Copy button. |
+   | `bibtex` | The citation. Indent every line of it by two spaces under `bibtex: |`. It appears on the publication's page, and the "BibTeX" button in the lists on Home and the Publications page opens it in a small window with a Copy button. |
    | `description` | Optional: the text search engines show under the page's title (140 to 160 characters). Without it, the site writes one from the venue, date, authors, and the start of the abstract. |
    | `figure`, `figure_alt`, `figure_caption` | Optional: a figure at the top of the publication's page that visitors can enlarge. Add the image like a story photo (section 13, steps 1 to 3, with a name such as `publications/<slug>`), then set `figure: publications/<slug>`, a description in `figure_alt`, and an optional `figure_caption`. It also becomes the page's preview image on social media. |
 
@@ -202,7 +202,7 @@ Open the publication's file in `_publications/` and change only what changed:
 - **Accepted:** set `status: accepted`, update `venue` and `venue_short`, and set `date` to the acceptance month.
 - **Published:** set `status: published`, add the `doi`, update `venue`, `venue_short`, and `date`, and replace the `bibtex` with the publisher's. The script prints all of them without changing anything: `python3 scripts/new_publication.py --doi <the DOI> --dry-run`; copy what you need into the file.
 - **New link** (code, slides, video): add the field.
-- **Award:** add `award: Best Paper Award` (and add it to `_data/awards.yml` too, section 9).
+- **Award:** add `award: Best Paper Award`: a badge in the lists and on the paper's page, a note after its citation on the CV, and the award in the paper's data for search engines. Add it to `_data/awards.yml` too, with `pub:` set to the paper's slug (section 9), and a news item with `type: award` if you like (section 3).
 - **Stop featuring it on Home:** set `featured: false` or delete the line.
 
 Add a news item if the change is news (section 3).
@@ -328,6 +328,8 @@ Before every build on GitHub, and every Monday morning, `scripts/fetch_videos.py
 ## 10. Update the CV
 
 All CV sections are in `_data/cv/` (and the research interests in `_data/profile.yml`). The full CV page is `/cv/`; Home shows a summary.
+
+The CV's Publications section needs no editing: it lists every file in `_publications/` as a numbered citation (authors, the title linking to the paper's page, the venue, and the year; "submitted to" for papers under review, "to appear" for accepted ones; an award as a short note), under a "Full list of publications" button. The buttons, badges, and BibTeX are on the Publications page and the papers' own pages.
 
 - **Education** (`education.yml`): `degree`, `field`, `school`, `school_short`, `location`, `start`, `end`, `expected: true` while in progress, `gpa`, `advisor` or `thesis`, and `logo` (the name of the logo image, for example `uci`).
 - **Experience** (`experience.yml`), in the order you want it shown:

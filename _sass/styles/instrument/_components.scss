@@ -35,6 +35,21 @@
 .badge--award .icon { color: var(--signal); }
 .badge--status { border: 1px dashed var(--slate); color: var(--slate); }
 
+// The CV's publications as numbered citations (2026-11-10); the title links
+// to the publication's page, which has the buttons and BibTeX.
+.pub-cites { list-style: decimal; padding-left: 2rem; }
+.pub-cites > li { padding-left: 0.25rem; }
+.pub-cites > li + li { margin-top: var(--space-4); }
+.pub-cites > li::marker { color: var(--slate); font-family: var(--font-mono); font-size: var(--text-mono); }
+.pub-cite { display: block; }
+.pub-cite strong { font-weight: 600; }
+.pub-cite a { font-weight: 500; text-decoration: none; }
+.pub-cite__award { font-weight: 500; white-space: nowrap; }
+.pub-cite__award .icon { display: inline-block; width: 1em; height: 1em; margin-right: 0.3em; vertical-align: -0.14em; color: var(--signal); }
+@media (hover: hover) and (pointer: fine) {
+  .pub-cite a:hover { color: var(--ink); text-decoration: underline; }
+}
+
 .bibtex {
   display: grid; gap: var(--space-3); margin-top: var(--space-3);
   padding: var(--space-3) var(--space-4);

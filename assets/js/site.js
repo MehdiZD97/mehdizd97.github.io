@@ -249,11 +249,16 @@ run("Back button", () => {
   });
 });
 
-// Back to top (Mehdi, 2026-10-22): the button appears once the page has
-// scrolled a screen down. A sentinel one screen tall at the top of the page
-// says when (no scroll listener). The scroll follows the page's CSS: smooth,
-// or at once with reduced motion. After a keyboard press, focus moves to the
-// skip link, so the next Tab starts at the top of the page.
+// Back to top (Mehdi, 2026-10-22; earlier since 2026-11-10): the button
+// appears once the page's top block (the hero on Home, the title block
+// elsewhere) has scrolled under the sticky header, or after half a screen,
+// whichever comes first (the hero is taller than a phone's screen). Two
+// observed targets say when, with no scroll listener: the top block, with
+// the header's allowance (scroll-padding-top) cut from the top of the
+// window, and a sentinel half a screen tall at the top of the page. The
+// scroll follows the page's CSS: smooth, or at once with reduced motion.
+// After a keyboard press, focus moves to the skip link, so the next Tab
+// starts at the top of the page.
 run("back to top", () => {
   const button = document.querySelector(".to-top");
   if (!button || !("IntersectionObserver" in window)) return;
@@ -262,9 +267,18 @@ run("back to top", () => {
   sentinel.setAttribute("aria-hidden", "true");
   document.body.prepend(sentinel);
   button.hidden = false;
-  new IntersectionObserver(([entry]) => {
-    button.classList.toggle("is-visible", !entry.isIntersecting && entry.boundingClientRect.top < 0);
-  }).observe(sentinel);
+  const passed = new Map();
+  const watch = (target, allowance) => {
+    passed.set(target, false);
+    new IntersectionObserver(([entry]) => {
+      const top = entry.rootBounds ? entry.rootBounds.top : allowance;
+      passed.set(target, !entry.isIntersecting && entry.boundingClientRect.bottom <= top + 1);
+      button.classList.toggle("is-visible", [...passed.values()].some(Boolean));
+    }, { rootMargin: `${-allowance}px 0px 0px 0px` }).observe(target);
+  };
+  watch(sentinel, 0);
+  const block = document.querySelector("#main .hero, #main .page-header");
+  if (block) watch(block, parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0);
   button.addEventListener("click", (event) => {
     window.scrollTo({ top: 0 });
     if (event.detail === 0) document.querySelector(".skip-link")?.focus({ preventScroll: true });
